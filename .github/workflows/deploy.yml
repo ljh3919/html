@@ -44,10 +44,28 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.REMOTE_PORT }}
           script: |
+            set -e
             cd ${{ secrets.TARGET }}
-            unzip -o deploy.zip
+            
+            echo "Checking unzip command..."
+            if command -v unzip > /dev/null; then
+              unzip -o deploy.zip
+            else
+              echo "Error: unzip command not found on remote server."
+              exit 127
+            fi
+            
             rm deploy.zip
-            php artisan migrate --force
-            php artisan optimize
-            php artisan view:clear
-            php artisan config:cache
+            
+            echo "Checking PHP command..."
+            PHP_CMD=$(command -v php8.4 || command -v php8.3 || command -v php || echo "")
+            if [ -z "$PHP_CMD" ]; then
+              echo "Error: PHP command not found."
+              exit 127
+            fi
+            
+            echo "Using PHP command: $PHP_CMD"
+            $PHP_CMD artisan migrate --force
+            $PHP_CMD artisan optimize
+            $PHP_CMD artisan view:clear
+            $PHP_CMD artisan config:cache
