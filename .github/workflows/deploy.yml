@@ -25,15 +25,12 @@ jobs:
           npm install
           npm run build
 
-      - name: Setup SSH Agent
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
 
       - name: Deploy to Server via rsync
         run: |
-          ssh-keyscan -p ${{ secrets.REMOTE_PORT }} ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-          rsync -avzr --delete \
+          sshpass -p "${{ secrets.PASSWORD }}" rsync -avzr --delete \
             -e "ssh -p ${{ secrets.REMOTE_PORT }} -o StrictHostKeyChecking=no" \
             --exclude=".git/" \
             --exclude=".github/" \
@@ -49,8 +46,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # password: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.REMOTE_PORT }}
           script: |
             cd ${{ secrets.TARGET }}
