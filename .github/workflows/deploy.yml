@@ -57,20 +57,23 @@ jobs:
             
             rm deploy.zip
             
-            echo "Checking PHP command..."
+            echo "Searching for PHP binaries across the system..."
+            # Try to find any php executable in various directories
+            FOUND_PHP=$(find /usr/bin /usr/local/bin /usr/share /opt -name "php*" -type f -executable 2>/dev/null | head -n 10 || echo "")
+            echo "Found PHP candidates:"
+            echo "$FOUND_PHP"
+
             PHP_CMD=""
-            # Check common paths for shared hosting
-            for cmd in /usr/bin/php8.4 /usr/bin/php8.3 /usr/bin/php8.2 /usr/bin/php /usr/local/bin/php php; do
-              if $cmd -v > /dev/null 2>&1; then
+            for cmd in $FOUND_PHP /usr/bin/php php; do
+              if [ -n "$cmd" ] && $cmd -v > /dev/null 2>&1; then
                 PHP_CMD=$cmd
                 break
               fi
             done
 
             if [ -z "$PHP_CMD" ]; then
-              echo "Error: PHP command not found in common paths."
-              echo "Searching for available php binaries..."
-              ls -l /usr/bin/php* /usr/local/bin/php* || true
+              echo "Error: PHP command not found in discovered paths."
+              echo "This specific Dothome plan might not support PHP CLI via SSH."
               exit 127
             fi
             
