@@ -34,9 +34,9 @@ jobs:
           remote_host: ${{ secrets.HOST }}
           remote_port: ${{ secrets.REMOTE_PORT }}
           remote_user: ${{ secrets.USERNAME }}
-          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          # remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
           # if using password instead of key:
-          # remote_password: ${{ secrets.PASSWORD }}
+          remote_password: ${{ secrets.PASSWORD }}
 
       - name: Post Deployment Commands
         uses: appleboy/ssh-action@master
