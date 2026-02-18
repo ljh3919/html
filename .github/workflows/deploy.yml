@@ -58,9 +58,19 @@ jobs:
             rm deploy.zip
             
             echo "Checking PHP command..."
-            PHP_CMD=$(command -v php8.4 || command -v php8.3 || command -v php || echo "")
+            PHP_CMD=""
+            # Check common paths for shared hosting
+            for cmd in /usr/bin/php8.4 /usr/bin/php8.3 /usr/bin/php8.2 /usr/bin/php /usr/local/bin/php php; do
+              if $cmd -v > /dev/null 2>&1; then
+                PHP_CMD=$cmd
+                break
+              fi
+            done
+
             if [ -z "$PHP_CMD" ]; then
-              echo "Error: PHP command not found."
+              echo "Error: PHP command not found in common paths."
+              echo "Searching for available php binaries..."
+              ls -l /usr/bin/php* /usr/local/bin/php* || true
               exit 127
             fi
             
