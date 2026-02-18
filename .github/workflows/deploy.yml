@@ -1,0 +1,55 @@
+name: Deploy to Hosting
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: |
+          composer install --no-dev --optimize-autoloader --no-interaction --no-progress
+          npm install
+          npm run build
+
+      - name: Deploy to Server via rsync
+        uses: Burnett01/rsync-deployments@7.0.0
+        with:
+          switches: -avzr --delete
+          path: .
+          remote_path: ${{ secrets.TARGET }}
+          remote_host: ${{ secrets.HOST }}
+          remote_port: ${{ secrets.REMOTE_PORT }}
+          remote_user: ${{ secrets.USERNAME }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          # if using password instead of key:
+          # remote_password: ${{ secrets.PASSWORD }}
+          exclude: |
+            .git/
+            .github/
+            .env
+            node_modules/
+            vendor/
+            storage/*.log
+            public/storage
+
+      - name: Post Deployment Commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          # password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.REMOTE_PORT }}
+          script: |
+            cd ${{ secrets.TARGET }}
+            php artisan migrate --force
+            php artisan optimize
+            php artisan view:clear
+            php artisan config:cache
