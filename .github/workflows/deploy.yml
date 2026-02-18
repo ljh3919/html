@@ -25,14 +25,16 @@ jobs:
           npm install
           npm run build
 
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Deploy to Server via rsync
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -p ${{ secrets.REMOTE_PORT }} ${{ secrets.HOST }} >> ~/.ssh/known_hosts
           rsync -avzr --delete \
-            -e "ssh -p ${{ secrets.REMOTE_PORT }} -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
+            -e "ssh -p ${{ secrets.REMOTE_PORT }} -o StrictHostKeyChecking=no" \
             --exclude=".git/" \
             --exclude=".github/" \
             --exclude=".env" \
