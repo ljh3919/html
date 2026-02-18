@@ -28,23 +28,13 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
-      - name: Ensure rsync is installed on remote
+      - name: Zip files
         run: |
-          sshpass -p "${{ secrets.PASSWORD }}" ssh -p ${{ secrets.REMOTE_PORT }} -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
-          "sudo apt-get update && sudo apt-get install -y rsync || yum install -y rsync || true"
+          zip -r deploy.zip . -x ".git/*" ".github/*" ".env" "node_modules/*" "storage/*.log" "public/storage/*"
 
-      - name: Deploy to Server via rsync
+      - name: Upload zip file
         run: |
-          sshpass -p "${{ secrets.PASSWORD }}" rsync -avzr --delete \
-            -e "ssh -p ${{ secrets.REMOTE_PORT }} -o StrictHostKeyChecking=no" \
-            --exclude=".git/" \
-            --exclude=".github/" \
-            --exclude=".env" \
-            --exclude="node_modules/" \
-            --exclude="vendor/" \
-            --exclude="storage/*.log" \
-            --exclude="public/storage" \
-            . ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET }}
+          sshpass -p "${{ secrets.PASSWORD }}" scp -P ${{ secrets.REMOTE_PORT }} -o StrictHostKeyChecking=no deploy.zip ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET }}
 
       - name: Post Deployment Commands
         uses: appleboy/ssh-action@master
@@ -55,6 +45,8 @@ jobs:
           port: ${{ secrets.REMOTE_PORT }}
           script: |
             cd ${{ secrets.TARGET }}
+            unzip -o deploy.zip
+            rm deploy.zip
             php artisan migrate --force
             php artisan optimize
             php artisan view:clear
