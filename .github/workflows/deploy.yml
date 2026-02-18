@@ -28,6 +28,11 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
+      - name: Ensure rsync is installed on remote
+        run: |
+          sshpass -p "${{ secrets.PASSWORD }}" ssh -p ${{ secrets.REMOTE_PORT }} -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} \
+          "sudo apt-get update && sudo apt-get install -y rsync || yum install -y rsync || true"
+
       - name: Deploy to Server via rsync
         run: |
           sshpass -p "${{ secrets.PASSWORD }}" rsync -avzr --delete \
