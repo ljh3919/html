@@ -26,17 +26,21 @@ jobs:
           npm run build
 
       - name: Deploy to Server via rsync
-        uses: Burnett01/rsync-deployments@7.0.0
-        with:
-          switches: -avzr --delete --exclude=.git/ --exclude=.github/ --exclude=.env --exclude=node_modules/ --exclude=vendor/ --exclude=storage/*.log --exclude=public/storage
-          path: .
-          remote_path: ${{ secrets.TARGET }}
-          remote_host: ${{ secrets.HOST }}
-          remote_port: ${{ secrets.REMOTE_PORT }}
-          remote_user: ${{ secrets.USERNAME }}
-          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # if using password instead of key:
-          # remote_password: ${{ secrets.PASSWORD }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p ${{ secrets.REMOTE_PORT }} ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+          rsync -avzr --delete \
+            -e "ssh -p ${{ secrets.REMOTE_PORT }} -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
+            --exclude=".git/" \
+            --exclude=".github/" \
+            --exclude=".env" \
+            --exclude="node_modules/" \
+            --exclude="vendor/" \
+            --exclude="storage/*.log" \
+            --exclude="public/storage" \
+            . ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET }}
 
       - name: Post Deployment Commands
         uses: appleboy/ssh-action@master
