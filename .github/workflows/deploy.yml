@@ -28,7 +28,7 @@ jobs:
       - name: Deploy to Server via rsync
         uses: Burnett01/rsync-deployments@7.0.0
         with:
-          switches: -avzr --delete
+          switches: -avzr --delete --exclude=.git/ --exclude=.github/ --exclude=.env --exclude=node_modules/ --exclude=vendor/ --exclude=storage/*.log --exclude=public/storage
           path: .
           remote_path: ${{ secrets.TARGET }}
           remote_host: ${{ secrets.HOST }}
@@ -37,14 +37,6 @@ jobs:
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
           # if using password instead of key:
           # remote_password: ${{ secrets.PASSWORD }}
-          exclude: |
-            .git/
-            .github/
-            .env
-            node_modules/
-            vendor/
-            storage/*.log
-            public/storage
 
       - name: Post Deployment Commands
         uses: appleboy/ssh-action@master
