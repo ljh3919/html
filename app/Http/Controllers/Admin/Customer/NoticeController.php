@@ -19,15 +19,15 @@ class NoticeController extends Controller
         $query = Notice::with('author', 'attachments');
 
         if ($searchType && $searchKeyword) {
-            if ($searchType === 'title_content') {
+            if ($searchType === 'all') {
                 $query->where(function($q) use ($searchKeyword) {
                     $q->where('title', 'like', "%{$searchKeyword}%")
                       ->orWhere('content', 'like', "%{$searchKeyword}%");
                 });
-            } elseif ($searchType === 'author') {
-                $query->whereHas('author', function($q) use ($searchKeyword) {
-                    $q->where('name', 'like', "%{$searchKeyword}%");
-                });
+            } elseif ($searchType === 'title') {
+                $query->where('title', 'like', "%{$searchKeyword}%");
+            } elseif ($searchType === 'content') {
+                $query->where('content', 'like', "%{$searchKeyword}%");
             }
         }
 
@@ -147,6 +147,21 @@ class NoticeController extends Controller
         }
         $notice->delete();
         return redirect()->route('HNA_Customer_Noticelist_001')->with('success', '삭제되었습니다.');
+    }
+
+    public function massDestroy(Request $request)
+    {
+        $ids = $request->input('ids');
+        if (!empty($ids)) {
+            $notices = Notice::whereIn('id', $ids)->get();
+            foreach ($notices as $notice) {
+                foreach ($notice->attachments as $attachment) {
+                    Storage::delete($attachment->file_path);
+                }
+                $notice->delete();
+            }
+        }
+        return response()->json(['success' => true]);
     }
 
     public function downloadAttachment(NoticeAttachment $attachment)

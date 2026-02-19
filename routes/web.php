@@ -12,6 +12,14 @@ use App\Http\Controllers\Admin\BrochureController;
 use App\Http\Controllers\Front\Customer\InquiryController as FrontInquiryController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/debug-config', function () {
+    dd([
+        'app.key' => config('app.key'),
+        'env.APP_KEY' => env('APP_KEY'),
+        'hardcoded' => 'base64:i0sEWcW/MYbkbmFRLCOU1s/e7DE30cGt6h4uQmCvj2k=',
+    ]);
+});
+
 Route::get('/', function () {
     return view('welcome');
 });

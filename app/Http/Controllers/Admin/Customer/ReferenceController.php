@@ -19,11 +19,15 @@ class ReferenceController extends Controller
         $query = ReferenceRoom::with('author', 'attachments');
 
         if ($searchType && $searchKeyword) {
-            if ($searchType === 'title_content') {
+            if ($searchType === 'all' || $searchType === 'title_content') {
                 $query->where(function($q) use ($searchKeyword) {
                     $q->where('title', 'like', "%{$searchKeyword}%")
                       ->orWhere('content', 'like', "%{$searchKeyword}%");
                 });
+            } elseif ($searchType === 'title') {
+                $query->where('title', 'like', "%{$searchKeyword}%");
+            } elseif ($searchType === 'content') {
+                $query->where('content', 'like', "%{$searchKeyword}%");
             } elseif ($searchType === 'author') {
                 $query->whereHas('author', function($q) use ($searchKeyword) {
                     $q->where('name', 'like', "%{$searchKeyword}%");
