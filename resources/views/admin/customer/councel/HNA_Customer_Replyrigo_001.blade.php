@@ -1,92 +1,160 @@
 @extends('layouts.admin')
 
+@section('styles')
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<style>
+    .note-editor.note-frame {
+        border-color: #dee2e6;
+    }
+    .note-editor.note-frame .note-statusbar {
+        border-top-color: #dee2e6;
+    }
+    .table-header-custom {
+        background-color: #f8f9fa;
+        font-weight: 500;
+        vertical-align: middle !important;
+        padding-left: 20px !important;
+        border-bottom: 1px solid #dee2e6 !important;
+    }
+    .table-cell-custom {
+        padding: 12px 20px !important;
+        border-bottom: 1px solid #dee2e6 !important;
+    }
+    .btn-outline-custom {
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        color: #333;
+        font-weight: 500;
+    }
+    .btn-outline-custom:hover {
+        background-color: #f8f9fa;
+        color: #000;
+    }
+</style>
+@endsection
+
 @section('content')
-<div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800">관리자사이트 > 고객센터 > 1:1 상담 관리 > 답변</h1>
+<div class="container-fluid text-black">
+    <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+        <div style="font-size: 1.5rem; font-weight: 700; color: #000;">• 1:1 상담 관리</div>
     </div>
 
     @if ($errors->any())
-        <div class="alert alert-danger">
+        <div class="alert alert-danger mt-3">
             {{ $errors->first() }}
         </div>
     @endif
 
     <!-- 원본 문의 정보 (ReadOnly) -->
-    <div class="card shadow mb-4 bg-light">
-        <div class="card-body">
-            <div class="row mb-2">
-                <div class="col-md-2 font-weight-bold">제목</div>
-                <div class="col-md-10">{{ $inquiry->title }}</div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-md-2 font-weight-bold">내용</div>
-                <div class="col-md-10" style="white-space: pre-wrap;">{{ $inquiry->content }}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 font-weight-bold">작성자 ID</div>
-                <div class="col-md-4">{{ $inquiry->username }}</div>
-                <div class="col-md-2 font-weight-bold">작성일</div>
-                <div class="col-md-4">{{ $inquiry->created_at->format('Y-m-d') }}</div>
+    <div class="card border-0 mb-4 mt-3">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-bordered mb-0">
+                    <colgroup>
+                        <col style="width: 200px;">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th class="table-header-custom">문의 제목</th>
+                            <td class="table-cell-custom">{{ $inquiry->title }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-header-custom">문의 내용</th>
+                            <td class="table-cell-custom">
+                                <div style="white-space: pre-wrap; line-height: 1.6; font-size: 0.95rem;">{{ $inquiry->content }}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="table-header-custom">작성자 ID</th>
+                            <td class="table-cell-custom">{{ $inquiry->username }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-header-custom">이메일</th>
+                            <td class="table-cell-custom">{{ $inquiry->email ?? '-' }}</td>
+                        </tr>
+                        <tr>
+                            <th class="table-header-custom">작성일</th>
+                            <td class="table-cell-custom text-secondary">{{ $inquiry->created_at->format('Y-m-d H:i') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
     <!-- 답변 작성 폼 -->
-    <div class="card shadow mb-4 border-left-primary">
-        <div class="card-header py-3 bg-white">
-            <h6 class="m-0 font-weight-bold text-primary">답변 작성</h6>
+    <form action="{{ route('admin.inquiry.reply.store', $inquiry->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="card border-0">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0">
+                        <colgroup>
+                            <col style="width: 200px;">
+                            <col>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th class="table-header-custom">답변 제목 <span class="text-danger ml-1">*</span></th>
+                                <td class="table-cell-custom">
+                                    <input type="text" name="title" class="form-control form-control-sm" value="{{ old('title', '[Re]: 문의하신 내용에 대한 답변입니다.') }}" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="table-header-custom">답변 내용 <span class="text-danger ml-1">*</span></th>
+                                <td class="table-cell-custom">
+                                    <textarea name="content" id="editor" class="form-control" required>{{ old('content') }}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="table-header-custom">첨부파일</th>
+                                <td class="table-cell-custom">
+                                    <div id="file-input-container">
+                                        <div class="d-flex align-items-center mb-2 file-input-group">
+                                            <input type="file" name="attachments[]" class="form-control-file w-auto mr-2">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary btn-add-file"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    <p class="text-muted mb-0" style="font-size: 0.85rem;">• 첨부파일은 최대 3개까지 등록 가능합니다. (개당 10MB)</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <form action="{{ route('admin.inquiry.reply.store', $inquiry->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label font-weight-bold">답변 제목 <span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" name="title" class="form-control" value="{{ old('title', '[Re]: 문의하신 내용에 대한 답변입니다.') }}">
-                    </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label font-weight-bold">답변 <span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <textarea name="content" id="editor" class="form-control" rows="10">{{ old('content') }}</textarea>
-                        <p class="text-muted small mt-2">웹 에디터 영역</p>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label font-weight-bold">첨부파일</label>
-                    <div class="col-sm-10">
-                        <div id="file-input-container">
-                            <div class="d-flex align-items-center mb-2 file-input-group">
-                                <input type="file" name="attachments[]" class="form-control-file w-auto mr-2">
-                                <button type="button" class="btn btn-sm btn-outline-primary btn-add-file"><i class="fas fa-plus"></i></button>
-                            </div>
-                        </div>
-                        <p class="text-muted small mt-2">첨부파일은 최대 3개까지 등록 가능합니다.</p>
-                    </div>
-                </div>
-
-                <div class="text-center mt-5">
-                    <button type="submit" class="btn btn-primary px-5 mr-2">등록</button>
-                    <a href="{{ route('HNA_Customer_Councelview_001', $inquiry->id) }}" class="btn btn-secondary px-5">취소</a>
-                </div>
-            </form>
+        <div class="d-flex justify-content-between align-items-center mt-4 mb-5">
+            <p class="text-danger small mb-0 mr-auto">* 표시항목은 필수입력 항목입니다.</p>
+            <div class="d-flex">
+                <a href="{{ route('HNA_Customer_Councelview_001', $inquiry->id) }}" class="btn btn-sm btn-outline-custom px-4 py-2 mr-2" style="min-width: 80px;">취소</a>
+                <button type="submit" class="btn btn-sm text-white px-4 py-2" style="background-color: #5d401a; border: 1px solid #5d401a; min-width: 80px; font-weight: 500;">답변 등록</button>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
+@endsection
 
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(e) {
-        const title = form.querySelector('input[name="title"]').value.trim();
-        const content = form.querySelector('textarea[name="content"]').value.trim();
-        if (!title || !content) {
-            alert('입력항목을 다시한번 확인해주세요.');
-            e.preventDefault();
-        }
+$(document).ready(function() {
+    $('#editor').summernote({
+        placeholder: '답변 내용을 입력해주세요.',
+        tabsize: 2,
+        height: 400,
+        lang: 'ko-KR',
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
     });
 
     const container = document.getElementById('file-input-container');

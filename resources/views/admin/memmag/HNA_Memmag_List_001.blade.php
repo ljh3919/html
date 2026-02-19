@@ -1,71 +1,69 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800">회원 관리 > 목록</h1>
-        <div>
-            <a href="{{ route('HNA_Memmag_Regi_001') }}" class="btn btn-primary">신규 회원 등록</a>
-            <button type="button" id="btn-delete" class="btn btn-danger" disabled>삭제</button>
-        </div>
-    </div>
+<div class="container-fluid">
+    <div class="content-title">회원 관리</div>
 
-    <div class="row mb-4">
+    <div class="row align-items-end mb-3">
         <div class="col-md-6">
-            <div class="d-flex align-items-center">
-                <span class="mr-3">회원 수 : <strong>{{ number_format($totalCount) }}</strong> 명</span>
+            <div style="font-size: 0.9rem; color: #5d401a; font-weight: 500;">
+                • 회원 수 <strong style="color: #5d401a;">{{ number_format($totalCount) }}</strong>명
             </div>
         </div>
         <div class="col-md-6">
-            <form action="{{ route('HNA_Memmag_List_001') }}" method="GET" class="form-inline justify-content-end">
-                <select name="search_type" class="form-control mr-2">
+            <form action="{{ route('HNA_Memmag_List_001') }}" method="GET" class="d-flex justify-content-end">
+                <select name="search_type" class="form-control form-control-sm mr-2" style="width: 150px;">
                     <option value="username" {{ $searchType == 'username' ? 'selected' : '' }}>아이디</option>
                     <option value="name" {{ $searchType == 'name' ? 'selected' : '' }}>이름</option>
                     <option value="email" {{ $searchType == 'email' ? 'selected' : '' }}>이메일</option>
                 </select>
-                <input type="text" name="search_keyword" class="form-control mr-2" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요">
-                <button type="submit" class="btn btn-dark">검색</button>
+                <input type="text" name="search_keyword" class="form-control form-control-sm mr-2" style="width: 200px;" value="{{ $searchKeyword }}">
+                <button type="submit" class="btn btn-sm text-white px-3" style="background-color: #5d401a;">검색</button>
             </form>
         </div>
     </div>
 
-    <div class="card shadow mb-4">
-        <div class="card-body">
+    <div class="card border-0">
+        <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="memberTable" width="100%" cellspacing="0">
-                    <thead class="thead-light">
+                <table class="table table-bordered text-center" id="memberTable" width="100%" cellspacing="0">
+                    <thead style="background-color: #f8f9fa;">
                         <tr>
-                            <th class="text-center" style="width: 40px;">
+                            <th style="width: 50px;">
                                 <input type="checkbox" id="check-all">
                             </th>
-                            <th class="text-center" style="width: 50px;">번호</th>
-                            <th>아이디</th>
                             <th>이름</th>
-                            <th>휴대전화번호</th>
-                            <th>E-mail</th>
-                            <th class="text-center">등록일</th>
+                            <th>아이디</th>
+                            <th>핸드폰 번호</th>
+                            <th>이메일</th>
+                            <th>등록일</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($members as $member)
                             <tr class="member-row" data-id="{{ $member->id }}" style="cursor: pointer;">
-                                <td class="text-center" onclick="event.stopPropagation();">
+                                <td onclick="event.stopPropagation();">
                                     <input type="checkbox" name="ids[]" value="{{ $member->id }}" class="check-item">
                                 </td>
-                                <td class="text-center">{{ $members->firstItem() + $loop->index }}</td>
-                                <td>{{ $member->username }}</td>
                                 <td>{{ $member->name }}</td>
+                                <td class="text-secondary">{{ $member->username }}</td>
                                 <td>{{ $member->phone }}</td>
                                 <td>{{ $member->email }}</td>
-                                <td class="text-center">{{ $member->created_at->format('Y-m-d') }}</td>
+                                <td class="text-secondary">{{ $member->created_at->format('Y-m-d') }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center py-4">검색결과가 없습니다.</td>
+                                <td colspan="6" class="text-center py-4 text-secondary">검색결과가 없습니다.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <button type="button" id="btn-delete" class="btn btn-sm btn-outline-secondary px-3" disabled>
+                    삭제 <i class="fas fa-trash-alt ml-1"></i>
+                </button>
             </div>
 
             <div class="mt-4 d-flex justify-content-center">

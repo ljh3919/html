@@ -1,67 +1,79 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800">관리자사이트 > 고객센터 > 1:1 상담 관리 > 목록</h1>
-    </div>
+<div class="container-fluid">
+    <div class="content-title">1:1 상담 관리</div>
 
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <span class="mr-3">총 등록 수 : <strong>{{ number_format($totalCount) }}</strong></span>
+    <div class="d-flex justify-content-between align-items-end mb-3">
+        <div>
+            <div style="font-size: 0.9rem; color: #5d401a; font-weight: 500;">
+                • 총 등록 수 <strong style="color: #5d401a;">{{ number_format($totalCount) }}</strong>
+            </div>
         </div>
-        <div class="col-md-6">
-            <form action="{{ route('HNA_Customer_Councellist_001') }}" method="GET" class="form-inline justify-content-end">
-                <select name="search_type" class="form-control mr-2">
-                    <option value="title_content" {{ $searchType == 'title_content' ? 'selected' : '' }}>제목+내용</option>
+        <div>
+            <form action="{{ route('HNA_Customer_Councellist_001') }}" method="GET" class="d-flex">
+                <select name="search_type" class="form-control form-control-sm mr-2" style="width: 100px;">
+                    <option value="title" {{ $searchType == 'title' ? 'selected' : '' }}>제목</option>
+                    <option value="content" {{ $searchType == 'content' ? 'selected' : '' }}>내용</option>
                     <option value="author" {{ $searchType == 'author' ? 'selected' : '' }}>작성자</option>
                 </select>
-                <input type="text" name="search_keyword" class="form-control mr-2" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요">
-                <button type="submit" class="btn btn-dark">검색</button>
+                <div class="input-group">
+                    <input type="text" name="search_keyword" class="form-control form-control-sm" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-sm btn-secondary">검색</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 
-    <div class="card shadow mb-4">
-        <div class="card-body">
+    <div class="card">
+        <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead class="thead-light">
+                <table class="table text-center mb-0">
+                    <thead class="bg-light">
                         <tr>
-                            <th class="text-center" style="width: 60px;">No</th>
+                            <th style="width: 60px;">No</th>
                             <th>제목</th>
-                            <th class="text-center" style="width: 120px;">상태</th>
-                            <th class="text-center" style="width: 120px;">작성자 ID</th>
-                            <th class="text-center" style="width: 120px;">등록일</th>
+                            <th style="width: 100px;">상태</th>
+                            <th style="width: 120px;">작성자 ID</th>
+                            <th style="width: 120px;">등록일</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($inquiries as $inquiry)
                             <tr onclick="location.href='{{ route('HNA_Customer_Councelview_001', $inquiry->id) }}'" style="cursor: pointer;">
-                                <td class="text-center">{{ $inquiries->firstItem() + $loop->index }}</td>
-                                <td>{{ $inquiry->title }}</td>
-                                <td class="text-center">
-                                    <span class="badge {{ $inquiry->status == '답변완료' ? 'badge-success' : 'badge-secondary' }}">
-                                        {{ $inquiry->status }}
-                                    </span>
+                                <td>{{ $inquiries->total() - ($inquiries->currentPage() - 1) * $inquiries->perPage() - $loop->index }}</td>
+                                <td class="text-left">
+                                    <div class="text-truncate" style="max-width: 600px;">
+                                        {{ $inquiry->title }}
+                                    </div>
                                 </td>
-                                <td class="text-center">{{ $inquiry->username }}</td>
-                                <td class="text-center">{{ $inquiry->created_at->format('Y.m.d') }}</td>
+                                <td>
+                                    @if($inquiry->status == '답변완료')
+                                        <span class="badge badge-success">답변완료</span>
+                                    @else
+                                        <span class="badge badge-secondary">미답변</span>
+                                    @endif
+                                </td>
+                                <td>{{ $inquiry->username }}</td>
+                                <td>{{ $inquiry->created_at->format('Y-m-d') }}</td>
                             </tr>
                             @if($inquiry->status == '답변완료' && $inquiry->reply)
-                                <tr onclick="location.href='{{ route('HNA_Customer_Councelview_001', $inquiry->id) }}'" style="cursor: pointer; background-color: #f8f9fc;">
-                                    <td class="text-center border-top-0"></td>
-                                    <td class="border-top-0">
-                                        <span class="text-primary mr-2">﹄[Re] :</span> {{ $inquiry->reply->title }}
+                                <tr onclick="location.href='{{ route('HNA_Customer_Councelview_001', $inquiry->id) }}'" style="cursor: pointer; background-color: #f8f9fa;">
+                                    <td class="border-top-0"></td>
+                                    <td class="text-left border-top-0 pl-4">
+                                        <span class="text-danger mr-1">↳ [Re]</span>
+                                        {{ $inquiry->reply->title }}
                                     </td>
-                                    <td class="text-center border-top-0"></td>
-                                    <td class="text-center border-top-0 text-muted">관리자</td>
-                                    <td class="text-center border-top-0 text-muted">{{ $inquiry->reply->created_at->format('Y.m.d') }}</td>
+                                    <td class="border-top-0"></td>
+                                    <td class="border-top-0 small text-muted">관리자</td>
+                                    <td class="border-top-0 small text-muted">{{ $inquiry->reply->created_at->format('Y-m-d') }}</td>
                                 </tr>
                             @endif
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center py-4">검색결과가 없습니다.</td>
+                                <td colspan="5" class="py-5 text-muted">검색결과가 없습니다.</td>
                             </tr>
                         @endforelse
                     </tbody>

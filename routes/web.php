@@ -130,6 +130,7 @@ Route::group(['prefix' => 'admin'], function () {
         // --- 공지사항 관리 (HNA_Customer_Notice) ---
         Route::group(['prefix' => 'HNA_Customer_Notice'], function() {
             Route::get('/Noticelist_001', [NoticeController::class, 'index'])->name('HNA_Customer_Noticelist_001');
+            Route::post('/mass-destroy', [NoticeController::class, 'massDestroy'])->name('admin.notice.massDestroy');
             Route::get('/Noticeregi_001', [NoticeController::class, 'create'])->name('HNA_Customer_Noticeregi_001');
             Route::post('/store', [NoticeController::class, 'store'])->name('admin.notice.store');
             Route::get('/Noticeview_001/{notice}', [NoticeController::class, 'show'])->name('HNA_Customer_Noticeview_001');

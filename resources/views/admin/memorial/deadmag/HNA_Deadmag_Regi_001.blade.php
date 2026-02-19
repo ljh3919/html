@@ -1,13 +1,39 @@
 @extends('layouts.admin')
 
+@section('styles')
+<style>
+    .table-header-custom {
+        background-color: #f8f9fa;
+        font-weight: 500;
+        vertical-align: middle !important;
+        padding-left: 20px !important;
+        border-bottom: 1px solid #dee2e6 !important;
+    }
+    .table-cell-custom {
+        padding: 12px 20px !important;
+        border-bottom: 1px solid #dee2e6 !important;
+    }
+    .btn-outline-custom {
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        color: #333;
+        font-weight: 500;
+    }
+    .btn-outline-custom:hover {
+        background-color: #f8f9fa;
+        color: #000;
+    }
+</style>
+@endsection
+
 @section('content')
-<div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800">사이버 추모관 > 고인 관리 > 등록</h1>
+<div class="container-fluid text-black">
+    <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+        <div style="font-size: 1.5rem; font-weight: 700; color: #000;">• 고인 관리</div>
     </div>
 
     @if ($errors->any())
-        <div class="alert alert-danger">
+        <div class="alert alert-danger border-0 shadow-sm mb-3">
             <ul class="mb-0">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -16,30 +42,30 @@
         </div>
     @endif
 
-    <div class="card shadow mb-4">
-        <div class="card-body">
+    <div class="card border-0">
+        <div class="card-body p-0">
             <form action="{{ route('admin.deadmag.store') }}" method="POST" id="regi-form">
                 @csrf
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered mb-0">
                         <colgroup>
-                            <col style="width: 200px; background-color: #f8f9fc;">
+                            <col style="width: 180px;">
                             <col>
                         </colgroup>
                         <tbody>
                             <tr>
-                                <th class="align-middle">고인명 <span class="text-danger">*</span></th>
-                                <td>
+                                <th class="table-header-custom">고인명 <span class="text-danger ml-1">*</span></th>
+                                <td class="table-cell-custom">
                                     <div class="d-flex align-items-center">
-                                        <span class="mr-2">故</span>
-                                        <input type="text" name="name" class="form-control w-25" value="{{ old('name') }}" required>
+                                        <span class="mr-2 font-weight-bold" style="color: #5d401a;">故</span>
+                                        <input type="text" name="name" class="form-control form-control-sm" style="width: 200px;" value="{{ old('name') }}" required>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="align-middle">구분 <span class="text-danger">*</span></th>
-                                <td>
-                                    <select name="category" id="category-select" class="form-control w-25" required>
+                                <th class="table-header-custom">구분 <span class="text-danger ml-1">*</span></th>
+                                <td class="table-cell-custom">
+                                    <select name="category" id="category-select" class="form-control form-control-sm" style="width: 200px;" required>
                                         <option value="">선택해주세요</option>
                                         <option value="하늘누리관" {{ old('category') == '하늘누리관' ? 'selected' : '' }}>하늘누리관</option>
                                         <option value="자연장" {{ old('category') == '자연장' ? 'selected' : '' }}>자연장</option>
@@ -47,49 +73,49 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="align-middle">안치장소 <span class="text-danger">*</span></th>
-                                <td>
-                                    <div id="location-fields-none" class="text-muted">구분을 선택해주시기 바랍니다.</div>
+                                <th class="table-header-custom">안치장소 <span class="text-danger ml-1">*</span></th>
+                                <td class="table-cell-custom">
+                                    <div id="location-fields-none" class="text-secondary small py-1">구분을 먼저 선택해 주세요.</div>
                                     
                                     <div id="location-fields-hall" style="display: none;">
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center py-1">
                                             <span class="mr-2">관 :</span>
-                                            <select name="location_hall" class="form-control mr-3" style="width: 150px;">
+                                            <select name="location_hall" class="form-control form-control-sm mr-3" style="width: 150px;">
                                                 <option value="">선택해주세요</option>
                                                 <option value="하늘">하늘관</option>
                                                 <option value="누리">누리관</option>
                                                 <option value="무궁화">무궁화관</option>
                                             </select>
                                             <span class="mr-2">열 :</span>
-                                            <select name="location_row_hall" class="form-control mr-3" style="width: 100px;">
+                                            <select name="location_row_hall" class="form-control form-control-sm mr-3" style="width: 80px;">
                                                 <option value="">선택</option>
                                                 @for($i=1; $i<=10; $i++)
                                                     <option value="{{ $i }}">{{ $i }}</option>
                                                 @endfor
                                             </select>
                                             <span class="mr-2">번호 :</span>
-                                            <input type="text" name="location_num_hall" class="form-control" style="width: 100px;">
+                                            <input type="text" name="location_num_hall" class="form-control form-control-sm" style="width: 80px;">
                                         </div>
                                     </div>
 
                                     <div id="location-fields-area" style="display: none;">
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center py-1">
                                             <span class="mr-2">구역 :</span>
-                                            <select name="location_area" class="form-control mr-3" style="width: 150px;">
+                                            <select name="location_area" class="form-control form-control-sm mr-3" style="width: 150px;">
                                                 <option value="">선택해주세요</option>
                                                 <option value="A">A구역</option>
                                                 <option value="B">B구역</option>
                                                 <option value="C">C구역</option>
                                             </select>
                                             <span class="mr-2">열 :</span>
-                                            <select name="location_row_area" class="form-control mr-3" style="width: 100px;">
+                                            <select name="location_row_area" class="form-control form-control-sm mr-3" style="width: 80px;">
                                                 <option value="">선택</option>
                                                 @for($i=1; $i<=20; $i++)
                                                     <option value="{{ $i }}">{{ $i }}</option>
                                                 @endfor
                                             </select>
                                             <span class="mr-2">번호 :</span>
-                                            <input type="text" name="location_num_area" class="form-control" style="width: 100px;">
+                                            <input type="text" name="location_num_area" class="form-control form-control-sm" style="width: 80px;">
                                         </div>
                                     </div>
 
@@ -98,20 +124,20 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="align-middle">기일 <span class="text-danger">*</span></th>
-                                <td>
+                                <th class="table-header-custom">기일 <span class="text-danger ml-1">*</span></th>
+                                <td class="table-cell-custom">
                                     <div class="d-flex align-items-center">
-                                        <select name="death_year" class="form-control mr-2" style="width: 120px;" required>
+                                        <select name="death_year" class="form-control form-control-sm mr-2" style="width: 120px;" required>
                                             @for($y=date('Y'); $y>=1900; $y--)
                                                 <option value="{{ $y }}">{{ $y }}년</option>
                                             @endfor
                                         </select>
-                                        <select name="death_month" class="form-control mr-2" style="width: 80px;" required>
+                                        <select name="death_month" class="form-control form-control-sm mr-2" style="width: 80px;" required>
                                             @for($m=1; $m<=12; $m++)
                                                 <option value="{{ sprintf('%02d', $m) }}">{{ $m }}월</option>
                                             @endfor
                                         </select>
-                                        <select name="death_day" class="form-control mr-2" style="width: 80px;" required>
+                                        <select name="death_day" class="form-control form-control-sm mr-2" style="width: 80px;" required>
                                             @for($d=1; $d<=31; $d++)
                                                 <option value="{{ sprintf('%02d', $d) }}">{{ $d }}일</option>
                                             @endfor
@@ -124,10 +150,17 @@
                     </table>
                 </div>
 
-                <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-primary px-5">등록</button>
-                    <a href="{{ route('HNA_Deadmag_List_001') }}" class="btn btn-secondary px-5 ml-2">취소</a>
+                <div class="d-flex justify-content-between align-items-center mt-4 mb-5">
+                    <p class="text-danger small mb-0 mr-auto">* 표시항목은 필수입력 항목입니다.</p>
+                    <div class="d-flex">
+                        <a href="{{ route('HNA_Deadmag_List_001') }}" class="btn btn-sm btn-outline-custom px-4 py-2 mr-2" style="min-width: 80px;">취소</a>
+                        <button type="submit" class="btn btn-sm text-white px-4 py-2" style="background-color: #5d401a; border: 1px solid #5d401a; min-width: 80px; font-weight: 500;">등록</button>
+                    </div>
                 </div>
+            </form>
+        </div>
+    </div>
+</div>
             </form>
         </div>
     </div>
@@ -156,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     categorySelect.addEventListener('change', toggleFields);
-    toggleFields(); // Initial call
+    toggleFields();
 
     document.getElementById('regi-form').addEventListener('submit', function(e) {
         const cat = categorySelect.value;
@@ -169,7 +202,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('final-num').value = document.querySelector('input[name="location_num_area"]').value;
         }
 
-        // 기일 조합
         const y = document.querySelector('select[name="death_year"]').value;
         const m = document.querySelector('select[name="death_month"]').value;
         const d = document.querySelector('select[name="death_day"]').value;

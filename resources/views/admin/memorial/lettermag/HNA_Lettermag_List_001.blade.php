@@ -1,69 +1,75 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800">사이버 추모관 > 하늘 편지 관리 > 목록</h1>
-        <div>
-            <button type="button" id="btn-delete" class="btn btn-danger" disabled>삭제</button>
-        </div>
-    </div>
+<div class="container-fluid">
+    <div class="content-title">하늘편지 관리</div>
 
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <div class="d-flex align-items-center">
-                <span class="mr-3">총 등록 수 : <strong>{{ number_format($totalCount) }}</strong></span>
+    <div class="d-flex justify-content-between align-items-end mb-3">
+        <div>
+            <div style="font-size: 0.9rem; color: #5d401a; font-weight: 500;">
+                • 총 등록 수 <strong style="color: #5d401a;">{{ number_format($totalCount) }}</strong>
             </div>
         </div>
-        <div class="col-md-6">
-            <form action="{{ route('HNA_Lettermag_List_001') }}" method="GET" class="form-inline justify-content-end">
-                <select name="search_type" class="form-control mr-2">
-                    <option value="username" {{ $searchType == 'username' ? 'selected' : '' }}>ID</option>
+        <div>
+            <form action="{{ route('HNA_Lettermag_List_001') }}" method="GET" class="d-flex">
+                <select name="search_type" class="form-control form-control-sm mr-2" style="width: 150px;">
+                    <option value="username" {{ $searchType == 'username' ? 'selected' : '' }}>아이디</option>
                     <option value="content" {{ $searchType == 'content' ? 'selected' : '' }}>내용</option>
+                    <option value="author" {{ $searchType == 'author' ? 'selected' : '' }}>작성자</option>
                 </select>
-                <input type="text" name="search_keyword" class="form-control mr-2" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요">
-                <button type="submit" class="btn btn-dark">검색</button>
+                <input type="text" name="search_keyword" class="form-control form-control-sm mr-2" style="width: 200px;" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요">
+                <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #5d401a;">검색</button>
             </form>
         </div>
     </div>
 
-    <div class="card shadow mb-4">
-        <div class="card-body">
+    <div class="card border-0">
+        <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="letterTable" width="100%" cellspacing="0">
-                    <thead class="thead-light">
+                <table class="table table-bordered text-center mb-0" id="letterTable" width="100%" cellspacing="0" style="font-size: 0.9rem;">
+                    <thead style="background-color: #f8f9fa;">
                         <tr>
-                            <th class="text-center" style="width: 40px;">
+                            <th style="width: 50px;">
                                 <input type="checkbox" id="check-all">
                             </th>
-                            <th class="text-center" style="width: 50px;">No</th>
-                            <th class="text-center">ID</th>
+                            <th style="width: 80px;">No</th>
+                            <th style="width: 120px;">아이디</th>
                             <th>내용</th>
-                            <th class="text-center">작성자</th>
-                            <th class="text-center">비밀글</th>
-                            <th class="text-center">등록일</th>
+                            <th style="width: 150px;">작성자</th>
+                            <th style="width: 120px;">비밀글</th>
+                            <th style="width: 150px;">등록일</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($letters as $letter)
                             <tr class="letter-row" data-id="{{ $letter->id }}" style="cursor: pointer;">
-                                <td class="text-center" onclick="event.stopPropagation();">
+                                <td onclick="event.stopPropagation();">
                                     <input type="checkbox" name="ids[]" value="{{ $letter->id }}" class="check-item">
                                 </td>
-                                <td class="text-center">{{ $letters->firstItem() + $loop->index }}</td>
-                                <td class="text-center">{{ $letter->username }}</td>
-                                <td class="text-truncate" style="max-width: 300px;">{{ $letter->content }}</td>
-                                <td class="text-center">{{ $letter->author_description }}</td>
-                                <td class="text-center">{{ $letter->is_private }}</td>
-                                <td class="text-center">{{ $letter->created_at->format('Y.m.d') }}</td>
+                                <td>{{ $letters->total() - ($letters->currentPage() - 1) * $letters->perPage() - $loop->index }}</td>
+                                <td class="text-secondary">{{ $letter->username }}</td>
+                                <td class="text-left py-2 px-3">
+                                    <div class="text-truncate" style="max-width: 600px;">
+                                        {{ $letter->content }}
+                                    </div>
+                                </td>
+                                <td>{{ $letter->author_description }}</td>
+                                <td class="text-secondary">{{ $letter->is_private == 'Y' ? 'Y' : '' }}</td>
+                                <td class="text-secondary">{{ $letter->created_at->format('Y-m-d') }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center py-4">검색결과가 없습니다.</td>
+                                <td colspan="7" class="text-center py-4 text-secondary">검색결과가 없습니다.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <button type="button" id="btn-delete" class="btn btn-sm btn-outline-secondary px-3" style="border-color: #ced4da; color: #333;" disabled>
+                    삭제 <i class="fas fa-trash-alt ml-1"></i>
+                </button>
             </div>
 
             <div class="mt-4 d-flex justify-content-center">
@@ -139,4 +145,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<style>
+.pagination .page-item .page-link {
+    color: #333;
+    border: none;
+    margin: 0 2px;
+    border-radius: 50% !important;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+.pagination .page-item.active .page-link {
+    background-color: #3e2a0f !important;
+    color: #fff !important;
+    font-weight: bold;
+}
+.pagination .page-item.disabled .page-link {
+    color: #ccc;
+    background: transparent;
+}
+</style>
 @endsection

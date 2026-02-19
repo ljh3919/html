@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? '하늘누리 관리자' }}</title>
-    <!-- Bootstrap CSS (가정: CDN 사용 중이거나 이미 포함됨) -->
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f4f7f6;
+            background-color: #fff;
+            color: #333;
         }
         #wrapper {
             display: flex;
@@ -19,52 +22,126 @@
         #sidebar {
             min-width: 250px;
             max-width: 250px;
-            background: #343a40;
+            background: #5d401a;
             color: #fff;
             transition: all 0.3s;
             min-height: 100vh;
         }
         #sidebar .sidebar-header {
-            padding: 20px;
-            background: #212529;
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        #sidebar .sidebar-header h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0;
+            color: #fff;
         }
         #sidebar ul.components {
-            padding: 20px 0;
+            padding: 0;
         }
-        #sidebar ul p {
-            color: #fff;
-            padding: 10px;
+        #sidebar ul li {
+            position: relative;
         }
         #sidebar ul li a {
-            padding: 10px 20px;
-            font-size: 1.1em;
-            display: block;
-            color: #adb5bd;
+            padding: 15px 20px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            color: #fff;
             text-decoration: none;
+            transition: 0.2s;
+        }
+        #sidebar ul li a i {
+            width: 25px;
+            margin-right: 10px;
+            font-size: 1.1rem;
         }
         #sidebar ul li a:hover {
-            color: #fff;
-            background: #495057;
+            background: rgba(0,0,0,0.1);
         }
         #sidebar ul li.active > a {
-            color: #fff;
-            background: #007bff;
+            background: #3e2a0f;
+        }
+        #sidebar ul li.active > a::after {
+            content: '>';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .sub-menu {
+            display: block;
+            background: transparent;
+            padding: 0;
+        }
+        .sub-menu li a {
+            padding: 12px 20px 12px 55px !important;
+            font-size: 0.95rem !important;
+            color: #ddd !important;
+            background: transparent !important;
+        }
+        .sub-menu li.active > a {
+            background: #3e2a0f !important;
+            color: #fff !important;
+        }
+        .sub-menu li a:hover {
+            color: #fff !important;
+            background: rgba(0,0,0,0.1) !important;
+        }
+        /* 화살표 표시 (활성화된 메뉴에만) */
+        #sidebar ul li.active > a::after {
+            content: '>';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
         #content {
             width: 100%;
-            padding: 20px;
             transition: all 0.3s;
         }
-        .menu-title {
-            font-size: 0.9em;
-            font-weight: bold;
-            text-transform: uppercase;
-            padding: 10px 20px;
-            color: #6c757d;
+        .top-navbar {
+            background: #5d401a;
+            color: #fff;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 30px;
         }
-        .sub-menu {
-            padding-left: 20px;
-            font-size: 0.9em;
+        .top-navbar .user-info {
+            font-size: 0.9rem;
+            margin-right: 20px;
+        }
+        .btn-logout {
+            background: #fff;
+            color: #5d401a;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+        }
+        .btn-logout i {
+            margin-left: 8px;
+        }
+        .main-content {
+            padding: 30px;
+        }
+        .content-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+        .content-title::before {
+            content: '•';
+            margin-right: 10px;
         }
     </style>
     @yield('styles')
@@ -74,34 +151,50 @@
         <!-- Sidebar -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>하늘누리 Admin</h3>
+                <h3>하늘누리 추모공원</h3>
             </div>
             <ul class="list-unstyled components">
-                <!-- <div class="menu-title">관리자 관리</div> -->
-                <li class="{{ Request::is('admin/HNA_Admag*') ? 'active' : '' }}">
-                    <a href="{{ route('HNA_Admag_list_001') }}">관리자 관리</a>
-                </li>
-                
-                <!-- <div class="menu-title">회원 관리</div> -->
-                <li class="{{ Request::is('admin/HNA_Memmag*') ? 'active' : '' }}">
-                    <a href="{{ route('HNA_Memmag_List_001') }}">회원 관리</a>
-                </li>
-                
                 <li>
-                    <a href="#cyberSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">사이버 추모관</a>
-                    <ul class="collapse list-unstyled sub-menu {{ Request::is('admin/HNA_Deadmag*', 'admin/HNA_Lettermag*') ? 'show' : '' }}" id="cyberSubmenu">
-                        <li class="{{ Request::is('admin/HNA_Deadmag*') ? 'active' : '' }}">
-                            <a href="{{ route('HNA_Deadmag_List_001') }}">고인 관리</a>
-                        </li>
-                        <li class="{{ Request::is('admin/HNA_Lettermag*') ? 'active' : '' }}">
-                            <a href="{{ route('HNA_Lettermag_List_001') }}">하늘 편지 관리</a>
+                    <a href="javascript:void(0);">
+                        <i class="far fa-user"></i> 관리자 관리
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="{{ Request::is('admin/HNA_Admag*') ? 'active' : '' }}">
+                            <a href="{{ route('HNA_Admag_list_001') }}">관리자 관리</a>
                         </li>
                     </ul>
                 </li>
                 
                 <li>
-                    <a href="#customerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">고객센터</a>
-                    <ul class="collapse list-unstyled sub-menu {{ Request::is('admin/HNA_Customer_Notice*', 'admin/HNA_Customer_Councel*', 'admin/HNA_Customer_Referen*') ? 'show' : '' }}" id="customerSubmenu">
+                    <a href="javascript:void(0);">
+                        <i class="fas fa-user-friends"></i> 회원관리
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="{{ Request::is('admin/HNA_Memmag*') ? 'active' : '' }}">
+                            <a href="{{ route('HNA_Memmag_List_001') }}">회원 관리</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="javascript:void(0);">
+                        <i class="far fa-heart"></i> 사이버추모관
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="{{ Request::is('admin/HNA_Deadmag*') ? 'active' : '' }}">
+                            <a href="{{ route('HNA_Deadmag_List_001') }}">고인 관리</a>
+                        </li>
+                        <li class="{{ Request::is('admin/HNA_Lettermag*') ? 'active' : '' }}">
+                            <a href="{{ route('HNA_Lettermag_List_001') }}">하늘편지 관리</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="javascript:void(0);">
+                        <i class="fas fa-volume-up"></i> 고객센터
+                    </a>
+                    <ul class="sub-menu">
                         <li class="{{ Request::is('admin/HNA_Customer_Notice*') ? 'active' : '' }}">
                             <a href="{{ route('HNA_Customer_Noticelist_001') }}">공지사항</a>
                         </li>
@@ -114,41 +207,51 @@
                     </ul>
                 </li>
                 
-                <li class="{{ Request::is('admin/HNA_Popup*') ? 'active' : '' }}">
-                    <a href="{{ route('HNA_Popup_List_001') }}">팝업관리</a>
+                <li>
+                    <a href="javascript:void(0);">
+                        <i class="far fa-window-maximize"></i> 팝업 관리
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="{{ Request::is('admin/HNA_Popup*') ? 'active' : '' }}">
+                            <a href="{{ route('HNA_Popup_List_001') }}">팝업 관리</a>
+                        </li>
+                    </ul>
                 </li>
                 
-                <li class="{{ Request::is('admin/HNA_Brochure*') ? 'active' : '' }}">
-                    <a href="{{ route('HNA_Brochure_Applicationlist_001') }}">브로슈어 신청관리</a>
+                <li>
+                    <a href="javascript:void(0);">
+                        <i class="far fa-file-alt"></i> 브로슈어 신청
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="{{ Request::is('admin/HNA_Brochure*') ? 'active' : '' }}">
+                            <a href="{{ route('HNA_Brochure_Applicationlist_001') }}">브로슈어 신청</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>
 
         <!-- Page Content -->
         <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm">
-                <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" class="btn btn-dark">
-                        <i class="fas fa-align-left"></i>
-                        <span>메뉴 토글</span>
-                    </button>
-                    <div class="ml-auto">
-                        <span class="mr-3">{{ auth('admin')->user()->name ?? '관리자' }}님 환영합니다</span>
-                        <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-outline-danger btn-sm">로그아웃</a>
-                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
+            <header class="top-navbar">
+                <div class="user-info">
+                    <strong>{{ auth('admin')->user()->username ?? 'ADMIN' }}</strong> 님이 로그인 하였습니다.
                 </div>
-            </nav>
+                <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn-logout">
+                    LOGOUT <i class="fas fa-sign-out-alt"></i>
+                </a>
+                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </header>
 
-            @yield('content')
+            <div class="main-content">
+                @yield('content')
+            </div>
         </div>
     </div>
 
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <!-- Font Awesome JS (Removed defer JS in favor of CSS) -->
     <!-- jQuery, Popper.js, Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

@@ -1,52 +1,51 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800">관리자 관리 > 목록</h1>
-        <div>
-            <a href="{{ route('HNA_Admag_Regi_001') }}" class="btn btn-primary">신규 관리자 등록</a>
-            <button type="button" id="btn-delete" class="btn btn-danger" disabled>삭제</button>
-        </div>
-    </div>
+<div class="container-fluid">
+    <div class="content-title">관리자 관리</div>
 
-    <div class="card shadow mb-4">
-        <div class="card-body">
+    <div class="card border-0">
+        <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="adminTable" width="100%" cellspacing="0">
-                    <thead class="thead-light">
+                <table class="table table-bordered text-center" id="adminTable" width="100%" cellspacing="0">
+                    <thead style="background-color: #f8f9fa;">
                         <tr>
-                            <th class="text-center" style="width: 40px;">
+                            <th style="width: 50px;">
                                 <input type="checkbox" id="check-all">
                             </th>
-                            <th class="text-center" style="width: 50px;">번호</th>
                             <th>이름</th>
                             <th>아이디</th>
                             <th>핸드폰 번호</th>
-                            <th>E-mail</th>
-                            <th class="text-center">등록일</th>
+                            <th>이메일</th>
+                            <th>등록일</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($admins as $admin)
                             <tr class="admin-row" data-id="{{ $admin->id }}" style="cursor: pointer;">
-                                <td class="text-center" onclick="event.stopPropagation();">
+                                <td onclick="event.stopPropagation();">
                                     <input type="checkbox" name="ids[]" value="{{ $admin->id }}" class="check-item">
                                 </td>
-                                <td class="text-center">{{ $admins->firstItem() + $loop->index }}</td>
                                 <td>{{ $admin->name }}</td>
-                                <td>{{ $admin->username }}</td>
+                                <td class="text-secondary">{{ $admin->username }}</td>
                                 <td>{{ $admin->phone }}</td>
                                 <td>{{ $admin->email }}</td>
-                                <td class="text-center">{{ $admin->created_at->format('Y-m-d') }}</td>
+                                <td class="text-secondary">{{ $admin->created_at->format('Y-m-d') }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center py-4">등록된 관리자가 없습니다.</td>
+                                <td colspan="6" class="text-center py-4 text-secondary">등록된 관리자가 없습니다.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <button type="button" id="btn-delete" class="btn btn-sm btn-outline-secondary px-3" disabled>
+                    삭제 <i class="fas fa-trash-alt ml-1"></i>
+                </button>
+                <a href="{{ route('HNA_Admag_Regi_001') }}" class="btn btn-sm text-white px-4" style="background-color: #5d401a; border-radius: 4px;">신규 관리자 등록</a>
             </div>
 
             <div class="mt-4 d-flex justify-content-center">
