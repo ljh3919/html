@@ -57,10 +57,6 @@
 
             <div class="col-md-6">
                 <h4 class="section-title">ADMIN (관리자)</h4>
-                <div class="alert alert-warning">
-                    <small>* 관리자 페이지는 로그인이 필요할 수 있습니다.</small><br>
-                    <strong>ID:</strong> haneulnuri / <strong>PW:</strong> 1234
-                </div>
                 <div class="list-group shadow-sm">
                     <a href="/publish/admin/HNA_Login_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>관리자 로그인</span> <span class="badge badge-custom">Auth</span>
