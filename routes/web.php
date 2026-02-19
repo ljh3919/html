@@ -16,7 +16,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/publish', 'publish_list');
+Route::view('/publish', 'publishing.index');
 
 // Front Routes
 Route::group(['prefix' => 'front'], function () {
