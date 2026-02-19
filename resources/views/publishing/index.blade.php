@@ -25,31 +25,31 @@
             <div class="col-md-6">
                 <h4 class="section-title">FRONT (사용자)</h4>
                 <div class="list-group shadow-sm">
-                    <a href="/front/HN_Main_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/front/HN_Main_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>메인 페이지</span> <span class="badge badge-light">Main</span>
                     </a>
-                    <a href="/front/HN_Login_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/front/HN_Login_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>로그인</span> <span class="badge badge-light">Member</span>
                     </a>
-                    <a href="/front/HN_Join_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/front/HN_Join_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>회원가입 (약관)</span> <span class="badge badge-light">Member</span>
                     </a>
-                    <a href="/front/HN_Join_002" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/front/HN_Join_002" target="_blank" class="list-group-item list-group-item-action">
                         <span>회원가입 (입력)</span> <span class="badge badge-light">Member</span>
                     </a>
-                    <a href="/front/HN_Introdu_Greeting_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/front/HN_Introdu_Greeting_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>인사말</span> <span class="badge badge-light">Intro</span>
                     </a>
-                    <a href="/front/HN_Facil_Bongan_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/front/HN_Facil_Bongan_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>시설안내 (봉안담)</span> <span class="badge badge-light">Facility</span>
                     </a>
-                    <a href="/front/HN_DistriInfo_Distriproce_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/front/HN_DistriInfo_Distriproce_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>분양안내 (절차)</span> <span class="badge badge-light">Info</span>
                     </a>
-                    <a href="/front/HN_Memorial_Deadsearch_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/front/HN_Memorial_Deadsearch_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>사이버추모관 (검색)</span> <span class="badge badge-light">Memorial</span>
                     </a>
-                     <a href="/front/HN_Customer_Noticelist_001" target="_blank" class="list-group-item list-group-item-action">
+                     <a href="/publish/front/HN_Customer_Noticelist_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>고객센터 (공지사항)</span> <span class="badge badge-light">CS</span>
                     </a>
                 </div>
@@ -62,34 +62,34 @@
                     <strong>ID:</strong> haneulnuri / <strong>PW:</strong> 1234
                 </div>
                 <div class="list-group shadow-sm">
-                    <a href="/admin/HNA_Login_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/admin/HNA_Login_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>관리자 로그인</span> <span class="badge badge-custom">Auth</span>
                     </a>
-                    <a href="/admin/HNA_Admag_list_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/admin/HNA_Admag_list_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>관리자 관리 (목록)</span> <span class="badge badge-custom">Admin</span>
                     </a>
-                    <a href="/admin/HNA_Memmag/List_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/admin/HNA_Memmag/List_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>회원 관리 (목록)</span> <span class="badge badge-custom">Member</span>
                     </a>
-                    <a href="/admin/HNA_Deadmag/List_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/admin/HNA_Deadmag/List_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>고인 관리 (목록)</span> <span class="badge badge-custom">Dead</span>
                     </a>
-                    <a href="/admin/HNA_Lettermag/List_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/admin/HNA_Lettermag/List_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>하늘편지 관리 (목록)</span> <span class="badge badge-custom">Letter</span>
                     </a>
-                    <a href="/admin/HNA_Customer_Notice/Noticelist_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/admin/HNA_Customer_Notice/Noticelist_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>공지사항 관리 (목록)</span> <span class="badge badge-custom">Notice</span>
                     </a>
-                    <a href="/admin/HNA_Customer_Councel/Councellist_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/admin/HNA_Customer_Councel/Councellist_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>1:1 상담 관리 (목록)</span> <span class="badge badge-custom">Counsel</span>
                     </a>
-                    <a href="/admin/HNA_Customer_Referen/Referenlist_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/admin/HNA_Customer_Referen/Referenlist_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>자료실 관리 (목록)</span> <span class="badge badge-custom">Referen</span>
                     </a>
-                    <a href="/admin/HNA_Popup/Popup_List_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/admin/HNA_Popup/Popup_List_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>팝업 관리 (목록)</span> <span class="badge badge-custom">Popup</span>
                     </a>
-                    <a href="/admin/HNA_Brochure/Applicationlist_001" target="_blank" class="list-group-item list-group-item-action">
+                    <a href="/publish/admin/HNA_Brochure/Applicationlist_001" target="_blank" class="list-group-item list-group-item-action">
                         <span>브로슈어 신청 관리</span> <span class="badge badge-custom">Brochure</span>
                     </a>
                 </div>
