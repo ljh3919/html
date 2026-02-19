@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.publishing_blank')
 
 @section('content')
 <div class="container-fluid">
