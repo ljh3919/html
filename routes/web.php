@@ -16,6 +16,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/publish', 'publish_list');
+
 // Front Routes
 Route::group(['prefix' => 'front'], function () {
     Route::view('/HN_Main_001', 'front.main.HN_Main_001')->name('HN_Main_001');
