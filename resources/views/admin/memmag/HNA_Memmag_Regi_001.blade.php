@@ -66,19 +66,7 @@
                                     <small class="text-secondary mt-1 d-block" style="font-size: 0.8rem;">* 영문 또는 영문+숫자만 가능</small>
                                 </td>
                             </tr>
-                            <tr>
-                                <th class="table-header-custom">비밀번호 <span class="text-danger ml-1">*</span></th>
-                                <td class="table-cell-custom py-3">
-                                    <input type="password" name="password" class="form-control form-control-sm" style="width: 300px;" required>
-                                    <small class="text-secondary mt-1 d-block" style="font-size: 0.8rem;">* 10~16자의 숫자와 영문 대 소문자 조합으로 사용하세요.</small>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="table-header-custom">비밀번호 확인 <span class="text-danger ml-1">*</span></th>
-                                <td class="table-cell-custom">
-                                    <input type="password" name="password_confirmation" class="form-control form-control-sm" style="width: 300px;" required>
-                                </td>
-                            </tr>
+
                             <tr>
                                 <th class="table-header-custom">핸드폰 번호 <span class="text-danger ml-1">*</span></th>
                                 <td class="table-cell-custom">

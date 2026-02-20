@@ -66,19 +66,7 @@
                                     <input type="text" class="form-control form-control-sm bg-light" style="width: 300px; border: 1px solid #ced4da;" value="{{ $member->username }}" readonly disabled>
                                 </td>
                             </tr>
-                            <tr>
-                                <th class="table-header-custom">비밀번호</th>
-                                <td class="table-cell-custom py-3">
-                                    <input type="password" name="password" class="form-control form-control-sm" style="width: 300px;" placeholder="*************">
-                                    <small class="text-secondary mt-1 d-block" style="font-size: 0.8rem;">* 변경 시에만 입력하세요. 10~16자의 숫자와 영문 대 소문자 조합으로 사용하세요.</small>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="table-header-custom">비밀번호 확인</th>
-                                <td class="table-cell-custom">
-                                    <input type="password" name="password_confirmation" class="form-control form-control-sm" style="width: 300px;" placeholder="*************">
-                                </td>
-                            </tr>
+
                             <tr>
                                 <th class="table-header-custom">핸드폰 번호 <span class="text-danger ml-1">*</span></th>
                                 <td class="table-cell-custom">

@@ -56,10 +56,6 @@
                             <td class="table-cell-custom">{{ $member->username }}</td>
                         </tr>
                         <tr>
-                            <th class="table-header-custom">비밀번호 <span class="text-danger ml-1">*</span></th>
-                            <td class="table-cell-custom text-secondary">****************</td>
-                        </tr>
-                        <tr>
                             <th class="table-header-custom">핸드폰 번호 <span class="text-danger ml-1">*</span></th>
                             <td class="table-cell-custom">{{ $member->phone }}</td>
                         </tr>
