@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <link rel="stylesheet" href="../../../../resources/css/main.css" />
+  </head>
+  <body>
+    <div class="container login">
+      <div class="wrap-login">
+        <div class="login-cont">
+          <h1 class="tit-login">Login</h1>
+          <form action="" class="form-login">
+            <div class="form-tit">아이디</div>
+            <div class="input-group">
+              <input
+                type="text"
+                class="input-box"
+                placeholder="아이디를 입력해주세요."
+              />
+              <span class="error-message">
+                <span class="error-icon">!</span>
+                에러메세지
+              </span>
+            </div>
+            <div class="form-tit">비밀번호</div>
+            <div class="input-group">
+              <input
+                type="password"
+                class="input-box"
+                placeholder="비밀번호를 입력해주세요."
+              />
+              <span class="error-message">
+                <span class="error-icon">!</span>
+                에러메세지
+              </span>
+            </div>
+            <div class="checkbox-group">
+              <div class="checkbox-list">
+                <label class="checkbox-item">
+                  <input type="checkbox" class="checkbox-input" />
+                  <span class="checkbox-label">아이디 저장</span>
+                </label>
+              </div>
+            </div>
+          </form>
+          <button type="button" class="btn primary h56 full">
+            <span>로그인</span>
+          </button>
+          <div class="wrap-find">
+            <button class="btn empty" id="popupFindIdBtn">아이디 찾기</button>
+            <button class="btn empty" id="popupFindPasswordBtn">
+              비밀번호 찾기
+            </button>
+          </div>
+        </div>
+        <div class="alert-text">* 하늘누리 관리자만 로그인 가능합니다.</div>
+      </div>
+    </div>
+    <!-- popup preview modal -->
+    <div class="popup-overlay" id="popupOverlay" aria-hidden="true">
+      <div class="wrap-popup" role="dialog" aria-labelledby="popupPreviewTitle">
+        <div class="popup-header">
+          <h3 class="popup-tit" id="popupPreviewTitle">아이디 찾기</h3>
+          <button
+            type="button"
+            class="popup-close"
+            id="popupClose"
+            aria-label="닫기"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+            >
+              <path
+                d="M4 28L28 4"
+                stroke="white"
+                stroke-width="2"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+              />
+              <path
+                d="M4 4L28 28"
+                stroke="white"
+                stroke-width="2"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="popup-body">
+          <div class="popup-cont" id="popupContent">
+            <div class="wrap-asdf">asdf</div>
+            <div class="wrap-cont asdf">
+              <!-- <p>입력하신 정보가 일치하지 않습니다.</p>
+              <p>고객님의 아이디는</p>
+              <p><strong>“doobu001”</strong> 입니다.</p>
+              <p>
+                Doobu001 님의 임시 비빌번호를 등록된
+                이메일(doobu001@naver.com)로 발송하였습니다.
+              </p>
+              <p>비밀번호를 변경 후 사용하시기 바랍니다.</p>
+              <button type="button" class="btn primary">
+                <span>확인</span>
+              </button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var findIdBtn = document.getElementById("popupFindIdBtn");
+        var findPasswordBtn = document.getElementById("popupFindPasswordBtn");
+        var overlay = document.getElementById("popupOverlay");
+        var closeBtn = document.getElementById("popupClose");
+        var contentEl = document.getElementById("popupContent");
+        var titleEl = document.getElementById("popupPreviewTitle");
+
+        var findIdContent =
+          '<div class="wrap-cont">' +
+          "<form>" +
+          '<div class="wrap-form">' +
+          '<div class="tit">이름</div>' +
+          '<div class="desc">' +
+          '<div class="input-group"><input type="text" class="input-box" /><span class="error-message"><span class="error-icon">!</span>에러메세지</span></div>' +
+          "</div>" +
+          "</div>" +
+          '<div class="wrap-form">' +
+          '<div class="tit">이메일 주소</div>' +
+          '<div class="desc">' +
+          '<div class="input-group"><input type="text" class="input-box" /><span class="error-message"><span class="error-icon">!</span>에러메세지</span></div>' +
+          "</div>" +
+          "</div>" +
+          "</form>" +
+          // ToDo: id 일치 하지 않을때
+          // "<p>입력하신 정보가 일치하지 않습니다.</p>" +
+          // ToDo: id 일치 할때
+          // "<p>고객님의 아이디는</p>" +
+          // '<p><strong>"doobu001"</strong> 입니다.</p>' +
+          // ToDo: 비밀번호 발송 후
+          // "<p>Doobu001 님의 임시 비밀번호를 등록된 이메일(doobu001@naver.com)로 발송하였습니다.</p>" +
+          // "<p>비밀번호를 변경 후 사용하시기 바랍니다.</p>";
+          '<div class="wrap-btn"><button type="button" class="btn primary popup-confirm-btn"><span>확인</span></button></div>' +
+          "</div>";
+        // ToDo: id 찾기
+        // '<div class="wrap-btn"><button type="button" class="btn line popup-confirm-btn"><span>취소</span></button><button type="button" class="btn primary popup-confirm-btn"><span>찾기</span></button></div>' +
+        // "</div>";
+        var findPasswordContent =
+          '<div class="wrap-cont">' +
+          "<form>" +
+          '<div class="wrap-form">' +
+          '<div class="tit">아이디</div>' +
+          '<div class="desc">' +
+          '<div class="input-group"><input type="text" class="input-box" /><span class="error-message"><span class="error-icon">!</span>에러메세지</span></div>' +
+          "</div>" +
+          "</div>" +
+          '<div class="wrap-form">' +
+          '<div class="tit">이름</div>' +
+          '<div class="desc">' +
+          '<div class="input-group"><input type="text" class="input-box" /><span class="error-message"><span class="error-icon">!</span>에러메세지</span></div>' +
+          "</div>" +
+          "</div>" +
+          '<div class="wrap-form">' +
+          '<div class="tit">이메일 주소</div>' +
+          '<div class="desc">' +
+          '<div class="input-group"><input type="text" class="input-box" /><span class="error-message"><span class="error-icon">!</span>에러메세지</span></div>' +
+          "</div>" +
+          "</div>" +
+          "</form>" +
+          '<div class="wrap-btn"><button type="button" class="btn line popup-confirm-btn"><span>취소</span></button><button type="button" class="btn primary popup-confirm-btn"><span>찾기</span></button></div>' +
+          "</div>";
+
+        if (!findIdBtn || !findPasswordBtn || !overlay || !contentEl) return;
+
+        function openPopup(type) {
+          if (type === "findId") {
+            if (titleEl) titleEl.textContent = "아이디 찾기";
+            contentEl.innerHTML = findIdContent;
+          } else if (type === "findPassword") {
+            if (titleEl) titleEl.textContent = "비밀번호 찾기";
+            contentEl.innerHTML = findPasswordContent;
+          }
+          overlay.classList.add("active");
+          overlay.setAttribute("aria-hidden", "false");
+        }
+
+        function closePopup() {
+          overlay.classList.remove("active");
+          overlay.setAttribute("aria-hidden", "true");
+        }
+
+        findIdBtn.addEventListener("click", function () {
+          openPopup("findId");
+        });
+        findPasswordBtn.addEventListener("click", function () {
+          openPopup("findPassword");
+        });
+        if (closeBtn) closeBtn.addEventListener("click", closePopup);
+        overlay.addEventListener("click", function (e) {
+          if (e.target === overlay) closePopup();
+          if (e.target.closest(".popup-confirm-btn")) closePopup();
+        });
+      })();
+    </script>
+  </body>
+</html>

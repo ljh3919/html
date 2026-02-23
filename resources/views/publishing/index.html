@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>페이지 목록 - vite-project</title>
+        <style>
+            .page-list-wrap {
+                max-width: 720px;
+                margin: 0 auto;
+                padding: 2rem;
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    sans-serif;
+            }
+            .page-list-wrap h1 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+                color: #1a1a1a;
+            }
+            .page-list-wrap h2 {
+                font-size: 1rem;
+                margin: 1.5rem 0 0.5rem;
+                color: #666;
+            }
+            .page-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 0.75rem;
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .page-list a {
+                display: block;
+                padding: 1rem 1.25rem;
+                background: #f5f5f5;
+                border-radius: 8px;
+                color: #333;
+                text-decoration: none;
+                font-size: 0.9rem;
+                transition:
+                    background 0.2s,
+                    transform 0.1s;
+            }
+            .page-list a:hover {
+                background: #e8e8e8;
+                transform: translateY(-1px);
+            }
+            .page-list a:active {
+                transform: translateY(0);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-list-wrap">
+            <h1>페이지 목록</h1>
+
+            <h2>로그인</h2>
+            <ul class="page-list">
+                <li>
+                    <a
+                        href="./pages/login.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >로그인</a
+                    >
+                </li>
+            </ul>
+
+            <h2>관리자</h2>
+            <ul class="page-list">
+                <li>
+                    <a
+                        href="./pages/admin_list.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >관리자 관리 list</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/admin_registration.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >관리자 관리 Registration</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/admin_view.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >관리자 관리 View</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/admin_modify.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >관리자 관리 Modify</a
+                    >
+                </li>
+            </ul>
+            <h2>회원관리</h2>
+            <ul class="page-list">
+                <li>
+                    <a
+                        href="./pages/user_manage.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >회원관리</a
+                    >
+                </li>
+            </ul>
+            <h2>사이버 추모관</h2>
+            <ul class="page-list">
+                <li>
+                    <a
+                        href="./pages/cyber_room_list.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >고인관리 List</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/cyber_room_registration.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >고인관리 Registration</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/letter_list.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >하늘편지 List</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/letter_detail.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >하늘편지 Detail</a
+                    >
+                </li>
+            </ul>
+
+            <h2>공지사항</h2>
+            <ul class="page-list">
+                <li>
+                    <a
+                        href="./pages/notice_list.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >공지사항 List</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/notice_registration.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >공지사항 Registration / Modify</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/notice_detail.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >공지사항 Detail</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/counsel_list.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >1:1 상담관리 List</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/counsel_view.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >1:1 상담관리 View</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/counsel_reply.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >1:1 상담관리 Reply</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/archive_list.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >자료실 List</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/archive_registration.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >자료실 Registration / Modify</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/archive_view.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >자료실 View</a
+                    >
+                </li>
+            </ul>
+
+            <h2>팝업</h2>
+            <ul class="page-list">
+                <li>
+                    <a
+                        href="./pages/popup_list.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >팝업관리 List</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/popup_registration.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >팝업관리 Registration</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="./pages/popup_detail.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >팝업관리 Detail</a
+                    >
+                </li>
+            </ul>
+
+            <h2>브로슈어 신청관리</h2>
+            <ul class="page-list">
+                <li>
+                    <a
+                        href="./pages/brochure_list.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >브로슈어 List</a
+                    >
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
