@@ -1,4 +1,10 @@
 @extends('layouts.admin')
+ 
+ @section('styles')
+ <style>
+     /* 페이지네이션 및 테이블 기본 스타일은 admin-common.css에 정의됨 */
+ </style>
+ @endsection
 
 @section('content')
 <div class="container-fluid">
@@ -26,7 +32,7 @@
     <div class="card border-0">
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-bordered text-center mb-0" id="letterTable" width="100%" cellspacing="0" style="font-size: 0.9rem;">
+                <table class="table table-bordered text-center table-admin" id="letterTable" width="100%" cellspacing="0">
                     <thead style="background-color: #f8f9fa;">
                         <tr>
                             <th style="width: 50px;">
@@ -66,14 +72,34 @@
                 </table>
             </div>
 
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <button type="button" id="btn-delete" class="btn btn-sm btn-outline-secondary px-3" style="border-color: #ced4da; color: #333;" disabled>
+            <div class="btn-area-60">
+                <button type="button" id="btn-delete" class="btn btn-sm btn-delete-custom px-3" disabled>
                     삭제 <i class="fas fa-trash-alt ml-1"></i>
                 </button>
             </div>
 
-            <div class="mt-4 d-flex justify-content-center">
-                {{ $letters->appends(request()->input())->links('pagination::bootstrap-4') }}
+            <div class="pagination-wrap">
+                <a href="{{ $letters->appends(request()->input())->url(1) }}" class="pag-btn {{ $letters->onFirstPage() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-double-left"></i>
+                </a>
+                <a href="{{ $letters->appends(request()->input())->previousPageUrl() }}" class="pag-btn {{ $letters->onFirstPage() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                
+                @foreach(range(1, $letters->lastPage()) as $page)
+                    @if($page >= $letters->currentPage() - 2 && $page <= $letters->currentPage() + 2)
+                        <a href="{{ $letters->url($page) }}" class="pag-btn {{ $page == $letters->currentPage() ? 'active' : '' }}">
+                            {{ $page }}
+                        </a>
+                    @endif
+                @endforeach
+
+                <a href="{{ $letters->nextPageUrl() }}" class="pag-btn {{ !$letters->hasMorePages() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+                <a href="{{ $letters->url($letters->lastPage()) }}" class="pag-btn {{ !$letters->hasMorePages() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-double-right"></i>
+                </a>
             </div>
         </div>
     </div>
@@ -146,27 +172,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<style>
-.pagination .page-item .page-link {
-    color: #333;
-    border: none;
-    margin: 0 2px;
-    border-radius: 50% !important;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-}
-.pagination .page-item.active .page-link {
-    background-color: #3e2a0f !important;
-    color: #fff !important;
-    font-weight: bold;
-}
-.pagination .page-item.disabled .page-link {
-    color: #ccc;
-    background: transparent;
-}
-</style>
 @endsection

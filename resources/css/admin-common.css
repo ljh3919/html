@@ -1,0 +1,97 @@
+/* 관리자 공통 스타일 */
+
+/* 페이지네이션 (원형 스타일) */
+.pagination-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    border-top: 1px solid #dee2e6;
+    gap: 8px;
+    margin-top: 0 !important;
+}
+
+.pag-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid #dee2e6;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #666;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.pag-btn i {
+    font-size: 0.8rem;
+}
+
+.pag-btn.active {
+    background-color: #5d401a;
+    color: #fff;
+    border-color: #5d401a;
+}
+
+.pag-btn:hover:not(.active):not(.disabled) {
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+.pag-btn.disabled {
+    color: #ccc;
+    cursor: default;
+}
+
+/* 테이블 공통 스타일 */
+.table-admin {
+    margin-bottom: 0 !important;
+    font-size: 0.9rem;
+}
+
+.table-admin thead th {
+    height: 38px;
+    padding: 0 10px !important;
+    vertical-align: middle;
+}
+
+.table-admin tbody td {
+    height: 36px;
+    padding: 0 10px !important;
+    vertical-align: middle;
+}
+
+/* 버튼 영역 높이 */
+.btn-area-60 {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 삭제 버튼 커스텀 스타일 (하늘편지 관리 디자인 기준) */
+.btn-delete-custom {
+    border-color: #ced4da !important;
+    color: #333 !important;
+    background-color: #fff !important;
+}
+
+.btn-delete-custom:hover {
+    background-color: #f8f9fa !important;
+}
+
+/* 등록/발송 등 주 버튼 커스텀 스타일 */
+.btn-register-custom {
+    background-color: #5d401a !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 4px !important;
+}
+
+.btn-register-custom:hover {
+    background-color: #4a3215 !important;
+    color: #fff !important;
+}

@@ -1,4 +1,10 @@
 @extends('layouts.admin')
+ 
+ @section('styles')
+ <style>
+     /* 페이지네이션 및 테이블 기본 스타일은 admin-common.css에 정의됨 */
+ </style>
+ @endsection
 
 @section('content')
 <div class="container-fluid">
@@ -7,7 +13,7 @@
     <div class="card border-0">
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-bordered text-center" id="adminTable" width="100%" cellspacing="0">
+                <table class="table table-bordered text-center table-admin" id="adminTable" width="100%" cellspacing="0">
                     <thead style="background-color: #f8f9fa;">
                         <tr>
                             <th style="width: 50px;">
@@ -41,15 +47,35 @@
                 </table>
             </div>
 
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <button type="button" id="btn-delete" class="btn btn-sm btn-outline-secondary px-3" disabled>
+            <div class="btn-area-60">
+                <button type="button" id="btn-delete" class="btn btn-sm btn-delete-custom px-3" disabled>
                     삭제 <i class="fas fa-trash-alt ml-1"></i>
                 </button>
-                <a href="{{ route('HNA_Admag_Regi_001') }}" class="btn btn-sm text-white px-4" style="background-color: #5d401a; border-radius: 4px;">신규 관리자 등록</a>
+                <a href="{{ route('HNA_Admag_Regi_001') }}" class="btn btn-sm btn-register-custom px-4">신규 관리자 등록</a>
             </div>
 
-            <div class="mt-4 d-flex justify-content-center">
-                {{ $admins->links('pagination::bootstrap-4') }}
+            <div class="pagination-wrap">
+                <a href="{{ $admins->url(1) }}" class="pag-btn {{ $admins->onFirstPage() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-double-left"></i>
+                </a>
+                <a href="{{ $admins->previousPageUrl() }}" class="pag-btn {{ $admins->onFirstPage() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                
+                @foreach(range(1, $admins->lastPage()) as $page)
+                    @if($page >= $admins->currentPage() - 2 && $page <= $admins->currentPage() + 2)
+                        <a href="{{ $admins->url($page) }}" class="pag-btn {{ $page == $admins->currentPage() ? 'active' : '' }}">
+                            {{ $page }}
+                        </a>
+                    @endif
+                @endforeach
+
+                <a href="{{ $admins->nextPageUrl() }}" class="pag-btn {{ !$admins->hasMorePages() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+                <a href="{{ $admins->url($admins->lastPage()) }}" class="pag-btn {{ !$admins->hasMorePages() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-double-right"></i>
+                </a>
             </div>
         </div>
     </div>

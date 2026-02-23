@@ -1,4 +1,10 @@
 @extends('layouts.admin')
+ 
+ @section('styles')
+ <style>
+     /* 페이지네이션 및 테이블 기본 스타일은 admin-common.css에 정의됨 */
+ </style>
+ @endsection
 
 @section('content')
 <div class="container-fluid">
@@ -27,12 +33,15 @@
         </div>
     </div>
 
-    <div class="card">
+    <div class="card border-0">
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table text-center mb-0">
+                <table class="table table-bordered text-center table-admin">
                     <thead class="bg-light">
                         <tr>
+                            <th style="width: 50px;">
+                                <input type="checkbox" id="check-all">
+                            </th>
                             <th style="width: 60px;">No</th>
                             <th>제목</th>
                             <th style="width: 100px;">상태</th>
@@ -42,7 +51,10 @@
                     </thead>
                     <tbody>
                         @forelse($inquiries as $inquiry)
-                            <tr onclick="location.href='{{ route('HNA_Customer_Councelview_001', $inquiry->id) }}'" style="cursor: pointer;">
+                            <tr class="inquiry-row" data-id="{{ $inquiry->id }}" style="cursor: pointer;">
+                                <td onclick="event.stopPropagation();">
+                                    <input type="checkbox" name="ids[]" value="{{ $inquiry->id }}" class="check-item">
+                                </td>
                                 <td>{{ $inquiries->total() - ($inquiries->currentPage() - 1) * $inquiries->perPage() - $loop->index }}</td>
                                 <td class="text-left">
                                     <div class="text-truncate" style="max-width: 600px;">
@@ -60,7 +72,8 @@
                                 <td>{{ $inquiry->created_at->format('Y-m-d') }}</td>
                             </tr>
                             @if($inquiry->status == '답변완료' && $inquiry->reply)
-                                <tr onclick="location.href='{{ route('HNA_Customer_Councelview_001', $inquiry->id) }}'" style="cursor: pointer; background-color: #f8f9fa;">
+                                <tr class="inquiry-row" data-id="{{ $inquiry->id }}" style="cursor: pointer; background-color: #f8f9fa;">
+                                    <td class="border-top-0"></td>
                                     <td class="border-top-0"></td>
                                     <td class="text-left border-top-0 pl-4">
                                         <span class="text-danger mr-1">↳ [Re]</span>
@@ -73,15 +86,42 @@
                             @endif
                         @empty
                             <tr>
-                                <td colspan="5" class="py-5 text-muted">검색결과가 없습니다.</td>
+                            <tr>
+                                <td colspan="6" class="py-5 text-muted">검색결과가 없습니다.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
 
-            <div class="mt-4 d-flex justify-content-center">
-                {{ $inquiries->appends(request()->input())->links('pagination::bootstrap-4') }}
+            <div class="btn-area-60">
+                <button type="button" id="btn-delete" class="btn btn-sm btn-delete-custom px-3" disabled>
+                    삭제 <i class="fas fa-trash-alt ml-1"></i>
+                </button>
+            </div>
+
+            <div class="pagination-wrap">
+                <a href="{{ $inquiries->appends(request()->input())->url(1) }}" class="pag-btn {{ $inquiries->onFirstPage() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-double-left"></i>
+                </a>
+                <a href="{{ $inquiries->appends(request()->input())->previousPageUrl() }}" class="pag-btn {{ $inquiries->onFirstPage() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                
+                @foreach(range(1, $inquiries->lastPage()) as $page)
+                    @if($page >= $inquiries->currentPage() - 2 && $page <= $inquiries->currentPage() + 2)
+                        <a href="{{ $inquiries->appends(request()->input())->url($page) }}" class="pag-btn {{ $page == $inquiries->currentPage() ? 'active' : '' }}">
+                            {{ $page }}
+                        </a>
+                    @endif
+                @endforeach
+
+                <a href="{{ $inquiries->appends(request()->input())->nextPageUrl() }}" class="pag-btn {{ !$inquiries->hasMorePages() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+                <a href="{{ $inquiries->appends(request()->input())->url($inquiries->lastPage()) }}" class="pag-btn {{ !$inquiries->hasMorePages() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-double-right"></i>
+                </a>
             </div>
         </div>
     </div>

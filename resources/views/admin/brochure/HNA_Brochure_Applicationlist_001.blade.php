@@ -1,4 +1,10 @@
 @extends('layouts.admin')
+ 
+ @section('styles')
+ <style>
+     /* 페이지네이션 및 테이블 기본 스타일은 admin-common.css에 정의됨 */
+ </style>
+ @endsection
 
 @section('content')
 <div class="container-fluid">
@@ -38,12 +44,12 @@
         </div>
     </div>
 
-    <div class="card border-0 mb-3">
+    <div class="card border-0">
         <div class="card-body p-0">
             <form id="batch-form" action="{{ route('admin.brochure.send') }}" method="POST">
                 @csrf
                 <div class="table-responsive">
-                    <table class="table table-bordered text-center mb-0" style="font-size: 0.9rem;">
+                     <table class="table table-bordered text-center table-admin">
                         <thead style="background-color: #f8f9fa;">
                             <tr>
                                 <th style="width: 50px;">
@@ -91,24 +97,64 @@
                     </table>
                 </div>
             </form>
+
+            <div class="btn-area-60">
+                <button type="button" id="btn-delete" class="btn btn-sm btn-delete-custom px-3" disabled>
+                    삭제 <i class="fas fa-trash-alt ml-1"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-register-custom px-4" onclick="submitBatchSend()">발송하기</button>
+            </div>
+
+            <div class="pagination-wrap">
+                <a href="{{ $applications->appends(request()->input())->url(1) }}" class="pag-btn {{ $applications->onFirstPage() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-double-left"></i>
+                </a>
+                <a href="{{ $applications->appends(request()->input())->previousPageUrl() }}" class="pag-btn {{ $applications->onFirstPage() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                
+                @foreach(range(1, $applications->lastPage()) as $page)
+                    @if($page >= $applications->currentPage() - 2 && $page <= $applications->currentPage() + 2)
+                        <a href="{{ $applications->appends(request()->input())->url($page) }}" class="pag-btn {{ $page == $applications->currentPage() ? 'active' : '' }}">
+                            {{ $page }}
+                        </a>
+                    @endif
+                @endforeach
+
+                <a href="{{ $applications->appends(request()->input())->nextPageUrl() }}" class="pag-btn {{ !$applications->hasMorePages() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+                <a href="{{ $applications->appends(request()->input())->url($applications->lastPage()) }}" class="pag-btn {{ !$applications->hasMorePages() ? 'disabled' : '' }}">
+                    <i class="fas fa-angle-double-right"></i>
+                </a>
+            </div>
         </div>
-    </div>
-
-    <div class="d-flex justify-content-end mb-4">
-        <button type="button" class="btn btn-sm text-white px-4" style="background-color: #5d401a;" onclick="submitBatchSend()">발송하기</button>
-    </div>
-
-    <div class="mt-4 d-flex justify-content-center">
-        {{ $applications->appends(request()->input())->links('pagination::bootstrap-4') }}
     </div>
 </div>
 
 <script>
-document.getElementById('check-all').addEventListener('change', function() {
-    const isChecked = this.checked;
-    document.querySelectorAll('.check-item').forEach(item => {
-        item.checked = isChecked;
+document.addEventListener('DOMContentLoaded', function() {
+    const checkAll = document.getElementById('check-all');
+    const checkItems = document.querySelectorAll('.check-item');
+    const btnDelete = document.getElementById('btn-delete');
+
+    if (checkAll) {
+        checkAll.addEventListener('change', function() {
+            checkItems.forEach(item => item.checked = this.checked);
+            toggleDeleteButton();
+        });
+    }
+
+    checkItems.forEach(item => {
+        item.addEventListener('change', function() {
+            if (checkAll) checkAll.checked = Array.from(checkItems).every(i => i.checked);
+            toggleDeleteButton();
+        });
     });
+
+    function toggleDeleteButton() {
+        if (btnDelete) btnDelete.disabled = !Array.from(checkItems).some(i => i.checked);
+    }
 });
 
 function submitBatchSend() {
@@ -140,16 +186,5 @@ function sendIndividual(id) {
 }
 </script>
 
-<style>
-.pagination .page-item.active .page-link {
-    background-color: #5d401a;
-    border-color: #5d401a;
-    color: #fff;
-    font-weight: bold;
-}
-.pagination .page-link {
-    color: #333;
-}
-</style>
 @endsection
 
