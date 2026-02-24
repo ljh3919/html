@@ -1508,7 +1508,8 @@ html {
 }
 
 .container {
-  width: 1920px;
+  min-width: 1280px;
+  max-width: 1920px;
   height: 100vh;
   margin: 0 auto;
 }
@@ -1567,6 +1568,9 @@ html {
   padding: 0 10px;
   width: 240px;
   height: calc(100vh - 63px);
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
 }
 .container .main .lnb .lnb-lv01 {
   list-style: none;
@@ -1602,6 +1606,7 @@ html {
 .container .main .lnb .lnb-lv01 .item .lnb-lv02 .item .item-wrap {
   padding: 9px 16px 9px 48px;
   cursor: pointer;
+  position: relative;
 }
 .container .main .lnb .lnb-lv01 .item .lnb-lv02 .item .item-wrap .item-text {
   font-family: "Noto Sans KR";
@@ -1610,7 +1615,7 @@ html {
   font-weight: 400;
   color: #fff;
 }
-.container .main .lnb .lnb-lv01 .item .lnb-lv02 .item .item-wrap::before {
+.container .main .lnb .lnb-lv01 .item .lnb-lv02 .item.active .item-wrap::before {
   content: "";
   width: 20px;
   height: 20px;
@@ -1674,6 +1679,9 @@ html {
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+}
+.wrap-popup.w400 {
+  width: 400px;
 }
 .wrap-popup .popup-header {
   display: flex;
@@ -1742,6 +1750,24 @@ html {
 .wrap-popup .popup-body .popup-cont .wrap-cont p + p {
   margin-top: 12px;
 }
+.wrap-popup .popup-body .popup-cont .wrap-cont .form-login .error-message {
+  display: none;
+  background-color: #fff4f4;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #c00404;
+  text-align: left;
+}
+.wrap-popup .popup-body .popup-cont .wrap-cont .form-login .error-message + .wrap-form {
+  margin-top: 20px;
+}
+.wrap-popup .popup-body .popup-cont .wrap-cont .form-login.error .error-message {
+  display: block;
+}
 .wrap-popup .popup-body .popup-cont .wrap-cont .wrap-btn {
   margin: 30px auto 0;
   display: flex;
@@ -1786,7 +1812,7 @@ html {
 }
 
 .wrap-login .login-cont {
-  width: 344px;
+  width: 336px;
   padding: 60px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   border-top-left-radius: 32px;
@@ -1827,6 +1853,23 @@ html {
 .wrap-login .login-cont .form-login {
   margin-top: 32px;
 }
+.wrap-login .login-cont .form-login .error-message {
+  display: none;
+  background-color: #fff4f4;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: "Noto Sans KR";
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #c00404;
+}
+.wrap-login .login-cont .form-login .error-message + .form-tit {
+  margin-top: 20px;
+}
+.wrap-login .login-cont .form-login.error .error-message {
+  display: block;
+}
 .wrap-login .login-cont .form-login .form-tit {
   font-family: "Noto Sans KR";
   font-size: 14px;
@@ -1850,7 +1893,7 @@ html {
   font-weight: 400;
   color: #333333;
 }
-.wrap-login .login-cont > .btn {
+.wrap-login .login-cont .form-login .btn {
   margin-top: 32px;
 }
 .wrap-login .alert-text {
