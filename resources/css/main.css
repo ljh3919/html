@@ -1567,6 +1567,9 @@ html {
   padding: 0 10px;
   width: 240px;
   height: calc(100vh - 63px);
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
 }
 .container .main .lnb .lnb-lv01 {
   list-style: none;
@@ -1674,6 +1677,9 @@ html {
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+}
+.wrap-popup.w400 {
+  width: 400px;
 }
 .wrap-popup .popup-header {
   display: flex;
@@ -1786,7 +1792,7 @@ html {
 }
 
 .wrap-login .login-cont {
-  width: 344px;
+  width: 336px;
   padding: 60px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   border-top-left-radius: 32px;
