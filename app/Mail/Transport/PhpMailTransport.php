@@ -24,24 +24,35 @@ class PhpMailTransport extends AbstractTransport
         $email = MessageConverter::toEmail($message->getOriginalMessage());
         
         $to = implode(', ', array_map(fn($recipient) => $recipient->getAddress(), $email->getTo()));
-        $subject = $email->getSubject();
         
-        // 메일 본문 추출 (HTML 우선, 없으면 Text)
+        // 제목 인코딩 (한글 깨짐 방지)
+        $subject = '=?UTF-8?B?' . base64_encode($email->getSubject()) . '?=';
+        
+        // 메일 본문 추출
         $body = $email->getHtmlBody() ?: $email->getTextBody();
+        $contentType = $email->getHtmlBody() ? 'text/html' : 'text/plain';
         
-        // 발신자 정보 추출 ( Envelope Sender 설정용 )
+        // 발신자 정보
         $from = $email->getFrom();
         $senderAddress = !empty($from) ? $from[0]->getAddress() : config('mail.from.address');
+        $senderName = !empty($from) && $from[0]->getName() ? $from[0]->getName() : config('mail.from.name');
+        
+        // 헤더 단순화 및 최적화 (Dothome 등 공유 호스팅용)
+        $headers = [];
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: $contentType; charset=utf-8";
+        $headers[] = "From: =?UTF-8?B?" . base64_encode($senderName) . "?= <$senderAddress>";
+        $headers[] = "Reply-To: $senderAddress";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
 
-        // 헤더 문자열 생성 및 보정
-        $headers = $email->getHeaders()->toString();
+        $headerString = implode("\r\n", $headers);
 
-        // PHP의 mail() 함수는 5번째 인자로 -f 옵션을 주어 Envelope Sender를 명시하는 것이 
-        // 공유 호스팅(Dothome 등)에서 발송 성공률을 높입니다.
+        // Envelope Sender 설정
         $extraParams = "-f" . $senderAddress;
 
-        if (!mail($to, $subject, $body, $headers, $extraParams)) {
-            \Log::error("PHP mail() failed for $to with subject: $subject");
+        // 발송 시도
+        if (!mail($to, $subject, $body, $headerString, $extraParams)) {
+            \Log::error("PHP mail() native call failed to $to");
             throw new \RuntimeException('PHP mail() 함수를 통한 메일 발송에 실패했습니다.');
         }
     }
