@@ -1508,7 +1508,8 @@ html {
 }
 
 .container {
-  width: 1920px;
+  min-width: 1280px;
+  max-width: 1920px;
   height: 100vh;
   margin: 0 auto;
 }
@@ -1605,6 +1606,7 @@ html {
 .container .main .lnb .lnb-lv01 .item .lnb-lv02 .item .item-wrap {
   padding: 9px 16px 9px 48px;
   cursor: pointer;
+  position: relative;
 }
 .container .main .lnb .lnb-lv01 .item .lnb-lv02 .item .item-wrap .item-text {
   font-family: "Noto Sans KR";
@@ -1613,7 +1615,7 @@ html {
   font-weight: 400;
   color: #fff;
 }
-.container .main .lnb .lnb-lv01 .item .lnb-lv02 .item .item-wrap::before {
+.container .main .lnb .lnb-lv01 .item .lnb-lv02 .item.active .item-wrap::before {
   content: "";
   width: 20px;
   height: 20px;
