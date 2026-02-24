@@ -38,7 +38,7 @@ class PhpMailTransport extends AbstractTransport
         
         // 가장 안정적인 최소한의 헤더 구성
         $headers = [];
-        // $headers[] = "MIME-Version: 1.0";
+        $headers[] = "MIME-Version: 1.0";
         $headers[] = "Content-type: $contentType; charset=utf-8";
         $headers[] = "From: $senderAddress";
         $headers[] = "Reply-To: $senderAddress";
