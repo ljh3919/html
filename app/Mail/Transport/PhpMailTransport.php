@@ -25,34 +25,29 @@ class PhpMailTransport extends AbstractTransport
         
         $to = implode(', ', array_map(fn($recipient) => $recipient->getAddress(), $email->getTo()));
         
-        // 제목 인코딩 (한글 깨짐 방지)
+        // 제목 (UTF-8 인코딩 명시)
         $subject = '=?UTF-8?B?' . base64_encode($email->getSubject()) . '?=';
         
-        // 메일 본문 추출
+        // 메일 본문
         $body = $email->getHtmlBody() ?: $email->getTextBody();
         $contentType = $email->getHtmlBody() ? 'text/html' : 'text/plain';
         
-        // 발신자 정보
+        // 발신자 주소 (Dothome 환경에서는 계정명과 일치하는 메일 주소를 사용하는 것이 필수적일 수 있음)
         $from = $email->getFrom();
         $senderAddress = !empty($from) ? $from[0]->getAddress() : config('mail.from.address');
-        $senderName = !empty($from) && $from[0]->getName() ? $from[0]->getName() : config('mail.from.name');
         
-        // 헤더 단순화 및 최적화 (Dothome 등 공유 호스팅용)
+        // 가장 안정적인 최소한의 헤더 구성
         $headers = [];
-        $headers[] = "MIME-Version: 1.0";
+        // $headers[] = "MIME-Version: 1.0";
         $headers[] = "Content-type: $contentType; charset=utf-8";
-        $headers[] = "From: =?UTF-8?B?" . base64_encode($senderName) . "?= <$senderAddress>";
+        $headers[] = "From: $senderAddress";
         $headers[] = "Reply-To: $senderAddress";
-        $headers[] = "X-Mailer: PHP/" . phpversion();
 
-        $headerString = implode("\r\n", $headers);
-
-        // Envelope Sender 설정
-        $extraParams = "-f" . $senderAddress;
+        $headerString = implode("\n", $headers);
 
         // 발송 시도
-        if (!mail($to, $subject, $body, $headerString, $extraParams)) {
-            \Log::error("PHP mail() native call failed to $to");
+        if (!mail($to, $subject, $body, $headerString)) {
+            \Log::error("PHP mail() failed to $to");
             throw new \RuntimeException('PHP mail() 함수를 통한 메일 발송에 실패했습니다.');
         }
     }
