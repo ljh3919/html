@@ -261,8 +261,9 @@
                             </form>
                             <div id="findPwSuccessArea" class="d-none">
                                 <div class="wrap-cont">
-                                    <p>임시 비밀번호가 발송되었습니다.</p>
-                                    <p>이메일을 확인해 주세요.</p>
+                                    <p><span id="success_pw_username"></span> 님의 임시 비빌번호를</p>
+                                    <p>등록된 이메일(<span id="success_pw_email"></span>)로 발송하였습니다.</p>
+                                    <p>비밀번호를 변경 후 사용하시기 바랍니다.</p>
                                 </div>
                                 <div class="wrap-btn">
                                     <button type="button" class="btn primary" data-dismiss="modal"><span>확인</span></button>
@@ -324,6 +325,8 @@ $(document).ready(function() {
             success: function(response) {
                 if(response.success) {
                     form.addClass('d-none');
+                    $('#success_pw_username').text(response.username);
+                    $('#success_pw_email').text(response.email);
                     successArea.removeClass('d-none');
                 } else {
                     resultDiv.removeClass('d-none').text(response.message);
