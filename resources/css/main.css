@@ -1748,6 +1748,24 @@ html {
 .wrap-popup .popup-body .popup-cont .wrap-cont p + p {
   margin-top: 12px;
 }
+.wrap-popup .popup-body .popup-cont .wrap-cont .form-login .error-message {
+  display: none;
+  background-color: #fff4f4;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #c00404;
+  text-align: left;
+}
+.wrap-popup .popup-body .popup-cont .wrap-cont .form-login .error-message + .wrap-form {
+  margin-top: 20px;
+}
+.wrap-popup .popup-body .popup-cont .wrap-cont .form-login.error .error-message {
+  display: block;
+}
 .wrap-popup .popup-body .popup-cont .wrap-cont .wrap-btn {
   margin: 30px auto 0;
   display: flex;
@@ -1833,6 +1851,23 @@ html {
 .wrap-login .login-cont .form-login {
   margin-top: 32px;
 }
+.wrap-login .login-cont .form-login .error-message {
+  display: none;
+  background-color: #fff4f4;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: "Noto Sans KR";
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #c00404;
+}
+.wrap-login .login-cont .form-login .error-message + .form-tit {
+  margin-top: 20px;
+}
+.wrap-login .login-cont .form-login.error .error-message {
+  display: block;
+}
 .wrap-login .login-cont .form-login .form-tit {
   font-family: "Noto Sans KR";
   font-size: 14px;
@@ -1856,7 +1891,7 @@ html {
   font-weight: 400;
   color: #333333;
 }
-.wrap-login .login-cont > .btn {
+.wrap-login .login-cont .form-login .btn {
   margin-top: 32px;
 }
 .wrap-login .alert-text {
