@@ -198,7 +198,7 @@ class AdminController extends Controller
                 return response()->json(['success' => true, 'email' => $admin->email, 'username' => $admin->username]);
             } catch (\Exception $e) {
                 \Log::error('Mail sending failed: ' . $e->getMessage());
-                return response()->json(['success' => false, 'message' => '이메일 발송 중 오류가 발생했습니다.']);
+                return response()->json(['success' => false, 'message' => '이메일 발송 중 오류가 발생했습니다: ' . $e->getMessage()]);
             }
         }
 
