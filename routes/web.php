@@ -16,143 +16,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/publish', 'publishing.index');
-
-// --- 퍼블리싱 전용 라우트 (Publishing Routes) ---
-Route::group(['prefix' => 'publish'], function () {
-    // Front Publishing
-    Route::group(['prefix' => 'front'], function () {
-        Route::view('/HN_Main_001', 'publishing.front.main.HN_Main_001');
-        Route::view('/HN_Login_001', 'publishing.front.login.HN_Login_001');
-        Route::view('/HN_Join_001', 'publishing.front.join.HN_Join_001');
-        Route::view('/HN_Join_002', 'publishing.front.join.HN_Join_002');
-        Route::view('/HN_Introdu_Greeting_001', 'publishing.front.introdu.HN_Introdu_Greeting_001');
-        Route::view('/HN_Introdu_Hnstory_001', 'publishing.front.introdu.HN_Introdu_Hnstory_001');
-        Route::view('/HN_Introdu_Perarti_001', 'publishing.front.introdu.HN_Introdu_Perarti_001');
-        Route::view('/HN_Introdu_Way_001', 'publishing.front.introdu.HN_Introdu_Way_001');
-        Route::view('/HN_Facil_Bongan_001', 'publishing.front.facil.HN_Facil_Bongan_001');
-        Route::view('/HN_Facil_Naburial_001', 'publishing.front.facil.HN_Facil_Naburial_001');
-        Route::view('/HN_Facil_Aditinal_001', 'publishing.front.facil.HN_Facil_Aditinal_001');
-        Route::view('/HN_Facil_Surround_001', 'publishing.front.facil.HN_Facil_Surround_001');
-        Route::view('/HN_DistriInfo_Distriproce_001', 'publishing.front.distri-info.HN_DistriInfo_Distriproce_001');
-        Route::view('/HN_DistriInfo_Distriprice_001', 'publishing.front.distri-info.HN_DistriInfo_Distriprice_001');
-        Route::view('/HN_DistriInfo_Applibenefit_001', 'publishing.front.distri-info.HN_DistriInfo_Applibenefit_001');
-        Route::view('/HN_Memorial_Deadsearch_001', 'publishing.front.memorial.deadsearch.HN_Memorial_Deadsearch_001');
-        Route::view('/HN_Memorial_Deadresult_001', 'publishing.front.memorial.deadsearch.HN_Memorial_Deadresult_001', ['deads' => []]);
-        Route::view('/HN_Memorial_Letterlist_001', 'publishing.front.memorial.letter.HN_Memorial_Letterlist_001', ['letters' => []]);
-        Route::view('/HN_Memorial_Letterregi_001', 'publishing.front.memorial.letter.HN_Memorial_Letterregi_001');
-        Route::view('/HN_Memorial_Letterview_001', 'publishing.front.memorial.letter.HN_Memorial_Letterview_001', ['letter' => []]);
-        Route::view('/HN_Memorial_Lettermodi_001', 'publishing.front.memorial.letter.HN_Memorial_Lettermodi_001', ['letter' => []]);
-        Route::view('/HN_Customer_Noticelist_001', 'publishing.front.customer.notice.HN_Customer_Noticelist_001', ['notices' => []]);
-        Route::view('/HN_Customer_Noticeview_001', 'publishing.front.customer.notice.HN_Customer_Noticeview_001', ['notice' => []]);
-        Route::view('/HN_Customer_Faq_001', 'publishing.front.customer.faq.HN_Customer_Faq_001');
-        Route::view('/HN_Customer_Councellist_001', 'publishing.front.customer.inquiry.HN_Customer_Councellist_001', ['inquiries' => []]);
-        Route::view('/HN_Customer_Councelregi_001', 'publishing.front.customer.inquiry.HN_Customer_Councelregi_001');
-        Route::view('/HN_Customer_Councelview_001', 'publishing.front.customer.inquiry.HN_Customer_Councelview_001', ['inquiry' => []]);
-        Route::view('/HN_Customer_Councelmodi_001', 'publishing.front.customer.inquiry.HN_Customer_Councelmodi_001', ['inquiry' => []]);
-        Route::view('/HN_Customer_Referenlist_001', 'publishing.front.customer.referen.HN_Customer_Referenlist_001', ['references' => []]);
-        Route::view('/HN_Customer_Referenview_001', 'publishing.front.customer.referen.HN_Customer_Referenview_001', ['reference' => []]);
-        Route::view('/HN_Phonecouncel_Info_001P', 'publishing.front.skyscraper.HN_Phonecouncel_Info_001P');
-        Route::view('/HN_Brochure_Application_001', 'publishing.front.brochure.HN_Brochure_Application_001');
-        Route::view('/HN_MemInfo_View_001', 'publishing.front.mem-info.HN_MemInfo_View_001', ['user' => []]);
-        Route::view('/HN_MemInfo_Modi_001', 'publishing.front.mem-info.HN_MemInfo_Modi_001', ['user' => []]);
-        Route::view('/HN_MemInfo_Pwmodi_001', 'publishing.front.mem-info.HN_MemInfo_Pwmodi_001');
-        Route::view('/HN_Login_Idsearch_001', 'publishing.front.login.HN_Login_Idsearch_001');
-        Route::view('/HN_Login_Pwsearch_001', 'publishing.front.login.HN_Login_Pwsearch_001');
-    });
-
-    // Admin Publishing
-    Route::group(['prefix' => 'admin'], function () {
-        Route::view('/HNA_Login_001', 'publishing.admin.login.HNA_Login_001');
-        Route::view('/HNA_FindId_001', 'publishing.admin.login.HNA_FindId_001');
-        Route::view('/HNA_FindPw_001', 'publishing.admin.login.HNA_FindPw_001');
-        Route::view('/HNA_Admag_list_001', 'publishing.admin.admag.HNA_Admag_list_001', ['admins' => []]);
-        Route::view('/HNA_Admag_Regi_001', 'publishing.admin.admag.HNA_Admag_Regi_001');
-        Route::view('/HNA_Admag_view_001', 'publishing.admin.admag.HNA_Admag_view_001', ['admin' => []]);
-        Route::view('/HNA_Admag_Modi_001', 'publishing.admin.admag.HNA_Admag_Modi_001', ['admin' => []]);
-        
-        Route::view('/HNA_Memmag/List_001', 'publishing.admin.memmag.HNA_Memmag_List_001', ['members' => []]);
-        Route::view('/HNA_Memmag/Regi_001', 'publishing.admin.memmag.HNA_Memmag_Regi_001');
-        Route::view('/HNA_Memmag/View_001', 'publishing.admin.memmag.HNA_Memmag_View_001', ['member' => []]);
-        Route::view('/HNA_Memmag/Modi_001', 'publishing.admin.memmag.HNA_Memmag_Modi_001', ['member' => []]);
-
-        Route::view('/HNA_Deadmag/List_001', 'publishing.admin.memorial.dead.HNA_Deadmag_List_001', ['deads' => []]);
-        Route::view('/HNA_Deadmag/Regi_001', 'publishing.admin.memorial.dead.HNA_Deadmag_Regi_001');
-        Route::view('/HNA_Deadmag/View_001', 'publishing.admin.memorial.dead.HNA_Deadmag_View_001', ['dead' => []]);
-        Route::view('/HNA_Deadmag/Modi_001', 'publishing.admin.memorial.dead.HNA_Deadmag_Modi_001', ['dead' => []]);
-
-        Route::view('/HNA_Lettermag/List_001', 'publishing.admin.memorial.letter.HNA_Lettermag_List_001', ['letters' => []]);
-        Route::view('/HNA_Lettermag/View_001', 'publishing.admin.memorial.letter.HNA_Lettermag_View_001', ['letter' => []]);
-
-        Route::view('/HNA_Customer_Notice/Noticelist_001', 'publishing.admin.customer.notice.HNA_Customer_Noticelist_001', ['notices' => [], 'searchType' => '', 'searchKeyword' => '', 'totalCount' => 0]);
-        Route::view('/HNA_Customer_Notice/Noticeregi_001', 'publishing.admin.customer.notice.HNA_Customer_Noticeregi_001');
-        Route::view('/HNA_Customer_Notice/Noticeview_001', 'publishing.admin.customer.notice.HNA_Customer_Noticeview_001', ['notice' => []]);
-        Route::view('/HNA_Customer_Notice/Noticemodi_001', 'publishing.admin.customer.notice.HNA_Customer_Noticemodi_001', ['notice' => []]);
-
-        Route::view('/HNA_Customer_Councel/Councellist_001', 'publishing.admin.customer.inquiry.HNA_Customer_Councellist_001', ['inquiries' => []]);
-        Route::view('/HNA_Customer_Councel/Councelview_001', 'publishing.admin.customer.inquiry.HNA_Customer_Councelview_001', ['inquiry' => []]);
-        Route::view('/HNA_Customer_Councel/Replyrigo_001', 'publishing.admin.customer.inquiry.HNA_Customer_Replyrigo_001', ['inquiry' => []]);
-        Route::view('/HNA_Customer_Councel/Replymodi_001', 'publishing.admin.customer.inquiry.HNA_Customer_Replymodi_001', ['inquiry' => []]);
-
-        Route::view('/HNA_Customer_Referen/Referenlist_001', 'publishing.admin.customer.referen.HNA_Customer_Referenlist_001', ['references' => []]);
-        Route::view('/HNA_Customer_Referen/Referenrigo_001', 'publishing.admin.customer.referen.HNA_Customer_Referenrigo_001');
-        Route::view('/HNA_Customer_Referen/Referenview_001', 'publishing.admin.customer.referen.HNA_Customer_Referenview_001', ['reference' => []]);
-        Route::view('/HNA_Customer_Referen/Referenmodi_001', 'publishing.admin.customer.referen.HNA_Customer_Referenmodi_001', ['reference' => []]);
-
-        Route::view('/HNA_Popup/Popup_List_001', 'publishing.admin.popup.HNA_Popup_List_001', ['popups' => []]);
-        Route::view('/HNA_Popup/Popup_Regi_001', 'publishing.admin.popup.HNA_Popup_Regi_001');
-        Route::view('/HNA_Popup/Popup_Detail_001', 'publishing.admin.popup.HNA_Popup_Detail_001', ['popup' => []]);
-        Route::view('/HNA_Popup/Popup_Modi_001', 'publishing.admin.popup.HNA_Popup_Modi_001', ['popup' => []]);
-        Route::view('/HNA_Popup/Popup_Preview_001', 'publishing.admin.popup.HNA_Popup_Preview_001', ['popup' => []]);
-
-        Route::view('/HNA_Brochure/Applicationlist_001', 'publishing.admin.brochure.HNA_Brochure_Applicationlist_001', ['brochures' => []]);
-    });
-});
-
-// Front Routes
-Route::group(['prefix' => 'front'], function () {
-    Route::view('/HN_Main_001', 'front.main.HN_Main_001')->name('HN_Main_001');
-    Route::view('/HN_Join_001', 'front.join.HN_Join_001')->name('HN_Join_001');
-    Route::view('/HN_Join_002', 'front.join.HN_Join_002')->name('HN_Join_002');
-    Route::view('/HN_Login_001', 'front.login.HN_Login_001')->name('HN_Login_001');
-    Route::view('/HN_Login_Idsearch_001', 'front.login.HN_Login_Idsearch_001')->name('HN_Login_Idsearch_001');
-    Route::view('/HN_Login_Pwsearch_001', 'front.login.HN_Login_Pwsearch_001')->name('HN_Login_Pwsearch_001');
-    Route::view('/HN_MemInfo_View_001', 'front.mem-info.HN_MemInfo_View_001')->name('HN_MemInfo_View_001');
-    Route::view('/HN_MemInfo_Modi_001', 'front.mem-info.HN_MemInfo_Modi_001')->name('HN_MemInfo_Modi_001');
-    Route::view('/HN_MemInfo_Pwmodi_001', 'front.mem-info.HN_MemInfo_Pwmodi_001')->name('HN_MemInfo_Pwmodi_001');
-    Route::view('/HN_Introdu_Greeting_001', 'front.introdu.HN_Introdu_Greeting_001')->name('HN_Introdu_Greeting_001');
-    Route::view('/HN_Introdu_Hnstory_001', 'front.introdu.HN_Introdu_Hnstory_001')->name('HN_Introdu_Hnstory_001');
-    Route::view('/HN_Introdu_Perarti_001', 'front.introdu.HN_Introdu_Perarti_001')->name('HN_Introdu_Perarti_001');
-    Route::view('/HN_Introdu_Way_001', 'front.introdu.HN_Introdu_Way_001')->name('HN_Introdu_Way_001');
-    Route::view('/HN_Facil_Bongan_001', 'front.facil.HN_Facil_Bongan_001')->name('HN_Facil_Bongan_001');
-    Route::view('/HN_Facil_Naburial_001', 'front.facil.HN_Facil_Naburial_001')->name('HN_Facil_Naburial_001');
-    Route::view('/HN_Facil_Aditinal_001', 'front.facil.HN_Facil_Aditinal_001')->name('HN_Facil_Aditinal_001');
-    Route::view('/HN_Facil_Surround_001', 'front.facil.HN_Facil_Surround_001')->name('HN_Facil_Surround_001');
-    Route::view('/HN_DistriInfo_Distriproce_001', 'front.distri-info.HN_DistriInfo_Distriproce_001')->name('HN_DistriInfo_Distriproce_001');
-    Route::view('/HN_DistriInfo_Distriprice_001', 'front.distri-info.HN_DistriInfo_Distriprice_001')->name('HN_DistriInfo_Distriprice_001');
-    Route::view('/HN_DistriInfo_Applibenefit_001', 'front.distri-info.HN_DistriInfo_Applibenefit_001')->name('HN_DistriInfo_Applibenefit_001');
-    Route::view('/HN_Memorial_Deadsearch_001', 'front.memorial.deadsearch.HN_Memorial_Deadsearch_001')->name('HN_Memorial_Deadsearch_001');
-    Route::view('/HN_Memorial_Deadresult_001', 'front.memorial.deadsearch.HN_Memorial_Deadresult_001')->name('HN_Memorial_Deadresult_001');
-    Route::view('/HN_Memorial_Letterlist_001', 'front.memorial.letter.HN_Memorial_Letterlist_001')->name('HN_Memorial_Letterlist_001');
-    Route::view('/HN_Memorial_Letterregi_001', 'front.memorial.letter.HN_Memorial_Letterregi_001')->name('HN_Memorial_Letterregi_001');
-    Route::view('/HN_Memorial_Letterview_001', 'front.memorial.letter.HN_Memorial_Letterview_001')->name('HN_Memorial_Letterview_001');
-    Route::view('/HN_Memorial_Lettermodi_001', 'front.memorial.letter.HN_Memorial_Lettermodi_001')->name('HN_Memorial_Lettermodi_001');
-    Route::view('/HN_Customer_Noticelist_001', 'front.customer.notice.HN_Customer_Noticelist_001')->name('HN_Customer_Noticelist_001');
-    Route::view('/HN_Customer_Noticeview_001', 'front.customer.notice.HN_Customer_Noticeview_001')->name('HN_Customer_Noticeview_001');
-    Route::view('/HN_Customer_Faq_001', 'front.customer.faq.HN_Customer_Faq_001')->name('HN_Customer_Faq_001');
-    Route::get('/HN_Customer_Councellist_001', [FrontInquiryController::class, 'index'])->name('HN_Customer_Councellist_001');
-    Route::get('/HN_Customer_Councelregi_001', [FrontInquiryController::class, 'create'])->name('HN_Customer_Councelregi_001');
-    Route::post('/HN_Customer_Councelregi_001', [FrontInquiryController::class, 'store'])->name('front.inquiry.store');
-    Route::get('/HN_Customer_Councelview_001/{inquiry}', [FrontInquiryController::class, 'show'])->name('HN_Customer_Councelview_001');
-    Route::get('/HN_Customer_Councelmodi_001/{inquiry}', [FrontInquiryController::class, 'edit'])->name('HN_Customer_Councelmodi_001');
-    Route::put('/HN_Customer_Councelmodi_001/{inquiry}', [FrontInquiryController::class, 'update'])->name('front.inquiry.update');
-    Route::delete('/HN_Customer_Councelview_001/{inquiry}', [FrontInquiryController::class, 'destroy'])->name('front.inquiry.destroy');
-    Route::view('/HN_Customer_Referenlist_001', 'front.customer.referen.HN_Customer_Referenlist_001')->name('HN_Customer_Referenlist_001');
-    Route::view('/HN_Customer_Referenview_001', 'front.customer.referen.HN_Customer_Referenview_001')->name('HN_Customer_Referenview_001');
-    Route::view('/HN_Phonecouncel_Info_001P', 'front.skyscraper.HN_Phonecouncel_Info_001P')->name('HN_Phonecouncel_Info_001P');
-    Route::view('/HN_Brochure_Application_001', 'front.brochure.HN_Brochure_Application_001')->name('HN_Brochure_Application_001');
-});
-
 // Admin Routes
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', function () {
@@ -165,17 +28,17 @@ Route::group(['prefix' => 'admin'], function () {
     // --- 로그인 및 정보 찾기 ---
     Route::get('/HNA_Login_001', [AdminController::class, 'loginForm'])->name('HNA_Login_001');
     Route::post('/HNA_Login_001', [AdminController::class, 'login'])->name('admin.login');
-    
+
     Route::get('/HNA_FindId_001', [AdminController::class, 'findIdForm'])->name('HNA_FindId_001');
     Route::get('/HNA_FindPw_001', [AdminController::class, 'findPwForm'])->name('HNA_FindPw_001');
-    
+
     Route::post('/find-id', [AdminController::class, 'findId'])->name('admin.findId');
     Route::post('/find-pw', [AdminController::class, 'findPw'])->name('admin.findPw');
 
     // --- 관리자 기능 (auth:admin) ---
     Route::middleware('auth:admin')->group(function () {
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
-        
+
         Route::get('/HNA_Admag_list_001', [AdminController::class, 'index'])->name('HNA_Admag_list_001');
         Route::post('/HNA_Admag_list_001/mass-destroy', [AdminController::class, 'massDestroy'])->name('admin.admag.massDestroy');
         Route::get('/HNA_Admag_Regi_001', [AdminController::class, 'create'])->name('HNA_Admag_Regi_001');
@@ -184,7 +47,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/HNA_Admag_Modi_001/{admin}', [AdminController::class, 'edit'])->name('HNA_Admag_Modi_001');
         Route::put('/HNA_Admag_Modi_001/{admin}', [AdminController::class, 'update'])->name('admin.admag.update');
         Route::delete('/HNA_Admag_list_001/{admin}', [AdminController::class, 'destroy'])->name('admin.admag.destroy');
-        
+
         // --- 회원관리 (HNA_Memmag) ---
         Route::group(['prefix' => 'HNA_Memmag'], function() {
             Route::get('/List_001', [MemberController::class, 'index'])->name('HNA_Memmag_List_001');
