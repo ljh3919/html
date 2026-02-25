@@ -78,7 +78,7 @@
 <!-- board button -->
 <div class="wrap-board-btn">
     <div class="wrap-btn-left">
-        <button type="button" id="btn-delete" class="btn line" disabled>
+        <button type="button" id="btn-delete" class="btn line small" disabled>
             <span>삭제</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M19.1119 3.78009H13.7778C13.7778 3.29279 13.3801 2.89844 12.8886 2.89844H11.1113C10.6187 2.89844 10.2221 3.29279 10.2221 3.78009H4.88804C4.39657 3.78009 4 4.17448 4 4.66179C4 5.14795 4.39772 5.54344 4.88804 5.54344H19.1119C19.6034 5.54344 20 5.14795 20 4.66179C20.0011 4.17562 19.6034 3.78009 19.1119 3.78009Z" fill="#4A4A4A" />

@@ -54,7 +54,7 @@
 <!-- board button -->
 <div class="wrap-board-btn">
     <div class="wrap-btn-left">
-        <button type="button" class="btn line" id="btn-delete" disabled>
+        <button type="button" class="btn line small" id="btn-delete" disabled>
             <span>삭제</span>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
