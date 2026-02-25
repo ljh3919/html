@@ -1,0 +1,50 @@
+@use "../abstracts/typography";
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins";
+
+// Search Styles
+.search-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 400px;
+
+  .search-input {
+    flex: 1;
+    padding: 0.75rem 0;
+    @include mixins.ff(14, 1.4);
+    color: $text-color-body;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $border-color-03;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+      color: $text-color-a;
+    }
+
+    &:focus {
+      border-bottom-color: $black;
+    }
+  }
+
+  .search-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    @include mixins.ff(16, 1, nb);
+    color: $text-color-body;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $text-color-tit;
+    }
+  }
+}

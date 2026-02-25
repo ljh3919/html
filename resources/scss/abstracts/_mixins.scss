@@ -1,0 +1,783 @@
+@use "sass:list";
+@use "sass:string";
+
+// width 360px 기준 - 반응형으로 size 계산
+@function rate($value) {
+  @return 100 / 360 * $value + vw;
+}
+
+@mixin ff($size: 1.8, $line-height: 1.4, $font-family: nr) {
+  @if $font-family == nr {
+    // Noto Sans Regular
+    font-family: "Noto Sans KR";
+    font-size: $size + px;
+    line-height: $line-height;
+    font-weight: 400;
+  } @else if $font-family == nm {
+    // Noto Sans Medium
+    font-family: "Noto Sans KR";
+    font-size: $size + px;
+    line-height: $line-height;
+    font-weight: 500;
+  } @else if $font-family == nb {
+    // Noto Sans Bold
+    font-family: "Noto Sans KR";
+    font-size: $size + px;
+    line-height: $line-height;
+    font-weight: 700;
+  } @else if $font-family == pr {
+    // Pretendard Variable Regular
+    font-family: "Pretendard Variable";
+    font-size: $size + px;
+    line-height: $line-height;
+    font-weight: 400;
+  } @else if $font-family == pm {
+    // Pretendard Variable Medium
+    font-family: "Pretendard Variable";
+    font-size: $size + px;
+    line-height: $line-height;
+    font-weight: 500;
+  } @else if $font-family == pb {
+    // Pretendard Variable Bold
+    font-family: "Pretendard Variable";
+    font-size: $size + px;
+    line-height: $line-height;
+    font-weight: 700;
+  } @else if $font-family == nsr {
+    // Noto Serif KR Regular
+    font-family: "Noto Serif KR";
+    font-size: $size + px;
+    line-height: $line-height;
+    font-weight: 400;
+  } @else if $font-family == nsm {
+    // Noto Serif KR Regular
+    font-family: "Noto Serif KR";
+    font-size: $size + px;
+    line-height: $line-height;
+    font-weight: 500;
+  } @else if $font-family == nsb {
+    // Noto Serif KR Bold
+    font-family: "Noto Serif KR";
+    font-size: $size + px;
+    line-height: $line-height;
+    font-weight: 700;
+  } @else if $font-family == nmr {
+    // 나눔명조 Regular
+    font-family: "Nanum Myeongjo";
+    font-size: $size + px;
+    line-height: $line-height;
+    font-weight: 400;
+  } @else if $font-family == nmb {
+    // 나눔명조 Bold
+    font-family: "Nanum Myeongjo";
+    font-size: $size + px;
+    line-height: $line-height;
+    font-weight: 700;
+  }
+}
+
+// 1. px 단위 값을 전달 받음 (계산에 사용되는 기준 값은 옵션으로 사용자에 의해 변경 가능)
+// 2. remove-unit() 유틸리티 함수를 실행해 단위를 제거한 후, 1em을 곱해 결과 값을 반환
+@function unitless-px($value) {
+  @if unitless($value) {
+    @if $value != 0 {
+      @return $value * 1px;
+    } @else {
+      @return $value;
+    }
+  } @else {
+    @return $value;
+  }
+}
+
+// 1. 전달 받은 값의 유형이 숫자일 경우, unitless-px() 믹스인에 값을 전달 호출
+// 2. 전달 받은 값의 유형이 문자일 경우, 전달 받은 값을 그대로 반환
+@function get-number-or-string($value) {
+  @if type-of($value) == "number" {
+    @return unitless-px($value);
+  } @else {
+    @return $value;
+  }
+}
+
+// 1. 전달 받은 2개의 리스트 안에 포함된 아이템을 비교
+// 2. 일치하는 값이 있을 경우, true 불리언(bool) 값 반환
+// 3. 일치하는 값이 없을 경우, false 불리언 값 반환
+@function is-include-items($list, $comparelist) {
+  $result-list: ();
+
+  @each $item in $list {
+    $result-list: append($result-list, is-valid-keywords($item, $comparelist));
+  }
+
+  @return type-of(list.index($result-list, true)) == "number";
+}
+
+// 1. 전달 받은 키의 인덱스가 전달 받은 리스트의 몇 번째인지 검토
+// 2. 리스트 안에 키가 포함되어 있다면? 키의 다음 인덱스(+1) 값을 추출해 반환
+// 3. 리스트 안에 키가 포함되어 있지 않다면? null을 반환
+@function get-value-after-key($key-value-list, $key) {
+  $key-index: list.index($key-value-list, $key);
+  @if $key-index {
+    @return list.nth($key-value-list, $key-index + 1);
+  } @else {
+    @return null;
+  }
+}
+// 1. 전달 받은 값 리스트($values)와, 키 리스트($keys)를 분석
+// 2. 키 리스트를 순환하여 값($value)이 존재할 경우, 값 리스트에서 키의 다음에 위치한 값을 값으로 설정 (get-value-after-key() 믹스인 호출)
+// 3. 순환이 이루어지지 않은 경우, null을 반환
+@function get-match-value-of-keys($values, $keys) {
+  $value: null;
+
+  @each $key in $keys {
+    @if $value {
+      // $value는 이미 설정됨
+    } @else {
+      $value: get-value-after-key($values, $key);
+    }
+  }
+  @return $value;
+}
+
+// 1. 전달 받은 컬러 이름($name)이  $colors 구성 변수에 등록된 이름인지 검사
+// 2. 컬러 이름이 컬러 구성표에 포함된 이름인 경우, true 반환
+// 3. 컬러 이름이 컬러 구성표에 포함되지 않은 이름인 경우, false 반환
+@function str-replace($string, $search, $replace: "") {
+  $index: string.index($string, $search);
+
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace +
+      str-replace(
+        string.slice($string, $index + string.length($search)),
+        $search,
+        $replace
+      );
+  }
+
+  @return $string;
+}
+
+// 1. 전달 받은 키워드 리스트를 순환하여 키워드와 전달 받은 데이터 값을 비교
+// 2. 값이 일치할 경우, true 불리언(bool) 값 반환
+// 3. 값이 일치하지 않을 경우, false 불리언 값 반환
+@function is-valid-keywords($data, $keywordlist) {
+  @each $valid-type in $keywordlist {
+    @if $data == $valid-type {
+      @return true;
+    }
+  }
+  @return false;
+}
+// 1. 전달 받은 2개의 리스트 안에 포함된 아이템을 비교
+// 2. 일치하는 값이 있을 경우, true 불리언(bool) 값 반환
+// 3. 일치하는 값이 없을 경우, false 불리언 값 반환
+@function is-include-items($list, $comparelist) {
+  $result-list: ();
+
+  @each $item in $list {
+    $result-list: append($result-list, is-valid-keywords($item, $comparelist));
+  }
+
+  @return type-of(list.index($result-list, true)) == "number";
+}
+
+@mixin transform-translate($x, $y) {
+  transform: translate($x, $y);
+  -ms-transform: translate($x, $y);
+  -webkit-transform: translate($x, $y);
+}
+
+@mixin transform-translate3d($x, $y, $z) {
+  transform: translate3d($x, $y, $z);
+  -ms-transform: translate3d($x, $y, $z);
+  -webkit-transform: translate3d($x, $y, $z);
+  -moz-transform: translate3d($x, $y, $z);
+  -o-transform: translate3d($x, $y, $z);
+}
+
+@mixin transform-rotate($angle) {
+  transform: rotate($angle);
+  -ms-transform: rotate($angle);
+  -webkit-transform: rotate($angle);
+  -moz-transform: rotate($angle);
+}
+
+@mixin transform-scale($x, $y) {
+  transform: scale($x, $y);
+  -ms-transform: scale($x, $y);
+  -webkit-transform: scale($x, $y);
+  -moz-transform: scale($x, $y);
+}
+
+@mixin ir {
+  margin: 0;
+  @include absolute();
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 0, 0 0);
+  clip: rect(0 0 0 0);
+}
+
+@mixin ir-phark {
+  overflow: hidden;
+  text-indent: -999.9rem;
+  font-size: 0;
+  line-height: 0;
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin multi-ellipsis($clamp: 2) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal;
+  -webkit-line-clamp: $clamp;
+}
+
+@mixin tooltip-tail($color1, $color2, $color3, $color4: 1) {
+  background: url("data:image/svg+xml, <svg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5.90784 8.03446C5.55023 8.80871 4.44977 8.80871 4.09216 8.03447L0.459403 0.169314C0.15334 -0.493331 0.637331 -1.25 1.36724 -1.25L8.63276 -1.25C9.36267 -1.25 9.84666 -0.493331 9.5406 0.169313L5.90784 8.03446Z' fill='rgb(#{$color1},#{$color2},#{$color3},#{$color4})' /></svg>")
+    no-repeat center center;
+  background-size: 100%;
+  width: 1.2px;
+  height: 1.5px;
+}
+
+// Position
+
+// 1. 전달 받은 인자 중, 포지션 타입 값을 position 속성 값으로 설정
+// 2. 전달 받은 인자 $args가 있을 경우, 리스트 분석 후 개별 속성 설정
+@mixin position($position, $args: null) {
+  position: $position;
+
+  @if $args != null {
+    $top-value: get-match-value-of-keys($args, top t);
+    $right-value: get-match-value-of-keys($args, right r);
+    $bottom-value: get-match-value-of-keys($args, bottom b);
+    $left-value: get-match-value-of-keys($args, left l);
+
+    z-index: get-match-value-of-keys($args, z-index z);
+    @if $top-value {
+      top: $top-value;
+    }
+    @if $right-value {
+      right: $right-value;
+    }
+    @if $bottom-value {
+      bottom: $bottom-value;
+    }
+    @if $left-value {
+      left: $left-value;
+    }
+  }
+}
+
+// 1. 상대(relative) 위치 설정
+// 2. 전달 받은 인자 $args가 있을 경우, 리스트 분석 후 개별 속성 설정
+@mixin relative($args: null) {
+  @include position(relative, $args);
+}
+
+// 1. 절대(absolute) 위치 설정
+// 2. 전달 받은 인자 $args가 있을 경우, 리스트 분석 후 개별 속성 설정
+@mixin absolute($args: null) {
+  @include position(absolute, $args);
+}
+
+// 1. 고정(fixed) 위치 설정
+// 2. 전달 받은 인자 $args가 있을 경우, 리스트 분석 후 개별 속성 설정
+@mixin fixed($args: null) {
+  @include position(fixed, $args);
+}
+
+// 1. 스티키(sticky) 위치 설정
+// 2. 전달 받은 인자 $args가 있을 경우, 리스트 분석 후 개별 속성 설정
+@mixin sticky($args: null) {
+  @include position(sticky, $args);
+}
+
+// 1. 포지션 설정 해제 (static) 설정
+@mixin static {
+  @include position(static, null);
+}
+
+// border-radius
+@mixin radius($args) {
+  border-radius: $args;
+}
+
+// flexbox
+// 1. $mode 매개변수에 값이 전달되지 않을 경우, 기본 값인 flex로 표시(display) 모드 설정
+// 2. $args 매개변수로 리스트 값이 전달되면 flex-container-append() 믹스인에 전달
+@mixin flex-container($args, $mode: flex) {
+  @if $mode == flex {
+    display: flex;
+  } @else {
+    display: inline-flex;
+  }
+  @include flex-container-append($args);
+}
+// flex-c() 믹스인은 flex-container() 믹스인 래퍼로 축약형
+@mixin flex-c($args, $mode: flex) {
+  @include flex-container($args, $mode);
+}
+
+// 1. $mode 매개변수에 값이 전달되지 않을 경우, 기본 값인 flex로 표시(display) 모드 설정
+// 2. $args 매개변수로 리스트 값이 전달되면 flex-container-append() 믹스인에 전달
+@mixin flex-container-append($args) {
+  @if $args != null {
+    // flex-direction ------------------------------------------
+    @each $direction in row row-reverse column column-reverse {
+      $direction-index: list.index($args, $direction);
+
+      @if $direction-index {
+        flex-direction: list.nth($args, $direction-index);
+      }
+    }
+
+    // flex-wrap -----------------------------------------------
+    @each $wrap in nowrap wrap wrap-reverse {
+      $wrap-index: list.index($args, $wrap);
+
+      @if $wrap-index {
+        flex-wrap: list.nth($args, $wrap-index);
+      }
+    }
+
+    // justify-content ------------------------------------------
+    @each $justifyContent
+      in justify-start
+      justify-center
+      justify-end
+      justify-left
+      justify-right
+      justify-normal
+      justify-between
+      justify-around
+      justify-evenly
+      justify-safe
+      justify-unsafe
+      justify-inherit
+      justify-initial
+      justify-unset
+    {
+      $justifyContent-index: list.index($args, $justifyContent);
+
+      @if $justifyContent-index {
+        $justifyContent-value: str-replace(
+          list.nth($args, $justifyContent-index),
+          "justify-"
+        );
+        @include justify-content($justifyContent-value, flex);
+      }
+    }
+
+    // align-items ------------------------------------------------
+    @each $alignItems
+      in items-normal
+      items-stretch
+      items-start
+      items-end
+      items-center
+      items-baseline
+      items-first-baseline
+      items-last-baseline
+      items-safe
+      items-unsafe
+      items-inherit
+      items-initial
+      items-unset
+    {
+      $alignItems-index: list.index($args, $alignItems);
+
+      @if $alignItems-index {
+        $alignItems-value: str-replace(
+          list.nth($args, $alignItems-index),
+          "items-"
+        );
+        @include align-items($alignItems-value, flex);
+      }
+    }
+
+    // align-content ------------------------------------------------
+    @each $alignContent
+      in content-start
+      content-center
+      content-end
+      content-left
+      content-right
+      content-normal
+      content-baseline
+      content-first-baseline
+      content-last-baseline
+      content-between
+      content-around
+      content-evenly
+      content-stretch
+      content-safe
+      content-unsafe
+      content-inherit
+      content-initial
+      content-unset
+    {
+      $alignContent-index: list.index($args, $alignContent);
+
+      @if $alignContent-index {
+        $alignContent-value: str-replace(
+          list.nth($args, $alignContent-index),
+          "content-"
+        );
+        @include align-content($alignContent-value, flex);
+      }
+    }
+  }
+}
+// 축약형
+@mixin flex-c-a($args) {
+  @include flex-container-append($args);
+}
+
+@mixin justify-content($value, $mode: grid) {
+  @if $value == "start" {
+    @if $mode == grid {
+      justify-content: start;
+    } @else {
+      justify-content: flex-start;
+    }
+  }
+  @if $value == "end" {
+    @if $mode == grid {
+      justify-content: end;
+    } @else {
+      justify-content: flex-end;
+    }
+  }
+  @if $value == "center" {
+    justify-content: center;
+  }
+  @if $value == "left" {
+    justify-content: left;
+  }
+  @if $value == "right" {
+    justify-content: right;
+  }
+
+  @if $value == "normal" {
+    justify-content: normal;
+  }
+
+  @if $value == "between" {
+    justify-content: space-between;
+  }
+  @if $value == "around" {
+    justify-content: space-around;
+  }
+  @if $value == "evenly" {
+    justify-content: space-evenly;
+  }
+  @if $value == "stretch" {
+    justify-content: stretch;
+  }
+
+  @if $value == "safe" {
+    justify-content: safe center;
+  }
+  @if $value == "unsafe" {
+    justify-content: unsafe center;
+  }
+
+  @if $value == "inherit" {
+    justify-content: inherit;
+  }
+  @if $value == "initial" {
+    justify-content: initial;
+  }
+  @if $value == "unset" {
+    justify-content: unset;
+  }
+}
+
+@mixin align-items($value, $mode: grid) {
+  @if $value == "normal" {
+    align-items: normal;
+  }
+  @if $value == "stretch" {
+    align-items: stretch;
+  }
+
+  @if $value == "start" {
+    @if $mode == grid {
+      align-items: start;
+    } @else {
+      align-items: flex-start;
+    }
+  }
+  @if $value == "end" {
+    @if $mode == grid {
+      align-items: end;
+    } @else {
+      align-items: flex-end;
+    }
+  }
+  @if $value == "center" {
+    align-items: center;
+  }
+
+  @if $value == "baseline" {
+    align-items: baseline;
+  }
+  @if $value == "first-baseline" {
+    align-items: first baseline;
+  }
+  @if $value == "last-baseline" {
+    align-items: last baseline;
+  }
+  @if $value == "safe" {
+    align-items: safe center;
+  }
+  @if $value == "unsafe" {
+    align-items: unsafe center;
+  }
+
+  @if $value == "inherit" {
+    align-items: inherit;
+  }
+  @if $value == "initial" {
+    align-items: initial;
+  }
+  @if $value == "unset" {
+    align-items: unset;
+  }
+}
+
+@mixin align-content($value, $mode: grid) {
+  @if $value == "start" {
+    @if $mode == grid {
+      align-content: start;
+    } @else {
+      align-content: flex-start;
+    }
+  }
+  @if $value == "end" {
+    @if $mode == grid {
+      align-content: end;
+    } @else {
+      align-content: flex-end;
+    }
+  }
+  @if $value == "center" {
+    align-content: center;
+  }
+  @if $value == "left" {
+    align-content: left;
+  }
+  @if $value == "right" {
+    align-content: right;
+  }
+
+  @if $value == "normal" {
+    align-content: normal;
+  }
+
+  @if $value == "baseline" {
+    align-content: baseline;
+  }
+  @if $value == "first-baseline" {
+    align-content: first baseline;
+  }
+  @if $value == "last-baseline" {
+    align-content: last baseline;
+  }
+
+  @if $value == "between" {
+    align-content: space-between;
+  }
+  @if $value == "around" {
+    align-content: space-around;
+  }
+  @if $value == "evenly" {
+    align-content: space-evenly;
+  }
+  @if $value == "stretch" {
+    align-content: stretch;
+  }
+
+  @if $value == "safe" {
+    align-content: safe center;
+  }
+  @if $value == "unsafe" {
+    align-content: unsafe center;
+  }
+
+  @if $value == "inherit" {
+    align-content: inherit;
+  }
+  @if $value == "initial" {
+    align-content: initial;
+  }
+  @if $value == "unset" {
+    align-content: unset;
+  }
+}
+
+// 1. 전달 받은 인자가 없을 경우, 오류 메시지 출력
+// 2. 전달 받은 인자가 있을 경우, 인자의 타입을 확인
+// 3. 타입이 숫자 또는 문자인 경우, get-number-or-string() 믹스인 처리
+// 4. 타입이 리스트인 경우, 전달 인자의 키워드를 분석하여 개별 속성 처리
+@mixin margin($args...) {
+  @if length($args) == 0 {
+    @error 'margin() 믹스인은 margin 속성의 설정 방향 top, right, bottom, left와 값을 연이어 전달 받을 수 있습니다. 뿐만 아니라 x, y 방향으로 속성을 일괄 설정 가능합니다.';
+  }
+
+  @each $value in $args {
+    $type: type-of($value);
+
+    @if $type == "number" or $type == "string" {
+      margin: get-number-or-string($value);
+    }
+
+    @if $type == "list" {
+      @if is-include-items($value, top t) {
+        margin-top: get-number-or-string(
+          get-match-value-of-keys($value, top t)
+        );
+      }
+      @if is-include-items($value, right r) {
+        margin-right: get-number-or-string(
+          get-match-value-of-keys($value, right r)
+        );
+      }
+      @if is-include-items($value, bottom b) {
+        margin-bottom: get-number-or-string(
+          get-match-value-of-keys($value, bottom b)
+        );
+      }
+      @if is-include-items($value, left l) {
+        margin-left: get-number-or-string(
+          get-match-value-of-keys($value, left l)
+        );
+      }
+      @if is-include-items($value, x) {
+        $x-value: get-value-after-key($value, x);
+        margin-left: get-number-or-string($x-value);
+        margin-right: get-number-or-string($x-value);
+      }
+      @if is-include-items($value, y) {
+        $y-value: get-value-after-key($value, y);
+        margin-top: get-number-or-string($y-value);
+        margin-bottom: get-number-or-string($y-value);
+      }
+    }
+  }
+}
+
+// 1. 전달 받은 인자가 없을 경우, 오류 메시지 출력
+// 2. 전달 받은 인자가 있을 경우, margin() 믹스인 호출
+@mixin m($args: null) {
+  @if not $args {
+    @error 'm() 믹스인은 margin 속성의 설정 방향 top, right, bottom, left와 값을 연이어 전달 받을 수 있습니다. 뿐만 아니라 x, y 방향으로 속성을 일괄 설정 가능합니다.';
+  }
+  @include margin($args);
+}
+
+// 1. 전달 받은 인자의 아이템 개수(length) 확인
+// 2. 개수가 1개인 경우, m() 믹스인의 인자 값으로 좌(l), 우(r) 값 설정 호출
+// 3. 개수가 2개인 경우, m() 믹스인의 인자 값으로 좌(l), 우(r) 값 개별 설정 호출
+@mixin mx($value) {
+  $value_length: length($value);
+  @if $value_length == 1 {
+    @include m(l $value r $value);
+  }
+  @if $value_length == 2 {
+    @include m(l first($value) r last($value));
+  }
+}
+@mixin my($value) {
+  $value_length: length($value);
+  @if $value_length == 1 {
+    @include m(t $value b $value);
+  }
+  @if $value_length == 2 {
+    @include m(t first($value) b last($value));
+  }
+}
+
+// padding
+@mixin padding($args...) {
+  @if length($args) == 0 {
+    @error 'padding() 믹스인은 padding 속성의 설정 방향 top, right, bottom, left와 값을 연이어 전달 받을 수 있습니다. 뿐만 아니라 x, y 방향으로 속성을 일괄 설정 가능합니다.';
+  }
+
+  @each $value in $args {
+    $type: type-of($value);
+
+    @if $type == "number" or $type == "string" {
+      padding: get-number-or-string($value);
+    }
+
+    @if $type == "list" {
+      @if is-include-items($value, top t) {
+        padding-top: get-number-or-string(
+          get-match-value-of-keys($value, top t)
+        );
+      }
+      @if is-include-items($value, right r) {
+        padding-right: get-number-or-string(
+          get-match-value-of-keys($value, right r)
+        );
+      }
+      @if is-include-items($value, bottom b) {
+        padding-bottom: get-number-or-string(
+          get-match-value-of-keys($value, bottom b)
+        );
+      }
+      @if is-include-items($value, left l) {
+        padding-left: get-number-or-string(
+          get-match-value-of-keys($value, left l)
+        );
+      }
+      @if is-include-items($value, x) {
+        $x-value: get-value-after-key($value, x);
+        padding-left: get-number-or-string($x-value);
+        padding-right: get-number-or-string($x-value);
+      }
+      @if is-include-items($value, y) {
+        $y-value: get-value-after-key($value, y);
+        padding-top: get-number-or-string($y-value);
+        padding-bottom: get-number-or-string($y-value);
+      }
+    }
+  }
+}
+@mixin p($args: null) {
+  @if not $args {
+    @error 'p() 믹스인은 padding 속성의 설정 방향 top, right, bottom, left와 값을 연이어 전달 받을 수 있습니다. 뿐만 아니라 x, y 방향으로 속성을 일괄 설정 가능합니다.';
+  }
+  @include padding($args);
+}
+@mixin px($value) {
+  $value_length: length($value);
+  @if $value_length == 1 {
+    @include p(l $value r $value);
+  }
+  @if $value_length == 2 {
+    @include p(l first($value) r last($value));
+  }
+}
+@mixin py($value) {
+  $value_length: length($value);
+  @if $value_length == 1 {
+    @include p(t $value b $value);
+  }
+  @if $value_length == 2 {
+    @include p(t first($value) b last($value));
+  }
+}

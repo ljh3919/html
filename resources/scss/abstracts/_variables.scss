@@ -1,0 +1,47 @@
+@use "sass:math";
+@use "sass:map";
+@use "sass:meta";
+
+// Colors Variables
+$white: #fff;
+$black: #000;
+$body-font-family: "Noto Sans KR", "Noto Serif KR", sans-serif !default;
+
+// $card-title-size: 18px !default;
+// $border-radius-root: 8px;
+// $btn-letter-spacing: 0 !default;
+// Global Shadowsss
+// $box-shadow: 0px 2px 4px -1px #afb6c933;
+
+// Primary Colors
+$main-color01: #65451e;
+$main-color02: #332518;
+$main-color03: #121635;
+// $secondary-color: #0055e9;
+
+// Text Colors
+$text-color-tit: #161616;
+$text-color-body: #333333;
+$text-color-detail: #4a4a4a;
+$text-color-7: #777777;
+$text-color-a: #aaaaaa;
+$text-color-desable: #bebebe;
+$text-color-white: $white;
+
+// System Colors
+$danger: #c00404;
+$warning: #ffb724;
+$success: #008a1e;
+$info: #2768ff;
+
+// Background Colors
+$bg-color-base: #fbfbfb;
+$bg-color-01: #f5f5f5;
+$bg-color-02: #949494;
+
+// Border Colors
+$border-color-01: #f4f4f4;
+$border-color-02: #e7e7e7;
+$border-color-03: #cccccc;
+$border-color-04: #232527;
+$border-color-05: #563f2a;

@@ -1,0 +1,134 @@
+// 1. 나눔명조 Regular
+@font-face {
+  font-family: "Nanum Myeongjo";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local(ⓐ),
+    url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Regular.eot);
+  src:
+    local(ⓐ),
+    url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Regular.eot?#iefix)
+      format("embedded-opentype"),
+    url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Regular.woff)
+      format("woff"),
+    url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Regular.ttf)
+      format("truetype");
+}
+
+// 1. 나눔명조 Bold
+@font-face {
+  font-family: "Nanum Myeongjo";
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local(ⓐ),
+    url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Bold.eot);
+  src:
+    local(ⓐ),
+    url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Bold.eot?#iefix)
+      format("embedded-opentype"),
+    url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Bold.woff)
+      format("woff"),
+    url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Bold.ttf)
+      format("truetype");
+}
+
+// 2. Noto Serif KR Regular
+@font-face {
+  font-family: "Noto Serif KR";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("Noto Serif KR"),
+    url("https://fonts.cdnfonts.com/s/107389/NotoSerifKR[wght].woff")
+      format("woff");
+}
+// 2. Noto Serif KR Medium
+@font-face {
+  font-family: "Noto Serif KR";
+  font-style: normal;
+  font-weight: 500;
+  src:
+    local("Noto Serif KR"),
+    url("https://fonts.cdnfonts.com/s/107389/NotoSerifKR[wght].woff")
+      format("woff");
+}
+// 2. Noto Serif KR Bold
+@font-face {
+  font-family: "Noto Serif KR";
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local("Noto Serif KR"),
+    url("https://fonts.cdnfonts.com/s/107389/NotoSerifKR[wght].woff")
+      format("woff");
+}
+
+// 3. Noto Sans KR Regular
+@font-face {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2)
+      format("woff2"),
+    url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff)
+      format("woff"),
+    url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf)
+      format("opentype");
+}
+// 3. Noto Sans KR Medium
+@font-face {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 500;
+  src:
+    url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2)
+      format("woff2"),
+    url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff)
+      format("woff"),
+    url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf)
+      format("opentype");
+}
+// 3. Noto Sans KR Bold
+@font-face {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2)
+      format("woff2"),
+    url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff)
+      format("woff"),
+    url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf)
+      format("opentype");
+}
+
+// 4. Pretendard Variable Regular
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2")
+    format("woff2-variations");
+}
+// 4. Pretendard Variable Medium
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2")
+    format("woff2-variations");
+}
+// 4. Pretendard Variable Bold
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2")
+    format("woff2-variations");
+}

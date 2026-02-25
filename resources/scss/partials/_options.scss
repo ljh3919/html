@@ -1,0 +1,43 @@
+@use "../abstracts/typography";
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins";
+
+// Option Status Styles
+.option-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  .option-tag {
+    padding: 0.5rem 1rem;
+    @include mixins.ff(14, 1.4);
+    color: $text-color-body;
+    background-color: transparent;
+    border: 1px solid $border-color-03;
+    border-radius: 4px;
+
+    &.option-tag--active {
+      background-color: $bg-color-01;
+    }
+  }
+
+  .option-close {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    @include mixins.ff(18, 1, nb);
+    color: $text-color-7;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $text-color-tit;
+    }
+  }
+}

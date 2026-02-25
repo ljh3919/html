@@ -1,0 +1,136 @@
+@use "../abstracts/typography";
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins";
+
+.table {
+  &.board-table {
+    border-collapse: collapse;
+    border: 1px solid #d4d7dc;
+    width: 100%;
+    table-layout: fixed;
+    thead tr th,
+    tbody tr td {
+      color: #333;
+      text-align: center;
+      padding: 8px;
+      .checkbox-item {
+        display: inline-block;
+      }
+    }
+    thead {
+      tr th {
+        background-color: #f7f7f9;
+        @include mixins.ff(16, 1.4, nb);
+        border-top: 1px solid #d4d7dc;
+        &:not(:first-child) {
+          border-left: 1px solid #d4d7dc;
+        }
+      }
+    }
+    tbody {
+      tr td {
+        @include mixins.ff(14, 1.4);
+        border-top: 1px solid #d4d7dc;
+        white-space: wrap;
+        word-break: break-all;
+        border-left: 1px solid #d4d7dc;
+
+        &.ellipsis {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        &.tal {
+          text-align: left;
+        }
+        &.done {
+          color: #008a1e;
+        }
+        &.reply {
+          font-weight: 700;
+        }
+      }
+    }
+    &.vertical-table {
+      tr {
+        th,
+        td {
+          text-align: left;
+          @include mixins.ff(15, 1.4);
+          color: #333333;
+        }
+        th {
+          padding: 10px 20px;
+          @include mixins.ff(14, 1.4, nb);
+          color: #333333;
+          width: 160px;
+          background-color: #f7f7f9;
+          border-top: 1px solid #d4d7dc;
+          position: relative;
+          &.required {
+            &::after {
+              content: "*";
+              color: #ff404b;
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              margin: 4px 0 0 6px;
+            }
+          }
+        }
+      }
+    }
+    .text-info {
+      display: block;
+      text-align: left;
+      margin-top: 8px;
+    }
+  }
+}
+.wrap-table-control {
+  @include mixins.flex-container(justify-between items-center);
+  + .table {
+    margin-top: 10px;
+  }
+
+  .wrap-table-control-left {
+    @include mixins.flex-container(items-center);
+    gap: 8px;
+    .wrap-count {
+      position: relative;
+      @include mixins.flex-container(items-center);
+      gap: 8px;
+      @include mixins.ff(14, 1.4);
+      color: #4a4a4a;
+      &::before {
+        content: "";
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: #4a4a4a;
+      }
+
+      .count {
+        @include mixins.ff(16, 1.4, nm);
+        color: #65451e;
+      }
+    }
+  }
+  .wrap-table-control-right {
+    @include mixins.flex-container(items-center);
+    gap: 12px;
+  }
+}
+
+.wrap-post-info {
+  @include mixins.flex-container(justify-between items-center);
+  padding: 11px 20px;
+  .date-during,
+  .date-write {
+    @include mixins.ff(15, 1.2);
+    color: #333333;
+  }
+}
+.wrap-popup-preview {
+  padding: 20px;
+}

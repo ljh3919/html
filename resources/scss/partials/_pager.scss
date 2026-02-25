@@ -1,0 +1,44 @@
+@use "../abstracts/typography";
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins";
+
+.wrap-pager {
+  width: 100%;
+  padding: 20px 0;
+  border-top: 1px solid #e7e7e7;
+  @include mixins.flex-container(justify-center items-center);
+  gap: 8px;
+  .arrow,
+  .num {
+    width: 30px;
+    height: 30px;
+    @include mixins.ff(14, 1.4);
+    color: #4a4a4a;
+    border-radius: 50%;
+    background-color: $white;
+    @include mixins.flex-container(justify-center items-center);
+    cursor: pointer;
+  }
+  .arrow {
+    border: 1px solid #2d2d2d;
+    &.disabled {
+      cursor: not-allowed;
+      border-color: #8e8e8e;
+      svg path {
+        stroke: #8e8e8e;
+      }
+    }
+  }
+  .num {
+    border: 1px solid $white;
+    &.active {
+      @include mixins.ff(14, 1.4, nb);
+      color: $white;
+      background-color: #65451e;
+      border-color: #65451e;
+    }
+    &:hover {
+      border: 1px solid #161616;
+    }
+  }
+}
