@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 @font-face {
   font-family: "Nanum Myeongjo";
   font-style: normal;
@@ -6,6 +7,7 @@
   src: local(ⓐ), url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Regular.eot);
   src: local(ⓐ), url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Regular.eot?#iefix) format("embedded-opentype"), url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Regular.woff) format("woff"), url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Regular.ttf) format("truetype");
 }
+
 @font-face {
   font-family: "Nanum Myeongjo";
   font-style: normal;
@@ -13,42 +15,49 @@
   src: local(ⓐ), url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Bold.eot);
   src: local(ⓐ), url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Bold.eot?#iefix) format("embedded-opentype"), url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Bold.woff) format("woff"), url(https://cdn.jsdelivr.net/font-nanum/1.0/nanummyeongjo/v2/NanumMyeongjo-Bold.ttf) format("truetype");
 }
+
 @font-face {
   font-family: "Noto Serif KR";
   font-style: normal;
   font-weight: 400;
   src: local("Noto Serif KR"), url("https://fonts.cdnfonts.com/s/107389/NotoSerifKR[wght].woff") format("woff");
 }
+
 @font-face {
   font-family: "Noto Serif KR";
   font-style: normal;
   font-weight: 500;
   src: local("Noto Serif KR"), url("https://fonts.cdnfonts.com/s/107389/NotoSerifKR[wght].woff") format("woff");
 }
+
 @font-face {
   font-family: "Noto Serif KR";
   font-style: normal;
   font-weight: 700;
   src: local("Noto Serif KR"), url("https://fonts.cdnfonts.com/s/107389/NotoSerifKR[wght].woff") format("woff");
 }
+
 @font-face {
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 400;
   src: url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format("woff2"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format("woff"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format("opentype");
 }
+
 @font-face {
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 500;
   src: url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format("woff2"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format("woff"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format("opentype");
 }
+
 @font-face {
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 700;
   src: url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format("woff2"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format("woff"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format("opentype");
 }
+
 @font-face {
   font-family: "Pretendard Variable";
   font-weight: 400;
@@ -56,6 +65,7 @@
   font-display: swap;
   src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2") format("woff2-variations");
 }
+
 @font-face {
   font-family: "Pretendard Variable";
   font-weight: 500;
@@ -63,6 +73,7 @@
   font-display: swap;
   src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2") format("woff2-variations");
 }
+
 @font-face {
   font-family: "Pretendard Variable";
   font-weight: 700;
@@ -70,6 +81,7 @@
   font-display: swap;
   src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2") format("woff2-variations");
 }
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -78,8 +90,10 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 html {
-  line-height: 1.15; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
+  line-height: 1.15;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
 }
 
 /* Sections
@@ -115,9 +129,12 @@ h1 {
  * 2. Show the overflow in Edge and IE.
  */
 hr {
-  box-sizing: content-box; /* 1 */
-  height: 0; /* 1 */
-  overflow: visible; /* 2 */
+  box-sizing: content-box;
+  /* 1 */
+  height: 0;
+  /* 1 */
+  overflow: visible;
+  /* 2 */
 }
 
 /**
@@ -125,8 +142,10 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 pre {
-  font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2 */
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
 }
 
 /* Text-level semantics
@@ -144,9 +163,12 @@ a {
  * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  */
 abbr[title] {
-  border-bottom: none; /* 1 */
-  text-decoration: underline; /* 2 */
-  text-decoration: underline dotted; /* 2 */
+  border-bottom: none;
+  /* 1 */
+  text-decoration: underline;
+  /* 2 */
+  text-decoration: underline dotted;
+  /* 2 */
 }
 
 /**
@@ -164,8 +186,10 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2 */
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
 }
 
 /**
@@ -215,10 +239,14 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: inherit; /* 1 */
-  font-size: 100%; /* 1 */
-  line-height: 1.15; /* 1 */
-  margin: 0; /* 2 */
+  font-family: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 1 */
+  line-height: 1.15;
+  /* 1 */
+  margin: 0;
+  /* 2 */
 }
 
 /**
@@ -287,12 +315,18 @@ fieldset {
  *    `fieldset` elements in all browsers.
  */
 legend {
-  box-sizing: border-box; /* 1 */
-  color: inherit; /* 2 */
-  display: table; /* 1 */
-  max-width: 100%; /* 1 */
-  padding: 0; /* 3 */
-  white-space: normal; /* 1 */
+  box-sizing: border-box;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  display: table;
+  /* 1 */
+  max-width: 100%;
+  /* 1 */
+  padding: 0;
+  /* 3 */
+  white-space: normal;
+  /* 1 */
 }
 
 /**
@@ -315,8 +349,10 @@ textarea {
  */
 [type=checkbox],
 [type=radio] {
-  box-sizing: border-box; /* 1 */
-  padding: 0; /* 2 */
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
 }
 
 /**
@@ -332,8 +368,10 @@ textarea {
  * 2. Correct the outline style in Safari.
  */
 [type=search] {
-  -webkit-appearance: textfield; /* 1 */
-  outline-offset: -2px; /* 2 */
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
 }
 
 /**
@@ -348,8 +386,10 @@ textarea {
  * 2. Change font properties to `inherit` in Safari.
  */
 ::-webkit-file-upload-button {
-  -webkit-appearance: button; /* 1 */
-  font: inherit; /* 2 */
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
 }
 
 /* Interactive
@@ -493,6 +533,7 @@ html {
   padding: 2rem;
   text-align: left;
 }
+
 .component-demo h1 {
   font-family: "Noto Sans KR";
   font-size: 32px;
@@ -501,6 +542,7 @@ html {
   color: #161616;
   margin-bottom: 2rem;
 }
+
 .component-demo h2 {
   font-family: "Noto Sans KR";
   font-size: 20px;
@@ -509,6 +551,7 @@ html {
   color: #161616;
   margin-bottom: 1rem;
 }
+
 .component-demo h3 {
   font-family: "Noto Sans KR";
   font-size: 16px;
@@ -518,6 +561,7 @@ html {
   margin-top: 2rem;
   margin-bottom: 0.75rem;
 }
+
 .component-demo h3:first-child {
   margin-top: 0;
 }
@@ -527,6 +571,7 @@ html {
   padding-bottom: 2rem;
   border-bottom: 1px solid #e7e7e7;
 }
+
 .demo-section:last-child {
   border-bottom: none;
 }
@@ -543,6 +588,7 @@ html {
 .checkbox-group {
   margin-bottom: 1.5rem;
 }
+
 .checkbox-group .input-label {
   display: block;
   font-family: "Noto Sans KR";
@@ -552,6 +598,7 @@ html {
   color: #161616;
   margin-bottom: 0.5rem;
 }
+
 .checkbox-group .input-label.required::after {
   content: " *";
   color: #c00404;
@@ -569,6 +616,7 @@ html {
   gap: 0.5rem;
   cursor: pointer;
 }
+
 .checkbox-item .checkbox-input {
   width: 20px;
   height: 20px;
@@ -581,10 +629,12 @@ html {
   position: relative;
   transition: all 0.2s;
 }
+
 .checkbox-item .checkbox-input:checked {
   border-color: #65451e;
   background-color: #65451e;
 }
+
 .checkbox-item .checkbox-input:checked::after {
   content: "✓";
   position: absolute;
@@ -597,20 +647,25 @@ html {
   line-height: 1;
   font-weight: 700;
 }
+
 .checkbox-item .checkbox-input:disabled {
   border-color: #e7e7e7;
   background-color: #f5f5f5;
   cursor: not-allowed;
 }
-.checkbox-item .checkbox-input:disabled + .checkbox-label {
+
+.checkbox-item .checkbox-input:disabled+.checkbox-label {
   color: #bebebe;
 }
+
 .checkbox-item .checkbox-input:disabled:checked {
   background-color: #f5f5f5;
 }
+
 .checkbox-item .checkbox-input:disabled:checked::after {
   color: #bebebe;
 }
+
 .checkbox-item .checkbox-label {
   font-family: "Noto Sans KR";
   font-size: 14px;
@@ -620,18 +675,22 @@ html {
   user-select: none;
 }
 
-.input-group + .input-group {
+.input-group+.input-group {
   margin-top: 1.5rem;
 }
-.input-group + .bold-before {
+
+.input-group+.bold-before {
   margin-left: 24px;
 }
-.input-group + .bold-after {
+
+.input-group+.bold-after {
   margin-left: 6px;
 }
+
 .input-group.textarea {
   width: 100%;
 }
+
 .input-group .input-label {
   display: block;
   font-family: "Noto Sans KR";
@@ -641,38 +700,47 @@ html {
   color: #161616;
   margin-bottom: 0.5rem;
 }
+
 .input-group .input-label.required::after {
   content: " *";
   color: #c00404;
 }
+
 .input-group.horizontal {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
 }
+
 .input-group.horizontal .input-label {
   margin-bottom: 0;
   flex-shrink: 0;
   padding-top: 0.75rem;
 }
+
 .input-group.horizontal .input-box {
   flex: 1;
 }
+
 .input-group.horizontal .input-box.input-box--textarea {
   padding-top: 0.75rem;
 }
+
 .input-group.h30 .input-box {
   height: 30px;
   padding: 6px 8px;
 }
+
 .input-group.h40 .input-box {
   height: 40px;
   padding: 8px 10px;
 }
+
 .input-group.h56 .input-box {
   height: 56px;
   padding: 10px 12px;
 }
+
 .input-group .input-box {
   height: 44px;
 }
@@ -693,23 +761,30 @@ html {
   transition: border-color 0.2s;
   box-sizing: border-box;
 }
+
 .input-box::placeholder {
   color: #aaaaaa;
 }
-.input-box:focus, .input-box.input-box--focus {
+
+.input-box:focus,
+.input-box.input-box--focus {
   border-color: #000;
 }
+
 .input-box.input-box--fill {
   border-color: #cccccc;
   color: #333333;
 }
-.input-box + .error-message {
+
+.input-box+.error-message {
   display: none;
 }
+
 .input-box.error {
   border-color: #c00404;
 }
-.input-box.error + .error-message {
+
+.input-box.error+.error-message {
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -720,7 +795,8 @@ html {
   font-weight: 400;
   color: #c00404;
 }
-.input-box.error + .error-message .error-icon {
+
+.input-box.error+.error-message .error-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -734,29 +810,37 @@ html {
   line-height: 1;
   font-weight: 700;
 }
+
 .input-box.input-box--textarea {
   min-width: 100%;
   min-height: 120px;
   padding: 10px 12px;
   resize: vertical;
 }
+
 .input-box.input-box--textarea:focus {
   border-color: #000;
 }
-.input-box.readonly, .input-box:read-only {
+
+.input-box.readonly,
+.input-box:read-only {
   background-color: #fbfbfb;
-  border: none;
+  border: 1px solid #cccccc;
   color: #333333;
   cursor: default;
 }
-.input-box.select, .input-box.input-box--select {
+
+.input-box.select,
+.input-box.input-box--select {
   cursor: pointer;
   appearance: none;
   background-color: #fff;
   padding-right: 2.5rem;
   border: 1px solid #cccccc;
 }
-.input-box.disabled, .input-box:disabled {
+
+.input-box.disabled,
+.input-box:disabled {
   background-color: #fbfbfb;
   border: 1px solid #e7e7e7;
   color: #bebebe;
@@ -769,6 +853,7 @@ html {
   width: 100%;
   max-width: 400px;
 }
+
 .select-wrapper::before {
   content: "";
   display: block;
@@ -800,9 +885,11 @@ html {
   align-items: center;
   gap: 4px;
 }
+
 .wrap-form .input-group {
   margin: 0;
 }
+
 .wrap-form .bold-before {
   font-family: "Noto Sans KR";
   font-size: 16px;
@@ -810,9 +897,11 @@ html {
   font-weight: 700;
   color: #333333;
 }
-.wrap-form .bold-before + .input-group {
+
+.wrap-form .bold-before+.input-group {
   margin-left: 6px;
 }
+
 .wrap-form .bold-after {
   font-family: "Noto Sans KR";
   font-size: 16px;
@@ -820,7 +909,8 @@ html {
   font-weight: 700;
   color: #333333;
 }
-.wrap-form .bold-after + .input-group {
+
+.wrap-form .bold-after+.input-group {
   margin-left: 24px;
 }
 
@@ -830,6 +920,7 @@ html {
   gap: 0.5rem;
   flex-wrap: wrap;
 }
+
 .option-status .option-tag {
   padding: 0.5rem 1rem;
   font-family: "Noto Sans KR";
@@ -841,9 +932,11 @@ html {
   border: 1px solid #cccccc;
   border-radius: 4px;
 }
+
 .option-status .option-tag.option-tag--active {
   background-color: #f5f5f5;
 }
+
 .option-status .option-close {
   width: 24px;
   height: 24px;
@@ -861,6 +954,7 @@ html {
   justify-content: center;
   transition: color 0.2s;
 }
+
 .option-status .option-close:hover {
   color: #161616;
 }
@@ -868,6 +962,7 @@ html {
 .radio-group {
   margin-bottom: 1.5rem;
 }
+
 .radio-group .input-label {
   display: block;
   font-family: "Noto Sans KR";
@@ -877,6 +972,7 @@ html {
   color: #161616;
   margin-bottom: 0.5rem;
 }
+
 .radio-group .input-label.required::after {
   content: " *";
   color: #c00404;
@@ -894,6 +990,7 @@ html {
   gap: 0.5rem;
   cursor: pointer;
 }
+
 .radio-item .radio-input {
   width: 20px;
   height: 20px;
@@ -906,10 +1003,12 @@ html {
   position: relative;
   transition: all 0.2s;
 }
+
 .radio-item .radio-input:checked {
   border-color: #65451e;
   background-color: #fff;
 }
+
 .radio-item .radio-input:checked::after {
   content: "";
   position: absolute;
@@ -921,17 +1020,21 @@ html {
   border-radius: 50%;
   background-color: #65451e;
 }
+
 .radio-item .radio-input:disabled {
   border-color: #e7e7e7;
   background-color: #f5f5f5;
   cursor: not-allowed;
 }
-.radio-item .radio-input:disabled + .radio-label {
+
+.radio-item .radio-input:disabled+.radio-label {
   color: #bebebe;
 }
+
 .radio-item .radio-input:disabled:checked::after {
   background-color: #bebebe;
 }
+
 .radio-item .radio-label {
   font-family: "Noto Sans KR";
   font-size: 14px;
@@ -947,6 +1050,7 @@ html {
   gap: 0.5rem;
   max-width: 400px;
 }
+
 .search-group .search-input {
   flex: 1;
   padding: 0.75rem 0;
@@ -961,12 +1065,15 @@ html {
   outline: none;
   transition: border-color 0.2s;
 }
+
 .search-group .search-input::placeholder {
   color: #aaaaaa;
 }
+
 .search-group .search-input:focus {
   border-bottom-color: #000;
 }
+
 .search-group .search-btn {
   width: 32px;
   height: 32px;
@@ -984,6 +1091,7 @@ html {
   justify-content: center;
   transition: color 0.2s;
 }
+
 .search-group .search-btn:hover {
   color: #161616;
 }
@@ -992,6 +1100,7 @@ html {
   position: relative;
   max-width: 400px;
 }
+
 .select-filter .select-filter-btn {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -1009,6 +1118,7 @@ html {
   justify-content: space-between;
   transition: border-color 0.2s;
 }
+
 .select-filter .select-filter-btn .arrow-down {
   font-family: "Noto Sans KR";
   font-size: 12px;
@@ -1016,9 +1126,11 @@ html {
   font-weight: 400;
   color: #777777;
 }
+
 .select-filter .select-filter-btn:hover {
   border-color: #000;
 }
+
 .select-filter .select-dropdown {
   position: absolute;
   top: 100%;
@@ -1032,6 +1144,7 @@ html {
   z-index: 10;
   display: none;
 }
+
 .select-filter .select-dropdown .select-option {
   padding: 0.75rem 1rem;
   font-family: "Noto Sans KR";
@@ -1042,12 +1155,15 @@ html {
   cursor: pointer;
   transition: background-color 0.2s;
 }
+
 .select-filter .select-dropdown .select-option:first-child {
   background-color: #f5f5f5;
 }
+
 .select-filter .select-dropdown .select-option:hover {
   background-color: #f5f5f5;
 }
+
 .select-filter:hover .select-dropdown {
   display: block;
 }
@@ -1055,6 +1171,7 @@ html {
 .toggle-group {
   margin-bottom: 1.5rem;
 }
+
 .toggle-group .input-label {
   display: block;
   font-family: "Noto Sans KR";
@@ -1064,6 +1181,7 @@ html {
   color: #161616;
   margin-bottom: 0.5rem;
 }
+
 .toggle-group .input-label.required::after {
   content: " *";
   color: #c00404;
@@ -1080,9 +1198,11 @@ html {
   gap: 0.5rem;
   cursor: pointer;
 }
+
 .toggle-item .toggle-input {
   display: none;
 }
+
 .toggle-item .toggle-slider {
   position: relative;
   width: 48px;
@@ -1092,6 +1212,7 @@ html {
   border-radius: 44px;
   transition: background-color 0.3s;
 }
+
 .toggle-item .toggle-slider::after {
   content: "";
   position: absolute;
@@ -1104,17 +1225,21 @@ html {
   transition: transform 0.3s;
   border: 1px solid #cccccc;
 }
-.toggle-item .toggle-input:checked + .toggle-slider {
+
+.toggle-item .toggle-input:checked+.toggle-slider {
   background-color: #65451e;
 }
-.toggle-item .toggle-input:checked + .toggle-slider::after {
+
+.toggle-item .toggle-input:checked+.toggle-slider::after {
   transform: translateX(21px);
   border: 1px solid #fff;
 }
-.toggle-item .toggle-input:disabled + .toggle-slider {
+
+.toggle-item .toggle-input:disabled+.toggle-slider {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
 .toggle-item .toggle-label {
   font-family: "Noto Sans KR";
   font-size: 14px;
@@ -1144,81 +1269,114 @@ html {
   color: #333333;
   cursor: pointer;
 }
+
 .btn:hover {
   background-color: #dbdbdb;
   border-color: #cccccc;
 }
-.btn:active, .btn:focus, .btn.active {
+
+.btn:active,
+.btn:focus,
+.btn.active {
   outline: inherit;
   background-color: #c2c2c2;
   border-color: #cccccc;
 }
-.btn:disabled, .btn.disabled {
+
+.btn:disabled,
+.btn.disabled {
   background-color: #e3e5e8;
   border-color: #cccccc;
   opacity: 0.5;
   cursor: not-allowed;
 }
-.btn.line, .btn.round {
+
+.btn.line,
+.btn.round {
   background-color: #fff;
   border: 1px solid #ccc;
 }
-.btn.line:hover, .btn.round:hover {
+
+.btn.line:hover,
+.btn.round:hover {
   background-color: #e3e5e8;
   border-color: #ccc;
 }
-.btn.line:active, .btn.line:focus, .btn.line.active, .btn.round:active, .btn.round:focus, .btn.round.active {
+
+.btn.line:active,
+.btn.line:focus,
+.btn.line.active,
+.btn.round:active,
+.btn.round:focus,
+.btn.round.active {
   outline: inherit;
   background-color: #c7cbd1;
   border-color: #ccc;
 }
-.btn.line:disabled, .btn.line.disabled, .btn.round:disabled, .btn.round.disabled {
+
+.btn.line:disabled,
+.btn.line.disabled,
+.btn.round:disabled,
+.btn.round.disabled {
   background-color: #e3e5e8;
   border-color: #ccc;
   opacity: 0.5;
   cursor: not-allowed;
 }
+
 .btn.round {
   border-radius: 66px;
 }
+
 .btn.primary {
   background-color: #65451e;
   border: 1px solid #65451e;
   color: #fff;
 }
+
 .btn.primary:hover {
   background-color: #4c3417;
   border-color: #4c3417;
 }
-.btn.primary:active, .btn.primary:focus, .btn.primary.active {
+
+.btn.primary:active,
+.btn.primary:focus,
+.btn.primary.active {
   outline: inherit;
   background-color: #33230f;
   border-color: #33230f;
 }
-.btn.primary:disabled, .btn.primary.disabled {
+
+.btn.primary:disabled,
+.btn.primary.disabled {
   background-color: #e3e5e8;
   border-color: #e3e5e8;
   opacity: 0.5;
   cursor: not-allowed;
 }
+
 .btn.h30 {
   min-width: 100px;
   height: 30px;
   padding: 5px 10px;
 }
+
 .btn.h32 {
   min-width: 100px;
   height: 32px;
   padding: 6px 12px;
 }
+
 .btn.h56 {
   min-width: 200px;
   height: 56px;
   border-radius: 8px;
 }
+
 .btn.small {
   min-width: 100px;
 }
+
 .btn.icon {
   min-width: 30px;
   max-width: 30px;
@@ -1226,9 +1384,11 @@ html {
   height: 30px;
   padding: 0;
 }
+
 .btn.full {
   width: 100%;
 }
+
 .btn.empty {
   background-color: transparent;
   border: none;
@@ -1246,6 +1406,7 @@ html {
   align-items: center;
   padding: 10px 0;
 }
+
 .wrap-board-btn .text-info {
   font-family: "Noto Sans KR";
   font-size: 14px;
@@ -1255,6 +1416,7 @@ html {
   position: relative;
   padding-left: 10px;
 }
+
 .wrap-board-btn .text-info::before {
   content: "*";
   color: #ff404b;
@@ -1264,6 +1426,7 @@ html {
   transform: translateY(-50%);
   margin-top: 4px;
 }
+
 .wrap-board-btn .wrap-btn-right {
   display: flex;
   align-items: center;
@@ -1275,7 +1438,8 @@ html {
   align-items: center;
   gap: 4px;
 }
-.wrap-find-file + .wrap-file {
+
+.wrap-find-file+.wrap-file {
   margin-top: 8px;
 }
 
@@ -1284,6 +1448,7 @@ html {
   align-items: center;
   gap: 8px;
 }
+
 .wrap-file span {
   font-family: "Noto Sans KR";
   font-size: 14px;
@@ -1291,7 +1456,8 @@ html {
   font-weight: 500;
   color: #4a4a4a;
 }
-.wrap-file + .wrap-file {
+
+.wrap-file+.wrap-file {
   margin-top: 4px;
 }
 
@@ -1300,9 +1466,11 @@ html {
   align-items: center;
   gap: 6px;
 }
+
 .wrap-calendar .select-wrapper {
   width: 120px;
 }
+
 .wrap-calendar .select-wrapper .select {
   height: 30px;
 }
@@ -1313,16 +1481,19 @@ html {
   width: 100%;
   table-layout: fixed;
 }
+
 .table.board-table thead tr th,
 .table.board-table tbody tr td {
   color: #333;
   text-align: center;
   padding: 8px;
 }
+
 .table.board-table thead tr th .checkbox-item,
 .table.board-table tbody tr td .checkbox-item {
   display: inline-block;
 }
+
 .table.board-table thead tr th {
   background-color: #f7f7f9;
   font-family: "Noto Sans KR";
@@ -1331,9 +1502,11 @@ html {
   font-weight: 700;
   border-top: 1px solid #d4d7dc;
 }
+
 .table.board-table thead tr th:not(:first-child) {
   border-left: 1px solid #d4d7dc;
 }
+
 .table.board-table tbody tr td {
   font-family: "Noto Sans KR";
   font-size: 14px;
@@ -1344,20 +1517,25 @@ html {
   word-break: break-all;
   border-left: 1px solid #d4d7dc;
 }
+
 .table.board-table tbody tr td.ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .table.board-table tbody tr td.tal {
   text-align: left;
 }
+
 .table.board-table tbody tr td.done {
   color: #008a1e;
 }
+
 .table.board-table tbody tr td.reply {
   font-weight: 700;
 }
+
 .table.board-table.vertical-table tr th,
 .table.board-table.vertical-table tr td {
   text-align: left;
@@ -1367,6 +1545,7 @@ html {
   font-weight: 400;
   color: #333333;
 }
+
 .table.board-table.vertical-table tr th {
   padding: 10px 20px;
   font-family: "Noto Sans KR";
@@ -1379,6 +1558,7 @@ html {
   border-top: 1px solid #d4d7dc;
   position: relative;
 }
+
 .table.board-table.vertical-table tr th.required::after {
   content: "*";
   color: #ff404b;
@@ -1387,6 +1567,7 @@ html {
   transform: translateY(-50%);
   margin: 4px 0 0 6px;
 }
+
 .table.board-table .text-info {
   display: block;
   text-align: left;
@@ -1398,14 +1579,17 @@ html {
   justify-content: space-between;
   align-items: center;
 }
-.wrap-table-control + .table {
+
+.wrap-table-control+.table {
   margin-top: 10px;
 }
+
 .wrap-table-control .wrap-table-control-left {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .wrap-table-control .wrap-table-control-left .wrap-count {
   position: relative;
   display: flex;
@@ -1417,6 +1601,7 @@ html {
   font-weight: 400;
   color: #4a4a4a;
 }
+
 .wrap-table-control .wrap-table-control-left .wrap-count::before {
   content: "";
   width: 4px;
@@ -1424,6 +1609,7 @@ html {
   border-radius: 50%;
   background-color: #4a4a4a;
 }
+
 .wrap-table-control .wrap-table-control-left .wrap-count .count {
   font-family: "Noto Sans KR";
   font-size: 16px;
@@ -1431,6 +1617,7 @@ html {
   font-weight: 500;
   color: #65451e;
 }
+
 .wrap-table-control .wrap-table-control-right {
   display: flex;
   align-items: center;
@@ -1443,6 +1630,7 @@ html {
   align-items: center;
   padding: 11px 20px;
 }
+
 .wrap-post-info .date-during,
 .wrap-post-info .date-write {
   font-family: "Noto Sans KR";
@@ -1465,6 +1653,7 @@ html {
   align-items: center;
   gap: 8px;
 }
+
 .wrap-pager .arrow,
 .wrap-pager .num {
   width: 30px;
@@ -1481,19 +1670,24 @@ html {
   align-items: center;
   cursor: pointer;
 }
+
 .wrap-pager .arrow {
   border: 1px solid #2d2d2d;
 }
+
 .wrap-pager .arrow.disabled {
   cursor: not-allowed;
   border-color: #8e8e8e;
 }
+
 .wrap-pager .arrow.disabled svg path {
   stroke: #8e8e8e;
 }
+
 .wrap-pager .num {
   border: 1px solid #fff;
 }
+
 .wrap-pager .num.active {
   font-family: "Noto Sans KR";
   font-size: 14px;
@@ -1503,20 +1697,24 @@ html {
   background-color: #65451e;
   border-color: #65451e;
 }
+
 .wrap-pager .num:hover {
   border: 1px solid #161616;
 }
 
 .container {
-  width: 1920px;
+  min-width: 1280px;
+  max-width: 1920px;
   height: 100vh;
   margin: 0 auto;
 }
+
 .container.login {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .container .header {
   background-color: #65451e;
   border-bottom: 1px solid #332518;
@@ -1525,6 +1723,7 @@ html {
   justify-content: space-between;
   align-items: center;
 }
+
 .container .header .home {
   display: inline-block;
   padding: 6px 21px;
@@ -1534,16 +1733,19 @@ html {
   font-weight: 500;
   color: #fff;
 }
+
 .container .header .wrap-login {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
 .container .header .wrap-login .wrap-status {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .container .header .wrap-login .wrap-status .user {
   font-family: "Noto Sans KR";
   font-size: 16px;
@@ -1552,6 +1754,7 @@ html {
   color: #fff;
   text-decoration: uppercase;
 }
+
 .container .header .wrap-login .wrap-status .text {
   font-family: "Noto Sans KR";
   font-size: 14px;
@@ -1559,20 +1762,27 @@ html {
   font-weight: 400;
   color: #fff;
 }
+
 .container .main {
   display: flex;
 }
+
 .container .main .lnb {
   background-color: #65451e;
   padding: 0 10px;
   width: 240px;
   height: calc(100vh - 63px);
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
 }
+
 .container .main .lnb .lnb-lv01 {
   list-style: none;
   margin: 0;
   padding: 0;
 }
+
 .container .main .lnb .lnb-lv01 .item .item-wrap {
   padding: 16px;
   display: flex;
@@ -1580,6 +1790,7 @@ html {
   flex-wrap: wrap;
   gap: 8px;
 }
+
 .container .main .lnb .lnb-lv01 .item .item-wrap .item-text {
   font-family: "Noto Sans KR";
   font-size: 16px;
@@ -1587,22 +1798,28 @@ html {
   font-weight: 700;
   color: #fff;
 }
+
 .container .main .lnb .lnb-lv01 .item .lnb-lv02 {
   list-style: none;
   width: 100%;
   margin: 0;
   padding: 0;
 }
+
 .container .main .lnb .lnb-lv01 .item .lnb-lv02 .item {
   position: inherit;
   background-color: transparent;
   border-radius: 4px;
-  transition: background-color 0.1s ease; /* 색상만 부드럽게 */
+  transition: background-color 0.1s ease;
+  /* 색상만 부드럽게 */
 }
+
 .container .main .lnb .lnb-lv01 .item .lnb-lv02 .item .item-wrap {
   padding: 9px 16px 9px 48px;
   cursor: pointer;
+  position: relative;
 }
+
 .container .main .lnb .lnb-lv01 .item .lnb-lv02 .item .item-wrap .item-text {
   font-family: "Noto Sans KR";
   font-size: 16px;
@@ -1610,7 +1827,8 @@ html {
   font-weight: 400;
   color: #fff;
 }
-.container .main .lnb .lnb-lv01 .item .lnb-lv02 .item .item-wrap::before {
+
+.container .main .lnb .lnb-lv01 .item .lnb-lv02 .item.active .item-wrap::before {
   content: "";
   width: 20px;
   height: 20px;
@@ -1620,14 +1838,19 @@ html {
   top: 50%;
   transform: translateY(-50%);
 }
-.container .main .lnb .lnb-lv01 .item .lnb-lv02 .item.active, .container .main .lnb .lnb-lv01 .item .lnb-lv02 .item:hover, .container .main .lnb .lnb-lv01 .item .lnb-lv02 .item:focus {
+
+.container .main .lnb .lnb-lv01 .item .lnb-lv02 .item.active,
+.container .main .lnb .lnb-lv01 .item .lnb-lv02 .item:hover,
+.container .main .lnb .lnb-lv01 .item .lnb-lv02 .item:focus {
   position: relative;
   background-color: #332518;
 }
+
 .container .main .contents {
   width: 100%;
   padding: 0 20px;
 }
+
 .container .main .contents .wrap-tit .tit01 {
   font-family: "Noto Sans KR";
   font-size: 24px;
@@ -1637,6 +1860,7 @@ html {
   position: relative;
   margin-left: 18px;
 }
+
 .container .main .contents .wrap-tit .tit01::before {
   content: "";
   display: block;
@@ -1648,6 +1872,25 @@ html {
   height: 8px;
   background-color: #161616;
   border-radius: 50%;
+}
+
+/* Alert Styles */
+.alert {
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+}
+
+.alert-success {
+  background-color: #dcf2e3;
+  color: #1b5e20;
+  border: none;
 }
 
 .popup-overlay {
@@ -1662,6 +1905,7 @@ html {
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0.2s ease;
 }
+
 .popup-overlay.active {
   opacity: 1;
   visibility: visible;
@@ -1675,6 +1919,11 @@ html {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }
+
+.wrap-popup.w400 {
+  width: 400px;
+}
+
 .wrap-popup .popup-header {
   display: flex;
   align-items: center;
@@ -1683,6 +1932,7 @@ html {
   background-color: #65451e;
   color: #fff;
 }
+
 .wrap-popup .popup-tit {
   margin: 0;
   font-family: "Noto Sans KR";
@@ -1691,6 +1941,7 @@ html {
   font-weight: 500;
   color: #ffffff;
 }
+
 .wrap-popup .popup-close {
   display: flex;
   align-items: center;
@@ -1702,19 +1953,24 @@ html {
   cursor: pointer;
   transition: opacity 0.2s;
 }
+
 .wrap-popup .popup-close:hover {
   opacity: 0.8;
 }
+
 .wrap-popup .popup-close svg {
   width: 24px;
   height: 24px;
 }
+
 .wrap-popup .popup-body {
   padding: 20px 30px;
 }
+
 .wrap-popup .popup-body .popup-cont {
   text-align: left;
 }
+
 .wrap-popup .popup-body .popup-cont .tit {
   padding: 0;
   margin: 0;
@@ -1724,6 +1980,7 @@ html {
   font-weight: 700;
   color: #333333;
 }
+
 .wrap-popup .popup-body .popup-cont .wrap-cont {
   text-align: center;
   font-family: "Noto Sans KR";
@@ -1732,16 +1989,41 @@ html {
   font-weight: 400;
   color: #333333;
 }
+
 .wrap-popup .popup-body .popup-cont .wrap-cont strong {
   font-weight: 700;
 }
+
 .wrap-popup .popup-body .popup-cont .wrap-cont p {
   margin: 0;
   padding: 0;
 }
-.wrap-popup .popup-body .popup-cont .wrap-cont p + p {
+
+.wrap-popup .popup-body .popup-cont .wrap-cont p+p {
   margin-top: 12px;
 }
+
+.wrap-popup .popup-body .popup-cont .wrap-cont .form-login .error-message {
+  display: none;
+  background-color: #fff4f4;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #c00404;
+  text-align: left;
+}
+
+.wrap-popup .popup-body .popup-cont .wrap-cont .form-login .error-message+.wrap-form {
+  margin-top: 20px;
+}
+
+.wrap-popup .popup-body .popup-cont .wrap-cont .form-login.error .error-message {
+  display: block;
+}
+
 .wrap-popup .popup-body .popup-cont .wrap-cont .wrap-btn {
   margin: 30px auto 0;
   display: flex;
@@ -1749,13 +2031,16 @@ html {
   align-items: center;
   gap: 10px;
 }
+
 .wrap-popup .popup-body .popup-cont .wrap-cont .wrap-form {
   display: flex;
   align-items: center;
 }
-.wrap-popup .popup-body .popup-cont .wrap-cont .wrap-form + .wrap-form {
+
+.wrap-popup .popup-body .popup-cont .wrap-cont .wrap-form+.wrap-form {
   margin-top: 20px;
 }
+
 .wrap-popup .popup-body .popup-cont .wrap-cont .wrap-form .tit {
   text-align: left;
   font-family: "Noto Sans KR";
@@ -1765,15 +2050,18 @@ html {
   color: #333333;
   flex: 0 0 90px;
 }
+
 .wrap-popup .popup-body .popup-cont .wrap-cont .wrap-form .desc {
   flex: 1 0 auto;
 }
+
 .wrap-popup .popup-body .popup-cont .wrap-cont.popup-manage {
   margin-top: 20px;
   padding: 40px 20px;
   background-color: #fbfbfb;
   border-radius: 8px;
 }
+
 .wrap-popup .popup-body .popup-cont .wrap-cont.popup-manage p {
   font-family: "Noto Sans KR";
   font-size: 16px;
@@ -1781,12 +2069,13 @@ html {
   font-weight: 400;
   color: #333333;
 }
+
 .wrap-popup .popup-body .popup-cont .wrap-cont.popup-manage p:not(:first-child) {
   margin-top: 20px;
 }
 
 .wrap-login .login-cont {
-  width: 344px;
+  width: 336px;
   padding: 60px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   border-top-left-radius: 32px;
@@ -1794,6 +2083,7 @@ html {
   border-bottom-right-radius: 32px;
   border-bottom-left-radius: 72px;
 }
+
 .wrap-login .login-cont .tit-login {
   font-family: "Noto Sans KR";
   font-size: 28px;
@@ -1802,6 +2092,7 @@ html {
   color: #65451e;
   position: relative;
 }
+
 .wrap-login .login-cont .tit-login::before {
   content: "";
   display: block;
@@ -1813,6 +2104,7 @@ html {
   bottom: -6px;
   left: 0;
 }
+
 .wrap-login .login-cont .tit-login::after {
   content: "";
   display: block;
@@ -1824,9 +2116,31 @@ html {
   bottom: -6px;
   left: 28px;
 }
+
 .wrap-login .login-cont .form-login {
   margin-top: 32px;
 }
+
+.wrap-login .login-cont .form-login .error-message {
+  display: none;
+  background-color: #fff4f4;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: "Noto Sans KR";
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #c00404;
+}
+
+.wrap-login .login-cont .form-login .error-message+.form-tit {
+  margin-top: 20px;
+}
+
+.wrap-login .login-cont .form-login.error .error-message {
+  display: block;
+}
+
 .wrap-login .login-cont .form-login .form-tit {
   font-family: "Noto Sans KR";
   font-size: 14px;
@@ -1834,15 +2148,19 @@ html {
   font-weight: 700;
   color: #333333;
 }
-.wrap-login .login-cont .form-login .form-tit + .input-group {
+
+.wrap-login .login-cont .form-login .form-tit+.input-group {
   margin-top: 8px;
 }
-.wrap-login .login-cont .form-login .form-tit + .input-group + .form-tit {
+
+.wrap-login .login-cont .form-login .form-tit+.input-group+.form-tit {
   margin-top: 20px;
 }
+
 .wrap-login .login-cont .form-login .checkbox-group {
   margin-top: 13px;
 }
+
 .wrap-login .login-cont .form-login .checkbox-group .checkbox-label {
   font-family: "Noto Sans KR";
   font-size: 16px;
@@ -1850,9 +2168,11 @@ html {
   font-weight: 400;
   color: #333333;
 }
-.wrap-login .login-cont > .btn {
+
+.wrap-login .login-cont .form-login .btn {
   margin-top: 32px;
 }
+
 .wrap-login .alert-text {
   margin-top: 20px;
   font-family: "Noto Sans KR";
@@ -1869,10 +2189,12 @@ html {
   justify-content: center;
   align-items: center;
 }
+
 .wrap-find .btn {
   padding: 0 20px;
   position: relative;
 }
+
 .wrap-find .btn:not(:first-child)::before {
   content: "";
   display: block;
