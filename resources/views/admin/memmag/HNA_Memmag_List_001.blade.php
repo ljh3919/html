@@ -18,7 +18,7 @@
             <div class="input-group h40">
                 <div class="select-wrapper">
                     <select name="search_type" class="input-box select" style="width: 160px">
-                        <option value="">선택해주세요</option>
+                        <option value="">선택하세요</option>
                         <option value="username" {{ $searchType == 'username' ? 'selected' : '' }}>아이디</option>
                         <option value="name" {{ $searchType == 'name' ? 'selected' : '' }}>이름</option>
                         <option value="email" {{ $searchType == 'email' ? 'selected' : '' }}>이메일</option>
