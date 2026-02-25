@@ -27,7 +27,7 @@
     </tr>
     <tr>
         <th>작성자</th>
-        <td>{{ $letter->author_description }}|| {{ $letter->content }}</td>
+        <td>{{ $letter->author_description }}</td>
     </tr>
     <tr>
         <th>비밀글</th>
