@@ -1,84 +1,63 @@
 @extends('layouts.admin')
 
-@section('styles')
-<style>
-    .table-header-custom {
-        background-color: #f8f9fa;
-        font-weight: 500;
-        vertical-align: middle !important;
-        padding-left: 20px !important;
-        border-bottom: 1px solid #dee2e6 !important;
-    }
-    .table-cell-custom {
-        padding: 12px 20px !important;
-        border-bottom: 1px solid #dee2e6 !important;
-    }
-    .btn-outline-custom {
-        background-color: #fff;
-        border: 1px solid #ced4da;
-        color: #333;
-        font-weight: 500;
-    }
-    .btn-outline-custom:hover {
-        background-color: #f8f9fa;
-        color: #000;
-    }
-</style>
-@endsection
+
 
 @section('content')
-<div class="container-fluid text-black">
-    <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
-        <div style="font-size: 1.5rem; font-weight: 700; color: #000;">• 회원 관리</div>
+<!-- title -->
+<div class="wrap-tit">
+    <h2 class="tit01">회원 관리</h2>
+</div>
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
     </div>
+@endif
 
-    @if (session('success'))
-        <div class="alert alert-success border-0 shadow-sm mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
+<!-- table -->
+<table class="table board-table vertical-table">
+    <tr>
+        <th>아이디</th>
+        <td>{{ $member->username }}</td>
+    </tr>
+    <tr>
+        <th>이름</th>
+        <td>{{ $member->name }}</td>
+    </tr>
+    <tr>
+        <th>휴대전화 번호</th>
+        <td>{{ $member->phone }}</td>
+    </tr>
+    <tr>
+        <th>이메일</th>
+        <td>{{ $member->email }}</td>
+    </tr>
+    <tr>
+        <th>등록일</th>
+        <td>{{ $member->created_at->format('Y-m-d H:i:s') }}</td>
+    </tr>
+</table>
 
-    <div class="card border-0 mb-4">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-bordered mb-0">
-                    <colgroup>
-                        <col style="width: 180px;">
-                        <col>
-                    </colgroup>
-                    <tbody>
-                        <tr>
-                            <th class="table-header-custom">이름 <span class="text-danger ml-1">*</span></th>
-                            <td class="table-cell-custom font-weight-bold">{{ $member->name }}</td>
-                        </tr>
-                        <tr>
-                            <th class="table-header-custom">아이디 <span class="text-danger ml-1">*</span></th>
-                            <td class="table-cell-custom">{{ $member->username }}</td>
-                        </tr>
-                        <tr>
-                            <th class="table-header-custom">핸드폰 번호 <span class="text-danger ml-1">*</span></th>
-                            <td class="table-cell-custom">{{ $member->phone }}</td>
-                        </tr>
-                        <tr>
-                            <th class="table-header-custom">이메일 <span class="text-danger ml-1">*</span></th>
-                            <td class="table-cell-custom">{{ $member->email }}</td>
-                        </tr>
-                        <tr>
-                            <th class="table-header-custom">등록일</th>
-                            <td class="table-cell-custom text-secondary">{{ $member->created_at->format('Y-m-d H:i:s') }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="d-flex justify-content-end align-items-center mt-4 mb-5">
-        <a href="{{ route('HNA_Memmag_List_001') }}" class="btn btn-sm btn-outline-custom px-4 py-2 mr-2" style="min-width: 80px;">목록</a>
-        <button type="button" class="btn btn-sm btn-outline-custom px-4 py-2 mr-2" style="min-width: 80px;" onclick="deleteUser()">
-            삭제 <i class="fas fa-trash-alt ml-1" style="font-size: 0.8rem;"></i>
+<!-- board button -->
+<div class="wrap-board-btn">
+    <div class="wrap-btn-left"></div>
+    <div class="wrap-btn-right">
+        <button type="button" class="btn line small" onclick="location.href='{{ route('HNA_Memmag_List_001') }}'">
+            <span>목록</span>
         </button>
-        <a href="{{ route('HNA_Memmag_Modi_001', $member->id) }}" class="btn btn-sm text-white px-4 py-2" style="background-color: #5d401a; border: 1px solid #5d401a; min-width: 80px; font-weight: 500;">수정</a>
+        <button type="button" class="btn line small" onclick="deleteUser()">
+            <span>삭제</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M19.1119 3.78009H13.7778C13.7778 3.29279 13.3801 2.89844 12.8886 2.89844H11.1113C10.6187 2.89844 10.2221 3.29279 10.2221 3.78009H4.88804C4.39657 3.78009 4 4.17448 4 4.66179C4 5.14795 4.39772 5.54344 4.88804 5.54344H19.1119C19.6034 5.54344 20 5.14795 20 4.66179C20.0011 4.17562 19.6034 3.78009 19.1119 3.78009Z" fill="#4A4A4A" />
+                <path d="M17.2722 8.48992L16.4013 17.9696C16.3978 18.0081 16.3956 18.0456 16.3944 18.0852H7.60642C7.60527 18.0467 7.60294 18.0093 7.59951 17.9696L6.72864 8.48992H17.2722ZM17.3351 6.6767H6.6669C5.68626 6.6767 4.88845 7.46547 4.88845 8.43894L5.77768 18.1351C5.77768 19.1074 6.5732 19.8984 7.55612 19.8984H16.4447C17.4265 19.8984 18.2231 19.1086 18.2231 18.1351L19.1123 8.43894C19.1123 7.46547 18.3157 6.6767 17.3351 6.6767Z" fill="#4A4A4A" />
+                <path d="M12.0006 17.065C11.6851 17.065 11.4291 16.8111 11.4291 16.4984V10.372C11.4291 10.0592 11.6851 9.80533 12.0006 9.80533C12.316 9.80533 12.572 10.0592 12.572 10.372V16.4984C12.572 16.8111 12.316 17.065 12.0006 17.065Z" fill="#4A4A4A" />
+                <path d="M9.51043 17.0645C9.22013 17.0645 8.97096 16.8457 8.94238 16.5533L8.33548 10.4269C8.30576 10.1153 8.53553 9.83766 8.8487 9.80819C9.16186 9.78439 9.44416 10.0054 9.47388 10.317L10.0808 16.4434C10.1105 16.7551 9.88073 17.0327 9.56757 17.0633C9.54814 17.0633 9.52986 17.0645 9.51043 17.0645Z" fill="#4A4A4A" />
+                <path d="M14.491 17.0645C14.7813 17.0645 15.0304 16.8457 15.059 16.5533L15.6659 10.4269C15.6956 10.1153 15.4659 9.83766 15.1528 9.80819C14.8396 9.78439 15.5573 10.0054 14.5276 10.317L13.891 16.4434C13.891 16.7551 14.1207 17.0327 14.4338 17.0633C14.4533 17.0633 14.4727 17.0645 14.491 17.0645Z" fill="#4A4A4A" />
+            </svg>
+        </button>
+        <button type="button" class="btn primary small" onclick="location.href='{{ route('HNA_Memmag_Modi_001', $member->id) }}'">
+            <span>수정</span>
+        </button>
     </div>
 </div>
 
