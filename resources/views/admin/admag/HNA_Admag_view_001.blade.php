@@ -14,10 +14,6 @@
 
 <!-- table -->
 <table class="table board-table vertical-table">
-    <colgroup>
-        <col>
-        <col>
-    </colgroup>
     <tbody>
         <tr>
             <th>이름</th>

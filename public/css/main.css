@@ -2217,4 +2217,15 @@ html {
   transform: translateY(-50%);
 }
 
+
+/* Layout Correction for Editor and Upload */
+.input-group.no-max-width .input-box {
+  max-width: none !important;
+}
+
+.note-editor.note-airframe,
+.note-editor.note-frame {
+  font-family: inherit;
+}
+
 /*# sourceMappingURL=main.css.map */

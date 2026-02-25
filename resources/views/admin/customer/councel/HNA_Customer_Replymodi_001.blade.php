@@ -2,13 +2,10 @@
 
 @section('styles')
 <!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <style>
-    .note-editor.note-frame {
+    .note-editor.note-lite {
         border-color: #dee2e6;
-    }
-    .note-editor.note-frame .note-statusbar {
-        border-top-color: #dee2e6;
     }
 </style>
 @endsection
@@ -71,38 +68,25 @@
             <th class="required">답변</th>
             <td>
                 <div class="wrap-form">
-                    <textarea name="content" id="editor" class="input-box" required>{{ old('content', $inquiry->reply->content) }}</textarea>
+                    <div class="input-group textarea no-max-width">
+                        <textarea name="content" id="editor" class="input-box input-box--textarea" required>{{ old('content', $inquiry->reply->content) }}</textarea>
+                    </div>
                 </div>
             </td>
         </tr>
         <tr>
             <th>첨부파일</th>
             <td>
-                <!-- Existing Files -->
-                @if($inquiry->reply->attachments->count() > 0)
-                    <div class="mb-3">
-                        @foreach($inquiry->reply->attachments as $attachment)
-                            <div class="wrap-file mb-1">
-                                <span class="text-dark">{{ $attachment->original_name }}</span>
-                                <label class="checkbox-item ml-4" style="color: #ff4d4f;">
-                                    <input type="checkbox" name="delete_attachments[]" value="{{ $attachment->id }}" class="checkbox-input" />
-                                    <span class="ml-1">삭제</span>
-                                </label>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-
-                <!-- New File Uploads -->
                 <div id="file-input-container">
-                    <div class="wrap-find-file mb-2 file-input-group">
-                        <div class="input-group h30" style="width: 400px">
-                            <input type="text" class="input-box file-name-display" style="min-width: 100%" readonly placeholder="새 파일을 선택하세요" />
+                    <!-- New File Uploads -->
+                    <div class="wrap-find-file file-input-group">
+                        <div class="input-group h30 no-max-width" style="width: 400px">
+                            <input type="text" class="input-box file-name-display" readonly placeholder="새 파일을 선택하세요" />
                         </div>
-                        <label class="btn h30" style="cursor: pointer;">
+                        <button type="button" class="btn h30 btn-find-file">
                             <span>파일찾기</span>
-                            <input type="file" name="attachments[]" class="file-input-real" style="display: none;">
-                        </label>
+                        </button>
+                        <input type="file" name="attachments[]" class="file-input-real" style="display: none;">
                         <button type="button" class="btn line icon h30 btn-add-file">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M12 6V18" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -110,8 +94,26 @@
                             </svg>
                         </button>
                     </div>
+
+                    <!-- Existing Files -->
+                    @if($inquiry->reply->attachments->count() > 0)
+                        @foreach($inquiry->reply->attachments as $attachment)
+                            <div class="wrap-file">
+                                <span class="file-name">{{ $attachment->original_name }}</span>
+                                <div class="wrap-file-delete">
+                                    <input type="checkbox" name="delete_attachments[]" value="{{ $attachment->id }}" class="delete-file-checkbox" style="display: none;" />
+                                    <button type="button" class="btn line icon h30 btn-delete-existing-file" title="파일 삭제">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M5 19L19 5" stroke="#161616" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
+                                            <path d="M5 5L19 19" stroke="#161616" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
-                <div class="text-secondary mt-2" style="font-size: 0.85rem;">
+                <div class="text-info">
                     • 첨부파일은 최대 3개까지 등록 가능합니다. (개당 10MB)
                 </div>
             </td>
@@ -135,7 +137,7 @@
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script>
 $(document).ready(function() {
     $('#editor').summernote({
@@ -158,6 +160,11 @@ $(document).ready(function() {
     const existingFilesCount = {{ $inquiry->reply->attachments->count() }};
     const maxFiles = 3;
 
+    // 파일찾기 버튼 클릭 이벤트
+    $(document).on('click', '.btn-find-file', function() {
+        $(this).closest('.file-input-group').find('.file-input-real').click();
+    });
+
     // 파일 선택 시 파일명 표시
     $(document).on('change', '.file-input-real', function() {
         const fileName = $(this).val().split('\\').pop();
@@ -167,20 +174,20 @@ $(document).ready(function() {
     container.addEventListener('click', function(e) {
         if (e.target.closest('.btn-add-file')) {
             const currentInputs = container.querySelectorAll('.file-input-group').length;
-            const checkedDeleteCount = document.querySelectorAll('input[name="delete_attachments[]"]:checked').length;
+            const checkedDeleteCount = document.querySelectorAll('.delete-file-checkbox:checked').length;
             const activeFiles = existingFilesCount - checkedDeleteCount + currentInputs;
 
             if (activeFiles < maxFiles) {
                 const newGroup = document.createElement('div');
-                newGroup.className = 'wrap-find-file mb-2 file-input-group';
+                newGroup.className = 'wrap-find-file file-input-group';
                 newGroup.innerHTML = `
-                    <div class="input-group h30" style="width: 400px">
-                        <input type="text" class="input-box file-name-display" style="min-width: 100%" readonly placeholder="새 파일을 선택하세요" />
+                    <div class="input-group h30 no-max-width" style="width: 400px">
+                        <input type="text" class="input-box file-name-display" readonly placeholder="파일을 선택하세요" />
                     </div>
-                    <label class="btn h30" style="cursor: pointer;">
+                    <button type="button" class="btn h30 btn-find-file">
                         <span>파일찾기</span>
-                        <input type="file" name="attachments[]" class="file-input-real" style="display: none;">
-                    </label>
+                    </button>
+                    <input type="file" name="attachments[]" class="file-input-real" style="display: none;">
                     <button type="button" class="btn line icon h30 btn-remove-file">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M5 19L19 5" stroke="#161616" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
@@ -199,9 +206,50 @@ $(document).ready(function() {
         }
     });
 
+    // 기존 파일 삭제 버튼 클릭 처리
+    $(document).on('click', '.btn-delete-existing-file', function() {
+        const wrap = $(this).closest('.wrap-file');
+        const checkbox = wrap.find('.delete-file-checkbox');
+        const isChecked = checkbox.prop('checked');
+        
+        checkbox.prop('checked', !isChecked);
+        
+        if (!isChecked) {
+            wrap.find('.file-name').css({
+                'text-decoration': 'line-through',
+                'color': '#adb5bd'
+            });
+            $(this).addClass('active');
+        } else {
+            wrap.find('.file-name').css({
+                'text-decoration': 'none',
+                'color': '#333'
+            });
+            $(this).removeClass('active');
+        }
+        updateAddButtonStatus(); // Update status after toggling delete
+    });
+
     function updateAddButtonStatus() {
         // Option to disable add button if limit reached
+        const currentInputs = container.querySelectorAll('.file-input-group').length;
+        const checkedDeleteCount = document.querySelectorAll('.delete-file-checkbox:checked').length;
+        const activeFiles = existingFilesCount - checkedDeleteCount + currentInputs;
+
+        const addButton = document.querySelector('.btn-add-file');
+        if (addButton) {
+            if (activeFiles >= maxFiles) {
+                addButton.disabled = true;
+                addButton.classList.add('disabled');
+            } else {
+                addButton.disabled = false;
+                addButton.classList.remove('disabled');
+            }
+        }
     }
+
+    // Initial call to set the correct state of the add button
+    updateAddButtonStatus();
 });
 </script>
 @endsection

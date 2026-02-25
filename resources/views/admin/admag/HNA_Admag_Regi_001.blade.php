@@ -10,10 +10,6 @@
     @csrf
     <!-- table -->
     <table class="table board-table vertical-table">
-        <colgroup>
-            <col style="width: 180px;">
-            <col>
-        </colgroup>
         <tbody>
             <tr>
                 <th class="required">이름</th>

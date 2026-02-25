@@ -2,13 +2,10 @@
 
 @section('styles')
 <!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <style>
-    .note-editor.note-frame {
+    .note-editor.note-lite {
         border-color: #dee2e6;
-    }
-    .note-editor.note-frame .note-statusbar {
-        border-top-color: #dee2e6;
     }
 </style>
 @endsection
@@ -70,7 +67,9 @@
             <th class="required">답변</th>
             <td>
                 <div class="wrap-form">
-                    <textarea name="content" id="editor" class="input-box" required>{{ old('content') }}</textarea>
+                    <div class="input-group textarea no-max-width">
+                        <textarea name="content" id="editor" class="input-box input-box--textarea" required>{{ old('content') }}</textarea>
+                    </div>
                 </div>
             </td>
         </tr>
@@ -79,13 +78,13 @@
             <td>
                 <div id="file-input-container">
                     <div class="wrap-find-file mb-2 file-input-group">
-                        <div class="input-group h30" style="width: 400px">
-                            <input type="text" class="input-box file-name-display" style="min-width: 100%" readonly placeholder="파일을 선택하세요" />
+                        <div class="input-group h30 no-max-width" style="width: 400px">
+                            <input type="text" class="input-box file-name-display" readonly placeholder="파일을 선택하세요" />
                         </div>
-                        <label class="btn h30" style="cursor: pointer;">
+                        <button type="button" class="btn h30 btn-find-file">
                             <span>파일찾기</span>
-                            <input type="file" name="attachments[]" class="file-input-real" style="display: none;">
-                        </label>
+                        </button>
+                        <input type="file" name="attachments[]" class="file-input-real" style="display: none;">
                         <button type="button" class="btn line icon h30 btn-add-file">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M12 6V18" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -118,7 +117,7 @@
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script>
 $(document).ready(function() {
     $('#editor').summernote({
@@ -140,6 +139,11 @@ $(document).ready(function() {
     const container = document.getElementById('file-input-container');
     const maxFiles = 3;
 
+    // 파일찾기 버튼 클릭 이벤트
+    $(document).on('click', '.btn-find-file', function() {
+        $(this).closest('.file-input-group').find('.file-input-real').click();
+    });
+
     // 파일 선택 시 파일명 표시
     $(document).on('change', '.file-input-real', function() {
         const fileName = $(this).val().split('\\').pop();
@@ -153,13 +157,13 @@ $(document).ready(function() {
                 const newGroup = document.createElement('div');
                 newGroup.className = 'wrap-find-file mb-2 file-input-group';
                 newGroup.innerHTML = `
-                    <div class="input-group h30" style="width: 400px">
-                        <input type="text" class="input-box file-name-display" style="min-width: 100%" readonly placeholder="파일을 선택하세요" />
+                    <div class="input-group h30 no-max-width" style="width: 400px">
+                        <input type="text" class="input-box file-name-display" readonly placeholder="파일을 선택하세요" />
                     </div>
-                    <label class="btn h30" style="cursor: pointer;">
+                    <button type="button" class="btn h30 btn-find-file">
                         <span>파일찾기</span>
-                        <input type="file" name="attachments[]" class="file-input-real" style="display: none;">
-                    </label>
+                    </button>
+                    <input type="file" name="attachments[]" class="file-input-real" style="display: none;">
                     <button type="button" class="btn line icon h30 btn-remove-file">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M5 19L19 5" stroke="#161616" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />

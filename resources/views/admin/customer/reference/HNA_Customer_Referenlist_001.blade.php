@@ -7,106 +7,148 @@
  @endsection
 
 @section('content')
-<div class="container-fluid">
-    <div class="content-title">자료실 관리</div>
+<!-- title -->
+<div class="wrap-tit">
+    <h2 class="tit01">자료실</h2>
+</div>
 
-    <div class="row align-items-end mb-3">
-        <div class="col-md-6">
-            <div style="font-size: 0.9rem; color: #5d401a; font-weight: 500;">
-                • 총 등록 수 <strong style="color: #5d401a;">{{ number_format($references->total()) }}</strong>
+<div class="wrap-table-control">
+    <div class="wrap-table-control-left"></div>
+    <div class="wrap-table-control-right">
+        <form action="{{ route('HNA_Customer_Referenlist_001') }}" method="GET" style="display: flex; align-items: center; gap: 8px;">
+            <div class="input-group h40">
+                <div class="select-wrapper">
+                    <select name="search_type" class="input-box select" style="width: 160px;">
+                        <option value="">선택하세요</option>
+                        <option value="all" {{ ($searchType == 'all' || $searchType == 'title_content') ? 'selected' : '' }}>전체</option>
+                        <option value="title" {{ $searchType == 'title' ? 'selected' : '' }}>제목</option>
+                        <option value="content" {{ $searchType == 'content' ? 'selected' : '' }}>내용</option>
+                        <option value="author" {{ $searchType == 'author' ? 'selected' : '' }}>작성자</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <form action="{{ route('HNA_Customer_Referenlist_001') }}" method="GET" class="d-flex justify-content-end">
-                <select name="search_type" class="form-control form-control-sm mr-2" style="width: 120px;">
-                    <option value="all" {{ ($searchType == 'all' || $searchType == 'title_content') ? 'selected' : '' }}>전체</option>
-                    <option value="title" {{ $searchType == 'title' ? 'selected' : '' }}>제목</option>
-                    <option value="content" {{ $searchType == 'content' ? 'selected' : '' }}>내용</option>
-                    <option value="author" {{ $searchType == 'author' ? 'selected' : '' }}>작성자</option>
-                </select>
-                <input type="text" name="search_keyword" class="form-control form-control-sm mr-2" style="width: 200px;" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요">
-                <button type="submit" class="btn btn-sm text-white px-3" style="background-color: #5d401a;">검색</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="card border-0">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-bordered text-center table-admin">
-                    <thead style="background-color: #f8f9fa;">
-                        <tr>
-                            <th style="width: 50px;">
-                                <input type="checkbox" id="check-all">
-                            </th>
-                            <th style="width: 60px;">No</th>
-                            <th>제목</th>
-                            <th style="width: 120px;">작성자</th>
-                            <th style="width: 120px;">등록일</th>
-                            <th style="width: 80px;">파일</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($references as $reference)
-                            <tr class="reference-row" data-id="{{ $reference->id }}" style="cursor: pointer;">
-                                <td onclick="event.stopPropagation();">
-                                    <input type="checkbox" name="ids[]" value="{{ $reference->id }}" class="check-item">
-                                </td>
-                                <td>{{ $references->total() - ($references->currentPage() - 1) * $references->perPage() - $loop->index }}</td>
-                                <td class="text-left px-3">
-                                    <div class="text-truncate" style="max-width: 700px;">
-                                        {{ $reference->title }}
-                                    </div>
-                                </td>
-                                <td>{{ $reference->author->name }}</td>
-                                <td class="text-secondary">{{ $reference->created_at->format('Y-m-d') }}</td>
-                                <td>
-                                    @if($reference->attachments->count() > 0)
-                                        <i class="far fa-file-alt" style="font-size: 1.1rem; color: #5d401a;"></i>
-                                    @endif
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6" class="text-center py-5 text-secondary">검색결과가 없습니다.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+            <div class="wrap-form mx-8">
+                <div class="input-group h40">
+                    <input type="text" name="search_keyword" class="input-box" style="width: 325px;" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요">
+                </div>
             </div>
-
-            <div class="btn-area-60">
-                <button type="button" id="btn-delete" class="btn btn-sm btn-delete-custom px-3" disabled>
-                    삭제 <i class="fas fa-trash-alt ml-1"></i>
-                </button>
-                <a href="{{ route('HNA_Customer_Referenrigo_001') }}" class="btn btn-sm btn-register-custom px-4">등록</a>
-            </div>
-
-            <div class="pagination-wrap">
-                <a href="{{ $references->appends(request()->input())->url(1) }}" class="pag-btn {{ $references->onFirstPage() ? 'disabled' : '' }}">
-                    <i class="fas fa-angle-double-left"></i>
-                </a>
-                <a href="{{ $references->appends(request()->input())->previousPageUrl() }}" class="pag-btn {{ $references->onFirstPage() ? 'disabled' : '' }}">
-                    <i class="fas fa-angle-left"></i>
-                </a>
-                
-                @foreach(range(1, $references->lastPage()) as $page)
-                    @if($page >= $references->currentPage() - 2 && $page <= $references->currentPage() + 2)
-                        <a href="{{ $references->appends(request()->input())->url($page) }}" class="pag-btn {{ $page == $references->currentPage() ? 'active' : '' }}">
-                            {{ $page }}
-                        </a>
-                    @endif
-                @endforeach
-
-                <a href="{{ $references->appends(request()->input())->nextPageUrl() }}" class="pag-btn {{ !$references->hasMorePages() ? 'disabled' : '' }}">
-                    <i class="fas fa-angle-right"></i>
-                </a>
-                <a href="{{ $references->appends(request()->input())->url($references->lastPage()) }}" class="pag-btn {{ !$references->hasMorePages() ? 'disabled' : '' }}">
-                    <i class="fas fa-angle-double-right"></i>
-                </a>
-            </div>
-        </div>
+            <button type="submit" class="btn primary small">
+                <span>검색</span>
+            </button>
+        </form>
     </div>
 </div>
 
+<!-- table -->
+<table class="table board-table">
+    <thead>
+        <tr>
+            <th scope="col" style="width: 50px;">
+                <input type="checkbox" id="check-all">
+            </th>
+            <th scope="col" style="width: 60px;">No</th>
+            <th scope="col" style="width: 50%" class="ellipsis tal">제목</th>
+            <th scope="col" style="width: calc((100% - 170px) / 2)">작성자</th>
+            <th scope="col" style="width: calc((100% - 170px) / 2)">등록일</th>
+            <th scope="col" style="width: 60px;">파일</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse($references as $reference)
+            <tr class="reference-row" data-id="{{ $reference->id }}" style="cursor: pointer;">
+                <td onclick="event.stopPropagation();">
+                    <input type="checkbox" name="ids[]" value="{{ $reference->id }}" class="check-item">
+                </td>
+                <td>{{ $references->total() - ($references->currentPage() - 1) * $references->perPage() - $loop->index }}</td>
+                <td class="tal ellipsis">
+                    {{ $reference->title }}
+                </td>
+                <td>{{ $reference->author->name }}</td>
+                <td>{{ $reference->created_at->format('Y-m-d') }}</td>
+                <td>
+                    @if($reference->attachments->count() > 0)
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#161616" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M14 2V8H20" stroke="#161616" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M16 13H8" stroke="#161616" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M16 17H8" stroke="#161616" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M10 9H9H8" stroke="#161616" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    @endif
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="6" class="text-center py-5 text-secondary">검색결과가 없습니다.</td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
+
+<div class="wrap-board-btn h30 mt-3">
+    <div class="wrap-btn-left">
+        <button type="button" id="btn-delete" class="btn line small" disabled>
+            <span>삭제</span>
+        </button>
+    </div>
+    <div class="wrap-btn-right">
+        <button type="button" class="btn primary small" onclick="location.href='{{ route('HNA_Customer_Referenrigo_001') }}'">
+            <span>등록</span>
+        </button>
+    </div>
+</div>
+
+<!-- pager -->
+{{ $references->appends(request()->input())->links('admin.partials.pagination') }}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const referenceRows = document.querySelectorAll('.reference-row');
+    const checkAll = document.getElementById('check-all');
+    const checkItems = document.querySelectorAll('.check-item');
+    const btnDelete = document.getElementById('btn-delete');
+
+    // 행 클릭 시 상세 페이지 이동
+    referenceRows.forEach(row => {
+        row.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            location.href = "{{ route('HNA_Customer_Referenview_001', ':id') }}".replace(':id', id);
+        });
+    });
+
+    // 전체 선택
+    if (checkAll) {
+        checkAll.addEventListener('change', function() {
+            checkItems.forEach(item => {
+                item.checked = this.checked;
+            });
+            updateDeleteButton();
+        });
+    }
+
+    // 개별 선택
+    checkItems.forEach(item => {
+        item.addEventListener('change', function() {
+            updateDeleteButton();
+        });
+    });
+
+    function updateDeleteButton() {
+        const checkedCount = document.querySelectorAll('.check-item:checked').length;
+        if (btnDelete) {
+            btnDelete.disabled = checkedCount === 0;
+        }
+    }
+
+    // 선택 삭제 처리
+    if (btnDelete) {
+        btnDelete.addEventListener('click', function() {
+            if (confirm('선택한 항목을 삭제하시겠습니까?')) {
+                const ids = Array.from(document.querySelectorAll('.check-item:checked')).map(item => item.value);
+                // 삭제 API 호출 로직 (생략 - 필요 시 구현)
+            }
+        });
+    }
+});
+</script>
 @endsection
