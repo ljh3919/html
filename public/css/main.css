@@ -1624,6 +1624,16 @@ html {
   gap: 12px;
 }
 
+.wrap-table-control .wrap-table-control-right form {
+  display: flex;
+  align-items: center;
+}
+
+.mx-8 {
+  margin-left: 8px !important;
+  margin-right: 8px !important;
+}
+
 .wrap-post-info {
   display: flex;
   justify-content: space-between;

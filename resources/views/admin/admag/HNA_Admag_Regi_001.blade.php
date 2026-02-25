@@ -157,10 +157,10 @@
     <div class="wrap-board-btn">
         <div class="text-info">표시항목은 필수입력 항목입니다.</div>
         <div class="wrap-btn-right">
-            <button type="button" class="btn line" onclick="location.href='{{ route('HNA_Admag_list_001') }}'">
+            <button type="button" class="btn line small" onclick="location.href='{{ route('HNA_Admag_list_001') }}'">
                 <span>취소</span>
             </button>
-            <button type="submit" class="btn primary">
+            <button type="submit" class="btn primary small">
                 <span>등록</span>
             </button>
         </div>

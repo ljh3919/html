@@ -10,148 +10,128 @@
     .note-editor.note-frame .note-statusbar {
         border-top-color: #dee2e6;
     }
-    .table-header-custom {
-        background-color: #f8f9fa;
-        font-weight: 500;
-        vertical-align: middle !important;
-        padding-left: 20px !important;
-        border-bottom: 1px solid #dee2e6 !important;
-    }
-    .table-cell-custom {
-        padding: 12px 20px !important;
-        border-bottom: 1px solid #dee2e6 !important;
-    }
-    .btn-outline-custom {
-        background-color: #fff;
-        border: 1px solid #ced4da;
-        color: #333;
-        font-weight: 500;
-    }
-    .btn-outline-custom:hover {
-        background-color: #f8f9fa;
-        color: #000;
-    }
 </style>
 @endsection
 
 @section('content')
-<div class="container-fluid text-black">
-    <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
-        <div style="font-size: 1.5rem; font-weight: 700; color: #000;">• 1:1 상담 관리</div>
-    </div>
-
-    @if ($errors->any())
-        <div class="alert alert-danger mt-3">
-            {{ $errors->first() }}
-        </div>
-    @endif
-
-    <!-- 원본 문의 정보 (ReadOnly) -->
-    <div class="card border-0 mb-4 mt-3">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-bordered mb-0">
-                    <colgroup>
-                        <col style="width: 200px;">
-                        <col>
-                    </colgroup>
-                    <tbody>
-                        <tr>
-                            <th class="table-header-custom">문의 제목</th>
-                            <td class="table-cell-custom">{{ $inquiry->title }}</td>
-                        </tr>
-                        <tr>
-                            <th class="table-header-custom">문의 내용</th>
-                            <td class="table-cell-custom">
-                                <div style="white-space: pre-wrap; line-height: 1.6; font-size: 0.95rem;">{{ $inquiry->content }}</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table-header-custom">작성자 ID</th>
-                            <td class="table-cell-custom">{{ $inquiry->username }}</td>
-                        </tr>
-                        <tr>
-                            <th class="table-header-custom">이메일</th>
-                            <td class="table-cell-custom">{{ $inquiry->email ?? '-' }}</td>
-                        </tr>
-                        <tr>
-                            <th class="table-header-custom">작성일</th>
-                            <td class="table-cell-custom text-secondary">{{ $inquiry->created_at->format('Y-m-d H:i') }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- 답변 수정 폼 -->
-    <form action="{{ route('admin.inquiry.reply.update', $inquiry->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-        <div class="card border-0">
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-bordered mb-0">
-                        <colgroup>
-                            <col style="width: 200px;">
-                            <col>
-                        </colgroup>
-                        <tbody>
-                            <tr>
-                                <th class="table-header-custom">답변 제목 <span class="text-danger ml-1">*</span></th>
-                                <td class="table-cell-custom">
-                                    <input type="text" name="title" class="form-control form-control-sm" value="{{ old('title', $inquiry->reply->title) }}" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="table-header-custom">답변 내용 <span class="text-danger ml-1">*</span></th>
-                                <td class="table-cell-custom">
-                                    <textarea name="content" id="editor" class="form-control" required>{{ old('content', $inquiry->reply->content) }}</textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="table-header-custom">첨부파일</th>
-                                <td class="table-cell-custom">
-                                    <!-- 기존 파일 목록 -->
-                                    @if($inquiry->reply->attachments->count() > 0)
-                                        <div class="mb-3">
-                                            @foreach($inquiry->reply->attachments as $attachment)
-                                                <div class="d-flex align-items-center mb-1">
-                                                    <span class="mr-2 text-dark">{{ $attachment->original_name }}</span>
-                                                    <div class="custom-control custom-checkbox ml-2">
-                                                        <input type="checkbox" name="delete_attachments[]" value="{{ $attachment->id }}" class="custom-control-input" id="del_file_{{ $attachment->id }}">
-                                                        <label class="custom-control-label text-danger" for="del_file_{{ $attachment->id }}" style="cursor: pointer; font-size: 0.85rem;">삭제</label>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    @endif
-
-                                    <!-- 신규 파일 업로드 -->
-                                    <div id="file-input-container">
-                                        <div class="d-flex align-items-center mb-2 file-input-group">
-                                            <input type="file" name="attachments[]" class="form-control-file w-auto mr-2">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary btn-add-file"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                    <p class="text-muted mb-0" style="font-size: 0.85rem;">• 첨부파일은 최대 3개까지 등록 가능합니다. (개당 10MB)</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="d-flex justify-content-between align-items-center mt-4 mb-5">
-            <p class="text-danger small mb-0 mr-auto">* 표시항목은 필수입력 항목입니다.</p>
-            <div class="d-flex">
-                <a href="{{ route('HNA_Customer_Councelview_001', $inquiry->id) }}" class="btn btn-sm btn-outline-custom px-4 py-2 mr-2" style="min-width: 80px;">취소</a>
-                <button type="submit" class="btn btn-sm text-white px-4 py-2" style="background-color: #5d401a; border: 1px solid #5d401a; min-width: 80px; font-weight: 500;">답변 수정</button>
-            </div>
-        </div>
-    </form>
+<!-- title -->
+<div class="wrap-tit">
+    <h2 class="tit01">1:1 상담 관리</h2>
 </div>
+
+@if ($errors->any())
+    <div class="alert alert-danger mt-3">
+        {{ $errors->first() }}
+    </div>
+@endif
+
+<!-- Original Inquiry Info (ReadOnly) -->
+<table class="table board-table vertical-table mb-4">
+    <tr>
+        <th>문의 제목</th>
+        <td>{{ $inquiry->title }}</td>
+    </tr>
+    <tr>
+        <th>문의 내용</th>
+        <td>
+            <div style="white-space: pre-wrap; line-height: 1.6;">{{ $inquiry->content }}</div>
+        </td>
+    </tr>
+    <tr>
+        <th>작성자 ID</th>
+        <td>{{ $inquiry->username }}</td>
+    </tr>
+    <tr>
+        <th>이메일</th>
+        <td>{{ $inquiry->email ?? '-' }}</td>
+    </tr>
+    <tr>
+        <th>작성일</th>
+        <td class="text-secondary">{{ $inquiry->created_at->format('Y-m-d H:i') }}</td>
+    </tr>
+</table>
+
+<h3 class="tit3">답변</h3>
+
+<form action="{{ route('admin.inquiry.reply.update', $inquiry->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    <table class="table board-table vertical-table">
+        <tr>
+            <th class="required">답변 제목</th>
+            <td>
+                <div class="wrap-form">
+                    <div class="input-group h30" style="width: 100%">
+                        <input type="text" name="title" class="input-box" style="min-width: 100%" value="{{ old('title', $inquiry->reply->title) }}" required />
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="required">답변</th>
+            <td>
+                <div class="wrap-form">
+                    <textarea name="content" id="editor" class="input-box" required>{{ old('content', $inquiry->reply->content) }}</textarea>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>첨부파일</th>
+            <td>
+                <!-- Existing Files -->
+                @if($inquiry->reply->attachments->count() > 0)
+                    <div class="mb-3">
+                        @foreach($inquiry->reply->attachments as $attachment)
+                            <div class="wrap-file mb-1">
+                                <span class="text-dark">{{ $attachment->original_name }}</span>
+                                <label class="checkbox-item ml-4" style="color: #ff4d4f;">
+                                    <input type="checkbox" name="delete_attachments[]" value="{{ $attachment->id }}" class="checkbox-input" />
+                                    <span class="ml-1">삭제</span>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+                <!-- New File Uploads -->
+                <div id="file-input-container">
+                    <div class="wrap-find-file mb-2 file-input-group">
+                        <div class="input-group h30" style="width: 400px">
+                            <input type="text" class="input-box file-name-display" style="min-width: 100%" readonly placeholder="새 파일을 선택하세요" />
+                        </div>
+                        <label class="btn h30" style="cursor: pointer;">
+                            <span>파일찾기</span>
+                            <input type="file" name="attachments[]" class="file-input-real" style="display: none;">
+                        </label>
+                        <button type="button" class="btn line icon h30 btn-add-file">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 6V18" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M18 12H6" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="text-secondary mt-2" style="font-size: 0.85rem;">
+                    • 첨부파일은 최대 3개까지 등록 가능합니다. (개당 10MB)
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- board button -->
+    <div class="wrap-board-btn">
+        <div class="wrap-btn-left"></div>
+        <div class="wrap-btn-right">
+            <button type="button" class="btn line small" onclick="location.href='{{ route('HNA_Customer_Councelview_001', $inquiry->id) }}'">
+                <span>취소</span>
+            </button>
+            <button type="submit" class="btn primary small">
+                <span>수정</span>
+            </button>
+        </div>
+    </div>
+</form>
+
 @endsection
 
 @section('scripts')
@@ -178,6 +158,12 @@ $(document).ready(function() {
     const existingFilesCount = {{ $inquiry->reply->attachments->count() }};
     const maxFiles = 3;
 
+    // 파일 선택 시 파일명 표시
+    $(document).on('change', '.file-input-real', function() {
+        const fileName = $(this).val().split('\\').pop();
+        $(this).closest('.wrap-find-file').find('.file-name-display').val(fileName);
+    });
+
     container.addEventListener('click', function(e) {
         if (e.target.closest('.btn-add-file')) {
             const currentInputs = container.querySelectorAll('.file-input-group').length;
@@ -186,10 +172,21 @@ $(document).ready(function() {
 
             if (activeFiles < maxFiles) {
                 const newGroup = document.createElement('div');
-                newGroup.className = 'd-flex align-items-center mb-2 file-input-group';
+                newGroup.className = 'wrap-find-file mb-2 file-input-group';
                 newGroup.innerHTML = `
-                    <input type="file" name="attachments[]" class="form-control-file w-auto mr-2">
-                    <button type="button" class="btn btn-sm btn-outline-danger btn-remove-file"><i class="fas fa-minus"></i></button>
+                    <div class="input-group h30" style="width: 400px">
+                        <input type="text" class="input-box file-name-display" style="min-width: 100%" readonly placeholder="새 파일을 선택하세요" />
+                    </div>
+                    <label class="btn h30" style="cursor: pointer;">
+                        <span>파일찾기</span>
+                        <input type="file" name="attachments[]" class="file-input-real" style="display: none;">
+                    </label>
+                    <button type="button" class="btn line icon h30 btn-remove-file">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 19L19 5" stroke="#161616" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
+                            <path d="M5 5L19 19" stroke="#161616" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
+                        </svg>
+                    </button>
                 `;
                 container.appendChild(newGroup);
                 updateAddButtonStatus();
@@ -203,11 +200,7 @@ $(document).ready(function() {
     });
 
     function updateAddButtonStatus() {
-        const currentInputs = container.querySelectorAll('.file-input-group').length;
-        const addBtn = container.querySelector('.btn-add-file');
-        if (addBtn) {
-            // Logic can be more complex if needed, but for now simple disable is fine or just alert
-        }
+        // Option to disable add button if limit reached
     }
 });
 </script>

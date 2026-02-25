@@ -1,172 +1,185 @@
 @extends('layouts.admin')
 
-@section('styles')
-<style>
-    .table-header-custom {
-        background-color: #f8f9fa;
-        font-weight: 500;
-        vertical-align: middle !important;
-        padding-left: 20px !important;
-        border-bottom: 1px solid #dee2e6 !important;
-    }
-    .table-cell-custom {
-        padding: 12px 20px !important;
-        border-bottom: 1px solid #dee2e6 !important;
-    }
-    .btn-outline-custom {
-        background-color: #fff;
-        border: 1px solid #ced4da;
-        color: #333;
-        font-weight: 500;
-    }
-    .btn-outline-custom:hover {
-        background-color: #f8f9fa;
-        color: #000;
-    }
-</style>
-@endsection
-
 @section('content')
-<div class="container-fluid text-black">
-    <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
-        <div style="font-size: 1.5rem; font-weight: 700; color: #000;">• 고인 관리</div>
-    </div>
+<!-- title -->
+<div class="wrap-tit">
+    <h2 class="tit01">고인 관리</h2>
+</div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger border-0 shadow-sm mb-3">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <div class="card border-0">
-        <div class="card-body p-0">
-            <form id="modi-form" action="{{ route('admin.deadmag.update', $dead->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="table-responsive">
-                    <table class="table table-bordered mb-0">
-                        <colgroup>
-                            <col style="width: 180px;">
-                            <col>
-                        </colgroup>
-                        <tbody>
-                            <tr>
-                                <th class="table-header-custom">고인명 <span class="text-danger ml-1">*</span></th>
-                                <td class="table-cell-custom">
-                                    <div class="d-flex align-items-center">
-                                        <span class="mr-2 font-weight-bold" style="color: #5d401a;">故</span>
-                                        <input type="text" name="name" class="form-control form-control-sm" style="width: 200px;" value="{{ old('name', $dead->name) }}" required>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="table-header-custom">구분 <span class="text-danger ml-1">*</span></th>
-                                <td class="table-cell-custom">
-                                    <select name="category" id="category-select" class="form-control form-control-sm" style="width: 200px;" required>
-                                        <option value="">선택해주세요</option>
-                                        <option value="하늘누리관" {{ old('category', $dead->category) == '하늘누리관' ? 'selected' : '' }}>하늘누리관</option>
-                                        <option value="자연장" {{ old('category', $dead->category) == '자연장' ? 'selected' : '' }}>자연장</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="table-header-custom">안치장소 <span class="text-danger ml-1">*</span></th>
-                                <td class="table-cell-custom">
-                                    <div id="location-fields-hall" style="{{ old('category', $dead->category) == '하늘누리관' ? '' : 'display: none;' }}">
-                                        <div class="d-flex align-items-center py-1">
-                                            <span class="mr-2">관 :</span>
-                                            <select name="location_hall" class="form-control form-control-sm mr-3" style="width: 150px;">
-                                                <option value="">선택해주세요</option>
-                                                <option value="하늘" {{ $dead->category == '하늘누리관' && $dead->location_hall == '하늘' ? 'selected' : '' }}>하늘관</option>
-                                                <option value="누리" {{ $dead->category == '하늘누리관' && $dead->location_hall == '누리' ? 'selected' : '' }}>누리관</option>
-                                                <option value="무궁화" {{ $dead->category == '하늘누리관' && $dead->location_hall == '무궁화' ? 'selected' : '' }}>무궁화관</option>
-                                            </select>
-                                            <span class="mr-2">열 :</span>
-                                            <select name="location_row_hall" class="form-control form-control-sm mr-3" style="width: 80px;">
-                                                <option value="">선택</option>
-                                                @for($i=1; $i<=10; $i++)
-                                                    <option value="{{ $i }}" {{ $dead->category == '하늘누리관' && $dead->location_row == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                                @endfor
-                                            </select>
-                                            <span class="mr-2">번호 :</span>
-                                            <input type="text" name="location_num_hall" class="form-control form-control-sm" style="width: 80px;" value="{{ $dead->category == '하늘누리관' ? $dead->location_num : '' }}">
-                                        </div>
-                                    </div>
-
-                                    <div id="location-fields-area" style="{{ old('category', $dead->category) == '자연장' ? '' : 'display: none;' }}">
-                                        <div class="d-flex align-items-center py-1">
-                                            <span class="mr-2">구역 :</span>
-                                            <select name="location_area" class="form-control form-control-sm mr-3" style="width: 150px;">
-                                                <option value="">선택해주세요</option>
-                                                <option value="A" {{ $dead->category == '자연장' && $dead->location_area == 'A' ? 'selected' : '' }}>A구역</option>
-                                                <option value="B" {{ $dead->category == '자연장' && $dead->location_area == 'B' ? 'selected' : '' }}>B구역</option>
-                                                <option value="C" {{ $dead->category == '자연장' && $dead->location_area == 'C' ? 'selected' : '' }}>C구역</option>
-                                            </select>
-                                            <span class="mr-2">열 :</span>
-                                            <select name="location_row_area" class="form-control form-control-sm mr-3" style="width: 80px;">
-                                                <option value="">선택</option>
-                                                @for($i=1; $i<=20; $i++)
-                                                    <option value="{{ $i }}" {{ $dead->category == '자연장' && $dead->location_row == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                                @endfor
-                                            </select>
-                                            <span class="mr-2">번호 :</span>
-                                            <input type="text" name="location_num_area" class="form-control form-control-sm" style="width: 80px;" value="{{ $dead->category == '자연장' ? $dead->location_num : '' }}">
-                                        </div>
-                                    </div>
-
-                                    <input type="hidden" name="location_row" id="final-row" value="{{ $dead->location_row }}">
-                                    <input type="hidden" name="location_num" id="final-num" value="{{ $dead->location_num }}">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="table-header-custom">기일 <span class="text-danger ml-1">*</span></th>
-                                <td class="table-cell-custom">
-                                    <div class="d-flex align-items-center">
-                                        @php
-                                            $death_at = \Carbon\Carbon::parse($dead->death_date);
-                                        @endphp
-                                        <select name="death_year" class="form-control form-control-sm mr-2" style="width: 120px;" required>
-                                            @for($y=date('Y'); $y>=1900; $y--)
-                                                <option value="{{ $y }}" {{ $death_at->year == $y ? 'selected' : '' }}>{{ $y }}년</option>
-                                            @endfor
-                                        </select>
-                                        <select name="death_month" class="form-control form-control-sm mr-2" style="width: 80px;" required>
-                                            @for($m=1; $m<=12; $m++)
-                                                <option value="{{ sprintf('%02d', $m) }}" {{ $death_at->month == $m ? 'selected' : '' }}>{{ $m }}월</option>
-                                            @endfor
-                                        </select>
-                                        <select name="death_day" class="form-control form-control-sm mr-2" style="width: 80px;" required>
-                                            @for($d=1; $d<=31; $d++)
-                                                <option value="{{ sprintf('%02d', $d) }}" {{ $death_at->day == $d ? 'selected' : '' }}>{{ $d }}일</option>
-                                            @endfor
-                                        </select>
-                                        <input type="hidden" name="death_date" id="death-date-full">
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="d-flex justify-content-between align-items-center mt-4 mb-5">
-                    <p class="text-danger small mb-0 mr-auto">* 표시항목은 필수입력 항목입니다.</p>
-                    <div class="d-flex">
-                        <a href="{{ route('HNA_Deadmag_View_001', $dead->id) }}" class="btn btn-sm btn-outline-custom px-4 py-2 mr-2" style="min-width: 80px;">취소</a>
-                        <button type="submit" class="btn btn-sm text-white px-4 py-2" style="background-color: #5d401a; border: 1px solid #5d401a; min-width: 80px; font-weight: 500;">수정</button>
+<form id="modi-form" action="{{ route('admin.deadmag.update', $dead->id) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <!-- table -->
+    <table class="table board-table vertical-table">
+        <tr>
+            <th class="required">고인명</th>
+            <td>
+                <div class="wrap-form">
+                    <div class="bold-before" style="color: #5d401a;">故</div>
+                    <div class="input-group h30">
+                        <input type="text" name="name" class="input-box" style="width: 200px;" value="{{ old('name', $dead->name) }}" required />
                     </div>
                 </div>
-            </form>
+                @error('name')
+                <div class="wrap-form mt-1">
+                    <span class="error-message">
+                        <span class="error-icon">!</span>
+                        {{ $message }}
+                    </span>
+                </div>
+                @enderror
+            </td>
+        </tr>
+        <tr>
+            <th class="required">구분</th>
+            <td>
+                <div class="wrap-form">
+                    <div class="input-group h30">
+                        <div class="select-wrapper">
+                            <select name="category" id="category-select" class="input-box select" style="width: 200px;" required>
+                                <option value="">선택해주세요</option>
+                                <option value="하늘누리관" {{ old('category', $dead->category) == '하늘누리관' ? 'selected' : '' }}>하늘누리관</option>
+                                <option value="자연장" {{ old('category', $dead->category) == '자연장' ? 'selected' : '' }}>자연장</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                @error('category')
+                <div class="wrap-form mt-1">
+                    <span class="error-message">
+                        <span class="error-icon">!</span>
+                        {{ $message }}
+                    </span>
+                </div>
+                @enderror
+            </td>
+        </tr>
+        <tr>
+            <th class="required">안치장소</th>
+            <td>
+                <div id="location-fields-hall" style="{{ old('category', $dead->category) == '하늘누리관' ? '' : 'display: none;' }}">
+                    <div class="wrap-form">
+                        <div class="bold-before">관:</div>
+                        <div class="input-group h30">
+                            <div class="select-wrapper">
+                                <select name="location_hall" class="input-box select" style="width: 150px;">
+                                    <option value="">선택해주세요</option>
+                                    <option value="하늘" {{ $dead->category == '하늘누리관' && $dead->location_hall == '하늘' ? 'selected' : '' }}>하늘관</option>
+                                    <option value="누리" {{ $dead->category == '하늘누리관' && $dead->location_hall == '누리' ? 'selected' : '' }}>누리관</option>
+                                    <option value="무궁화" {{ $dead->category == '하늘누리관' && $dead->location_hall == '무궁화' ? 'selected' : '' }}>무궁화관</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="bold-before ml-8">열:</div>
+                        <div class="input-group h30">
+                            <div class="select-wrapper">
+                                <select name="location_row_hall" class="input-box select" style="width: 80px;">
+                                    <option value="">선택</option>
+                                    @for($i=1; $i<=10; $i++)
+                                        <option value="{{ $i }}" {{ $dead->category == '하늘누리관' && $dead->location_row == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+                        <div class="bold-before ml-8">번호:</div>
+                        <div class="input-group h30">
+                            <input type="text" name="location_num_hall" class="input-box" style="width: 80px;" value="{{ $dead->category == '하늘누리관' ? $dead->location_num : '' }}" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="location-fields-area" style="{{ old('category', $dead->category) == '자연장' ? '' : 'display: none;' }}">
+                    <div class="wrap-form">
+                        <div class="bold-before">구역:</div>
+                        <div class="input-group h30">
+                            <div class="select-wrapper">
+                                <select name="location_area" class="input-box select" style="width: 150px;">
+                                    <option value="">선택해주세요</option>
+                                    <option value="A" {{ $dead->category == '자연장' && $dead->location_area == 'A' ? 'selected' : '' }}>A구역</option>
+                                    <option value="B" {{ $dead->category == '자연장' && $dead->location_area == 'B' ? 'selected' : '' }}>B구역</option>
+                                    <option value="C" {{ $dead->category == '자연장' && $dead->location_area == 'C' ? 'selected' : '' }}>C구역</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="bold-before ml-8">열:</div>
+                        <div class="input-group h30">
+                            <div class="select-wrapper">
+                                <select name="location_row_area" class="input-box select" style="width: 80px;">
+                                    <option value="">선택</option>
+                                    @for($i=1; $i<=20; $i++)
+                                        <option value="{{ $i }}" {{ $dead->category == '자연장' && $dead->location_row == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+                        <div class="bold-before ml-8">번호:</div>
+                        <div class="input-group h30">
+                            <input type="text" name="location_num_area" class="input-box" style="width: 80px;" value="{{ $dead->category == '자연장' ? $dead->location_num : '' }}" />
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="location_row" id="final-row" value="{{ $dead->location_row }}">
+                <input type="hidden" name="location_num" id="final-num" value="{{ $dead->location_num }}">
+            </td>
+        </tr>
+        <tr>
+            <th class="required">기일</th>
+            <td>
+                <div class="wrap-form">
+                    @php
+                        $death_at = \Carbon\Carbon::parse($dead->death_date);
+                    @endphp
+                    <div class="input-group h30">
+                        <div class="select-wrapper">
+                            <select name="death_year" class="input-box select" style="width: 120px;" required>
+                                @for($y=date('Y'); $y>=1900; $y--)
+                                    <option value="{{ $y }}" {{ $death_at->year == $y ? 'selected' : '' }}>{{ $y }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    <div class="bold-after">년</div>
+                    <div class="input-group h30 ml-8">
+                        <div class="select-wrapper">
+                            <select name="death_month" class="input-box select" style="width: 80px;" required>
+                                @for($m=1; $m<=12; $m++)
+                                    <option value="{{ sprintf('%02d', $m) }}" {{ $death_at->month == $m ? 'selected' : '' }}>{{ $m }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    <div class="bold-after">월</div>
+                    <div class="input-group h30 ml-8">
+                        <div class="select-wrapper">
+                            <select name="death_day" class="input-box select" style="width: 80px;" required>
+                                @for($d=1; $d<=31; $d++)
+                                    <option value="{{ sprintf('%02d', $d) }}" {{ $death_at->day == $d ? 'selected' : '' }}>{{ $d }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    <div class="bold-after">일</div>
+                    <input type="hidden" name="death_date" id="death-date-full">
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="wrap-board-btn">
+        <div class="wrap-btn-left">
+            <p class="text-danger small mb-0 mr-auto">* 표시항목은 필수입력 항목입니다.</p>
+        </div>
+        <div class="wrap-btn-right">
+            <button type="button" class="btn line small" onclick="location.href='{{ route('HNA_Deadmag_View_001', $dead->id) }}'">
+                <span>취소</span>
+            </button>
+            <button type="submit" class="btn primary small">
+                <span>수정</span>
+            </button>
         </div>
     </div>
-</div>
-            </form>
-        </div>
-    </div>
-</div>
+</form>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

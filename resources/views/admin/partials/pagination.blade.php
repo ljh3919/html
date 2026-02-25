@@ -1,4 +1,4 @@
-@if ($paginator->hasPages())
+@if ($paginator->total() > 0)
     <div class="wrap-pager">
         {{-- First Page Link --}}
         <a href="{{ $paginator->url(1) }}" class="arrow first {{ $paginator->onFirstPage() ? 'disabled' : '' }}">

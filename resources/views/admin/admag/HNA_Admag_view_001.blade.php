@@ -50,10 +50,10 @@
 <div class="wrap-board-btn">
     <div class="wrap-btn-left"></div>
     <div class="wrap-btn-right">
-        <button type="button" class="btn line" onclick="location.href='{{ route('HNA_Admag_list_001') }}'">
+        <button type="button" class="btn line small" onclick="location.href='{{ route('HNA_Admag_list_001') }}'">
             <span>목록</span>
         </button>
-        <button type="button" class="btn line" onclick="deleteAdmin()">
+        <button type="button" class="btn line small" onclick="deleteAdmin()">
             <span>삭제</span>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@
                 />
             </svg>
         </button>
-        <button type="button" class="btn primary" onclick="location.href='{{ route('HNA_Admag_Modi_001', $admin->id) }}'">
+        <button type="button" class="btn primary small" onclick="location.href='{{ route('HNA_Admag_Modi_001', $admin->id) }}'">
             <span>수정</span>
         </button>
     </div>
