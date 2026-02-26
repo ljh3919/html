@@ -8,26 +8,28 @@
 
 <div class="wrap-table-control">
     <div class="wrap-table-control-left"></div>
-    <form action="{{ route('HNA_Customer_Noticelist_001') }}" method="GET" class="wrap-table-control-right">
-        <div class="input-group h40">
-            <div class="select-wrapper">
-                <select name="search_type" class="input-box select" style="width: 160px">
-                    <option value="">선택하세요</option>
-                    <option value="all" {{ $searchType == 'all' ? 'selected' : '' }}>전체</option>
-                    <option value="title" {{ $searchType == 'title' ? 'selected' : '' }}>제목</option>
-                    <option value="content" {{ $searchType == 'content' ? 'selected' : '' }}>내용</option>
-                </select>
-            </div>
-        </div>
-        <div class="wrap-form">
+    <div class="wrap-table-control-right">
+        <form action="{{ route('HNA_Customer_Noticelist_001') }}" method="GET">
             <div class="input-group h40">
-                <input type="text" name="search_keyword" class="input-box" style="width: 325px" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요" />
+                <div class="select-wrapper">
+                    <select name="search_type" class="input-box select" style="width: 160px">
+                        <option value="">선택하세요</option>
+                        <option value="all" {{ $searchType == 'all' ? 'selected' : '' }}>전체</option>
+                        <option value="title" {{ $searchType == 'title' ? 'selected' : '' }}>제목</option>
+                        <option value="content" {{ $searchType == 'content' ? 'selected' : '' }}>내용</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn primary small">
-            <span>검색</span>
-        </button>
-    </form>
+            <div class="wrap-form mx-8">
+                <div class="input-group h40">
+                    <input type="text" name="search_keyword" class="input-box" style="width: 325px" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요" />
+                </div>
+            </div>
+            <button type="submit" class="btn primary small">
+                <span>검색</span>
+            </button>
+        </form>
+    </div>
 </div>
 
 <!-- table -->

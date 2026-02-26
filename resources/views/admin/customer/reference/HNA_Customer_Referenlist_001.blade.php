@@ -15,14 +15,12 @@
 <div class="wrap-table-control">
     <div class="wrap-table-control-left"></div>
     <div class="wrap-table-control-right">
-        <form action="{{ route('HNA_Customer_Referenlist_001') }}" method="GET" style="display: flex; align-items: center; gap: 8px;">
+        <form action="{{ route('HNA_Customer_Referenlist_001') }}" method="GET">
             <div class="input-group h40">
                 <div class="select-wrapper">
                     <select name="search_type" class="input-box select" style="width: 160px;">
                         <option value="">선택하세요</option>
-                        <option value="all" {{ ($searchType == 'all' || $searchType == 'title_content') ? 'selected' : '' }}>전체</option>
                         <option value="title" {{ $searchType == 'title' ? 'selected' : '' }}>제목</option>
-                        <option value="content" {{ $searchType == 'content' ? 'selected' : '' }}>내용</option>
                         <option value="author" {{ $searchType == 'author' ? 'selected' : '' }}>작성자</option>
                     </select>
                 </div>

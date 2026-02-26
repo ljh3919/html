@@ -22,7 +22,7 @@
             </div>
             <div class="wrap-form mx-8">
                 <div class="input-group h40">
-                    <input type="text" name="search_keyword" class="input-box" style="width: 325px;" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요" />
+                    <input type="text" name="search_keyword" class="input-box" style="width: 325px" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요" />
                 </div>
             </div>
             <button type="submit" class="btn primary small">
