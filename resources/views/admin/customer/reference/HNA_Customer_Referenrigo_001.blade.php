@@ -74,9 +74,7 @@
 
     <!-- board button -->
     <div class="wrap-board-btn">
-        <div class="wrap-btn-left">
-            <p class="text-danger small mb-0">* 표시항목은 필수입력 항목입니다.</p>
-        </div>
+        <div class="text-info">표시항목은 필수입력 항목입니다.</div>
         <div class="wrap-btn-right">
             <button type="button" class="btn line small" onclick="location.href='{{ route('HNA_Customer_Referenlist_001') }}'">
                 <span>취소</span>
