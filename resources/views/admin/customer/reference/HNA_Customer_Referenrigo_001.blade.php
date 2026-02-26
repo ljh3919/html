@@ -65,7 +65,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="text-secondary mt-2" style="font-size: 0.85rem;">
+                <div class="text-info">
                     • 첨부파일은 최대 3개까지 등록 가능합니다. (개당 10MB)
                 </div>
             </td>
