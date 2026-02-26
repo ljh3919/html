@@ -1443,6 +1443,11 @@ html {
   margin-top: 8px;
 }
 
+.wrap-find-file+.wrap-find-file,
+.wrap-file+.wrap-find-file {
+  margin-top: 4px;
+}
+
 .wrap-file {
   display: flex;
   align-items: center;

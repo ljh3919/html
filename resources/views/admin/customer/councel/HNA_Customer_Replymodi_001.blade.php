@@ -195,7 +195,8 @@ $(document).ready(function() {
                         </svg>
                     </button>
                 `;
-                container.appendChild(newGroup);
+                const addBtnRow = e.target.closest('.file-input-group');
+                addBtnRow.after(newGroup);
                 updateAddButtonStatus();
             } else {
                 alert('첨부파일은 최대 3개까지만 등록 가능합니다.');

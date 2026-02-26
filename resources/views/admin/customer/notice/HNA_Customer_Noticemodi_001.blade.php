@@ -177,7 +177,8 @@ $(document).ready(function() {
                         </svg>
                     </button>
                 `;
-                container.appendChild(newGroup);
+                const addBtnRow = e.target.closest('.file-input-group');
+                addBtnRow.after(newGroup);
                 setupFileInputGroup(newGroup); // Setup the new group
                 updateAddButtonStatus();
             } else {
