@@ -76,7 +76,8 @@ class NoticeController extends Controller
             return redirect()->route('HNA_Customer_Noticelist_001')->with('success', '등록되었습니다.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->withErrors(['error' => '등록 중 오류가 발생했습니다.'])->withInput();
+            \Log::error('공지사항 등록 오류: ' . $e->getMessage());
+            return back()->withErrors(['error' => '등록 중 오류가 발생했습니다: ' . $e->getMessage()])->withInput();
         }
     }
 
