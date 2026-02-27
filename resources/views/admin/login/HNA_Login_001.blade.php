@@ -90,7 +90,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.login') }}" method="POST" class="form-login">
+            <form action="{{ route('admin.login') }}" method="POST" class="form-login" id="loginForm">
                 @csrf
                 <div class="form-tit">아이디</div>
                 <div class="input-group @error('username') error @enderror">
@@ -134,13 +134,13 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn primary h56 full" style="margin-top: 32px;">
+                <button type="submit" class="btn primary h56 full" style="margin-top: 32px; position: relative; z-index: 10;" form="loginForm">
                     <span>로그인</span>
                 </button>
             </form>
-            <div class="wrap-find">
-                <button type="button" class="btn empty" data-toggle="modal" data-target="#findIdModal">아이디 찾기</button>
-                <button type="button" class="btn empty" data-toggle="modal" data-target="#findPwModal">비밀번호 찾기</button>
+            <div class="wrap-find" style="position: relative; z-index: 1;">
+                <button type="button" class="btn empty" id="btnFindIdPopup">아이디 찾기</button>
+                <button type="button" class="btn empty" id="btnFindPwPopup">비밀번호 찾기</button>
             </div>
         </div>
         <div class="alert-text">* 하늘누리 관리자만 로그인 가능합니다.</div>
@@ -281,6 +281,17 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
+    // 수동으로 모달 호출하여 Bootstrap 자동 포커스 복원(엔터키 중복실행) 방지
+    $('#btnFindIdPopup').on('click', function(e) {
+        e.preventDefault();
+        $('#findIdModal').modal('show');
+    });
+
+    $('#btnFindPwPopup').on('click', function(e) {
+        e.preventDefault();
+        $('#findPwModal').modal('show');
+    });
+
     // 아이디 찾기 AJAX
     $('#findIdForm').on('submit', function(e) {
         e.preventDefault();
@@ -338,12 +349,19 @@ $(document).ready(function() {
         });
     });
 
-    // 모달 닫힐 때 초기화
+    // 모달 닫힐 때 초기화 및 포커스 뺏기 (엔터키 칠 때 다시 열리는 현상 방지)
     $('.modal').on('hidden.bs.modal', function() {
         $(this).find('form').removeClass('d-none');
         $(this).find('form')[0].reset();
         $(this).find('.alert').addClass('d-none');
         $('#findIdSuccessArea, #findPwSuccessArea').addClass('d-none');
+        
+        // 포커스를 패스워드 입력란이나 아이디 입력란 등 안전한 곳으로 이동시킵니다
+        if ($('input[name="username"]').val() === '') {
+            $('input[name="username"]').focus();
+        } else {
+            $('input[name="password"]').focus();
+        }
     });
 });
 </script>
