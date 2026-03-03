@@ -10,10 +10,33 @@ use App\Http\Controllers\Admin\Customer\ReferenceController;
 use App\Http\Controllers\Admin\PopupController;
 use App\Http\Controllers\Admin\BrochureController;
 use App\Http\Controllers\Front\Customer\InquiryController as FrontInquiryController;
+use App\Http\Controllers\Front\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.index');
+})->name('frontend.index');
+
+// Frontend Routes
+Route::group(['prefix' => 'frontend'], function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('frontend.login');
+    Route::post('/login', [AuthController::class, 'login'])->name('frontend.login.post');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('frontend.logout');
+    Route::get('/findid', function () { return view('frontend.findid'); })->name('frontend.findid');
+    Route::get('/findpassword', function () { return view('frontend.findpassword'); })->name('frontend.findpassword');
+    Route::get('/join01', function () { return view('frontend.join01'); })->name('frontend.join01');
+    Route::get('/join02', function () { return view('frontend.join02'); })->name('frontend.join02');
+    Route::get('/join03', function () { return view('frontend.join03'); })->name('frontend.join03');
+    Route::post('/check-id', [AuthController::class, 'checkDuplicateId'])->name('frontend.check_id');
+    Route::post('/join03', [AuthController::class, 'register'])->name('frontend.register.post');
+    Route::get('/join04', function () { return view('frontend.join04'); })->name('frontend.join04');
+    Route::get('/myinfo', [AuthController::class, 'showMyInfo'])->name('frontend.myinfo');
+    Route::get('/myinfo_edit', [AuthController::class, 'showMyInfoEditForm'])->name('frontend.myinfo_edit');
+    Route::post('/myinfo_edit', [AuthController::class, 'updateMyInfo'])->name('frontend.myinfo_edit.post');
+    Route::get('/change_password', function () { return view('frontend.change_password'); })->name('frontend.change_password');
+    Route::post('/change_password', [AuthController::class, 'changePassword'])->name('frontend.change_password.post');
+    Route::get('/service_terms', function () { return view('frontend.service_terms'); })->name('frontend.service_terms');
+    Route::get('/personal_terms', function () { return view('frontend.personal_terms'); })->name('frontend.personal_terms');
 });
 
 // Admin Routes
