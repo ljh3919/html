@@ -178,7 +178,7 @@
                   class="input-box input-error"
                   placeholder="아이디를 입력하세요"
                 />
-                <button type="button" class="btn small h44">
+                <button type="button" class="btn h44">
                   <span>중복확인</span>
                 </button>
               </div>
@@ -205,16 +205,37 @@
             <div class="input-group">
               <label class="input-label required">휴대전화</label>
               <div class="wrap-form-set">
+                <div class="wrap-cell">
+                  <!-- ToDo: input 내용에 error 발생시 form에 .input-error 추가/삭제 -->
+                  <input type="text" class="input-box input-error" />-
+                  <!-- ToDo: input 내용에 error 발생시 form에 .input-error 추가/삭제 -->
+                  <input type="text" class="input-box input-error" />-
+                  <!-- ToDo: input 내용에 error 발생시 form에 .input-error 추가/삭제 -->
+                  <input type="text" class="input-box input-error" />
+                </div>
+                <button type="button" class="btn h44">
+                  <span>인증번호요청</span>
+                </button>
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label required">인증번호</label>
+              <div class="wrap-form-set">
                 <!-- ToDo: input 내용에 error 발생시 form에 .input-error 추가/삭제 -->
+                <!-- ToDo: 인증번호 입력 활성화/비활성화 disabled 추가/삭제 -->
                 <input
                   type="text"
                   class="input-box input-error"
-                  placeholder="휴대전화 번호를 입력하세요"
+                  placeholder="인증번호를 입력하세요"
+                  disabled
                 />
+                <button type="button" class="btn h44">
+                  <span>인증확인</span>
+                </button>
               </div>
               <span class="error-message">
                 <span class="error-icon">!</span>
-                '-'를 제외한 숫자만 입력이 가능합니다.
+                인증번호가 일치하지 않습니다. 다시 확인해주세요.
               </span>
             </div>
             <div class="input-group">
