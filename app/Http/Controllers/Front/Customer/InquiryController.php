@@ -17,7 +17,7 @@ class InquiryController extends Controller
     {
         $member = Auth::guard('member')->user();
         if (!$member) {
-            return redirect()->route('HN_Login_001');
+            return redirect()->route('front.login');
         }
 
         $searchKeyword = $request->input('search_keyword');
@@ -32,6 +32,10 @@ class InquiryController extends Controller
 
         $inquiries = $query->orderBy('created_at', 'desc')->paginate(10);
 
+        if ($request->ajax()) {
+            return view('front.customer.councel.partials.list', compact('inquiries'))->render();
+        }
+
         return view('front.customer.councel.HN_Customer_Councellist_001', compact('inquiries', 'searchKeyword'));
     }
 
@@ -42,7 +46,7 @@ class InquiryController extends Controller
     {
         $member = Auth::guard('member')->user();
         if (!$member) {
-            return redirect()->route('HN_Login_001');
+            return redirect()->route('front.login');
         }
 
         return view('front.customer.councel.HN_Customer_Councelregi_001', compact('member'));
@@ -74,7 +78,7 @@ class InquiryController extends Controller
             'status' => '미답변',
         ]);
 
-        return redirect()->route('HN_Customer_Councellist_001')->with('success', '등록되었습니다.');
+        return redirect()->route('front.customer.councel.index')->with('success', '등록되었습니다.');
     }
 
     /**
@@ -137,7 +141,7 @@ class InquiryController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect()->route('HN_Customer_Councelview_001', $inquiry->id)->with('success', '수정되었습니다.');
+        return redirect()->route('front.customer.councel.show', $inquiry->id)->with('success', '수정되었습니다.');
     }
 
     /**
@@ -156,6 +160,6 @@ class InquiryController extends Controller
 
         $inquiry->delete();
 
-        return redirect()->route('HN_Customer_Councellist_001')->with('success', '삭제되었습니다.');
+        return redirect()->route('front.customer.councel.index')->with('success', '삭제되었습니다.');
     }
 }

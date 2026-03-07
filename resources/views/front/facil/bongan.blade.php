@@ -1,4 +1,5 @@
 @extends('front.layouts.layout')
+
 @section('content')
-<!-- 오시는 길 -->
+<!-- 시설안내 bongan -->
 @endsection
