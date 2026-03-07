@@ -8,7 +8,7 @@
         @yield('styles')
     </head>
     <body>
-        <div class="container">
+        <div class="container admin">
             <header class="header">
                 <a
                     class="home"
