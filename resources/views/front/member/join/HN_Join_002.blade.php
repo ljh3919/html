@@ -151,7 +151,7 @@
       <div class="input-group" id="smsVerificationGroup">
         <label class="input-label required">인증번호</label>
         <div class="wrap-form-set">
-          <div style="position: relative; flex: 1;">
+          <div style="position: relative; flex: 1; width: 100%;">
             <input
               type="text"
               class="input-box"
