@@ -91,6 +91,8 @@ Route::group(['prefix' => 'front'], function () {
         Route::get('/referen', [App\Http\Controllers\Front\Customer\ReferenceController::class, 'index'])->name('front.customer.referen.index');
         Route::get('/referen/{id}', [App\Http\Controllers\Front\Customer\ReferenceController::class, 'show'])->name('front.customer.referen.show');
         Route::get('/sangjang', function () { return view('front.customer.sangjang'); })->name('front.customer.sangjang');
+        
+        Route::get('/faq', function () { return view('front.customer.HN_Customer_Faq_001'); })->name('front.customer.faq');
     });
 });
 
