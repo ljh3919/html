@@ -85,7 +85,7 @@
       </form>
 
       @if($notices->isEmpty())
-      <div class="wrap-empty">
+      <div class="wrap-empty" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 0;">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="48"
