@@ -184,7 +184,7 @@ class AuthController extends Controller
             \Illuminate\Support\Facades\Log::error('SOLAPI SMS sending failed: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
-                'message' => 'SMS 발송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.'
+                'message' => '발송 오류 원인: ' . $e->getMessage()
             ]);
         }
 
