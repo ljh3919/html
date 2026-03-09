@@ -51,25 +51,27 @@ Route::group(['prefix' => 'front'], function () {
 
     // Facil
     Route::group(['prefix' => 'facil'], function () {
-        Route::get('/bongan', function () { return view('front.facil.bongan'); })->name('front.facil.bongan');
-        Route::get('/naburial', function () { return view('front.facil.naburial'); })->name('front.facil.naburial');
-        Route::get('/aditinal', function () { return view('front.facil.aditinal'); })->name('front.facil.aditinal');
-        Route::get('/surround', function () { return view('front.facil.surround'); })->name('front.facil.surround');
+        Route::get('/bongan', function () { return view('front.facil.HN_Facil_Bongan_001'); })->name('front.facil.bongan');
+        Route::get('/naburial', function () { return view('front.facil.HN_Facil_Naburial_001'); })->name('front.facil.naburial');
+        Route::get('/aditinal', function () { return view('front.facil.HN_Facil_Aditinal_001'); })->name('front.facil.aditinal');
+        Route::get('/surround', function () { return view('front.facil.HN_Facil_Surround_001'); })->name('front.facil.surround');
     });
 
     // DistriInfo
-    Route::group(['prefix' => 'distri_info'], function () {
-        Route::get('/distriproce', function () { return view('front.distri_info.distriproce'); })->name('front.distri_info.distriproce');
-        Route::get('/distriprice', function () { return view('front.distri_info.distriprice'); })->name('front.distri_info.distriprice');
-        Route::get('/applibenefit', function () { return view('front.distri_info.applibenefit'); })->name('front.distri_info.applibenefit');
+    Route::group(['prefix' => 'distriinfo'], function () {
+        Route::get('/distriproce', function () { return view('front.distriinfo.HN_DistriInfo_Distriproce_001'); })->name('front.distriinfo.distriproce');
+        Route::get('/distriprice', function () { return view('front.distriinfo.HN_DistriInfo_Distriprice_001'); })->name('front.distriinfo.distriprice');
+        Route::get('/applibenefit', function () { return view('front.distriinfo.HN_DistriInfo_Applibenefit_001'); })->name('front.distriinfo.applibenefit');
     });
 
     // Memorial
     Route::group(['prefix' => 'memorial'], function () {
-        Route::get('/deadsearch', function () { return view('front.memorial.deadsearch'); })->name('front.memorial.deadsearch');
-        Route::get('/deadresult', function () { return view('front.memorial.deadresult'); })->name('front.memorial.deadresult');
-        Route::get('/letterlist', function () { return view('front.memorial.letterlist'); })->name('front.memorial.letterlist');
-        Route::get('/letterregi', function () { return view('front.memorial.letterregi'); })->name('front.memorial.letterregi');
+        Route::get('/deadsearch', function () { return view('front.memorial.HN_Memorial_Deadsearch_001'); })->name('front.memorial.deadsearch');
+        Route::get('/deadresult', function () { return view('front.memorial.HN_Memorial_Deadresult_001'); })->name('front.memorial.deadresult');
+        Route::get('/letterlist', function () { return view('front.memorial.letter.HN_Memorial_Letterlist_001'); })->name('front.memorial.letterlist');
+        Route::get('/letterview', function () { return view('front.memorial.letter.HN_Memorial_Letterview_001'); })->name('front.memorial.letterview');
+        Route::get('/letterregi', function () { return view('front.memorial.letter.HN_Memorial_Letterregi_001'); })->name('front.memorial.letterregi');
+        Route::get('/lettermodi', function () { return view('front.memorial.letter.HN_Memorial_Lettermodi_001'); })->name('front.memorial.lettermodi');
     });
 
     // Customer

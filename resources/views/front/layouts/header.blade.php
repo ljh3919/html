@@ -53,7 +53,7 @@
       <nav class="lnb">
         <a href="{{ route('front.introdu.greeting') }}" class="item">하늘누리소개</a>
         <a href="{{ route('front.facil.bongan') }}" class="item">시설안내</a>
-        <a href="{{ route('front.distri_info.distriproce') }}" class="item">분양안내</a>
+        <a href="{{ route('front.distriinfo.distriproce') }}" class="item">분양안내</a>
         <a href="{{ route('front.memorial.deadsearch') }}" class="item">사이버추모관</a>
         <a href="{{ route('front.notice.index') }}" class="item">고객센터</a>
       </nav>
