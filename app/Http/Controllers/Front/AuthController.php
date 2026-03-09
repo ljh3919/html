@@ -168,18 +168,34 @@ class AuthController extends Controller
             'expires_at' => $expiresAt
         ]);
 
-        // SOLAPI 실 메시지 발송 연동
+        // SOLAPI 실 메시지 발송 연동 (Laravel Http(cGuzzle/cURL) 사용 - 닷홈 호스팅 대응)
         try {
-            $messageService = new \Nurigo\Solapi\Services\SolapiMessageService(env('SOLAPI_API_KEY'), env('SOLAPI_API_SECRET'));
+            $apiKey = env('SOLAPI_API_KEY');
+            $apiSecret = env('SOLAPI_API_SECRET');
+            $senderKey = env('SOLAPI_SENDER');
+            
+            // Solapi V4 Auth (HMAC-SHA256)
+            $date = date('Y-m-d\TH:i:s.v\Z'); // ISO-8601 with milliseconds
+            $salt = uniqid();
+            $signature = hash_hmac('sha256', $date . $salt, $apiSecret);
+            $authHeader = "HMAC-SHA256 apiKey={$apiKey}, date={$date}, salt={$salt}, signature={$signature}";
 
-            $message = new \Nurigo\Solapi\Models\Message();
-            $message->setTo(preg_replace('/[^0-9]/', '', $phone));
-            $message->setFrom(preg_replace('/[^0-9]/', '', env('SOLAPI_SENDER')));
-            $message->setText("하늘누리 추모공원 가입 인증번호는 [" . $code . "] 입니다.");
+            $response = \Illuminate\Support\Facades\Http::withHeaders([
+                'Authorization' => $authHeader,
+                'Content-Type' => 'application/json'
+            ])->post('https://api.solapi.com/messages/v4/send', [
+                'message' => [
+                    'to' => preg_replace('/[^0-9]/', '', $phone),
+                    'from' => preg_replace('/[^0-9]/', '', $senderKey),
+                    'text' => "하늘누리 추모공원 가입 인증번호는 [" . $code . "] 입니다."
+                ]
+            ]);
 
-            $messageService->send($message);
+            if ($response->failed()) {
+                throw new \Exception('API Response Error: ' . $response->body());
+            }
 
-            \Illuminate\Support\Facades\Log::info("SOLAPI SMS Sent: Phone [{$phone}] Code [{$code}]");
+            \Illuminate\Support\Facades\Log::info("SOLAPI SMS Sent: Phone [{$phone}] Code [{$code}] Response: " . $response->body());
         } catch (\Exception $e) {
             \Illuminate\Support\Facades\Log::error('SOLAPI SMS sending failed: ' . $e->getMessage());
             return response()->json([
