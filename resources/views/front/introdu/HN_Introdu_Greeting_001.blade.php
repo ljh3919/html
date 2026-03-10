@@ -30,6 +30,7 @@
           />
         </svg>
       </a>
+      <a href="#" class="item">하늘누리 소개</a>
       <a href="#" class="item">인사말</a>
     </div>
     <div class="wrap-tit">

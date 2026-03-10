@@ -8,6 +8,7 @@
     <!-- CSS is loaded from Vite or public/dist, check the actual project setup. Using public/css for now -->
     @vite(['resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}" />
     @stack('styles')
   </head>
   <body>
