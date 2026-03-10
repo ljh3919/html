@@ -1,0 +1,39 @@
+/* --- CUSTOM BACKEND ADDITIONS PRESERVED --- */
+
+.file-input-group {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.wrap-table-control .wrap-table-control-right form {
+  display: flex;
+  align-items: center;
+}
+
+.mx-8 {
+  margin-left: 8px !important;
+  margin-right: 8px !important;
+}
+
+/* Layout Correction for Editor and Upload */
+.input-group.no-max-width .input-box {
+  max-width: none !important;
+}
+
+.note-editor.note-airframe,
+.note-editor.note-frame {
+  font-family: inherit;
+}
+
+.alert-danger {
+  color: #842029;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 1rem 1.25rem;
+  border-radius: 0.25rem;
+}
+
+.alert-danger ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}

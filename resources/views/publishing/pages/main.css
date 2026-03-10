@@ -1434,7 +1434,7 @@ html {
 .table.board-table tbody tr td.reply {
   font-weight: 700;
 }
-.table.board-table tbody tr td .btn {
+.table.board-table tbody tr td .btn.send {
   margin: 0 auto;
 }
 .table.board-table.vertical-table tr th,
@@ -1602,7 +1602,7 @@ html {
 }
 .container.admin .btn.primary {
   background-color: #65451e;
-  border-color: #65451E;
+  border-color: #65451e;
 }
 .container .header {
   background-color: #65451e;
@@ -1912,22 +1912,102 @@ html {
   .cont main .wrap-main-img {
     margin: 8rem 0 0;
     height: 400px;
+    max-width: 192rem;
+    width: 100%;
   }
 }
 .cont main .wrap-main-img.notice {
-  background: url("/vite-project/src/img/img_notice.png") no-repeat center;
+  background: url("/img/img_notice.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.counsel {
-  background: url("/vite-project/src/img/img_counsel.png") no-repeat center;
+  background: url("/img/img_counsel.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.archives {
-  background: url("/vite-project/src/img/img_archives.png") no-repeat center;
+  background: url("/img/img_archives.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.greetings {
-  background: url("/vite-project/src/img/img_greetings.png") no-repeat center;
+  background: url("/img/img_greetings.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.story01 {
+  background: url("/img/img_story01.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.story02 {
+  background: url("/img/img_story02.png") no-repeat center;
+  background-size: cover;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-main-img.story02 {
+    height: 640px;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-main-img.story02 + .wrap-story-info {
+    grid-template-columns: auto;
+  }
+}
+.cont main .wrap-main-img.story02 + .wrap-story-info + .wrap-story-info {
+  margin-top: 8rem;
+  margin-bottom: 4rem;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-main-img.story02 + .wrap-story-info + .wrap-story-info {
+    margin-bottom: 13.5rem;
+  }
+}
+.cont main .wrap-main-img.permission01 {
+  background: url("/img/img_permission01.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.permission01 + .wrap-story-info {
+  margin-top: 4rem;
+}
+.cont main .wrap-main-img.permission02 {
+  background: url("/img/img_permission02.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.permission03 {
+  background: url("/img/img_permission03.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.location01 {
+  background: url("/img/img_location01.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.sky-first01 {
+  background: url("/img/img_sky_first01.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.sky-first02 {
+  background: url("/img/img_sky_first02.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.sky-first03 {
+  background: url("/img/img_sky_first03.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.sky-first04 {
+  background: url("/img/img_sky_first04.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.sky-second01 {
+  background: url("/img/img_sky_second01.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.sky-second02 {
+  background: url("/img/img_sky_second02.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.sky-second03 {
+  background: url("/img/img_sky_second03.png") no-repeat center;
+  background-size: cover;
+}
+.cont main .wrap-main-img.sky-second04 {
+  background: url("/img/img_sky_second04.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-greetings {
@@ -2003,6 +2083,248 @@ html {
 @media only screen and (min-width: 1280px) {
   .cont main .wrap-greetings .greeting-last .greeting-text + .greeting-text {
     margin-top: 2rem;
+  }
+}
+.cont main .wrap-story-info {
+  max-width: 192rem;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-story-info {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.cont main .wrap-story-info + .wrap-story-info {
+  margin-top: 0;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-story-info + .wrap-story-info {
+    direction: rtl;
+  }
+}
+.cont main .wrap-story-info + .main {
+  margin-top: 4rem;
+}
+.cont main .wrap-story-info .wrap-info-text {
+  padding: 4rem 1.6rem 2.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-story-info .wrap-info-text {
+    padding: 0 6rem;
+  }
+}
+.cont main .wrap-story-info .wrap-info-text .tit {
+  padding: 0 1.6rem;
+  font-family: "Noto Serif KR";
+  font-size: 28px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #c5a059;
+  text-align: center;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-story-info .wrap-info-text .tit {
+    font-size: 5.6rem;
+  }
+}
+.cont main .wrap-story-info .wrap-info-text .desc {
+  margin-top: 2.4rem;
+  padding: 0 1.6rem;
+  font-family: "Noto Serif KR";
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: #161616;
+  text-align: center;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-story-info .wrap-info-text .desc {
+    margin-top: 8rem;
+    font-size: 2.4rem;
+  }
+}
+.cont main .wrap-story-info .wrap-info-text .desc + .desc {
+  margin-top: 1.8rem;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-story-info .wrap-info-text .desc + .desc {
+    margin-top: 1rem;
+  }
+}
+.cont main .wrap-story-info .wrap-info-text .desc-sub {
+  margin-top: 1.6rem;
+  padding: 0 1.6rem;
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #161616;
+  text-align: center;
+}
+.cont main .wrap-story-info .wrap-info-text .desc-sub + .desc {
+  margin-top: 2.4rem;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-story-info .wrap-info-text .desc-sub + .desc {
+    margin-top: 3rem;
+  }
+}
+.cont main .wrap-story-info .img-part {
+  width: 100%;
+  height: stretch;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-story-info .img-part {
+    max-height: 64rem;
+  }
+}
+.cont main .wrap-info-outter {
+  margin: 4rem 1.6rem;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter {
+    margin: 4rem 0;
+  }
+}
+.cont main .wrap-info-outter .wrap-foundation-info {
+  background-color: #fff;
+  padding: 3.2rem 2.4rem;
+  border: 0.1rem solid #e7e7e7;
+  border-radius: 1.6rem;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info {
+    padding: 6rem 8rem;
+  }
+}
+.cont main .wrap-info-outter .wrap-foundation-info .tit-info {
+  font-family: "Noto Serif KR";
+  font-size: 24px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: #161616;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info .tit-info {
+    font-family: "Noto Serif KR";
+    font-size: 28px;
+    line-height: 1.4;
+    font-weight: 700;
+  }
+}
+.cont main .wrap-info-outter .wrap-foundation-info .tit-info + .wrap-info {
+  margin-top: 4rem;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info .wrap-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 11.6rem;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+.cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list:not(:first-child) {
+  margin-top: 1.8rem;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list:not(:first-child) {
+    margin-top: 1rem;
+  }
+}
+.cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list:not(:first-child).wrap-text {
+  margin-top: 3.2rem;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list:not(:first-child).wrap-text {
+    margin-top: 0;
+  }
+}
+.cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item {
+  display: flex;
+  align-items: center;
+}
+.cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item:not(:first-child) {
+  margin-top: 1.8rem;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item:not(:first-child) {
+    margin-top: 1rem;
+  }
+}
+.cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item .item-tit {
+  flex: 0 0 10rem;
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #161616;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item .item-tit {
+    flex: 0 0 12rem;
+    font-family: "Noto Sans KR";
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+}
+.cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item .item-desc {
+  flex: 1 1 auto;
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #161616;
+  letter-spacing: -2%;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item .item-desc {
+    font-family: "Noto Sans KR";
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+}
+.cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .text {
+  font-family: "Noto Serif KR";
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #65451e;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .text {
+    font-family: "Noto Serif KR";
+    font-size: 28px;
+    line-height: 1.4;
+    font-weight: 700;
+  }
+}
+.cont main .wrap-map {
+  margin: 4rem 1.6rem 0;
+  border: 0.1rem solid #e7e7e7;
+  border-radius: 1.6rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  aspect-ratio: 1/1;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-map {
+    margin: 4rem 0 0;
+    aspect-ratio: 2/1;
+    max-width: 128rem;
   }
 }
 
