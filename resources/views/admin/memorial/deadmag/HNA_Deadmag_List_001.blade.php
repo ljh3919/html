@@ -13,8 +13,8 @@
             <div class="count">{{ number_format($totalCount) }}명</div>
         </div>
     </div>
-    <div class="wrap-table-control-right">
-        <form action="{{ route('HNA_Deadmag_List_001') }}" method="GET">
+    <form action="{{ route('HNA_Deadmag_List_001') }}" method="GET">
+        <div class="wrap-table-control-right">
             <div class="input-group h40">
                 <div class="select-wrapper">
                     <select name="search_type" class="input-box select" style="width: 160px">
@@ -32,8 +32,8 @@
             <button type="submit" class="btn primary small">
                 <span>검색</span>
             </button>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 <!-- table -->

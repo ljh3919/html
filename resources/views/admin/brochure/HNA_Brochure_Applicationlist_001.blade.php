@@ -39,9 +39,9 @@
                 <span>미발송</span>
             </button>
         </div>
-        <div class="wrap-table-control-right">
-            <form action="{{ route('HNA_Brochure_Applicationlist_001') }}" method="GET">
+        <form action="{{ route('HNA_Brochure_Applicationlist_001') }}" method="GET">
             <input type="hidden" name="status_filter" value="{{ $statusFilter }}">
+            <div class="wrap-table-control-right">
             <div class="input-group h40">
                 <div class="select-wrapper">
                     <select name="search_type" class="input-box select" style="width: 160px;">
@@ -59,8 +59,8 @@
             <button type="submit" class="btn primary small">
                 <span>검색</span>
             </button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 
     <!-- table -->
