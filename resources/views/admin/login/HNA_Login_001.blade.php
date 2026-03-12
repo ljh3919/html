@@ -3,85 +3,18 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <style>
-        /* Bootstrap 기본 스타일 오버라이드 및 고정 너비 해제 */
-        body {
-            background-color: #f8f9fa !important; /* 시안의 밝은 배경 또는 기본 레이아웃 유지 */
-            margin: 0;
-            padding: 0;
-        }
-        main {
-            padding: 0 !important;
-        }
-        .container.login {
-            max-width: 100% !important;
-            width: 100% !important;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f8f9fa;
-        }
-        .wrap-login {
-            width: 464px !important;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
         .wrap-login .login-cont {
-            width: 100% !important;
-            box-sizing: border-box !important;
-            background-color: #fff; /* 카드 배경을 흰색으로 설정하여 그림자가 보이게 함 */
-        }
-        /* 체크박스 높이 정밀 조정 (22.79 -> 22.4/22.39) */
-        .checkbox-list {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-        .checkbox-item {
-            margin-bottom: 0 !important; /* Bootstrap label 마진 제거 */
-            line-height: 1.4 !important; /* 16px * 1.4 = 22.4px */
-            display: flex !important;
-            align-items: center !important;
-        }
-        .checkbox-item .checkbox-label {
-            line-height: 22.4px !important; /* 높이를 직접 명시하여 오차 제거 */
-            height: 22.4px !important;
-        }
-        /* Bootstrap Modal 오버라이드 (HNA_Login_002P 스타일 적용) */
-        .modal-content {
-            border-radius: 0 !important;
-            border: none !important;
-            background: transparent !important;
-            box-shadow: none !important;
-        }
-        .modal-body {
-            padding: 0 !important;
-        }
-        .modal-dialog {
-            max-width: 400px !important; /* 사용자 요청: 400px */
-            width: 400px !important;
-            margin: auto !important; /* 중앙 정합성 보강 */
-        }
-        .wrap-popup {
-            max-width: 400px !important;
-            width: 100% !important;
-        }
-        .close {
-            text-shadow: none !important;
-            color: #fff !important;
-            opacity: 1 !important;
+            width: 456px !important;
         }
     </style>
 @endpush
 
 @section('content')
-<div class="container login">
+<div class="container admin login">
     <div class="wrap-login">
         <div class="login-cont">
             <h1 class="tit-login">Login</h1>
-            
+
             @if ($errors->any())
                 <div class="alert-error-container" style="background-color: #fff1f0; border: 1px solid #ffa39e; border-radius: 8px; font-size: 14px; padding: 12px 15px; margin-bottom: 24px; color: #cf1322; font-family: 'Noto Sans KR';">
                     @foreach ($errors->all() as $error)
@@ -90,7 +23,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.login') }}" method="POST" class="form-login" id="loginForm">
+            <form action="{{ route('admin.login') }}" method="POST" class="form-login @if($errors->any()) error @endif" id="loginForm">
                 @csrf
                 <div class="form-tit">아이디</div>
                 <div class="input-group @error('username') error @enderror">
@@ -134,11 +67,11 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn primary h56 full" style="margin-top: 32px; position: relative; z-index: 10;" form="loginForm">
+                <button type="submit" class="btn primary h56 full" form="loginForm">
                     <span>로그인</span>
                 </button>
             </form>
-            <div class="wrap-find" style="position: relative; z-index: 1;">
+            <div class="wrap-find">
                 <button type="button" class="btn empty" id="btnFindIdPopup">아이디 찾기</button>
                 <button type="button" class="btn empty" id="btnFindPwPopup">비밀번호 찾기</button>
             </div>
@@ -298,7 +231,7 @@ $(document).ready(function() {
         const resultDiv = $('#findIdResult');
         const form = $('#findIdForm');
         const successArea = $('#findIdSuccessArea');
-        
+
         resultDiv.addClass('d-none');
 
         $.ajax({
@@ -355,7 +288,7 @@ $(document).ready(function() {
         $(this).find('form')[0].reset();
         $(this).find('.alert').addClass('d-none');
         $('#findIdSuccessArea, #findPwSuccessArea').addClass('d-none');
-        
+
         // 포커스를 패스워드 입력란이나 아이디 입력란 등 안전한 곳으로 이동시킵니다
         if ($('input[name="username"]').val() === '') {
             $('input[name="username"]').focus();
