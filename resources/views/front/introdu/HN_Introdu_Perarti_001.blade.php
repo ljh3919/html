@@ -6,7 +6,7 @@
 <main>
   <div class="main">
     <div class="breadcrumb">
-      <a href="#" class="item">
+      <a href="{{ route('front.index') }}" class="item">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -30,7 +30,7 @@
           />
         </svg>
       </a>
-      <a href="#" class="item">하늘누리 소개</a>
+      <a href="{{ route('front.introdu.greeting') }}" class="item">하늘누리 소개</a>
       <a href="#" class="item">재단/허가 현황</a>
     </div>
     <div class="wrap-tit">
@@ -137,7 +137,6 @@
       </div>
     </div>
   </div>
-  <div class="wrap-info-outter"></div>
   <div class="main">
     <div class="wrap-tit">
       <h2 class="tit2">주요 허가 및 인증</h2>
@@ -145,11 +144,146 @@
     </div>
   </div>
   <div class="wrap-main-img permission02"></div>
+  <div class="wrap-info-outter">
+    <div class="wrap-permission-lists">
+      <div class="item">
+        <div class="tit">재단법인 설립허가</div>
+        <ul class="permission-lists">
+          <li class="permission-item"><strong>허가기관</strong>○○시청</li>
+          <li class="permission-item">
+            <strong>허가번호</strong>제2020-○○호
+          </li>
+          <li class="permission-item">
+            <strong>허가일자</strong>20OO년 ○월 ○일
+          </li>
+          <li class="permission-item space">
+            <strong>근거법령</strong>
+            <p>민법 제32조 (비영리법인의 설립과 허가)</p>
+            <p>장사 등에 관한 법률</p>
+          </li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="tit">봉안시절 설치허가</div>
+        <ul class="permission-lists">
+          <li class="permission-item"><strong>허가기관</strong>○○시청</li>
+          <li class="permission-item">
+            <strong>허가번호</strong>제2020-○○호
+          </li>
+          <li class="permission-item">
+            <strong>허가일자</strong>20OO년 ○월 ○일
+          </li>
+          <li class="permission-item space">
+            <strong>시설규모</strong>
+            <p>봉안당 : OOOOO기</p>
+            <p>수목장 : OOOOO기</p>
+            <p>부지면적 : OO,OOO ㎡</p>
+          </li>
+          <li class="permission-item space">
+            <strong>근거법령</strong>
+            <p>장사 등에 관한 법률 제13</p>
+            <p>조장사시설 설치기준 (시행령 별표3)</p>
+          </li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="tit">자연장지 조성허가</div>
+        <ul class="permission-lists">
+          <li class="permission-item"><strong>허가기관</strong>○○시청</li>
+          <li class="permission-item">
+            <strong>허가번호</strong>제2020-○○호
+          </li>
+          <li class="permission-item">
+            <strong>허가일자</strong>20OO년 ○월 ○일
+          </li>
+          <li class="permission-item space">
+            <strong>시설종류</strong>
+            <p>수목장 (개인/가족)</p>
+            <p>잔디장 (평장형)</p>
+          </li>
+          <li class="permission-item space">
+            <strong>근거법령</strong>
+            <p>장사 등에 관한 법률 제2조 제9호</p>
+            <p>자연장지 조성 기준 (시행령 별표4)</p>
+          </li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="tit">건축물 사용승인</div>
+        <ul class="permission-lists">
+          <li class="permission-item"><strong>허가기관</strong>○○시청</li>
+          <li class="permission-item">
+            <strong>승인번호</strong>건축물대장 ○○○○-○○○○
+          </li>
+          <li class="permission-item">
+            <strong>승인일자</strong>2020년 ○월 ○일
+          </li>
+          <li class="permission-item space">
+            <strong>건축물 정보</strong>
+            <p>구조 : 철근콘크리드조</p>
+            <p>규모 : 지하1층 ~ 지상 3층</p>
+            <p>연면적 : O,OOO ㎡</p>
+          </li>
+          <li class="permission-item space">
+            <strong>근거법령</strong>
+            <p>건축법 제 22조(사용승인)</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <div class="main">
     <div class="wrap-tit">
       <h2 class="tit2">주요 인증 및 등록</h2>
     </div>
   </div>
   <div class="wrap-main-img permission03"></div>
+  <div class="wrap-info-outter">
+    <div class="wrap-certification-lists">
+      <div class="item">
+        <div class="tit">친환경 건축물 인증<br />(그린빌딩)</div>
+        <ul class="certification-lists">
+          <li class="certification-item">
+            한국건설기술연구원 OOOO년 OO월
+          </li>
+          <li class="certification-item">등급 : 우수(2등급)</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="tit">장애인 편의시설 적합 인증</div>
+        <ul class="certification-lists">
+          <li class="certification-item">한국장애인개발원 OOOO년 OO월</li>
+          <li class="certification-item">등급 : 최우수(BF 1등급)</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="tit">소방시설 완비 확인서</div>
+        <ul class="certification-lists">
+          <li class="certification-item">OO소방서 OOOO년 OO월</li>
+          <li class="certification-item">
+            스프링쿨러, 자동화재탐지설비 등
+          </li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="tit">정기 안전검사 적합 판정</div>
+        <ul class="certification-lists">
+          <li class="certification-item">한국시설안전공단 OOOO년 OO월</li>
+          <li class="certification-item">
+            건축물, 전기, 소방, 기스 등 전 분야 적합
+          </li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="tit">위생관리등급 우수 평가</div>
+        <ul class="certification-lists">
+          <li class="certification-item">OO보건소 OOOO년 OO월</li>
+          <li class="certification-item">
+            식당, 카페, 화장실 위생 관리 우수
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </main>
 @endsection
