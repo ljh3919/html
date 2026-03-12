@@ -12,6 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->redirectGuestsTo('/admin/HNA_Login_001');
+        $middleware->validateCsrfTokens(except: [
+            'front/logout',
+            'admin/logout',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
