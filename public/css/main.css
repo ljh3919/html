@@ -1918,27 +1918,27 @@ html {
   }
 }
 .cont main .wrap-main-img.notice {
-  background: url("/img/img_notice.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_notice.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 .cont main .wrap-main-img.counsel {
-  background: url("/img/img_counsel.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_counsel.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 .cont main .wrap-main-img.archives {
-  background: url("/img/img_archives.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_archives.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 .cont main .wrap-main-img.greetings {
-  background: url("/img/img_greetings.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_greetings.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 .cont main .wrap-main-img.story01 {
-  background: url("/img/img_story01.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_story01.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 .cont main .wrap-main-img.story02 {
-  background: url("/img/img_story02.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_story02.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 @media only screen and (min-width: 1280px) {
@@ -1988,27 +1988,27 @@ html {
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-first03 {
-  background: url("/img/img_sky_first03.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_sky_first03.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-first04 {
-  background: url("/img/img_sky_first04.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_sky_first04.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-second01 {
-  background: url("/img/img_sky_second01.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_sky_second01.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-second02 {
-  background: url("/img/img_sky_second02.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_sky_second02.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-second03 {
-  background: url("/img/img_sky_second03.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_sky_second03.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-second04 {
-  background: url("/img/img_sky_second04.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("../src/img/img_sky_second04.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
   background-size: cover;
 }
 .cont main .wrap-greetings {
