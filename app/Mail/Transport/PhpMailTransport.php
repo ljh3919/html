@@ -52,35 +52,34 @@ class PhpMailTransport extends AbstractTransport
             $boundary = "----=_NextPart_" . md5(time());
             $headers[] = "Content-Type: multipart/mixed; boundary=\"$boundary\"";
             
-            $body = "This is a multi-part message in MIME format.\n\n";
+            $body = "This is a multi-part message in MIME format.\r\n\r\n";
             
             // 본문 파트
-            $body .= "--$boundary\n";
+            $body .= "--$boundary\r\n";
             $contentType = $html ? 'text/html' : 'text/plain';
-            $body .= "Content-Type: $contentType; charset=\"utf-8\"\n";
-            $body .= "Content-Transfer-Encoding: 8bit\n\n";
-            $body .= ($html ?: $text) . "\n\n";
+            $body .= "Content-Type: $contentType; charset=\"utf-8\"\r\n";
+            $body .= "Content-Transfer-Encoding: 8bit\r\n\r\n";
+            $body .= ($html ?: $text) . "\r\n\r\n";
             
             // 첨부파일 파트들
             foreach ($attachments as $attachment) {
                 $filename = '=?UTF-8?B?' . base64_encode($attachment->getPreparedHeaders()->get('Content-Disposition')?->getParameter('filename') ?: 'attachment') . '?=';
                 $content = chunk_split(base64_encode($attachment->getBody()));
                 
-                $body .= "--$boundary\n";
-                $body .= "Content-Type: application/octet-stream; name=\"$filename\"\n";
-                $body .= "Content-Description: $filename\n";
-                $body .= "Content-Disposition: attachment; filename=\"$filename\"\n";
-                $body .= "Content-Transfer-Encoding: base64\n\n";
-                $body .= $content . "\n";
+                $body .= "--$boundary\r\n";
+                $body .= "Content-Type: application/octet-stream; name=\"$filename\"\r\n";
+                $body .= "Content-Description: $filename\r\n";
+                $body .= "Content-Disposition: attachment; filename=\"$filename\"\r\n";
+                $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
+                $body .= $content . "\r\n";
             }
             $body .= "--$boundary--";
         }
 
-        $headerString = implode("\n", $headers);
-        $extraParams = "-f" . $senderAddress;
+        $headerString = implode("\r\n", $headers);
 
         // 발송 시도
-        if (!mail($to, $subject, $body, $headerString, $extraParams)) {
+        if (!mail($to, $subject, $body, $headerString)) {
             \Log::error("PHP mail() failed to $to");
             throw new \RuntimeException('PHP mail() 함수를 통한 메일 발송에 실패했습니다.');
         }
