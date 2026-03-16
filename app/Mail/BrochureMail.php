@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -53,6 +54,15 @@ class BrochureMail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        $attachments = [];
+        $filePath = public_path('files/brochure.pdf');
+
+        if (file_exists($filePath)) {
+            $attachments[] = Attachment::fromPath($filePath)
+                ->as('하늘누리_추모공원_브로슈어.pdf')
+                ->withMime('application/pdf');
+        }
+
+        return $attachments;
     }
 }
