@@ -39,8 +39,8 @@ class PhpMailTransport extends AbstractTransport
             $fromAddress = $from[0]->getAddress();
         }
         
-        // 헤더 문자열 생성
-        $headerString = $headers->toString();
+        // 헤더 문자열 생성 (불필요한 공백/줄바꿈 제거)
+        $headerString = trim($headers->toString());
         
         // 본문 데이터 추출
         $body = $email->getBody()->toString();
@@ -51,6 +51,8 @@ class PhpMailTransport extends AbstractTransport
         
         // Dothome 등 일부 호스팅에서는 발신자 주소 고정(-f) 옵션이 필수적인 경우가 많음
         $extraParams = "-f" . $fromAddress;
+
+        \Log::info("Attempting PHP mail() to $to with -f $fromAddress");
 
         // 발송 시도
         if (!mail($to, $subject, $body, $headerString, $extraParams)) {
