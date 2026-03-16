@@ -29,7 +29,7 @@ class PhpMailTransport extends AbstractTransport
         $subject = '=?UTF-8?B?' . base64_encode($email->getSubject()) . '?=';
         
         // Symfony Email 객체로부터 전체 MIME 데이터 생성
-        $messageString = $message->getEnvelope()->getMessage()->toString();
+        $messageString = $message->getMessage()->toString();
         
         // PHP mail() 함수는 To와 Subject를 별도로 받으므로, 헤더에서 이를 분리해야 함
         // 줄바꿈 형식을 정규화 (CRLF or LF)
