@@ -67,6 +67,31 @@
         </div>
       </div>
     </div>
+    <div class="wrap-info-outter">
+      <div class="wrap-foundation-info">
+        <div class="wrap-info">
+          <div class="info-list">
+            <div class="item vertical">
+              <div class="item-tit">대중교통 이용방법</div>
+              <div class="item-desc">
+                <p>
+                  1. 1호선 양주역 2번 출구 길 건너편 정류장(양주역 역전
+                  정류장)
+                </p>
+                <p>
+                  2. 마을 버스 3-3, 일반버스 7, 31, 35 승차하여 “산북동
+                  천주교 묘지” 또는 “샘내고개” 정류장 하차
+                </p>
+                <p>
+                  3. 추모공원까지 도보로 이동하시거나 셔틀버스를
+                  이용해주시기 바랍니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
 @endsection
