@@ -9,6 +9,16 @@
 <form id="modi-form" action="{{ route('admin.memmag.update', $member->id) }}" method="POST">
     @csrf
     @method('PUT')
+    
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+            {{ $errors->first() }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <!-- table -->
     <table class="table board-table vertical-table">
         <tr>

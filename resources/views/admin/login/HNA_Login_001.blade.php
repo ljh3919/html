@@ -16,10 +16,15 @@
             <h1 class="tit-login">Login</h1>
 
             @if ($errors->any())
-                <div class="alert-error-container" style="background-color: #fff1f0; border: 1px solid #ffa39e; border-radius: 8px; font-size: 14px; padding: 12px 15px; margin-bottom: 24px; color: #cf1322; font-family: 'Noto Sans KR';">
-                    @foreach ($errors->all() as $error)
-                        <div style="margin-bottom: 4px;">{{ $error }}</div>
-                    @endforeach
+                <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             @endif
 
