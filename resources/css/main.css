@@ -1436,7 +1436,6 @@ html {
 }
 .table.board-table tbody tr td .btn.send {
   margin: 0 auto;
-  /* ToDo: 260310-17:15*/
 }
 .table.board-table.vertical-table tr th,
 .table.board-table.vertical-table tr td {
@@ -1918,27 +1917,27 @@ html {
   }
 }
 .cont main .wrap-main-img.notice {
-  background: url("/img/img_notice.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_notice.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.counsel {
-  background: url("/img/img_counsel.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_counsel.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.archives {
-  background: url("/img/img_archives.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_archives.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.greetings {
-  background: url("/img/img_greetings.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_greetings.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.story01 {
-  background: url("/img/img_story01.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_story01.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.story02 {
-  background: url("/img/img_story02.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_story02.png") no-repeat center;
   background-size: cover;
 }
 @media only screen and (min-width: 1280px) {
@@ -1961,54 +1960,54 @@ html {
   }
 }
 .cont main .wrap-main-img.permission01 {
-  background: url("../src/img/img_permission01.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_permission01.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.permission01 + .wrap-story-info {
   margin-top: 4rem;
 }
 .cont main .wrap-main-img.permission02 {
-  background: url("../src/img/img_permission02.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_permission02.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.permission03 {
-  background: url("../src/img/img_permission03.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_permission03.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.location01 {
-  background: url("../src/img/img_location01.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_location01.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-first01 {
-  background: url("../src/img/img_sky_first01.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_sky_first01.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-first02 {
-  background: url("../src/img/img_sky_first02.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_sky_first02.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-first03 {
-  background: url("../src/img/img_sky_first03.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_sky_first03.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-first04 {
-  background: url("../src/img/img_sky_first04.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_sky_first04.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-second01 {
-  background: url("../src/img/img_sky_second01.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_sky_second01.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-second02 {
-  background: url("../src/img/img_sky_second02.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_sky_second02.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-second03 {
-  background: url("../src/img/img_sky_second03.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_sky_second03.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-main-img.sky-second04 {
-  background: url("../src/img/img_sky_second04.png") no-repeat center; /* ToDo: 260310-15:38 이미지 경로변경*/
+  background: url("/img/img_sky_second04.png") no-repeat center;
   background-size: cover;
 }
 .cont main .wrap-greetings {
@@ -2185,7 +2184,6 @@ html {
   }
 }
 .cont main .wrap-info-outter {
-  /* ToDo: 260311 - 12:24 변경 */
   margin: 2.4rem 0;
   width: 100%;
   display: flex;
@@ -2198,7 +2196,6 @@ html {
   }
 }
 .cont main .wrap-info-outter .wrap-foundation-info {
-  /* ToDo: 260311 - 12:24 변경 */
   margin: 0 1.6rem;
   max-width: 128rem;
   width: 100%;
@@ -2307,6 +2304,29 @@ html {
     font-weight: 400;
   }
 }
+.cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item.vertical {
+  /* ToDo: 260313 16:40 오시는길쪽 관련 추가 */
+  display: flex;
+  align-items: flex-start;
+  gap: 1.6rem;
+  flex-direction: column;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item.vertical {
+    gap: 2rem;
+  }
+}
+.cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item.vertical .item-tit {
+  flex: 0 0 auto;
+}
+.cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item.vertical .item-desc:not(:first-child) {
+  margin-top: 0.8rem;
+}
+@media only screen and (min-width: 1280px) {
+  .cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .item.vertical .item-desc:not(:first-child) {
+    margin-top: 1rem;
+  }
+}
 .cont main .wrap-info-outter .wrap-foundation-info .wrap-info .info-list .text {
   font-family: "Noto Serif KR";
   font-size: 24px;
@@ -2323,7 +2343,6 @@ html {
   }
 }
 .cont main .wrap-info-outter .wrap-permission-lists {
-  /* ToDo: 260311 - 12:24 추가 */
   max-width: 128rem;
   width: 100%;
   margin: 0 1.6rem;
@@ -2556,8 +2575,8 @@ html {
   border-color: #c5a059;
 }
 .wrap-popup.w400 .wrap-btn .btn:hover {
-  background-color: rgb(189.5946428571, 147.8705357143, 67.8053571429); /* ToDo: 20260311 16:48 */
-  border-color: rgb(189.5946428571, 147.8705357143, 67.8053571429); /* ToDo: 20260311 16:48 */
+  background-color: rgb(189.5946428571, 147.8705357143, 67.8053571429);
+  border-color: rgb(189.5946428571, 147.8705357143, 67.8053571429);
 }
 .wrap-popup .popup-header {
   display: flex;
@@ -2690,7 +2709,7 @@ html {
 .cont .header {
   display: flex;
   justify-content: center;
-  position: relative; /* ToDo: 260311 17:16 추가*/
+  position: relative;
 }
 .cont .header.active {
   background-color: #f4f4f4;
@@ -2700,7 +2719,7 @@ html {
   max-width: 127.2rem;
 }
 .cont .header .wrap-mo {
-  position: relative; /* ToDo: 260311 17:16 추가*/
+  position: relative;
   padding: 1.2rem 1.6rem;
   display: flex;
   justify-content: space-between;
@@ -2719,7 +2738,7 @@ html {
   color: #333333;
 }
 .cont .header .wrap-mo .btn-menu {
-  cursor: pointer; /* ToDo: 260311 17:16 padding 삭제*/
+  cursor: pointer;
   background-color: transparent;
   padding: 0;
   border: 0;
@@ -2727,7 +2746,6 @@ html {
   height: 3.2rem;
 }
 .cont .header .wrap-mo .wrap-menu-mo {
-  /* ToDo: 260311 17:16 추가*/
   position: absolute;
   top: 0;
   left: 0;
@@ -2847,7 +2865,6 @@ html {
   align-items: center;
 }
 .cont .header .nav-pc {
-  /* ToDo: 260311 17:16 추가*/
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -2916,6 +2933,9 @@ html {
   font-weight: 700;
 }
 
+.cont {
+  display: relative; /* 260313 17:30 속성 추가 */
+}
 .cont .footer {
   background-color: #333333;
 }
@@ -3028,6 +3048,87 @@ html {
   .cont .footer .wrap-compony .copyright {
     margin-top: 3rem;
   }
+}
+.cont .footer .wrap-floating {
+  /* 260313 17:30 속성 추가 */
+  position: fixed;
+  bottom: 2.4rem;
+  right: 1.6rem;
+  border-radius: 7rem;
+  border: 0.1rem solid #ccc;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+  padding: 0.8rem;
+  width: 3.8rem;
+  background-color: #fff;
+}
+@media only screen and (min-width: 1280px) {
+  .cont .footer .wrap-floating {
+    width: 4.6rem;
+    bottom: 4rem;
+    right: calc(50% - 3.2rem - 57.2rem);
+  }
+}
+.cont .footer .wrap-floating .float-item {
+  position: relative;
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  background-color: #c5a059;
+  border-radius: 50%;
+}
+@media only screen and (min-width: 1280px) {
+  .cont .footer .wrap-floating .float-item {
+    background-color: #cccccc;
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+  .cont .footer .wrap-floating .float-item svg {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+  .cont .footer .wrap-floating .float-item svg path {
+    fill: #777;
+  }
+  .cont .footer .wrap-floating .float-item:hover {
+    background-color: #c5a059;
+  }
+  .cont .footer .wrap-floating .float-item:hover svg path {
+    fill: #fff;
+  }
+  .cont .footer .wrap-floating .float-item:hover .tooltip {
+    display: block;
+  }
+}
+.cont .footer .wrap-floating .float-item:not(:first-child) {
+  margin-top: 1.6rem;
+}
+.cont .footer .wrap-floating .float-item.kakao {
+  background: url("/img/icon_kakao.svg") no-repeat center/cover #fdde00;
+}
+@media only screen and (min-width: 1280px) {
+  .cont .footer .wrap-floating .float-item.kakao {
+    background: url("/img/icon_kakao_white.svg") no-repeat center/cover #ccc;
+  }
+  .cont .footer .wrap-floating .float-item.kakao:hover {
+    background: url("/img/icon_kakao.svg") no-repeat center/cover #fdde00;
+  }
+}
+.cont .footer .wrap-floating .float-item .tooltip {
+  display: none;
+  border-radius: 0.4rem;
+  position: absolute;
+  top: 50%;
+  right: 6.4rem;
+  transform: translate(0, -50%);
+  padding: 0.4rem 1rem;
+  background-color: #161616;
+  font-family: "Noto Sans KR";
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #ffffff;
+  white-space: nowrap;
+  opacity: 90%;
 }
 
 .wrap-login.customer .form-login .error-message.error-m {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>나의 상담 - modify</title>
+    <title>브로슈어 신청</title>
     <link rel="stylesheet" href="../../dist/main.css" />
   </head>
   <body>
@@ -249,73 +249,33 @@
                 />
               </svg>
             </a>
-            <a href="#" class="item">고객센터</a>
-            <a href="#" class="item">나의 상담</a>
+            <a href="#" class="item">브로슈어 신청</a>
           </div>
           <div class="wrap-tit">
-            <h2 class="tit2">나의 상담</h2>
+            <h2 class="tit2">브로슈어 신청</h2>
             <div class="tit2-sub">
-              “마음을 다해 듣고, 정성을 다해 답하겠습니다.”
-            </div>
-            <div class="desc">
-              말로 다 전하기 어려운 유족분들의 고민과 궁금증을 귀 기울여
-              듣겠습니다. 하늘누리가 가족의 마음으로 함께 고민하고 답변해
-              드립니다.
+              사랑하는 이를 위한 가장 소중한 공간, 직접 만나보시기 전에 먼저
+              마음으로 느껴보세요.<br />하늘누리의 모든 것을 담은 브로슈어를
+              무료로 보내드립니다.
             </div>
           </div>
-          <div class="wrap-login customer horizontal">
-            <div class="login-cont">
-              <form action="" class="form-login counsel">
-                <div class="form-tit">작성자</div>
-                <div class="input-group">
-                  <input
-                    type="text"
-                    class="input-box"
-                    placeholder="작성자 이름을 입력해주세요."
-                  />
+          <div class="wrap-login customer">
+            <div class="login-cont myinfo">
+              <form action="" class="form-login">
+                <div class="wrap-form-item">
+                  <div class="form-tit">이름</div>
+                  <div class="form-desc">홍길동</div>
                 </div>
-                <div class="form-tit">E-Mail</div>
-                <div class="input-group">
-                  <input
-                    type="email"
-                    class="input-box"
-                    placeholder="E-Mail을 입력해주세요."
-                  />
+                <div class="wrap-form-item">
+                  <div class="form-tit form">E-Mail</div>
+                  <div class="form-desc">honggildong@example.com</div>
                 </div>
-                <div class="form-tit required">제목</div>
-                <div class="input-group">
-                  <!-- ToDo: input 내용에 error 발생시 form에 .input-error 추가/삭제 -->
-                  <input
-                    type="text"
-                    class="input-box input-error"
-                    placeholder="제목을 입력해주세요."
-                  />
-                  <span class="error-message error-m">
-                    <span class="error-icon">!</span>
-                    제목을 입력해주세요.
-                  </span>
-                </div>
-                <div class="form-tit required">문의내용</div>
-                <div class="input-group">
-                  <!-- ToDo: input 내용에 error 발생시 form에 .input-error 추가/삭제 -->
-                  <textarea
-                    class="input-box input-box--textarea input-error"
-                    placeholder="문의내용을 입력하세요."
-                  ></textarea>
-                  <span class="error-message error-m">
-                    <span class="error-icon">!</span>
-                    문의내용을 입력해주세요.
-                  </span>
+                <div class="wrap-btn">
+                  <button type="button" class="btn primary h56 full">
+                    <span>브로슈어 신청</span>
+                  </button>
                 </div>
               </form>
-              <div class="wrap-btn">
-                <button type="button" class="btn h56 full">
-                  <span>취소</span>
-                </button>
-                <button type="button" class="btn primary h56 full">
-                  <span>수정</span>
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -406,12 +366,16 @@
       </footer>
     </div>
     <script>
-      document.querySelector('.btn-menu').addEventListener('click', function () {
-        document.querySelector('.wrap-menu-mo').classList.add('active');
-      });
-      document.querySelector('.btn-close').addEventListener('click', function () {
-        document.querySelector('.wrap-menu-mo').classList.remove('active');
-      });
+      document
+        .querySelector(".btn-menu")
+        .addEventListener("click", function () {
+          document.querySelector(".wrap-menu-mo").classList.add("active");
+        });
+      document
+        .querySelector(".btn-close")
+        .addEventListener("click", function () {
+          document.querySelector(".wrap-menu-mo").classList.remove("active");
+        });
 
       (function () {
         const header = document.querySelector("header.header");
@@ -440,5 +404,6 @@
           removeActive();
         });
       })();
-    </script>  </body>
+    </script>
+  </body>
 </html>
