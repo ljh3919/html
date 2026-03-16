@@ -28,25 +28,59 @@ class PhpMailTransport extends AbstractTransport
         // 제목 (UTF-8 인코딩 명시)
         $subject = '=?UTF-8?B?' . base64_encode($email->getSubject()) . '?=';
         
-        // 메일 본문
-        $body = $email->getHtmlBody() ?: $email->getTextBody();
-        $contentType = $email->getHtmlBody() ? 'text/html' : 'text/plain';
-        
-        // 발신자 주소 (Dothome 환경에서는 계정명과 일치하는 메일 주소를 사용하는 것이 필수적일 수 있음)
+        // 발신자 주소
         $from = $email->getFrom();
         $senderAddress = !empty($from) ? $from[0]->getAddress() : config('mail.from.address');
         
-        // 가장 안정적인 최소한의 헤더 구성
+        $html = $email->getHtmlBody();
+        $text = $email->getTextBody();
+        $attachments = $email->getAttachments();
+        
         $headers = [];
-        // $headers[] = "MIME-Version: 1.0";
-        $headers[] = "Content-type: $contentType; charset=utf-8";
         $headers[] = "From: $senderAddress";
         $headers[] = "Reply-To: $senderAddress";
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
+
+        if (empty($attachments)) {
+            // 첨부파일이 없는 경우 기존의 단순 발송 방식 유지
+            $contentType = $html ? 'text/html' : 'text/plain';
+            $headers[] = "Content-type: $contentType; charset=utf-8";
+            $body = $html ?: $text;
+        } else {
+            // 첨부파일이 있는 경우 Multipart/Mixed 구조 생성
+            $boundary = "----=_NextPart_" . md5(time());
+            $headers[] = "Content-Type: multipart/mixed; boundary=\"$boundary\"";
+            
+            $body = "This is a multi-part message in MIME format.\n\n";
+            
+            // 본문 파트
+            $body .= "--$boundary\n";
+            $contentType = $html ? 'text/html' : 'text/plain';
+            $body .= "Content-Type: $contentType; charset=\"utf-8\"\n";
+            $body .= "Content-Transfer-Encoding: 8bit\n\n";
+            $body .= ($html ?: $text) . "\n\n";
+            
+            // 첨부파일 파트들
+            foreach ($attachments as $attachment) {
+                $filename = '=?UTF-8?B?' . base64_encode($attachment->getPreparedHeaders()->get('Content-Disposition')?->getParameter('filename') ?: 'attachment') . '?=';
+                $content = chunk_split(base64_encode($attachment->getBody()));
+                
+                $body .= "--$boundary\n";
+                $body .= "Content-Type: application/octet-stream; name=\"$filename\"\n";
+                $body .= "Content-Description: $filename\n";
+                $body .= "Content-Disposition: attachment; filename=\"$filename\"\n";
+                $body .= "Content-Transfer-Encoding: base64\n\n";
+                $body .= $content . "\n";
+            }
+            $body .= "--$boundary--";
+        }
 
         $headerString = implode("\n", $headers);
+        $extraParams = "-f" . $senderAddress;
 
         // 발송 시도
-        if (!mail($to, $subject, $body, $headerString)) {
+        if (!mail($to, $subject, $body, $headerString, $extraParams)) {
             \Log::error("PHP mail() failed to $to");
             throw new \RuntimeException('PHP mail() 함수를 통한 메일 발송에 실패했습니다.');
         }
