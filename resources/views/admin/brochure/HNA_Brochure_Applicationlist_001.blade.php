@@ -101,7 +101,7 @@
                         </td>
                         <td>
                             @if($app->status == '미발송')
-                                <button type="button" class="btn line small" onclick="sendIndividual({{ $app->id }})">
+                                <button type="button" class="btn line small send" onclick="sendIndividual({{ $app->id }})">
                                     <span>발송</span>
                                 </button>
                             @endif

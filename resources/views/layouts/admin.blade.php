@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{ $title ?? '하늘누리 관리자' }}</title>
         <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/admin-common.css') }}" />
         @yield('styles')
     </head>
     <body>

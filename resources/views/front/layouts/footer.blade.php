@@ -27,4 +27,5 @@
       </div>
     </div>
   </div>
+@include('front.layouts.floating')
 </footer>

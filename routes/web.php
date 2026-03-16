@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Customer\ReferenceController;
 use App\Http\Controllers\Admin\PopupController;
 use App\Http\Controllers\Admin\BrochureController;
 use App\Http\Controllers\Front\Customer\InquiryController as FrontInquiryController;
+use App\Http\Controllers\Front\BrochureController as FrontBrochureController;
 use App\Http\Controllers\Front\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -93,6 +94,8 @@ Route::group(['prefix' => 'front'], function () {
         Route::get('/sangjang', function () { return view('front.customer.sangjang'); })->name('front.customer.sangjang');
         
         Route::get('/faq', function () { return view('front.customer.HN_Customer_Faq_001'); })->name('front.customer.faq');
+        Route::get('/brochure', [FrontBrochureController::class, 'index'])->name('front.brochure');
+        Route::post('/brochure', [FrontBrochureController::class, 'store'])->name('front.brochure.store');
     });
 });
 
