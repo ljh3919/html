@@ -28,28 +28,35 @@ class PhpMailTransport extends AbstractTransport
         // 제목 (UTF-8 인코딩 명시)
         $subject = '=?UTF-8?B?' . base64_encode($email->getSubject()) . '?=';
         
-        // Symfony Email 객체로부터 전체 MIME 데이터 생성
-        $messageString = $message->getMessage()->toString();
+        // 헤더 복제 및 To, Subject 제거 (mail 함수 오동작 방지)
+        $headers = clone $email->getHeaders();
+        $headers->remove('To');
+        $headers->remove('Subject');
         
-        // PHP mail() 함수는 To와 Subject를 별도로 받으므로, 헤더에서 이를 분리해야 함
-        // 줄바꿈 형식을 정규화 (CRLF or LF)
-        $messageString = str_replace("\r\n", "\n", $messageString);
+        // 발신자 주소 추출 (Dothome의 -f 옵션용)
+        $fromAddress = config('mail.from.address');
+        if ($from = $email->getFrom()) {
+            $fromAddress = $from[0]->getAddress();
+        }
         
-        // 헤더와 본문 분리
-        [$headerData, $body] = explode("\n\n", $messageString, 2);
+        // 헤더 문자열 생성
+        $headerString = $headers->toString();
         
-        // To, Subject 헤더 제거 (mail() 함수의 인자로 전달되므로 중복 방지)
-        $headers = explode("\n", $headerData);
-        $filteredHeaders = array_filter($headers, function($header) {
-            $lowerHeader = strtolower($header);
-            return !str_starts_with($lowerHeader, 'to:') && !str_starts_with($lowerHeader, 'subject:');
-        });
+        // 본문 데이터 추출
+        $body = $email->getBody()->toString();
         
-        $headerString = implode("\n", $filteredHeaders);
+        // 닷홈(Linux) 환경의 mail() 함수는 \n을 선호하므로 줄바꿈 통일
+        $headerString = str_replace("\r\n", "\n", $headerString);
+        $body = str_replace("\r\n", "\n", $body);
+        
+        // Dothome 등 일부 호스팅에서는 발신자 주소 고정(-f) 옵션이 필수적인 경우가 많음
+        $extraParams = "-f" . $fromAddress;
 
         // 발송 시도
-        if (!mail($to, $subject, $body, $headerString)) {
-            \Log::error("PHP mail() failed to $to");
+        if (!mail($to, $subject, $body, $headerString, $extraParams)) {
+            \Log::error("PHP mail() failed to $to with params: $extraParams");
+            // 디버깅을 위해 에러 로그 상세화
+            \Log::error("Failed headers: " . $headerString);
             throw new \RuntimeException('PHP mail() 함수를 통한 메일 발송에 실패했습니다.');
         }
     }
