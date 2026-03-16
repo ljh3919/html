@@ -339,6 +339,14 @@
             </main>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // 알림창 닫기 버튼 기능
+                $(document).on('click', '[data-dismiss="alert"]', function() {
+                    $(this).closest('.alert').fadeOut();
+                });
+            });
+        </script>
         @yield('scripts')
     </body>
 </html>
