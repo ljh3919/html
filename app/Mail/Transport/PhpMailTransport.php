@@ -28,22 +28,24 @@ class PhpMailTransport extends AbstractTransport
         // 제목 (UTF-8 인코딩 명시)
         $subject = '=?UTF-8?B?' . base64_encode($email->getSubject()) . '?=';
         
-        // 메일 본문
-        $body = $email->getHtmlBody() ?: $email->getTextBody();
-        $contentType = $email->getHtmlBody() ? 'text/html' : 'text/plain';
+        // Symfony Email 객체로부터 전체 MIME 데이터 생성
+        $messageString = $message->getEnvelope()->getMessage()->toString();
         
-        // 발신자 주소 (Dothome 환경에서는 계정명과 일치하는 메일 주소를 사용하는 것이 필수적일 수 있음)
-        $from = $email->getFrom();
-        $senderAddress = !empty($from) ? $from[0]->getAddress() : config('mail.from.address');
+        // PHP mail() 함수는 To와 Subject를 별도로 받으므로, 헤더에서 이를 분리해야 함
+        // 줄바꿈 형식을 정규화 (CRLF or LF)
+        $messageString = str_replace("\r\n", "\n", $messageString);
         
-        // 가장 안정적인 최소한의 헤더 구성
-        $headers = [];
-        // $headers[] = "MIME-Version: 1.0";
-        $headers[] = "Content-type: $contentType; charset=utf-8";
-        $headers[] = "From: $senderAddress";
-        $headers[] = "Reply-To: $senderAddress";
-
-        $headerString = implode("\n", $headers);
+        // 헤더와 본문 분리
+        [$headerData, $body] = explode("\n\n", $messageString, 2);
+        
+        // To, Subject 헤더 제거 (mail() 함수의 인자로 전달되므로 중복 방지)
+        $headers = explode("\n", $headerData);
+        $filteredHeaders = array_filter($headers, function($header) {
+            $lowerHeader = strtolower($header);
+            return !str_starts_with($lowerHeader, 'to:') && !str_starts_with($lowerHeader, 'subject:');
+        });
+        
+        $headerString = implode("\n", $filteredHeaders);
 
         // 발송 시도
         if (!mail($to, $subject, $body, $headerString)) {

@@ -54,9 +54,7 @@ class BrochureController extends Controller
         foreach ($applications as $application) {
             // 실제 이메일 발송
             try {
-                \Log::info('Attempting to send brochure email to: ' . $application->email);
                 Mail::to($application->email)->send(new BrochureMail($application->name));
-                \Log::info('Brochure email sent successfully to: ' . $application->email);
                 
                 $application->update([
                     'status' => '발송완료',
