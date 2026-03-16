@@ -56,11 +56,17 @@ class BrochureMail extends Mailable
     {
         $attachments = [];
         $filePath = public_path('files/brochure.pdf');
+        
+        \Log::info('BrochureMail Attachment path: ' . $filePath);
+        \Log::info('BrochureMail Attachment existence: ' . (file_exists($filePath) ? 'Yes' : 'No'));
 
         if (file_exists($filePath)) {
             $attachments[] = Attachment::fromPath($filePath)
                 ->as('하늘누리_추모공원_브로슈어.pdf')
                 ->withMime('application/pdf');
+            \Log::info('BrochureMail: Attachment added to mail object');
+        } else {
+            \Log::warning('BrochureMail: Attachment file not found at ' . $filePath);
         }
 
         return $attachments;
