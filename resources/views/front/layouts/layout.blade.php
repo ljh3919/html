@@ -39,6 +39,9 @@
             <div class="wrap-cont">
               <p id="commonPopupMessage"></p>
               <div class="wrap-btn">
+                <button type="button" class="btn line popup-cancel-btn" id="commonPopupCancel" style="display: none;">
+                  <span>취소</span>
+                </button>
                 <button type="button" class="btn primary popup-confirm-btn" id="commonPopupConfirm">
                   <span>확인</span>
                 </button>
@@ -55,6 +58,7 @@
         title: null,
         message: null,
         confirmBtn: null,
+        cancelBtn: null,
         closeBtn: null,
         callback: null,
 
@@ -63,10 +67,14 @@
           this.title = document.getElementById('commonPopupTitle');
           this.message = document.getElementById('commonPopupMessage');
           this.confirmBtn = document.getElementById('commonPopupConfirm');
+          this.cancelBtn = document.getElementById('commonPopupCancel');
           this.closeBtn = document.getElementById('commonPopupClose');
 
           if (this.confirmBtn) {
             this.confirmBtn.addEventListener('click', () => this.hide(true));
+          }
+          if (this.cancelBtn) {
+            this.cancelBtn.addEventListener('click', () => this.hide(false));
           }
           if (this.closeBtn) {
             this.closeBtn.addEventListener('click', () => this.hide(false));
@@ -78,10 +86,11 @@
           }
         },
 
-        show: function(title, message, callback) {
+        show: function(title, message, callback, showCancel = false) {
           if (!this.overlay) this.init();
           if (this.title) this.title.textContent = title || '알림';
           if (this.message) this.message.innerHTML = message;
+          if (this.cancelBtn) this.cancelBtn.style.display = showCancel ? 'block' : 'none';
           this.callback = callback;
           this.overlay.style.display = 'flex';
           setTimeout(() => {

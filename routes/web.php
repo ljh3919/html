@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\BrochureController;
 use App\Http\Controllers\Front\Customer\InquiryController as FrontInquiryController;
 use App\Http\Controllers\Front\BrochureController as FrontBrochureController;
 use App\Http\Controllers\Front\AuthController;
+use App\Http\Controllers\Front\Memorial\DeadController as FrontDeadController;
+use App\Http\Controllers\Front\Memorial\LetterController as FrontLetterController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -67,12 +69,15 @@ Route::group(['prefix' => 'front'], function () {
 
     // Memorial
     Route::group(['prefix' => 'memorial'], function () {
-        Route::get('/deadsearch', function () { return view('front.memorial.HN_Memorial_Deadsearch_001'); })->name('front.memorial.deadsearch');
-        Route::get('/deadresult', function () { return view('front.memorial.HN_Memorial_Deadresult_001'); })->name('front.memorial.deadresult');
-        Route::get('/letterlist', function () { return view('front.memorial.letter.HN_Memorial_Letterlist_001'); })->name('front.memorial.letterlist');
-        Route::get('/letterview', function () { return view('front.memorial.letter.HN_Memorial_Letterview_001'); })->name('front.memorial.letterview');
-        Route::get('/letterregi', function () { return view('front.memorial.letter.HN_Memorial_Letterregi_001'); })->name('front.memorial.letterregi');
-        Route::get('/lettermodi', function () { return view('front.memorial.letter.HN_Memorial_Lettermodi_001'); })->name('front.memorial.lettermodi');
+        Route::get('/deadsearch', [FrontDeadController::class, 'index'])->name('front.memorial.deadsearch');
+        Route::get('/deadresult', [FrontDeadController::class, 'search'])->name('front.memorial.deadresult');
+        Route::get('/letterlist', [FrontLetterController::class, 'index'])->name('front.memorial.letterlist');
+        Route::get('/letterview/{id}', [FrontLetterController::class, 'show'])->name('front.memorial.letterview');
+        Route::get('/letteredit/{id}', [FrontLetterController::class, 'edit'])->name('front.memorial.letteredit');
+        Route::put('/letterupdate/{id}', [FrontLetterController::class, 'update'])->name('front.memorial.letterupdate');
+        Route::delete('/letterdelete/{id}', [FrontLetterController::class, 'destroy'])->name('front.memorial.letterdelete');
+        Route::get('/letterregi', [FrontLetterController::class, 'create'])->name('front.memorial.letterregi');
+        Route::post('/letterstore', [FrontLetterController::class, 'store'])->name('front.memorial.letterstore');
     });
 
     // Customer

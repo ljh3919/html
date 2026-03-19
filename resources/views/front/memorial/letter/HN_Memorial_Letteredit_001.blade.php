@@ -1,6 +1,6 @@
 @extends('front.layouts.layout')
 
-@section('title', '사이버추모관 - 하늘편지 작성')
+@section('title', '사이버추모관 - 하늘편지 수정')
 
 @section('content')
 <main>
@@ -34,25 +34,22 @@
       <a href="#" class="item">하늘편지</a>
     </div>
     <div class="wrap-tit">
-      <h2 class="tit2">하늘편지</h2>
+      <h2 class="tit2">하늘편지 수정</h2>
       <div class="tit2-sub">"닿지 못한 마음이 하늘에 닿는 곳"</div>
       <div class="desc">
-        @if(request()->dead_name)
-          <strong>故 {{ request()->dead_name }}님</strong>께 차마 다 전하지 못한 말들이 구름을 타고 그리운 이에게 전해집니다.<br>
-        @else
-          차마 다 전하지 못한 말들이 구름을 타고 그리운 이에게 전해집니다.
-        @endif
+        차마 다 전하지 못한 말들이 구름을 타고 그리운 이에게 전해집니다.
         당신의 진심을 담아 따뜻한 안부를 띄워주세요.
       </div>
     </div>
     <div class="wrap-login customer horizontal">
       <div class="login-cont myinfo">
-        <form id="letterForm" action="{{ route('front.memorial.letterstore') }}" method="POST" class="form-login counsel">
+        <form id="letterForm" action="{{ route('front.memorial.letterupdate', $letter->id) }}" method="POST" class="form-login counsel">
           @csrf
+          @method('PUT')
           <div class="form-tit">비밀글</div>
           <div class="input-group">
             <label class="checkbox-item">
-              <input type="checkbox" name="is_private" value="1" class="checkbox-input client" />
+              <input type="checkbox" name="is_private" value="1" class="checkbox-input client" {{ $letter->is_private === 'Y' ? 'checked' : '' }} />
             </label>
           </div>
           <div class="form-tit required">작성자</div>
@@ -63,6 +60,7 @@
               id="author_description"
               class="input-box"
               placeholder="작성자를 입력해주세요."
+              value="{{ $letter->author_description }}"
               maxlength="50"
             />
           </div>
@@ -73,19 +71,19 @@
               id="content"
               class="input-box input-box--textarea"
               placeholder="내용을 입력하세요."
-              maxlength="600"
-            ></textarea>
+              maxlength="1000"
+            >{{ $letter->content }}</textarea>
             <div class="message">
               * 600자 이내로 작성하실 수 있습니다.
             </div>
           </div>
         </form>
           <div class="wrap-btn">
-            <button type="button" onclick="location.href='{{ route('front.memorial.letterlist') }}'" class="btn h56 full">
-              <span>목록</span>
+            <button type="button" onclick="location.href='{{ route('front.memorial.letterview', $letter->id) }}'" class="btn h56 full">
+              <span>취소</span>
             </button>
             <button type="submit" form="letterForm" class="btn primary h56 full">
-              <span>작성완료</span>
+              <span>수정완료</span>
             </button>
           </div>
       </div>
