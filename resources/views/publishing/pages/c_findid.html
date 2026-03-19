@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -384,8 +384,9 @@
       </footer>
     </div>
     <div class="popup-overlay" id="popupOverlay" aria-hidden="true">
+      <!-- ToDo: 260318 16:00 .client 추가 -->
       <div
-        class="wrap-popup w400"
+        class="wrap-popup w400 client"
         role="dialog"
         aria-labelledby="popupPreviewTitle"
       >
@@ -428,20 +429,78 @@
         </div>
       </div>
     </div>
+    <!-- ToDo: 260318 14:50 popup 추가 -->
+    <div class="popup-overlay" id="popupOverlayCall" aria-hidden="true">
+      <div
+        class="wrap-popup w400 client"
+        role="dialog"
+        aria-labelledby="popupPreviewTitleCall"
+      >
+        <div class="popup-header">
+          <h3 class="popup-tit" id="popupPreviewTitleCall">전화상담</h3>
+          <button
+            type="button"
+            class="popup-close"
+            id="popupCloseCall"
+            aria-label="닫기"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+            >
+              <path
+                d="M4 28L28 4"
+                stroke="white"
+                stroke-width="2"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+              />
+              <path
+                d="M4 4L28 28"
+                stroke="white"
+                stroke-width="2"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="popup-body">
+          <div class="popup-cont" id="popupContentCall">
+            <div class="wrap-cont"></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script>
+      <!-- ToDo: 260318 14:50 popup script 추가 -->
       (function () {
-        var findIdBtn = document.getElementById("popupFindIdBtn");
-        var findPasswordBtn = document.getElementById("popupFindPasswordBtn");
-        var overlay = document.getElementById("popupOverlay");
-        var closeBtn = document.getElementById("popupClose");
-        var contentEl = document.getElementById("popupContent");
-        var titleEl = document.getElementById("popupPreviewTitle");
+        const findIdBtn = document.getElementById("popupFindIdBtn");
+        const findPasswordBtn = document.getElementById("popupFindPasswordBtn");
+        const overlay = document.getElementById("popupOverlay");
+        const closeBtn = document.getElementById("popupClose");
+        const contentEl = document.getElementById("popupContent");
+        const titleEl = document.getElementById("popupPreviewTitle");
 
-        var findIdContent =
+        const callOverlay = document.getElementById("popupOverlayCall");
+        const callCloseBtn = document.getElementById("popupCloseCall");
+        const callContentEl = document.getElementById("popupContentCall");
+        const callTitleEl = document.getElementById("popupPreviewTitleCall");
+
+        const findIdContent =
           '<div class="wrap-cont">' +
           // ToDo: 비밀번호 발송 후. 아이디 뒷 끝자리 2자리는 ** 마스킹 처리 할것
           "<p>등록된  doobu0**@naver.com 로</p>" +
           "<p>ID를 발송하였습니다.</p>" +
+          '<div class="wrap-btn"><button type="button" class="btn primary popup-confirm-btn"><span>확인</span></button></div>' +
+          "</div>";
+
+        const callConsultContent =
+          '<div class="wrap-cont">' +
+          "<p>전화 상담 031-9999-9999</p>" +
           '<div class="wrap-btn"><button type="button" class="btn primary popup-confirm-btn"><span>확인</span></button></div>' +
           "</div>";
 
@@ -461,6 +520,34 @@
           overlay.setAttribute("aria-hidden", "true");
         }
 
+        function openCallPopup() {
+          if (!callOverlay || !callContentEl) return;
+          if (callTitleEl) callTitleEl.textContent = "전화상담";
+          callContentEl.innerHTML = callConsultContent;
+          callOverlay.classList.add("active");
+          callOverlay.setAttribute("aria-hidden", "false");
+        }
+
+        function closeCallPopup() {
+          if (!callOverlay) return;
+          callOverlay.classList.remove("active");
+          callOverlay.setAttribute("aria-hidden", "true");
+        }
+
+        const isMobileResolution = () =>
+          window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
+
+        const floatingCallLink = document.querySelector(
+          ".wrap-floating a.float-item[href^='tel:']",
+        );
+        if (floatingCallLink) {
+          floatingCallLink.addEventListener("click", function (e) {
+            if (isMobileResolution()) return;
+            e.preventDefault();
+            openCallPopup();
+          });
+        }
+
         if (findIdBtn)
           findIdBtn.addEventListener("click", function () {
             openPopup("findId");
@@ -474,6 +561,15 @@
           if (e.target === overlay) closePopup();
           if (e.target.closest(".popup-confirm-btn")) closePopup();
         });
+
+        if (callCloseBtn)
+          callCloseBtn.addEventListener("click", closeCallPopup);
+        if (callOverlay) {
+          callOverlay.addEventListener("click", function (e) {
+            if (e.target === callOverlay) closeCallPopup();
+            if (e.target.closest(".popup-confirm-btn")) closeCallPopup();
+          });
+        }
       })();
     </script>
     <script>
