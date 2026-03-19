@@ -4121,33 +4121,8 @@ html {
 .cont main .main .result-list .result-body .result-item.active .item-top .icon {
   transform: rotate(180deg);
 }
-.cont main .main .result-list .result-empty {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-  gap: 0.8rem;
-  padding: 4rem 0;
-}
-@media only screen and (min-width: 1280px) {
-  .cont main .main .result-list .result-empty {
-    padding: 12rem 0;
-  }
-}
-.cont main .main .result-list .result-empty .empty-text {
-  font-family: "Noto Sans KR";
-  font-size: 16px;
-  line-height: 1.4;
-  font-weight: 400;
-  color: #333333;
-}
-@media only screen and (min-width: 1280px) {
-  .cont main .main .result-list .result-empty .empty-text {
-    font-family: "Noto Sans KR";
-    font-size: 18px;
-    line-height: 1.5;
-    font-weight: 400;
-  }
+.cont main .main .result-list {
+  /* ToDo: 260319 14:30 .result-empty 삭제 */
 }
 .cont main .main .result-list .wrap-btn-more {
   margin: 4rem 0;
@@ -4306,34 +4281,16 @@ html {
 }
 @media only screen and (min-width: 1280px) {
   .wrap-notice-lists {
-    padding: 8rem 2rem 12rem;
+    /* ToDo: 260319 14:00 속성 변경 */
+    padding: 4rem 2rem 12rem;
     /* 260317 10:00 추가 */
   }
   .wrap-notice-lists:has(.wrap-counsel-top.letter) {
     padding: 4rem 2rem;
   }
 }
-.wrap-notice-lists .wrap-empty {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-.wrap-notice-lists .wrap-empty .text-empty {
-  font-family: "Noto Sans KR";
-  font-size: 16px;
-  line-height: 1.4;
-  font-weight: 500;
-  color: #333333;
-}
-@media only screen and (min-width: 1280px) {
-  .wrap-notice-lists .wrap-empty .text-empty {
-    font-family: "Noto Sans KR";
-    font-size: 18px;
-    line-height: 1.5;
-    font-weight: 500;
-  }
+.wrap-notice-lists {
+  /* ToDo: 260319 14:00 class 삭제 */
 }
 @media only screen and (min-width: 1280px) {
   .wrap-notice-lists .wrap-search {
@@ -4345,6 +4302,17 @@ html {
 @media only screen and (min-width: 1280px) {
   .wrap-notice-lists .wrap-search .search-group {
     width: 32.8rem;
+  }
+}
+.wrap-notice-lists .wrap-search {
+  /* ToDo: 260319 15:20 class 변경 */
+}
+.wrap-notice-lists .wrap-search + .result-empty {
+  margin-top: 2.4rem;
+}
+@media only screen and (min-width: 1280px) {
+  .wrap-notice-lists .wrap-search + .result-empty {
+    margin-top: 2rem;
   }
 }
 .wrap-notice-lists .notice-lists {
@@ -5114,6 +5082,38 @@ html {
   color: #fff;
   background-color: #c5a059;
   border-color: #c5a059;
+}
+
+/* ToDo: 260319 15:20 class 변경 */
+.result-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.8rem;
+  background-color: #fff;
+  padding: 4rem 0;
+  border-bottom: 0.1rem solid #cccccc;
+}
+@media only screen and (min-width: 1280px) {
+  .result-empty {
+    padding: 16rem 0;
+  }
+}
+.result-empty .empty-text {
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #333333;
+}
+@media only screen and (min-width: 1280px) {
+  .result-empty .empty-text {
+    font-family: "Noto Sans KR";
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
