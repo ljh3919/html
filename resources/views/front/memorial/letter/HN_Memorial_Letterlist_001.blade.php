@@ -147,7 +147,7 @@
             fill="#4A4A4A"
           />
         </svg>
-        <div class="empty-text">작성된 하늘편지가 없습니다.</div>
+        <div class="empty-text">@if($search) 검색결과가 없습니다. @else 작성된 하늘편지가 없습니다. @endif</div>
       </div>
       @endif
       @if($letters->hasMorePages())

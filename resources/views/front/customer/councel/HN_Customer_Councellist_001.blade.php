@@ -65,9 +65,37 @@
         </div>
       </div>
       
+      @if($inquiries->isEmpty())
+      <div class="result-empty">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="48"
+          height="48"
+          viewBox="0 0 48 48"
+          fill="none"
+        >
+          <path
+            d="M23.9958 43.9909C35.0392 43.9909 43.9917 35.0385 43.9917 23.9951C43.9917 12.9517 35.0392 3.99927 23.9958 3.99927C12.9524 3.99927 4 12.9517 4 23.9951C4 35.0385 12.9524 43.9909 23.9958 43.9909Z"
+            stroke="#4A4A4A"
+            stroke-width="2"
+            stroke-miterlimit="10"
+          />
+          <path
+            d="M23.9951 33.6929C23.1451 33.6929 22.4551 34.3829 22.4551 35.2329C22.4551 36.0829 23.1451 36.7729 23.9951 36.7729C24.8451 36.7729 25.5351 36.0829 25.5351 35.2329C25.5351 34.3829 24.8451 33.6929 23.9951 33.6929Z"
+            fill="#4A4A4A"
+          />
+          <path
+            d="M26.2038 12.4774C26.2038 11.2576 25.224 10.2778 24.0042 10.2778C22.7845 10.2778 21.8047 11.2576 21.8047 12.4774C21.8047 12.5274 21.8147 12.5674 21.8147 12.6173H21.8047L22.9045 30.2337H22.9145C22.9445 30.8136 23.4144 31.2735 24.0042 31.2735C24.5941 31.2735 25.064 30.8136 25.094 30.2337H25.104L26.2038 12.6173H26.1938C26.1938 12.6173 26.2038 12.5274 26.2038 12.4774Z"
+            fill="#4A4A4A"
+          />
+        </svg>
+        <div class="empty-text">@if(request('search_keyword')) 검색결과가 없습니다. @else 등록된 상담 내역이 없습니다. @endif</div>
+      </div>
+      @else
       <ul class="notice-lists" id="counsel-list-container">
         @include('front.customer.councel.partials.list', ['inquiries' => $inquiries])
       </ul>
+      @endif
       
       @if($inquiries->hasMorePages())
       <div class="wrap-btn mt-10" id="load-more-container" style="display: flex; justify-content: center; margin-top: 40px;">

@@ -86,7 +86,7 @@
       </div>
 
       @if($references->isEmpty())
-      <div class="wrap-empty" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 0;">
+      <div class="result-empty">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="48"
@@ -109,7 +109,7 @@
             fill="#4A4A4A"
           />
         </svg>
-        <div class="text-empty" style="margin-top: 16px; font-size: 18px; color: #4A4A4A;">등록된 자료가 없습니다.</div>
+        <div class="empty-text">@if(request('search_keyword')) 검색결과가 없습니다. @else 등록된 자료가 없습니다. @endif</div>
       </div>
       @else
       <ul class="notice-lists" id="reference-list">

@@ -1,4 +1,4 @@
-@forelse($inquiries as $inquiry)
+@foreach($inquiries as $inquiry)
   <li class="item">
     <a href="{{ route('front.customer.councel.show', $inquiry->id) }}" class="link">
       <div class="num">{{ $inquiries->total() - ($inquiries->currentPage() - 1) * $inquiries->perPage() - $loop->index }}</div>
@@ -31,8 +31,4 @@
     </a>
   </li>
   @endif
-@empty
-  <li class="item" style="justify-content: center; padding: 40px 0;">
-    등록된 상담 내역이 없습니다.
-  </li>
-@endforelse
+@endforeach

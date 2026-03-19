@@ -46,8 +46,8 @@
   </div>
   <div class="main">
     <div class="wrap-notice-lists">
-      <form action="{{ route('front.notice.index') }}" method="GET">
-        <div class="wrap-search">
+      <div class="wrap-search">
+        <form action="{{ route('front.notice.index') }}" method="GET">
           <div class="search-group">
             <input
               type="text"
@@ -81,11 +81,11 @@
               </svg>
             </button>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
 
       @if($notices->isEmpty())
-      <div class="wrap-empty">
+      <div class="result-empty">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="48"
@@ -108,7 +108,7 @@
             fill="#4A4A4A"
           />
         </svg>
-        <div class="text-empty">@if(request('search')) 검색결과가 없습니다. @else 등록된 공지사항이 없습니다. @endif</div>
+        <div class="empty-text">@if(request('search')) 검색결과가 없습니다. @else 등록된 공지사항이 없습니다. @endif</div>
       </div>
       @else
       <ul class="notice-lists" id="notice-list-container">
