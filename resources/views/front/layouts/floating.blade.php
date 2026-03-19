@@ -51,3 +51,68 @@
     <div class="tooltip">맨 위로</div>
   </a>
 </div>
+
+<!-- 전화상담 모달창 (PC 전용) -->
+<div class="popup-overlay" id="popupOverlayCall" aria-hidden="true">
+  <div class="wrap-popup w400 client" role="dialog" aria-labelledby="popupPreviewTitleCall">
+    <div class="popup-header">
+      <h3 class="popup-tit" id="popupPreviewTitleCall">전화상담</h3>
+      <button type="button" class="popup-close" id="popupCloseCall" aria-label="닫기">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M4 28L28 4" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" />
+          <path d="M4 4L28 28" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <div class="popup-body">
+      <div class="popup-cont" id="popupContentCall">
+        <div class="wrap-cont">
+          <p>전화 상담 031-9999-9999</p>
+          <div class="wrap-btn">
+            <button type="button" class="btn primary popup-confirm-btn"><span>확인</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const callOverlay = document.getElementById("popupOverlayCall");
+    const callCloseBtn = document.getElementById("popupCloseCall");
+    const callContentEl = document.getElementById("popupContentCall");
+    const callTitleEl = document.getElementById("popupPreviewTitleCall");
+
+    if (!callOverlay) return;
+
+    function openCallPopup() {
+      callOverlay.classList.add("active");
+      callOverlay.setAttribute("aria-hidden", "false");
+    }
+
+    function closeCallPopup() {
+      callOverlay.classList.remove("active");
+      callOverlay.setAttribute("aria-hidden", "true");
+    }
+
+    const isMobileResolution = () =>
+      window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
+
+    const floatingCallLink = document.querySelector(".wrap-floating a.float-item[href^='tel:']");
+    if (floatingCallLink) {
+      floatingCallLink.addEventListener("click", function (e) {
+        if (isMobileResolution()) return;
+        e.preventDefault();
+        openCallPopup();
+      });
+    }
+
+    if (callCloseBtn) callCloseBtn.addEventListener("click", closeCallPopup);
+    callOverlay.addEventListener("click", function (e) {
+      if (e.target === callOverlay) closeCallPopup();
+      if (e.target.closest(".popup-confirm-btn")) closeCallPopup();
+    });
+  })();
+</script>
+
