@@ -265,32 +265,6 @@
         </div>
         <div class="main">
           <div class="wrap-notice-lists">
-            <!-- ToDo: 검색 결과 없을때 아래 .wrap-empty 활성화 -->
-            <div class="wrap-empty">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="0 0 48 48"
-                fill="none"
-              >
-                <path
-                  d="M23.9958 43.9909C35.0392 43.9909 43.9917 35.0385 43.9917 23.9951C43.9917 12.9517 35.0392 3.99927 23.9958 3.99927C12.9524 3.99927 4 12.9517 4 23.9951C4 35.0385 12.9524 43.9909 23.9958 43.9909Z"
-                  stroke="#4A4A4A"
-                  stroke-width="2"
-                  stroke-miterlimit="10"
-                />
-                <path
-                  d="M23.9951 33.6929C23.1451 33.6929 22.4551 34.3829 22.4551 35.2329C22.4551 36.0829 23.1451 36.7729 23.9951 36.7729C24.8451 36.7729 25.5351 36.0829 25.5351 35.2329C25.5351 34.3829 24.8451 33.6929 23.9951 33.6929Z"
-                  fill="#4A4A4A"
-                />
-                <path
-                  d="M26.2038 12.4774C26.2038 11.2576 25.224 10.2778 24.0042 10.2778C22.7845 10.2778 21.8047 11.2576 21.8047 12.4774C21.8047 12.5274 21.8147 12.5674 21.8147 12.6173H21.8047L22.9045 30.2337H22.9145C22.9445 30.8136 23.4144 31.2735 24.0042 31.2735C24.5941 31.2735 25.064 30.8136 25.094 30.2337H25.104L26.2038 12.6173H26.1938C26.1938 12.6173 26.2038 12.5274 26.2038 12.4774Z"
-                  fill="#4A4A4A"
-                />
-              </svg>
-              <div class="text-empty">검색결과가 없습니다.</div>
-            </div>
             <div class="wrap-search">
               <div class="search-group">
                 <input
@@ -323,6 +297,33 @@
                   </svg>
                 </button>
               </div>
+            </div>
+            <!-- ToDo: 260319 15:20 검색 결과 없을때 아래 .result-empty 활성화 -->
+            <div class="result-empty">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+              >
+                <path
+                  d="M23.9958 43.9909C35.0392 43.9909 43.9917 35.0385 43.9917 23.9951C43.9917 12.9517 35.0392 3.99927 23.9958 3.99927C12.9524 3.99927 4 12.9517 4 23.9951C4 35.0385 12.9524 43.9909 23.9958 43.9909Z"
+                  stroke="#4A4A4A"
+                  stroke-width="2"
+                  stroke-miterlimit="10"
+                />
+                <path
+                  d="M23.9951 33.6929C23.1451 33.6929 22.4551 34.3829 22.4551 35.2329C22.4551 36.0829 23.1451 36.7729 23.9951 36.7729C24.8451 36.7729 25.5351 36.0829 25.5351 35.2329C25.5351 34.3829 24.8451 33.6929 23.9951 33.6929Z"
+                  fill="#4A4A4A"
+                />
+                <path
+                  d="M26.2038 12.4774C26.2038 11.2576 25.224 10.2778 24.0042 10.2778C22.7845 10.2778 21.8047 11.2576 21.8047 12.4774C21.8047 12.5274 21.8147 12.5674 21.8147 12.6173H21.8047L22.9045 30.2337H22.9145C22.9445 30.8136 23.4144 31.2735 24.0042 31.2735C24.5941 31.2735 25.064 30.8136 25.094 30.2337H25.104L26.2038 12.6173H26.1938C26.1938 12.6173 26.2038 12.5274 26.2038 12.4774Z"
+                  fill="#4A4A4A"
+                />
+              </svg>
+              <!-- ToDo: 260319 15:20 class명 변경 -->
+              <div class="empty-text">검색결과가 없습니다.</div>
             </div>
             <ul class="notice-lists">
               <li class="item">
@@ -520,12 +521,16 @@
       </footer>
     </div>
     <script>
-      document.querySelector('.btn-menu').addEventListener('click', function () {
-        document.querySelector('.wrap-menu-mo').classList.add('active');
-      });
-      document.querySelector('.btn-close').addEventListener('click', function () {
-        document.querySelector('.wrap-menu-mo').classList.remove('active');
-      });
+      document
+        .querySelector(".btn-menu")
+        .addEventListener("click", function () {
+          document.querySelector(".wrap-menu-mo").classList.add("active");
+        });
+      document
+        .querySelector(".btn-close")
+        .addEventListener("click", function () {
+          document.querySelector(".wrap-menu-mo").classList.remove("active");
+        });
 
       (function () {
         const header = document.querySelector("header.header");
@@ -554,5 +559,6 @@
           removeActive();
         });
       })();
-    </script>  </body>
+    </script>
+  </body>
 </html>
