@@ -101,7 +101,7 @@
       <div class="checkbox-group">
         <div class="checkbox-list">
           <label class="checkbox-item w24">
-            <input type="checkbox" class="checkbox-input" id="termsService" />
+            <input type="checkbox" class="checkbox-input client" id="termsService" />
             <span class="checkbox-label">동의합니다.</span>
           </label>
         </div>
@@ -235,7 +235,7 @@
       <div class="checkbox-group">
         <div class="checkbox-list">
           <label class="checkbox-item w24">
-            <input type="checkbox" class="checkbox-input" id="termsPrivacy" />
+            <input type="checkbox" class="checkbox-input client" id="termsPrivacy" />
             <span class="checkbox-label">동의합니다.</span>
           </label>
         </div>
@@ -332,7 +332,7 @@
     <div class="checkbox-group all-agree">
       <div class="checkbox-list">
         <label class="checkbox-item w24">
-          <input type="checkbox" class="checkbox-input" id="termsAll" />
+          <input type="checkbox" class="checkbox-input client" id="termsAll" />
           <span class="checkbox-label">모든 약관에 동의합니다.</span>
         </label>
       </div>

@@ -15,16 +15,16 @@
     <div class="cont">
       <!-- Header -->
       @include('front.layouts.header')
-      
+
       <!-- Body -->
       @yield('content')
-      
+
       <!-- Footer -->
       @include('front.layouts.footer')
     </div>
 
     <div class="popup-overlay" id="commonPopupOverlay" aria-hidden="true" style="display: none;">
-      <div class="wrap-popup w400" role="dialog" aria-labelledby="commonPopupTitle">
+      <div class="wrap-popup w400 client" role="dialog" aria-labelledby="commonPopupTitle">
         <div class="popup-header">
           <h3 class="popup-tit" id="commonPopupTitle">알림</h3>
           <button type="button" class="popup-close" id="commonPopupClose" aria-label="닫기">
@@ -103,7 +103,7 @@
           }
         }
       };
-      
+
       document.addEventListener('DOMContentLoaded', () => commonModal.init());
     </script>
     @stack('scripts')
