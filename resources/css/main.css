@@ -1762,6 +1762,10 @@ html {
 .cont main .main {
   width: 100%;
   max-width: 127.2rem;
+  /* ToDo: 260326 15:40 style 추가 */
+}
+.cont main .main.intro {
+  max-width: inherit;
 }
 .cont main .main .breadcrumb {
   margin: 2.5rem 1.6rem 0;
@@ -1908,7 +1912,6 @@ html {
   margin: 4rem 0 0;
   width: 100%;
   height: 37.5rem;
-  /* ToDo: 260318 9:00 속성 추가 */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1920,9 +1923,6 @@ html {
     max-width: 192rem;
     width: 100%;
   }
-}
-.cont main .wrap-main-img {
-  /* ToDo: 260318 9:00 속성 추가 */
 }
 .cont main .wrap-main-img span {
   font-family: "Noto Serif KR";
@@ -2035,9 +2035,6 @@ html {
   background: url("/img/img_sky_second04.png") no-repeat center;
   background-size: cover;
 }
-.cont main .wrap-main-img {
-  /* ToDo: 260318 9:00 class 추가 */
-}
 .cont main .wrap-main-img.outside01 {
   background: url("/img/img_outside01.png") no-repeat center;
   background-size: cover;
@@ -2065,7 +2062,6 @@ html {
 .cont main .wrap-main-img.outside02 {
   background: url("/img/img_outside02.png") no-repeat center;
   background-size: cover;
-  /* ToDo: 260318 15:30 class명 변경  */
 }
 @media only screen and (min-width: 1280px) {
   .cont main .wrap-main-img.outside02 + .wrap-story-info {
@@ -2081,9 +2077,6 @@ html {
   .cont main .wrap-main-img.outside02 + .wrap-story-info + .wrap-story-info {
     margin-bottom: 13.5rem;
   }
-}
-.cont main .wrap-main-img {
-  /* ToDo: 260318 15:30 class 추가  */
 }
 .cont main .wrap-main-img.internal01 {
   background: url("/img/img_facilities_internal01.png") no-repeat center;
@@ -2210,16 +2203,10 @@ html {
     direction: rtl;
   }
 }
-.cont main .wrap-story-info + .wrap-story-info {
-  /* ToDo: 260318 15:30 class 추가  */
-}
 @media only screen and (min-width: 1280px) {
   .cont main .wrap-story-info + .wrap-story-info + .wrap-story-info {
     direction: ltr;
   }
-}
-.cont main .wrap-story-info {
-  /* ToDo: 260318 15:30 class 추가  */
 }
 .cont main .wrap-story-info.thin {
   margin-top: 4rem;
@@ -2343,9 +2330,6 @@ html {
     max-height: 64rem;
   }
 }
-.cont main .wrap-story-info {
-  /* ToDo: 260318 15:30 class 추가  */
-}
 .cont main .wrap-story-info .wrap-img-part {
   display: flex;
   justify-content: center;
@@ -2377,9 +2361,6 @@ html {
     line-height: 1.4;
     font-weight: 700;
   }
-}
-.cont main {
-  /* ToDo: 260318 15:30 class 추가  */
 }
 .cont main .tit-section {
   margin-top: 2.4rem;
@@ -2559,9 +2540,6 @@ html {
     font-weight: 700;
   }
 }
-.cont main .wrap-info-outter .wrap-foundation-info {
-  /* ToDo: 260318 15:30 class 추가  */
-}
 .cont main .wrap-info-outter .wrap-foundation-info .tit {
   font-family: "Noto Serif KR";
   font-size: 24px;
@@ -2572,9 +2550,6 @@ html {
 }
 .cont main .wrap-info-outter .wrap-foundation-info .tit + .wrap-facilities-info {
   margin-top: 2rem;
-}
-.cont main .wrap-info-outter .wrap-foundation-info {
-  /* ToDo: 260318 15:30 class 추가  */
 }
 .cont main .wrap-info-outter .wrap-foundation-info .wrap-facilities-info {
   direction: ltr;
@@ -3415,6 +3390,466 @@ html {
   opacity: 90%;
 }
 
+/* ToDo: 260326 15:40 main style 추가 */
+section {
+  box-sizing: border-box;
+}
+section.part01 {
+  background: url(/img/img_main01.png) no-repeat center center;
+  background-size: cover;
+  padding: 12.2rem 1.6rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5.6rem;
+  min-height: 71.2rem;
+}
+@media only screen and (min-width: 1280px) {
+  section.part01 {
+    min-height: 99rem;
+    gap: 4.9rem;
+    padding: 18rem 0 23.7rem;
+  }
+}
+section.part01 .part01-tit01 {
+  font-family: "Noto Serif KR";
+  font-size: 56px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -2%;
+}
+@media only screen and (min-width: 1280px) {
+  section.part01 .part01-tit01 {
+    font-size: 8.8rem;
+  }
+}
+section.part01 .part01-tit02 {
+  font-family: "Noto Serif KR";
+  font-size: 28px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -2%;
+}
+@media only screen and (min-width: 1280px) {
+  section.part01 .part01-tit02 {
+    font-size: 5.6rem;
+  }
+}
+section.part01 .part01-tit03 {
+  padding: 0 7rem;
+  font-family: "Noto Serif KR";
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -2%;
+}
+@media only screen and (min-width: 1280px) {
+  section.part01 .part01-tit03 {
+    font-size: 2.8rem;
+  }
+}
+section.part02, section.part04 {
+  background: url(/img/img_main02.png) no-repeat center center rgba(0, 0, 0, 0.8);
+  background-size: cover;
+  background-blend-mode: multiply;
+  padding: 6.4rem 1.6rem 7rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 7.6rem;
+  min-height: 80rem;
+}
+@media only screen and (min-width: 1280px) {
+  section.part02, section.part04 {
+    min-height: 100rem;
+    gap: 10.7rem;
+    padding: 14rem 0 12.4rem;
+  }
+}
+section.part02 .part02-tit01,
+section.part02 .part04-tit01, section.part04 .part02-tit01,
+section.part04 .part04-tit01 {
+  font-family: "Noto Serif KR";
+  font-size: 36px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -2%;
+}
+@media only screen and (min-width: 1280px) {
+  section.part02 .part02-tit01,
+  section.part02 .part04-tit01, section.part04 .part02-tit01,
+  section.part04 .part04-tit01 {
+    font-size: 5.6rem;
+  }
+}
+section.part02 .part02-tit02, section.part04 .part02-tit02 {
+  font-family: "Noto Serif KR";
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -2%;
+  position: relative;
+}
+@media only screen and (min-width: 1280px) {
+  section.part02 .part02-tit02, section.part04 .part02-tit02 {
+    font-size: 2.4rem;
+  }
+}
+section.part02 .part02-tit02 .tit02:not(:first-child), section.part04 .part02-tit02 .tit02:not(:first-child) {
+  margin-top: 2.4rem;
+}
+@media only screen and (min-width: 1280px) {
+  section.part02 .part02-tit02 .tit02:not(:first-child), section.part04 .part02-tit02 .tit02:not(:first-child) {
+    margin-top: 6rem;
+  }
+}
+section.part02 .part02-tit02::before, section.part04 .part02-tit02::before {
+  content: "“";
+  position: absolute;
+  font-size: 4rem;
+  top: -5rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media only screen and (min-width: 1280px) {
+  section.part02 .part02-tit02::before, section.part04 .part02-tit02::before {
+    font-size: 6rem;
+    top: -7rem;
+  }
+}
+section.part02 .part02-tit02::after, section.part04 .part02-tit02::after {
+  content: "”";
+  position: absolute;
+  font-size: 4rem;
+  bottom: -8rem;
+  right: 50%;
+  transform: translateX(50%);
+}
+@media only screen and (min-width: 1280px) {
+  section.part02 .part02-tit02::after, section.part04 .part02-tit02::after {
+    font-size: 6rem;
+    bottom: -10rem;
+  }
+}
+section.part02 .wrap-links, section.part04 .wrap-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+  flex-direction: column;
+}
+@media only screen and (min-width: 1280px) {
+  section.part02 .wrap-links, section.part04 .wrap-links {
+    margin-top: 12rem;
+    flex-direction: row;
+    gap: 4rem;
+  }
+}
+section.part02 .wrap-links .links-item, section.part04 .wrap-links .links-item {
+  cursor: pointer;
+  width: 100%;
+  background-color: transparent;
+  padding: 0.8rem 4.4rem 0.8rem 2.4rem;
+  box-sizing: border-box;
+  border: 0.1rem solid #cccccc;
+  border-radius: 5.4rem;
+}
+@media only screen and (min-width: 1280px) {
+  section.part02 .wrap-links .links-item, section.part04 .wrap-links .links-item {
+    padding: 1.5rem 8.2rem 1.5rem 6.2rem;
+    width: 27rem;
+  }
+}
+section.part02 .wrap-links .links-item span, section.part04 .wrap-links .links-item span {
+  display: inline-block;
+  position: relative;
+  font-family: "Noto Sans KR";
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #fff;
+}
+section.part02 .wrap-links .links-item span::after, section.part04 .wrap-links .links-item span::after {
+  content: "";
+  position: absolute;
+  right: -1.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.8rem;
+  height: 0.8rem;
+  border-top: 0.2rem solid #cccccc;
+  border-right: 0.2rem solid #cccccc;
+  transform: translateY(-50%) rotate(45deg);
+}
+section.part03 .wrap-story-info {
+  margin: 0 auto;
+}
+section.part03 .wrap-story-info .wrap-sky-part-info {
+  direction: ltr;
+  padding: 4rem 2.1rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+section.part03 .wrap-story-info .wrap-sky-part-info .sky-part-info-tit {
+  font-family: "Noto Serif KR";
+  font-size: 32px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #c5a059;
+}
+@media only screen and (min-width: 1280px) {
+  section.part03 .wrap-story-info .wrap-sky-part-info .sky-part-info-tit {
+    font-size: 5.6rem;
+  }
+}
+section.part03 .wrap-story-info .wrap-sky-part-info .sky-part-info-tit span {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: "Noto Serif KR";
+  font-size: 24px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #4a4a4a;
+}
+section.part03 .wrap-story-info .wrap-sky-part-info .sky-part-info-tit-sub {
+  margin-top: 3.2rem;
+  font-family: "Noto Serif KR";
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: #161616;
+}
+@media only screen and (min-width: 1280px) {
+  section.part03 .wrap-story-info .wrap-sky-part-info .sky-part-info-tit-sub {
+    margin-top: 8rem;
+    font-size: 2.4rem;
+  }
+}
+section.part03 .wrap-story-info .wrap-sky-part-info .sky-part-info-desc {
+  margin-top: 2rem;
+  font-family: "Noto Sans KR";
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #161616;
+}
+@media only screen and (min-width: 1280px) {
+  section.part03 .wrap-story-info .wrap-sky-part-info .sky-part-info-desc {
+    font-size: 1.8rem;
+  }
+}
+section.part03 .sky-par-link {
+  cursor: pointer;
+  width: 19.1rem;
+  background-color: transparent;
+  margin: 3.2rem auto 0;
+  padding: 0.8rem 4.4rem 0.8rem 2.4rem;
+  box-sizing: border-box;
+  border: 0.1rem solid #cccccc;
+  border-radius: 5.4rem;
+}
+@media only screen and (min-width: 1280px) {
+  section.part03 .sky-par-link {
+    margin: 8rem auto 0;
+    padding: 1.5rem 8.2rem 1.5rem 6.2rem;
+    width: 27rem;
+  }
+}
+section.part03 .sky-par-link span {
+  display: inline-block;
+  position: relative;
+  font-family: "Noto Sans KR";
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #333333;
+}
+section.part03 .sky-par-link span::after {
+  content: "";
+  position: absolute;
+  right: -1.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.8rem;
+  height: 0.8rem;
+  border-top: 0.2rem solid #cccccc;
+  border-right: 0.2rem solid #cccccc;
+  transform: translateY(-50%) rotate(45deg);
+}
+section.part04 {
+  min-height: 145rem;
+  gap: 4rem;
+}
+section.part04 .part04-tit02 {
+  font-family: "Noto Serif KR";
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -2%;
+  position: relative;
+}
+@media only screen and (min-width: 1280px) {
+  section.part04 .part04-tit02 {
+    font-size: 2.4rem;
+  }
+}
+section.part04 .wrap-product {
+  box-sizing: border-box;
+  width: 100%;
+}
+@media only screen and (min-width: 1280px) {
+  section.part04 .wrap-product {
+    margin-top: 16rem;
+  }
+}
+section.part04 .wrap-product .product-tit {
+  font-family: "Noto Serif KR";
+  font-size: 28px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #fff;
+}
+@media only screen and (min-width: 1280px) {
+  section.part04 .wrap-product .product-tit {
+    font-size: 4.2rem;
+  }
+}
+section.part04 .wrap-product .wrap-product-lists {
+  list-style-type: none;
+  width: 100%;
+  margin: 2.4rem auto 0;
+  padding: 0;
+}
+@media only screen and (min-width: 1280px) {
+  section.part04 .wrap-product .wrap-product-lists {
+    margin: 4rem auto 0;
+    width: 128rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.4rem;
+  }
+}
+section.part04 .wrap-product .wrap-product-lists .product-item:not(:first-child) {
+  margin-top: 2.4rem;
+}
+section.part04 .wrap-product .wrap-product-lists .product-item .item-link .product-img {
+  display: block;
+  width: 100%;
+}
+section.part04 .wrap-product .wrap-product-lists .product-item .item-link .product-name {
+  display: block;
+  margin-top: 1.2rem;
+  font-family: "Noto Sans KR";
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #fff;
+}
+@media only screen and (min-width: 1280px) {
+  section.part04 .wrap-product .wrap-product-lists .product-item .item-link .product-name {
+    margin-top: 2rem;
+    font-size: 2.4rem;
+  }
+}
+section.part05 {
+  padding: 4rem 1.6rem;
+  min-height: 64rem;
+  text-align: center;
+}
+@media only screen and (min-width: 1280px) {
+  section.part05 {
+    padding: 14rem 2rem 12rem;
+    min-height: 91rem;
+  }
+}
+section.part05 .part05-tit01 {
+  font-family: "Noto Serif KR";
+  font-size: 36px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #161616;
+}
+@media only screen and (min-width: 1280px) {
+  section.part05 .part05-tit01 {
+    font-size: 5.6rem;
+  }
+}
+section.part05 .part05-tit02 {
+  margin-top: 4rem;
+  font-family: "Noto Serif KR";
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #161616;
+}
+@media only screen and (min-width: 1280px) {
+  section.part05 .part05-tit02 {
+    font-size: 2.4rem;
+  }
+}
+section.part05 .wrap-company {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 4rem;
+}
+@media only screen and (min-width: 1280px) {
+  section.part05 .wrap-company {
+    margin-top: 8rem;
+    gap: 15.8rem;
+    flex-direction: row;
+  }
+}
+section.part05 .wrap-company .sky-info .cellnum {
+  font-family: "Noto Serif KR";
+  font-size: 28px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #65451e;
+}
+section.part05 .wrap-company .sky-info .time {
+  margin-top: 2.4rem;
+  font-family: "Noto Sans KR";
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #161616;
+}
+@media only screen and (min-width: 1280px) {
+  section.part05 .wrap-company .sky-info .time {
+    margin-top: 4rem;
+  }
+}
+section.part05 .wrap-company .sky-info .address {
+  margin-top: 2rem;
+  font-family: "Noto Sans KR";
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #161616;
+}
+section.part05 .wrap-company .img-map {
+  display: block;
+  width: 100%;
+  max-width: 50rem;
+}
+
 .wrap-login.customer .form-login .error-message.error-m {
   display: none;
   background-color: transparent;
@@ -4121,9 +4556,6 @@ html {
 .cont main .main .result-list .result-body .result-item.active .item-top .icon {
   transform: rotate(180deg);
 }
-.cont main .main .result-list {
-  /* ToDo: 260319 14:30 .result-empty 삭제 */
-}
 .cont main .main .result-list .wrap-btn-more {
   margin: 4rem 0;
 }
@@ -4281,16 +4713,12 @@ html {
 }
 @media only screen and (min-width: 1280px) {
   .wrap-notice-lists {
-    /* ToDo: 260319 14:00 속성 변경 */
     padding: 4rem 2rem 12rem;
     /* 260317 10:00 추가 */
   }
   .wrap-notice-lists:has(.wrap-counsel-top.letter) {
     padding: 4rem 2rem;
   }
-}
-.wrap-notice-lists {
-  /* ToDo: 260319 14:00 class 삭제 */
 }
 @media only screen and (min-width: 1280px) {
   .wrap-notice-lists .wrap-search {
@@ -4303,9 +4731,6 @@ html {
   .wrap-notice-lists .wrap-search .search-group {
     width: 32.8rem;
   }
-}
-.wrap-notice-lists .wrap-search {
-  /* ToDo: 260319 15:20 class 변경 */
 }
 .wrap-notice-lists .wrap-search + .result-empty {
   margin-top: 2.4rem;
@@ -5084,7 +5509,6 @@ html {
   border-color: #c5a059;
 }
 
-/* ToDo: 260319 15:20 class 변경 */
 .result-empty {
   display: flex;
   justify-content: center;
