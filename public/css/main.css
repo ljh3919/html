@@ -3746,6 +3746,11 @@ section.part04 .wrap-product .wrap-product-lists {
 section.part04 .wrap-product .wrap-product-lists .product-item:not(:first-child) {
   margin-top: 2.4rem;
 }
+@media only screen and (min-width: 1280px) {
+  section.part04 .wrap-product .wrap-product-lists .product-item:not(:first-child) {
+    margin-top: 0;
+  }
+}
 section.part04 .wrap-product .wrap-product-lists .product-item .item-link .product-img {
   display: block;
   width: 100%;
