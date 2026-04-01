@@ -1746,14 +1746,12 @@ html {
 }
 
 .cont {
-  /* ToDo: 260330 14:00 속성 추가 */
+  /* ToDo: 260401 14:00 속성 변경 */
   box-sizing: border-box;
-  width: auto;
+  width: 100%;
   max-width: 100%;
-  min-width: 375px;
 }
 .cont main {
-  /* ToDo: 260330 14:00 속성 추가 */
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -1766,7 +1764,6 @@ html {
   }
 }
 .cont main .main {
-  /* ToDo: 260330 14:00 속성 추가 */
   box-sizing: border-box;
   width: 100%;
   max-width: 127.2rem;
