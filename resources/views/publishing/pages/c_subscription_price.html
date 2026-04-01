@@ -1,0 +1,554 @@
+﻿<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>분양 가격</title>
+    <link rel="stylesheet" href="../../dist/main.css" />
+  </head>
+  <body>
+    <div class="cont">
+      <!-- Header -->
+      <!-- ToDo: pc메뉴(.wrap-pc) hover시 .active 추가 -->
+      <header class="header">
+        <div class="wrap-header">
+          <div class="wrap-mo">
+            <a href="#" class="tit1"><h1>하늘누리 추모공원</h1></a>
+            <button type="button" class="btn-menu">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+              >
+                <path
+                  d="M3 16H29"
+                  stroke="#333333"
+                  stroke-width="2"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M3 26H29"
+                  stroke="#333333"
+                  stroke-width="2"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M3 6H29"
+                  stroke="#333333"
+                  stroke-width="2"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+            <!-- ToDo: 햄버거 메뉴 클릭시 .active 추가 -->
+            <div class="wrap-menu-mo">
+              <div class="menu-header">
+                <!-- ToDo: logout 일때 활성화 -->
+                <div class="account-item"><span>회원가입</span></div>
+                <div class="account-item">
+                  <span>로그인</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M13.7372 12.3052C13.8182 12.1102 13.8182 11.8892 13.7372 11.6932C13.6992 11.6032 13.6432 11.5232 13.5772 11.4532C13.5712 11.4472 13.5702 11.4392 13.5642 11.4332L10.5642 8.43322C10.2512 8.12122 9.74623 8.12122 9.43323 8.43322C9.12023 8.74622 9.12023 9.25221 9.43323 9.56521L11.0672 11.1992H4.99921C4.55821 11.1992 4.19922 11.5572 4.19922 11.9992C4.19922 12.4402 4.55721 12.7992 4.99921 12.7992H11.0672L9.43323 14.4332C9.12023 14.7462 9.12023 15.2532 9.43323 15.5662C9.58923 15.7212 9.79323 15.7992 9.99823 15.7992C10.2032 15.7992 10.4072 15.7212 10.5632 15.5662L13.5632 12.5662C13.5692 12.5602 13.5702 12.5522 13.5762 12.5462C13.6432 12.4762 13.6992 12.3962 13.7372 12.3052Z"
+                      fill="#4A4A4A"
+                    />
+                    <path
+                      d="M8.52039 17.4682C9.82439 18.5842 11.4804 19.1992 13.1844 19.1992C17.1544 19.1992 20.3844 15.9702 20.3844 11.9992C20.3844 8.02924 17.1544 4.79922 13.1844 4.79922C11.6244 4.79922 10.1344 5.30022 8.87439 6.24722C8.52139 6.51422 8.01939 6.44223 7.75439 6.08923C7.48839 5.73623 7.56039 5.23524 7.91339 4.96924C9.45239 3.81124 11.2744 3.19922 13.1844 3.19922C18.0374 3.19922 21.9844 7.14624 21.9844 11.9992C21.9844 16.8522 18.0374 20.7992 13.1844 20.7992C11.0994 20.7992 9.07337 20.0482 7.47937 18.6832C7.14437 18.3962 7.10439 17.8912 7.3924 17.5552C7.67939 17.2202 8.18439 17.1812 8.52039 17.4682Z"
+                      fill="#4A4A4A"
+                    />
+                  </svg>
+                </div>
+                <!-- ToDo: login 일때 활성화 -->
+                <!-- <div class="account-item"><span>나의정보</span></div>
+                <div class="account-item">
+                  <span>로그아웃</span
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M20.7382 12.3052C20.8192 12.1102 20.8192 11.8892 20.7382 11.6932C20.7002 11.6032 20.6442 11.5232 20.5782 11.4532C20.5722 11.4472 20.5712 11.4392 20.5652 11.4332L17.5652 8.43322C17.2522 8.12122 16.7472 8.12122 16.4342 8.43322C16.1212 8.74622 16.1212 9.25221 16.4342 9.56521L18.0682 11.1992H12.0002C11.5592 11.1992 11.2002 11.5572 11.2002 11.9992C11.2002 12.4402 11.5582 12.7992 12.0002 12.7992H18.0682L16.4342 14.4332C16.1212 14.7462 16.1212 15.2532 16.4342 15.5662C16.5902 15.7212 16.7942 15.7992 16.9992 15.7992C17.2042 15.7992 17.4082 15.7212 17.5642 15.5662L20.5642 12.5662C20.5702 12.5602 20.5712 12.5522 20.5772 12.5462C20.6442 12.4762 20.7002 12.3962 20.7382 12.3052Z"
+                      fill="#4A4A4A"
+                    />
+                    <path
+                      d="M16.6642 17.4682C15.3602 18.5842 13.7042 19.1992 12.0002 19.1992C8.03018 19.1992 4.80017 15.9702 4.80017 11.9992C4.80017 8.02924 8.03018 4.79922 12.0002 4.79922C13.5602 4.79922 15.0502 5.30022 16.3102 6.24722C16.6632 6.51422 17.1652 6.44223 17.4302 6.08923C17.6962 5.73623 17.6242 5.23524 17.2712 4.96924C15.7322 3.81124 13.9102 3.19922 12.0002 3.19922C7.14718 3.19922 3.2002 7.14624 3.2002 11.9992C3.2002 16.8522 7.14718 20.7992 12.0002 20.7992C14.0852 20.7992 16.1112 20.0482 17.7052 18.6832C18.0402 18.3962 18.0802 17.8912 17.7922 17.5552C17.5052 17.2202 17.0002 17.1812 16.6642 17.4682Z"
+                      fill="#4A4A4A"
+                    />
+                  </svg>
+                </div> -->
+                <!-- close button -->
+                <button class="btn-close">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                  >
+                    <path
+                      d="M5 27L27 5"
+                      stroke="#333333"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M5 5L27 27"
+                      stroke="#333333"
+                      stroke-width="2"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <nav class="nav-mo">
+                <div class="nav-item">
+                  <div class="nav-item-head">하늘누리</div>
+                  <div class="nav-item-body">
+                    <a href="#" class="body-item">인사말</a>
+                    <a href="#" class="body-item">하늘누리 이야기</a>
+                    <a href="#" class="body-item">재단/허가 현황</a>
+                    <a href="#" class="body-item">오시는 길</a>
+                  </div>
+                </div>
+                <div class="nav-item">
+                  <div class="nav-item-head">시설안내</div>
+                  <div class="nav-item-body">
+                    <a href="#" class="body-item">봉안당(하늘누리관)</a>
+                    <a href="#" class="body-item">수목장(자연장)</a>
+                    <a href="#" class="body-item">부대시설</a>
+                    <a href="#" class="body-item">주변 둘러보기</a>
+                  </div>
+                </div>
+                <div class="nav-item">
+                  <div class="nav-item-head">분양안내</div>
+                  <div class="nav-item-body">
+                    <a href="#" class="body-item">분양절차</a>
+                    <a href="#" class="body-item">분양가격</a>
+                    <a href="#" class="body-item">사전청약 혜택</a>
+                  </div>
+                </div>
+                <div class="nav-item">
+                  <div class="nav-item-head">사이버 추모관</div>
+                  <div class="nav-item-body">
+                    <a href="#" class="body-item">고인 검색</a>
+                    <a href="#" class="body-item">하늘편지</a>
+                  </div>
+                </div>
+                <div class="nav-item">
+                  <div class="nav-item-head">고객센터</div>
+                  <div class="nav-item-body">
+                    <a href="#" class="body-item">공지사항</a>
+                    <a href="#" class="body-item">자주묻는 질문</a>
+                    <a href="#" class="body-item">1:1 상담</a>
+                    <a href="#" class="body-item">나의상담</a>
+                    <a href="#" class="body-item">자료실</a>
+                  </div>
+                </div>
+                <div class="nav-item">
+                  <div class="nav-item-head">
+                    <a href="#">서비스 이용약관</a>
+                  </div>
+                </div>
+                <div class="nav-item">
+                  <div class="nav-item-head">
+                    <a href="#">개인정보 처리방침</a>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+          <div class="wrap-pc">
+            <div class="wrap-header-account">
+              <a href="#" class="tit1"><h1>하늘누리 추모공원</h1></a>
+              <div class="wrap-account">
+                <a href="#" class="item">회원가입</a>
+                <a href="#" class="item">로그인</a>
+              </div>
+            </div>
+            <nav class="lnb">
+              <a href="#" class="item">하늘누리소개</a>
+              <a href="#" class="item">시설안내</a>
+              <a href="#" class="item">분양안내</a>
+              <a href="#" class="item">사이버추모관</a>
+              <a href="#" class="item">고객센터</a>
+            </nav>
+          </div>
+          <!-- ToDo: pc메뉴(.wrap-pc) hover시 .active 추가 -->
+          <nav class="nav-pc">
+            <div class="nav-pc-item item-word1">
+              <a href="#" class="item">인사말</a>
+              <a href="#" class="item">하늘누리 이야기</a>
+              <a href="#" class="item">재단/허가 현황</a>
+              <a href="#" class="item">오시는 길</a>
+            </div>
+            <div class="nav-pc-item item-word2">
+              <a href="#" class="item">봉안당(하늘누리관)</a>
+              <a href="#" class="item">수목장(자연장)</a>
+              <a href="#" class="item">부대시설</a>
+              <a href="#" class="item">주변 둘러보기</a>
+            </div>
+            <div class="nav-pc-item item-word3">
+              <a href="#" class="item">분양절차</a>
+              <a href="#" class="item">분양가격</a>
+              <a href="#" class="item">사전청약 혜택</a>
+            </div>
+            <div class="nav-pc-item item-word4">
+              <a href="#" class="item">고인 검색</a>
+              <a href="#" class="item">하늘편지</a>
+            </div>
+            <div class="nav-pc-item item-word5">
+              <a href="#" class="item">공지사항</a>
+              <a href="#" class="item">자주묻는 질문</a>
+              <a href="#" class="item">1:1 상담</a>
+              <a href="#" class="item">자료실</a>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- Body -->
+      <main>
+        <div class="main counsel">
+          <div class="breadcrumb">
+            <a href="#" class="item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+              >
+                <path
+                  d="M2 5.99992L8 1.33325L14 5.99992V13.3333C14 13.6869 13.8595 14.026 13.6095 14.2761C13.3594 14.5261 13.0203 14.6666 12.6667 14.6666H3.33333C2.97971 14.6666 2.64057 14.5261 2.39052 14.2761C2.14048 14.026 2 13.6869 2 13.3333V5.99992Z"
+                  stroke="#333333"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6 14.6667V8H10V14.6667"
+                  stroke="#333333"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+            <a href="#" class="item">분양 안내</a>
+            <a href="#" class="item">분양 가격</a>
+          </div>
+          <div class="wrap-tit">
+            <h2 class="tit2">분양 가격</h2>
+            <div class="tit2-sub">“가격 이상의 가치를 제공합니다”</div>
+            <div class="desc">
+              하늘누리는 재단법인 운영으로 과도한 영리 추구 없이 합리적인 가격을
+              책정합니다.
+            </div>
+          </div>
+        </div>
+        <div class="wrap-subscription">
+          <ul class="wrap-tab" role="tablist" aria-label="분양 절차 유형">
+            <!-- ToDo: 탭 클릭시 .active 추가 및 탭에 맞는 컨텐츠 노출 -->
+            <li
+              class="tab-item active"
+              role="tab"
+              aria-selected="true"
+              tabindex="0"
+            >
+              봉안당(하늘누리관)
+            </li>
+            <li class="tab-item" role="tab" aria-selected="false" tabindex="-1">
+              수목장(자연장)
+            </li>
+          </ul>
+        </div>
+        <div class="cont-subscription active">
+          <div class="wrap-main-img price01"></div>
+          <!-- 설명 table type4-1 -->
+          <div class="wrap-explain-round">
+            <div class="tit">일반 개인 분양가격</div>
+            <div class="wrap-explain-table type4-1">
+              <div class="explain-item item-header">구분</div>
+              <div class="explain-item item-header">1~3 단</div>
+              <div class="explain-item item-header">4~6 단</div>
+              <div class="explain-item item-header">7~9 단</div>
+              <div class="explain-item">1층</div>
+              <div class="explain-item">200 만원</div>
+              <div class="explain-item">350 만원</div>
+              <div class="explain-item">250 만원</div>
+              <div class="explain-item">2층</div>
+              <div class="explain-item">250 만원</div>
+              <div class="explain-item">450 만원</div>
+              <div class="explain-item">300 만원</div>
+              <div class="explain-item">3층</div>
+              <div class="explain-item">300 만원</div>
+              <div class="explain-item">550 만원</div>
+              <div class="explain-item">350 만원</div>
+            </div>
+          </div>
+          <!-- 설명 table type5-3 -->
+          <div class="wrap-explain-round">
+            <div class="tit">가족 분양실 분양가격</div>
+            <div class="wrap-explain-table type5-3">
+              <div class="explain-item item-header">구분</div>
+              <div class="explain-item item-header">지하 1층</div>
+              <div class="explain-item item-header">1층</div>
+              <div class="explain-item item-header">2층</div>
+              <div class="explain-item item-header">3층</div>
+              <div class="explain-item">4위용</div>
+              <div class="explain-item">600 만원</div>
+              <div class="explain-item">800 만원</div>
+              <div class="explain-item">1,000 만원</div>
+              <div class="explain-item">1,200 만원</div>
+              <div class="explain-item">6위용</div>
+              <div class="explain-item">900 만원</div>
+              <div class="explain-item">1,200 만원</div>
+              <div class="explain-item">1,500 만원</div>
+              <div class="explain-item">1,800 만원</div>
+            </div>
+          </div>
+          <div class="wrap-subscription-product-detail">
+            <div class="subscription-detail-item">
+              <img
+                class="subscription-detail-img"
+                src="../img/img_price_part01.png"
+                alt="프리미엄 봉안실"
+              />
+              <div class="subscription-detail-item-desc">
+                <div class="tit">프리미엄 봉안실</div>
+                <table class="subscription-detail-item-table">
+                  <thead>
+                    <tr>
+                      <th>유형</th>
+                      <th>위치</th>
+                      <th>가격</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>개인형</td>
+                      <td>3층 전망대 인접</td>
+                      <td>1,000 만원 ~ 1,500 만원</td>
+                    </tr>
+                    <tr>
+                      <td>가족형(4위)</td>
+                      <td>3층 전망대 인접</td>
+                      <td>1,800 만원 ~ 2,200 만원</td>
+                    </tr>
+                    <tr>
+                      <td>가족형(6위)</td>
+                      <td>3층 최상층</td>
+                      <td>2,200 만원 ~ 2,500 만원</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cont-subscription">
+          <div class="wrap-main-img price02"></div>
+          <!-- 설명 table type3-1 -->
+          <div class="wrap-explain-round">
+            <div class="tit">개인 수목장(수종별) 가격표</div>
+            <div class="wrap-explain-table type3-1">
+              <div class="explain-item item-header">수종</div>
+              <div class="explain-item item-header">규격</div>
+              <div class="explain-item item-header">가격</div>
+              <div class="explain-item">소나무</div>
+              <div class="explain-item">30㎡ 이하</div>
+              <div class="explain-item">400 만원</div>
+              <div class="explain-item">느티나무</div>
+              <div class="explain-item">30㎡ 이하</div>
+              <div class="explain-item">450 만원</div>
+              <div class="explain-item">벗나무</div>
+              <div class="explain-item">30㎡ 이하</div>
+              <div class="explain-item">420 만원</div>
+            </div>
+          </div>
+          <!-- 설명 table type4-1 -->
+          <div class="wrap-explain-round">
+            <div class="tit">부부/가족 수목장(위용벌) 가격표</div>
+            <div class="wrap-explain-table type4-1">
+              <div class="explain-item item-header">수종</div>
+              <div class="explain-item item-header">규격</div>
+              <div class="explain-item item-header">안치가능</div>
+              <div class="explain-item item-header">가격</div>
+              <div class="explain-item">부부형</div>
+              <div class="explain-item">50㎡ 이하</div>
+              <div class="explain-item">2위</div>
+              <div class="explain-item">700 만원</div>
+              <div class="explain-item">가족형(소)</div>
+              <div class="explain-item">80㎡ 이하</div>
+              <div class="explain-item">3위</div>
+              <div class="explain-item">950 만원</div>
+              <div class="explain-item">가족형(대)</div>
+              <div class="explain-item">100㎡ 이하</div>
+              <div class="explain-item">4위</div>
+              <div class="explain-item">1,200 만원</div>
+            </div>
+          </div>
+          <div class="wrap-main-img price03"></div>
+          <!-- 설명 table type3-1 -->
+          <div class="wrap-explain-round">
+            <div class="tit">공동 수목장</div>
+            <div class="wrap-explain-table type3-1">
+              <div class="explain-item item-header">구분</div>
+              <div class="explain-item item-header">특징</div>
+              <div class="explain-item item-header">가격</div>
+              <div class="explain-item">공동 수목장</div>
+              <div class="explain-item">큰 나무 아래 여러 위 안치</div>
+              <div class="explain-item">200 만원</div>
+            </div>
+          </div>
+          <!-- 설명 table type4-1 -->
+          <div class="wrap-explain-round">
+            <div class="tit">잔디장</div>
+            <div class="wrap-explain-table type4-1">
+              <div class="explain-item item-header">구분</div>
+              <div class="explain-item item-header">규격</div>
+              <div class="explain-item item-header">특징</div>
+              <div class="explain-item item-header">가격</div>
+              <div class="explain-item">잔디장</div>
+              <div class="explain-item">1㎡ 당 1 위</div>
+              <div class="explain-item">잔디 평지, 개별표식</div>
+              <div class="explain-item">250만원 ~ 350 만원</div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="wrap-footer">
+          <h2 class="tit2">하늘누리 추모공원</h2>
+          <div class="wrap-compony">
+            <div class="wrap-terms">
+              <a class="item" href="#">서비스 이용약관</a>
+              <a class="item" href="#">개인정보 처리방침</a>
+            </div>
+            <div class="wrap-info">
+              <div class="text">
+                <strong>재단법인 하늘누리 추모공원</strong>
+              </div>
+              <div class="wrap-text">
+                <div class="text">
+                  <span>사업자등록번호</span><strong>155-77-88888</strong>
+                </div>
+                <div class="text">
+                  <span>대표번호</span><strong>031-999-9999</strong>
+                </div>
+                <div class="text">
+                  <span>주소</span><strong>경기도 양주시 산북동 산67-20</strong>
+                </div>
+              </div>
+            </div>
+            <div class="copyright">
+              Copyright 2026 haneulnuri. All Right Reserved
+            </div>
+          </div>
+        </div>
+        <div class="wrap-floating">
+          <!-- ToDo: 전화번호 나오면 번호 바꿔야 함. -->
+          <a class="float-item" href="tel:010-1234-5678">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+            >
+              <path
+                d="M11.6856 11.7625C7.87312 16.7875 15.7981 24.1875 15.7981 24.1875C15.7981 24.1875 23.1856 32.1125 28.2231 28.3C28.2231 28.3 29.5981 27.2375 29.2856 25.7875C29.2856 25.7875 28.9856 24.95 28.0606 24.5625L24.9606 23.2875C24.9606 23.2875 24.1356 23 23.4356 23.5875L22.6481 24.25C22.6481 24.25 22.0731 24.9375 21.1481 24.2625C21.1481 24.2625 20.0856 23.5 18.2731 21.6875C16.4606 19.875 15.6981 18.8125 15.6981 18.8125C15.0356 17.875 15.7106 17.3125 15.7106 17.3125L16.3731 16.525C16.9606 15.825 16.6731 15 16.6731 15L15.3981 11.9C15.0106 10.9875 14.1731 10.675 14.1731 10.675C12.7231 10.375 11.6606 11.7375 11.6606 11.7375L11.6856 11.7625Z"
+                fill="#fff"
+              />
+            </svg>
+            <div class="tooltip">전화상담</div>
+          </a>
+          <!-- ToDo: 카카오 체널주소 나오면 바꿔야 함. -->
+          <a class="float-item kakao" href="https://pf.kakao.com/_xxxxxx/chat">
+            <div class="tooltip">카카오 상담</div></a
+          >
+          <!-- ToDo: 브로셔 신청으로 연결 해야 함. -->
+          <a class="float-item" href="#">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+            >
+              <path
+                d="M28.25 8.75H11.75C10.7875 8.75 10 9.53749 10 10.5V29.5C10 30.4625 10.7875 31.25 11.75 31.25H28.25C29.2125 31.25 30 30.4625 30 29.5V10.5C30 9.53749 29.2125 8.75 28.25 8.75ZM25.4625 19.225H14.55C14.0125 19.225 13.5875 18.8 13.5875 18.2625C13.5875 17.725 14.0125 17.3 14.55 17.3H25.4625C26 17.3 26.425 17.725 26.425 18.2625C26.425 18.8 26 19.225 25.4625 19.225ZM25.4625 14.75H14.55C14.0125 14.75 13.5875 14.325 13.5875 13.7875C13.5875 13.25 14.0125 12.825 14.55 12.825H25.4625C26 12.825 26.425 13.25 26.425 13.7875C26.425 14.325 26 14.75 25.4625 14.75Z"
+                fill="#fff"
+              />
+            </svg>
+            <div class="tooltip">브로슈어 신청</div>
+          </a>
+          <a class="float-item" href="#top">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+            >
+              <path
+                d="M19.7986 13L12 26.7348L12.2686 27C16.6811 23.1827 23.3285 23.1827 27.7314 27L28 26.7348L20.211 13H19.9424H19.8082H19.7986Z"
+                fill="#fff"
+              />
+            </svg>
+            <div class="tooltip">맨 위로</div>
+          </a>
+        </div>
+      </footer>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabs = document.querySelectorAll(".wrap-tab .tab-item");
+        const contents = document.querySelectorAll(".cont-subscription");
+
+        if (!tabs.length || !contents.length) return;
+
+        const activateTab = (targetIdx) => {
+          tabs.forEach((tab, idx) => {
+            tab.classList.toggle("active", idx === targetIdx);
+            tab.setAttribute("aria-selected", String(idx === targetIdx));
+            tab.setAttribute("tabindex", idx === targetIdx ? "0" : "-1");
+          });
+
+          contents.forEach((content, idx) => {
+            content.classList.toggle("active", idx === targetIdx);
+          });
+        };
+
+        tabs.forEach((tab, idx) => {
+          tab.addEventListener("click", function () {
+            activateTab(idx);
+          });
+
+          tab.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              activateTab(idx);
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
