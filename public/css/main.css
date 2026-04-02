@@ -3041,13 +3041,34 @@ html {
   margin-top: 20px;
 }
 
+.cont {
+  position: relative;
+}
 .cont .header {
   display: flex;
   justify-content: center;
   position: relative;
 }
+@media only screen and (min-width: 1280px) {
+  .cont .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(22, 22, 22, 0.2);
+  }
+}
 .cont .header.active {
   background-color: #f4f4f4;
+}
+.cont .header.active .wrap-pc .wrap-header-account .tit1 h1 {
+  color: #333;
+}
+.cont .header.active .wrap-pc .wrap-header-account .wrap-account .item {
+  color: #333;
+}
+.cont .header.active .wrap-pc nav.lnb .item {
+  color: #161616;
 }
 .cont .header .wrap-header {
   width: 100%;
@@ -3081,13 +3102,17 @@ html {
   height: 3.2rem;
 }
 .cont .header .wrap-mo .wrap-menu-mo {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
+  inset: 0;
   width: 100%;
-  height: 100vh;
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   background-color: #fff;
-  z-index: 10;
+  z-index: 500;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -3168,7 +3193,7 @@ html {
   font-size: 20px;
   line-height: 1;
   font-weight: 500;
-  color: #333333;
+  color: #fff;
 }
 .cont .header .wrap-pc .wrap-header-account .wrap-account {
   display: flex;
@@ -3180,7 +3205,7 @@ html {
   font-size: 15px;
   line-height: 1.2;
   font-weight: 400;
-  color: #333333;
+  color: #fff;
 }
 .cont .header .wrap-pc nav.lnb {
   display: flex;
@@ -3192,7 +3217,7 @@ html {
   font-size: 18px;
   line-height: 1.4;
   font-weight: 400;
-  color: #161616;
+  color: #fff;
   padding: 0 5rem;
   height: 4.8rem;
   display: flex;
@@ -3268,6 +3293,13 @@ html {
   font-weight: 700;
 }
 
+@media only screen and (max-width: 1279px) {
+  html:has(.wrap-menu-mo.active),
+  body:has(.wrap-menu-mo.active) {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+}
 .cont .footer {
   background-color: #333333;
 }
@@ -3382,7 +3414,6 @@ html {
   }
 }
 .cont .footer .wrap-floating {
-  /* 260313 17:30 속성 추가 */
   position: fixed;
   bottom: 2.4rem;
   right: 1.6rem;
@@ -3392,7 +3423,7 @@ html {
   padding: 0.8rem;
   width: 3.8rem;
   background-color: #fff;
-  z-index: 100;
+  z-index: 9;
 }
 @media only screen and (min-width: 1280px) {
   .cont .footer .wrap-floating {
@@ -3464,7 +3495,6 @@ html {
   opacity: 90%;
 }
 
-/* ToDo: 260326 15:40 main style 추가 */
 section {
   box-sizing: border-box;
 }
@@ -4793,7 +4823,6 @@ section.part05 .wrap-company .img-map {
 @media only screen and (min-width: 1280px) {
   .wrap-notice-lists {
     padding: 4rem 2rem 12rem;
-    /* 260317 10:00 추가 */
   }
   .wrap-notice-lists:has(.wrap-counsel-top.letter) {
     padding: 4rem 2rem;
