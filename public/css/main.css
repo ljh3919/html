@@ -3392,6 +3392,7 @@ html {
   padding: 0.8rem;
   width: 3.8rem;
   background-color: #fff;
+  z-index: 100;
 }
 @media only screen and (min-width: 1280px) {
   .cont .footer .wrap-floating {
