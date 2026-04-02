@@ -1,136 +1,197 @@
 @extends('layouts.admin')
 
-@section('content')
-<div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800">관리자사이트 > 팝업 관리 > 등록</h1>
-    </div>
+@section('styles')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<style>
+    .note-editor.note-frame {
+        border-color: #dee2e6;
+    }
+    .note-editor.note-frame .note-statusbar {
+        border-top-color: #dee2e6;
+    }
+</style>
+@endsection
 
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <form id="popup-form" action="{{ route('admin.popup.store') }}" method="POST">
-                @csrf
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label font-weight-bold">제목 <span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <input type="text" name="title" class="form-control" value="{{ old('title') }}" placeholder="팝업 제목을 입력하세요">
-                        @error('title') <small class="text-danger">{{ $message }}</small> @enderror
+@section('content')
+<!-- title -->
+<div class="wrap-tit">
+    <h2 class="tit01">팝업 관리</h2>
+</div>
+
+@if ($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
+<form id="popup-form" action="{{ route('admin.popup.store') }}" method="POST">
+    @csrf
+    <!-- table -->
+    <table class="table board-table vertical-table">
+        <tr>
+            <th>제목</th>
+            <td>
+                <div class="wrap-form">
+                    <div class="input-group h30" style="width: 100%">
+                        <input type="text" name="title" class="input-box" style="min-width: 100%" value="{{ old('title') }}" placeholder="팝업 제목을 입력하세요" />
                     </div>
                 </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label font-weight-bold">적용일시 <span class="text-danger">*</span></label>
-                    <div class="col-sm-10 d-flex align-items-center">
-                        <input type="date" name="start_date" class="form-control w-auto mr-2" value="{{ old('start_date', now()->format('Y-m-d')) }}">
-                        <select name="start_hour" class="form-control w-auto mr-3">
+            </td>
+        </tr>
+        <tr>
+            <th>적용일시</th>
+            <td>
+                <div class="wrap-calendar">
+                    <div class="wrap-form mr-2">
+                        <div class="input-group h30">
+                            <input type="date" name="start_date" class="input-box" value="{{ old('start_date', now()->format('Y-m-d')) }}">
+                        </div>
+                    </div>
+                    <div class="select-wrapper">
+                        <select name="start_hour" class="input-box select h30">
                             @for($i=0; $i<24; $i++)
                                 <option value="{{ $i }}" {{ old('start_hour') == $i ? 'selected' : '' }}>{{ sprintf('%02d', $i) }} 시</option>
                             @endfor
                         </select>
-                        <span class="mr-3">~</span>
-                        <input type="date" name="end_date" class="form-control w-auto mr-2" value="{{ old('end_date', now()->addDays(7)->format('Y-m-d')) }}">
-                        <select name="end_hour" class="form-control w-auto">
+                    </div>
+                    <span class="mx-2">~</span>
+                    <div class="wrap-form mr-2">
+                        <div class="input-group h30">
+                            <input type="date" name="end_date" class="input-box" value="{{ old('end_date', now()->addDays(7)->format('Y-m-d')) }}">
+                        </div>
+                    </div>
+                    <div class="select-wrapper">
+                        <select name="end_hour" class="input-box select h30">
                             @for($i=0; $i<24; $i++)
                                 <option value="{{ $i }}" {{ old('end_hour', 23) == $i ? 'selected' : '' }}>{{ sprintf('%02d', $i) }} 시</option>
                             @endfor
                         </select>
                     </div>
                 </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label font-weight-bold">내용 <span class="text-danger">*</span></label>
-                    <div class="col-sm-10">
-                        <textarea name="content" id="content" class="form-control" rows="10" placeholder="팝업 내용을 입력하세요">{{ old('content') }}</textarea>
-                        @error('content') <small class="text-danger">{{ $message }}</small> @enderror
+            </td>
+        </tr>
+        <tr>
+            <th>노출여부</th>
+            <td>
+                <div class="custom-control custom-switch mt-1">
+                    <input type="checkbox" name="is_visible" class="custom-control-input" id="is_visible" value="1" {{ old('is_visible', true) ? 'checked' : '' }}>
+                    <label class="custom-control-label font-weight-normal" for="is_visible" style="cursor: pointer;">노출함</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td>
+                <div class="wrap-form">
+                    <div class="input-group textarea">
+                        <textarea name="content" id="editor" class="input-box input-box--textarea" placeholder="내용을 입력하세요.">{{ old('content') }}</textarea>
                     </div>
                 </div>
+            </td>
+        </tr>
+    </table>
+    <!-- board button -->
+    <div class="wrap-board-btn">
+        <div class="text-info">표시항목은 필수입력 항목입니다.</div>
+        <div class="wrap-btn-right">
+            <button type="button" class="btn line small" onclick="location.href='{{ route('HNA_Popup_List_001') }}'">
+                <span>취소</span>
+            </button>
+            <button type="button" class="btn line small" id="popupPreviewBtn" onclick="openPreview()">
+                <span>미리보기</span>
+            </button>
+            <button type="submit" class="btn primary small">
+                <span>등록</span>
+            </button>
+        </div>
+    </div>
+</form>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label font-weight-bold">노출여부</label>
-                    <div class="col-sm-10">
-                        <div class="custom-control custom-switch mt-2">
-                            <input type="checkbox" name="is_visible" class="custom-control-input" id="is_visible" checked>
-                            <label class="custom-control-label" for="is_visible">노출함</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center mt-5">
-                    <button type="button" class="btn btn-info px-5 mr-2" onclick="openPreview()">미리보기</button>
-                    <button type="submit" class="btn btn-primary px-5 mr-2">등록</button>
-                    <a href="{{ route('HNA_Popup_List_001') }}" class="btn btn-secondary px-5">취소</a>
-                </div>
-            </form>
+<!-- popup preview modal -->
+<div class="popup-overlay" id="popupPreviewOverlay" aria-hidden="true">
+    <div class="wrap-popup" role="dialog" aria-labelledby="popupPreviewTitle">
+        <div class="popup-header">
+            <h3 class="popup-tit" id="popupPreviewTitle">팝업 미리보기</h3>
+            <button type="button" class="popup-close" id="popupPreviewClose" aria-label="닫기">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M4 28L28 4" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+                    <path d="M4 4L28 28" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="popup-body">
+            <div class="popup-cont" id="popupPreviewContent">
+                <!-- Content will be injected here -->
+            </div>
         </div>
     </div>
 </div>
+@endsection
 
-<!-- Preview Modal -->
-<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document" style="max-width: 500px;">
-        <div class="modal-content">
-            <div class="modal-header border-bottom-0">
-                <h5 class="modal-title">미리보기</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body p-0">
-                <iframe name="preview_iframe" id="preview_iframe" style="width: 100%; height: 600px; border: none;"></iframe>
-            </div>
-            <div class="modal-footer border-top-0 justify-content-center">
-                <button type="button" class="btn btn-secondary px-5" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script>
+$(document).ready(function() {
+    $('#editor').summernote({
+        placeholder: '팝업 내용을 입력해 주세요.',
+        tabsize: 2,
+        height: 400,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+    // 미리보기 닫기 이벤트
+    $('#popupPreviewClose').on('click', function() {
+        $('#popupPreviewOverlay').removeClass('active').attr('aria-hidden', 'true');
+    });
+
+    $('#popupPreviewOverlay').on('click', function(e) {
+        if (e.target === this) {
+            $(this).removeClass('active').attr('aria-hidden', 'true');
+        }
+    });
+});
+
 function openPreview() {
     const title = document.querySelector('input[name="title"]').value;
-    const content = document.querySelector('textarea[name="content"]').value;
+    const content = $('#editor').summernote('code');
 
-    if (!title || !content) {
+    if (!title || content === '<p><br></p>') {
         alert('입력내용을 확인해주세요.');
         return;
     }
 
-    // Modal show using jQuery (standard in SB Admin 2 / Bootstrap 4)
-    $('#previewModal').modal('show');
+    const contentEl = document.getElementById("popupPreviewContent");
+    contentEl.innerHTML = `
+        <h2 class="tit">${title}</h2>
+        <div class="wrap-cont popup-manage">
+            ${content}
+        </div>
+    `;
 
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = '{{ route("admin.popup.preview") }}';
-    form.target = 'preview_iframe';
-
-    const csrfToken = document.createElement('input');
-    csrfToken.type = 'hidden';
-    csrfToken.name = '_token';
-    csrfToken.value = '{{ csrf_token() }}';
-    form.appendChild(csrfToken);
-
-    const titleInput = document.createElement('input');
-    titleInput.type = 'hidden';
-    titleInput.name = 'title';
-    titleInput.value = title;
-    form.appendChild(titleInput);
-
-    const contentInput = document.createElement('input');
-    contentInput.type = 'hidden';
-    contentInput.name = 'content';
-    contentInput.value = content;
-    form.appendChild(contentInput);
-
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
+    const overlay = document.getElementById("popupPreviewOverlay");
+    overlay.classList.add("active");
+    overlay.setAttribute("aria-hidden", "false");
 }
 
 document.getElementById('popup-form').addEventListener('submit', function(e) {
     const title = this.querySelector('input[name="title"]').value.trim();
-    const content = this.querySelector('textarea[name="content"]').value.trim();
+    const content = $('#editor').summernote('code');
     
-    if (!title || !content) {
+    if (!title || content === '<p><br></p>') {
         alert('입력내용을 확인해주세요.');
         e.preventDefault();
     }

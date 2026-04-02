@@ -1,5 +1,11 @@
 <?php
 
+// [긴급 패치] APP_KEY 환경 변수 로딩 문제 우회
+$key = 'base64:i0sEWcW/MYbkbmFRLCOU1s/e7DE30cGt6h4uQmCvj2k=';
+putenv("APP_KEY={$key}");
+$_ENV['APP_KEY'] = $key;
+$_SERVER['APP_KEY'] = $key;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 

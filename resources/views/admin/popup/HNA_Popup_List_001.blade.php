@@ -1,85 +1,94 @@
 @extends('layouts.admin')
+ 
+ @section('styles')
+ <style>
+     /* 페이지네이션 및 테이블 기본 스타일은 admin-common.css에 정의됨 */
+ </style>
+ @endsection
 
 @section('content')
-<div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800">관리자사이트 > 팝업 관리 > 목록</h1>
-        <a href="{{ route('HNA_Popup_Regi_001') }}" class="btn btn-primary">등록</a>
-    </div>
+<!-- title -->
+<div class="wrap-tit">
+    <h2 class="tit01">팝업 관리</h2>
+</div>
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <div>
-                    총 등록 수 : <strong>{{ number_format($totalCount) }}</strong>
-                </div>
-                <form action="{{ route('HNA_Popup_List_001') }}" method="GET" class="form-inline">
-                    <select name="search_type" class="form-control mr-2">
+<div class="wrap-table-control">
+    <div class="wrap-table-control-left"></div>
+    <form action="{{ route('HNA_Popup_List_001') }}" method="GET">
+        <div class="wrap-table-control-right">
+            <div class="input-group h40">
+                <div class="select-wrapper">
+                    <select name="search_type" class="input-box select" style="width: 160px">
+                        <option value="all" {{ $searchType == 'all' ? 'selected' : '' }}>전체</option>
                         <option value="title" {{ $searchType == 'title' ? 'selected' : '' }}>제목</option>
                         <option value="content" {{ $searchType == 'content' ? 'selected' : '' }}>내용</option>
                     </select>
-                    <input type="text" name="search_keyword" class="form-control mr-2" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요">
-                    <button type="submit" class="btn btn-dark">검색</button>
-                    @if($searchKeyword)
-                        <a href="{{ route('HNA_Popup_List_001') }}" class="btn btn-outline-secondary ml-2">초기화</a>
-                    @endif
-                </form>
+                </div>
             </div>
-
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="text-center" style="width: 60px;">No</th>
-                            <th class="text-center" style="width: 120px;">진행상황</th>
-                            <th>제목</th>
-                            <th class="text-center" style="width: 200px;">시작일</th>
-                            <th class="text-center" style="width: 200px;">종료일</th>
-                            <th class="text-center" style="width: 100px;">노출여부</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($popups as $popup)
-                            <tr onclick="location.href='{{ route('HNA_Popup_Detail_001', $popup->id) }}'" style="cursor: pointer;">
-                                <td class="text-center">{{ $popups->firstItem() + $loop->index }}</td>
-                                <td class="text-center">
-                                    @php
-                                        $status = $popup->status;
-                                        $badgeClass = 'badge-secondary';
-                                        if ($status == '진행중') $badgeClass = 'badge-success';
-                                        elseif ($status == '사용대기') $badgeClass = 'badge-primary';
-                                        elseif ($status == '종료') $badgeClass = 'badge-danger';
-                                    @endphp
-                                    <span class="badge {{ $badgeClass }}">{{ $status }}</span>
-                                </td>
-                                <td>{{ $popup->title }}</td>
-                                <td class="text-center">{{ $popup->start_at->format('Y-m-d H:i') }}</td>
-                                <td class="text-center">{{ $popup->end_at->format('Y-m-d H:i') }}</td>
-                                <td class="text-center">
-                                    <span class="text-{{ $popup->is_visible ? 'primary' : 'danger' }}">
-                                        {{ $popup->is_visible ? 'O' : 'X' }}
-                                    </span>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6" class="text-center py-4">등록된 팝업이 없습니다.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+            <div class="wrap-form mx-8">
+                <div class="input-group h40">
+                    <input type="text" name="search_keyword" class="input-box" style="width: 325px" value="{{ $searchKeyword }}" placeholder="검색어를 입력하세요" />
+                </div>
             </div>
-
-            <div class="mt-4 d-flex justify-content-center">
-                {{ $popups->appends(request()->input())->links('pagination::bootstrap-4') }}
-            </div>
+            <button type="submit" class="btn primary small">
+                <span>검색</span>
+            </button>
         </div>
+    </form>
+</div>
+
+<!-- table -->
+<table class="table board-table">
+    <thead>
+        <tr>
+            <th scope="col" style="width: 60px">No</th>
+            <th scope="col" style="width: 150px" class="ellipsis">진행상황</th>
+            <th scope="col" style="width: 50%" class="ellipsis">제목</th>
+            <th scope="col" style="width: calc((100% - 60px) / 2)">시작일</th>
+            <th scope="col" style="width: calc((100% - 60px) / 2)">종료일</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse($popups as $popup)
+            <tr onclick="location.href='{{ route('HNA_Popup_Detail_001', $popup->id) }}'" style="cursor: pointer;">
+                <td style="width: 60px">{{ $popups->total() - ($popups->currentPage() - 1) * $popups->perPage() - $loop->index }}</td>
+                <td style="width: 150px">
+                    @if($popup->status == '진행중')
+                        <span class="text-danger font-weight-bold">진행중</span>
+                    @elseif($popup->status == '대기중' || $popup->status == '사용대기')
+                        <span class="text-success font-weight-bold">사용대기</span>
+                    @else
+                        <span class="text-secondary">종료</span>
+                    @endif
+                </td>
+                    <td style="width: 33%" class="ellipsis tal">
+                    {{ $popup->title }}
+                </td>
+                    <td style="width: calc((100% - 60px) / 2)">
+                    {{ $popup->start_at->format('Y-m-d H:i') }}
+                </td>
+                    <td style="width: calc((100% - 60px) / 2)">
+                    {{ $popup->end_at->format('Y-m-d H:i') }}
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="5" class="py-5 text-secondary text-center">등록된 팝업이 없습니다.</td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
+
+<!-- board button -->
+<div class="wrap-board-btn">
+    <div class="wrap-btn-left"></div>
+    <div class="wrap-btn-right">
+        <button type="button" class="btn primary small" onclick="location.href = '{{ route('HNA_Popup_Regi_001') }}'">
+            <span>등록</span>
+        </button>
     </div>
 </div>
+
+<!-- pager -->
+{{ $popups->appends(request()->input())->links('admin.partials.pagination') }}
 @endsection

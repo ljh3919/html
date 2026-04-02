@@ -10,54 +10,98 @@ use App\Http\Controllers\Admin\Customer\ReferenceController;
 use App\Http\Controllers\Admin\PopupController;
 use App\Http\Controllers\Admin\BrochureController;
 use App\Http\Controllers\Front\Customer\InquiryController as FrontInquiryController;
+use App\Http\Controllers\Front\BrochureController as FrontBrochureController;
+use App\Http\Controllers\Front\AuthController;
+use App\Http\Controllers\Front\Memorial\DeadController as FrontDeadController;
+use App\Http\Controllers\Front\Memorial\LetterController as FrontLetterController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('front.index');
+})->name('front.index');
 
-// Front Routes
+// Frontend Routes
 Route::group(['prefix' => 'front'], function () {
-    Route::view('/HN_Main_001', 'front.main.HN_Main_001')->name('HN_Main_001');
-    Route::view('/HN_Join_001', 'front.join.HN_Join_001')->name('HN_Join_001');
-    Route::view('/HN_Join_002', 'front.join.HN_Join_002')->name('HN_Join_002');
-    Route::view('/HN_Login_001', 'front.login.HN_Login_001')->name('HN_Login_001');
-    Route::view('/HN_Login_Idsearch_001', 'front.login.HN_Login_Idsearch_001')->name('HN_Login_Idsearch_001');
-    Route::view('/HN_Login_Pwsearch_001', 'front.login.HN_Login_Pwsearch_001')->name('HN_Login_Pwsearch_001');
-    Route::view('/HN_MemInfo_View_001', 'front.mem-info.HN_MemInfo_View_001')->name('HN_MemInfo_View_001');
-    Route::view('/HN_MemInfo_Modi_001', 'front.mem-info.HN_MemInfo_Modi_001')->name('HN_MemInfo_Modi_001');
-    Route::view('/HN_MemInfo_Pwmodi_001', 'front.mem-info.HN_MemInfo_Pwmodi_001')->name('HN_MemInfo_Pwmodi_001');
-    Route::view('/HN_Introdu_Greeting_001', 'front.introdu.HN_Introdu_Greeting_001')->name('HN_Introdu_Greeting_001');
-    Route::view('/HN_Introdu_Hnstory_001', 'front.introdu.HN_Introdu_Hnstory_001')->name('HN_Introdu_Hnstory_001');
-    Route::view('/HN_Introdu_Perarti_001', 'front.introdu.HN_Introdu_Perarti_001')->name('HN_Introdu_Perarti_001');
-    Route::view('/HN_Introdu_Way_001', 'front.introdu.HN_Introdu_Way_001')->name('HN_Introdu_Way_001');
-    Route::view('/HN_Facil_Bongan_001', 'front.facil.HN_Facil_Bongan_001')->name('HN_Facil_Bongan_001');
-    Route::view('/HN_Facil_Naburial_001', 'front.facil.HN_Facil_Naburial_001')->name('HN_Facil_Naburial_001');
-    Route::view('/HN_Facil_Aditinal_001', 'front.facil.HN_Facil_Aditinal_001')->name('HN_Facil_Aditinal_001');
-    Route::view('/HN_Facil_Surround_001', 'front.facil.HN_Facil_Surround_001')->name('HN_Facil_Surround_001');
-    Route::view('/HN_DistriInfo_Distriproce_001', 'front.distri-info.HN_DistriInfo_Distriproce_001')->name('HN_DistriInfo_Distriproce_001');
-    Route::view('/HN_DistriInfo_Distriprice_001', 'front.distri-info.HN_DistriInfo_Distriprice_001')->name('HN_DistriInfo_Distriprice_001');
-    Route::view('/HN_DistriInfo_Applibenefit_001', 'front.distri-info.HN_DistriInfo_Applibenefit_001')->name('HN_DistriInfo_Applibenefit_001');
-    Route::view('/HN_Memorial_Deadsearch_001', 'front.memorial.deadsearch.HN_Memorial_Deadsearch_001')->name('HN_Memorial_Deadsearch_001');
-    Route::view('/HN_Memorial_Deadresult_001', 'front.memorial.deadsearch.HN_Memorial_Deadresult_001')->name('HN_Memorial_Deadresult_001');
-    Route::view('/HN_Memorial_Letterlist_001', 'front.memorial.letter.HN_Memorial_Letterlist_001')->name('HN_Memorial_Letterlist_001');
-    Route::view('/HN_Memorial_Letterregi_001', 'front.memorial.letter.HN_Memorial_Letterregi_001')->name('HN_Memorial_Letterregi_001');
-    Route::view('/HN_Memorial_Letterview_001', 'front.memorial.letter.HN_Memorial_Letterview_001')->name('HN_Memorial_Letterview_001');
-    Route::view('/HN_Memorial_Lettermodi_001', 'front.memorial.letter.HN_Memorial_Lettermodi_001')->name('HN_Memorial_Lettermodi_001');
-    Route::view('/HN_Customer_Noticelist_001', 'front.customer.notice.HN_Customer_Noticelist_001')->name('HN_Customer_Noticelist_001');
-    Route::view('/HN_Customer_Noticeview_001', 'front.customer.notice.HN_Customer_Noticeview_001')->name('HN_Customer_Noticeview_001');
-    Route::view('/HN_Customer_Faq_001', 'front.customer.faq.HN_Customer_Faq_001')->name('HN_Customer_Faq_001');
-    Route::get('/HN_Customer_Councellist_001', [FrontInquiryController::class, 'index'])->name('HN_Customer_Councellist_001');
-    Route::get('/HN_Customer_Councelregi_001', [FrontInquiryController::class, 'create'])->name('HN_Customer_Councelregi_001');
-    Route::post('/HN_Customer_Councelregi_001', [FrontInquiryController::class, 'store'])->name('front.inquiry.store');
-    Route::get('/HN_Customer_Councelview_001/{inquiry}', [FrontInquiryController::class, 'show'])->name('HN_Customer_Councelview_001');
-    Route::get('/HN_Customer_Councelmodi_001/{inquiry}', [FrontInquiryController::class, 'edit'])->name('HN_Customer_Councelmodi_001');
-    Route::put('/HN_Customer_Councelmodi_001/{inquiry}', [FrontInquiryController::class, 'update'])->name('front.inquiry.update');
-    Route::delete('/HN_Customer_Councelview_001/{inquiry}', [FrontInquiryController::class, 'destroy'])->name('front.inquiry.destroy');
-    Route::view('/HN_Customer_Referenlist_001', 'front.customer.referen.HN_Customer_Referenlist_001')->name('HN_Customer_Referenlist_001');
-    Route::view('/HN_Customer_Referenview_001', 'front.customer.referen.HN_Customer_Referenview_001')->name('HN_Customer_Referenview_001');
-    Route::view('/HN_Phonecouncel_Info_001P', 'front.skyscraper.HN_Phonecouncel_Info_001P')->name('HN_Phonecouncel_Info_001P');
-    Route::view('/HN_Brochure_Application_001', 'front.brochure.HN_Brochure_Application_001')->name('HN_Brochure_Application_001');
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('front.login');
+    Route::post('/login', [AuthController::class, 'login'])->name('front.login.post');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('front.logout');
+    Route::get('/findid', function () { return view('front.member.login.HN_Login_Idsearch_001'); })->name('front.findid');
+    Route::post('/findid', [AuthController::class, 'findId'])->name('front.findid.post');
+    Route::get('/findpassword', function () { return view('front.member.login.HN_Login_Pwsearch_001'); })->name('front.findpassword');
+    Route::post('/findpassword', [AuthController::class, 'findPassword'])->name('front.findpassword.post');
+    Route::get('/join01', function () { return view('front.member.join.HN_Join_001'); })->name('front.join01');
+    Route::get('/join02', function () { return view('front.member.join.HN_Join_002'); })->name('front.join02');
+    Route::get('/join03', function () { return view('front.member.join.HN_Join_003'); })->name('front.join03');
+    Route::post('/check-id', [AuthController::class, 'checkDuplicateId'])->name('front.check_id');
+    Route::post('/join02', [AuthController::class, 'register'])->name('front.register.post');
+    Route::post('/send-sms', [AuthController::class, 'sendSms'])->name('front.send_sms');
+    Route::post('/verify-sms', [AuthController::class, 'verifySms'])->name('front.verify_sms');
+    Route::get('/myinfo', [AuthController::class, 'showMyInfo'])->name('front.myinfo');
+    Route::get('/myinfo_edit', [AuthController::class, 'showMyInfoEditForm'])->name('front.myinfo_edit');
+    Route::post('/myinfo_edit', [AuthController::class, 'updateMyInfo'])->name('front.myinfo_edit.post');
+    Route::get('/change_password', function () { return view('front.member.myinfo.HN_MemInfo_Pwmodi_001'); })->name('front.change_password');
+    Route::post('/change_password', [AuthController::class, 'changePassword'])->name('front.change_password.post');
+    Route::get('/service_terms', function () { return view('front.terms.service_terms'); })->name('front.service_terms');
+    Route::get('/personal_terms', function () { return view('front.terms.personal_terms'); })->name('front.personal_terms');
+
+    // Introdu
+    Route::group(['prefix' => 'introdu'], function () {
+        Route::get('/greeting', function () { return view('front.introdu.HN_Introdu_Greeting_001'); })->name('front.introdu.greeting');
+        Route::get('/hnstory', function () { return view('front.introdu.HN_Introdu_Hnstory_001'); })->name('front.introdu.hnstory');
+        Route::get('/perarti', function () { return view('front.introdu.HN_Introdu_Perarti_001'); })->name('front.introdu.perarti');
+        Route::get('/way', function () { return view('front.introdu.HN_Introdu_Way_001'); })->name('front.introdu.way');
+    });
+
+    // Facil
+    Route::group(['prefix' => 'facil'], function () {
+        Route::get('/bongan', function () { return view('front.facil.HN_Facil_Bongan_001'); })->name('front.facil.bongan');
+        Route::get('/naburial', function () { return view('front.facil.HN_Facil_Naburial_001'); })->name('front.facil.naburial');
+        Route::get('/aditinal', function () { return view('front.facil.HN_Facil_Aditinal_001'); })->name('front.facil.aditinal');
+        Route::get('/surround', function () { return view('front.facil.HN_Facil_Surround_001'); })->name('front.facil.surround');
+    });
+
+    // DistriInfo
+    Route::group(['prefix' => 'distriinfo'], function () {
+        Route::get('/distriproce', function () { return view('front.distriinfo.HN_DistriInfo_Distriproce_001'); })->name('front.distriinfo.distriproce');
+        Route::get('/distriprice', function () { return view('front.distriinfo.HN_DistriInfo_Distriprice_001'); })->name('front.distriinfo.distriprice');
+        Route::get('/applibenefit', function () { return view('front.distriinfo.HN_DistriInfo_Applibenefit_001'); })->name('front.distriinfo.applibenefit');
+    });
+
+    // Memorial
+    Route::group(['prefix' => 'memorial'], function () {
+        Route::get('/deadsearch', [FrontDeadController::class, 'index'])->name('front.memorial.deadsearch');
+        Route::get('/deadresult', [FrontDeadController::class, 'search'])->name('front.memorial.deadresult');
+        Route::get('/letterlist', [FrontLetterController::class, 'index'])->name('front.memorial.letterlist');
+        Route::get('/letterview/{id}', [FrontLetterController::class, 'show'])->name('front.memorial.letterview');
+        Route::get('/letteredit/{id}', [FrontLetterController::class, 'edit'])->name('front.memorial.letteredit');
+        Route::put('/letterupdate/{id}', [FrontLetterController::class, 'update'])->name('front.memorial.letterupdate');
+        Route::delete('/letterdelete/{id}', [FrontLetterController::class, 'destroy'])->name('front.memorial.letterdelete');
+        Route::get('/letterregi', [FrontLetterController::class, 'create'])->name('front.memorial.letterregi');
+        Route::post('/letterstore', [FrontLetterController::class, 'store'])->name('front.memorial.letterstore');
+    });
+
+    // Customer
+    Route::group(['prefix' => 'customer'], function () {
+        Route::get('/notice', [App\Http\Controllers\Front\Customer\NoticeController::class, 'index'])->name('front.notice.index');
+        Route::get('/notice/{id}', [App\Http\Controllers\Front\Customer\NoticeController::class, 'show'])->name('front.notice.show');
+        
+        // 1:1 Counsel
+        Route::get('/councel', [App\Http\Controllers\Front\Customer\InquiryController::class, 'index'])->name('front.customer.councel.index');
+        Route::get('/councel/create', [App\Http\Controllers\Front\Customer\InquiryController::class, 'create'])->name('front.customer.councel.create');
+        Route::post('/councel', [App\Http\Controllers\Front\Customer\InquiryController::class, 'store'])->name('front.customer.councel.store');
+        Route::get('/councel/{inquiry}', [App\Http\Controllers\Front\Customer\InquiryController::class, 'show'])->name('front.customer.councel.show');
+        Route::get('/councel/{inquiry}/edit', [App\Http\Controllers\Front\Customer\InquiryController::class, 'edit'])->name('front.customer.councel.edit');
+        Route::put('/councel/{inquiry}', [App\Http\Controllers\Front\Customer\InquiryController::class, 'update'])->name('front.customer.councel.update');
+        Route::delete('/councel/{inquiry}', [App\Http\Controllers\Front\Customer\InquiryController::class, 'destroy'])->name('front.customer.councel.destroy');
+
+        Route::get('/referen', [App\Http\Controllers\Front\Customer\ReferenceController::class, 'index'])->name('front.customer.referen.index');
+        Route::get('/referen/{id}', [App\Http\Controllers\Front\Customer\ReferenceController::class, 'show'])->name('front.customer.referen.show');
+        Route::get('/sangjang', function () { return view('front.customer.sangjang'); })->name('front.customer.sangjang');
+        
+        Route::get('/faq', function () { return view('front.customer.HN_Customer_Faq_001'); })->name('front.customer.faq');
+        Route::get('/brochure', [FrontBrochureController::class, 'index'])->name('front.brochure');
+        Route::post('/brochure', [FrontBrochureController::class, 'store'])->name('front.brochure.store');
+    });
 });
 
 // Admin Routes
@@ -72,17 +116,17 @@ Route::group(['prefix' => 'admin'], function () {
     // --- 로그인 및 정보 찾기 ---
     Route::get('/HNA_Login_001', [AdminController::class, 'loginForm'])->name('HNA_Login_001');
     Route::post('/HNA_Login_001', [AdminController::class, 'login'])->name('admin.login');
-    
+
     Route::get('/HNA_FindId_001', [AdminController::class, 'findIdForm'])->name('HNA_FindId_001');
     Route::get('/HNA_FindPw_001', [AdminController::class, 'findPwForm'])->name('HNA_FindPw_001');
-    
+
     Route::post('/find-id', [AdminController::class, 'findId'])->name('admin.findId');
     Route::post('/find-pw', [AdminController::class, 'findPw'])->name('admin.findPw');
 
     // --- 관리자 기능 (auth:admin) ---
     Route::middleware('auth:admin')->group(function () {
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
-        
+
         Route::get('/HNA_Admag_list_001', [AdminController::class, 'index'])->name('HNA_Admag_list_001');
         Route::post('/HNA_Admag_list_001/mass-destroy', [AdminController::class, 'massDestroy'])->name('admin.admag.massDestroy');
         Route::get('/HNA_Admag_Regi_001', [AdminController::class, 'create'])->name('HNA_Admag_Regi_001');
@@ -91,7 +135,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/HNA_Admag_Modi_001/{admin}', [AdminController::class, 'edit'])->name('HNA_Admag_Modi_001');
         Route::put('/HNA_Admag_Modi_001/{admin}', [AdminController::class, 'update'])->name('admin.admag.update');
         Route::delete('/HNA_Admag_list_001/{admin}', [AdminController::class, 'destroy'])->name('admin.admag.destroy');
-        
+
         // --- 회원관리 (HNA_Memmag) ---
         Route::group(['prefix' => 'HNA_Memmag'], function() {
             Route::get('/List_001', [MemberController::class, 'index'])->name('HNA_Memmag_List_001');
@@ -130,6 +174,7 @@ Route::group(['prefix' => 'admin'], function () {
         // --- 공지사항 관리 (HNA_Customer_Notice) ---
         Route::group(['prefix' => 'HNA_Customer_Notice'], function() {
             Route::get('/Noticelist_001', [NoticeController::class, 'index'])->name('HNA_Customer_Noticelist_001');
+            Route::post('/mass-destroy', [NoticeController::class, 'massDestroy'])->name('admin.notice.massDestroy');
             Route::get('/Noticeregi_001', [NoticeController::class, 'create'])->name('HNA_Customer_Noticeregi_001');
             Route::post('/store', [NoticeController::class, 'store'])->name('admin.notice.store');
             Route::get('/Noticeview_001/{notice}', [NoticeController::class, 'show'])->name('HNA_Customer_Noticeview_001');

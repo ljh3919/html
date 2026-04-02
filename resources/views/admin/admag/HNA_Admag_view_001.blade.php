@@ -1,60 +1,91 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0 text-gray-800">관리자 관리 > 상세</h1>
+<!-- title -->
+<div class="wrap-tit">
+    <h2 class="tit01">관리자 관리</h2>
+</div>
+
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
+@endif
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+<!-- table -->
+<table class="table board-table vertical-table">
+    <tbody>
+        <tr>
+            <th>이름</th>
+            <td>{{ $admin->name }}</td>
+        </tr>
+        <tr>
+            <th>아이디</th>
+            <td>{{ $admin->username }}</td>
+        </tr>
+        <tr>
+            <th>비밀번호</th>
+            <td>****************</td>
+        </tr>
+        <tr>
+            <th>핸드폰 번호</th>
+            <td>{{ $admin->phone }}</td>
+        </tr>
+        <tr>
+            <th>이메일</th>
+            <td>{{ $admin->email }}</td>
+        </tr>
+        <tr>
+            <th>등록일</th>
+            <td>{{ $admin->created_at->format('Y-m-d H:i:s') }}</td>
+        </tr>
+    </tbody>
+</table>
 
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <colgroup>
-                        <col style="width: 200px; background-color: #f8f9fc;">
-                        <col>
-                    </colgroup>
-                    <tbody>
-                        <tr>
-                            <th>이름</th>
-                            <td>{{ $admin->name }}</td>
-                        </tr>
-                        <tr>
-                            <th>아이디</th>
-                            <td>{{ $admin->username }}</td>
-                        </tr>
-                        <tr>
-                            <th>비밀번호</th>
-                            <td>****************</td>
-                        </tr>
-                        <tr>
-                            <th>핸드폰 번호</th>
-                            <td>{{ $admin->phone }}</td>
-                        </tr>
-                        <tr>
-                            <th>이메일</th>
-                            <td>{{ $admin->email }}</td>
-                        </tr>
-                        <tr>
-                            <th>등록일</th>
-                            <td>{{ $admin->created_at->format('Y-m-d H:i:s') }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="text-center mt-4">
-                <a href="{{ route('HNA_Admag_Modi_001', $admin->id) }}" class="btn btn-warning px-5">수정</a>
-                <button type="button" class="btn btn-danger px-5 ml-2" onclick="deleteAdmin()">삭제</button>
-                <a href="{{ route('HNA_Admag_list_001') }}" class="btn btn-secondary px-5 ml-2">목록</a>
-            </div>
-        </div>
+<!-- board button -->
+<div class="wrap-board-btn">
+    <div class="wrap-btn-left"></div>
+    <div class="wrap-btn-right">
+        <button type="button" class="btn line small" onclick="location.href='{{ route('HNA_Admag_list_001') }}'">
+            <span>목록</span>
+        </button>
+        <button type="button" class="btn line small" onclick="deleteAdmin()">
+            <span>삭제</span>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+            >
+                <path
+                    d="M19.1119 3.78009H13.7778C13.7778 3.29279 13.3801 2.89844 12.8886 2.89844H11.1113C10.6187 2.89844 10.2221 3.29279 10.2221 3.78009H4.88804C4.39657 3.78009 4 4.17448 4 4.66179C4 5.14795 4.39772 5.54344 4.88804 5.54344H19.1119C19.6034 5.54344 20 5.14795 20 4.66179C20.0011 4.17562 19.6034 3.78009 19.1119 3.78009Z"
+                    fill="#4A4A4A"
+                />
+                <path
+                    d="M17.2722 8.48992L16.4013 17.9696C16.3978 18.0081 16.3956 18.0456 16.3944 18.0852H7.60642C7.60527 18.0467 7.60294 18.0093 7.59951 17.9696L6.72864 8.48992H17.2722ZM17.3351 6.6767H6.6669C5.68626 6.6767 4.88845 7.46547 4.88845 8.43894L5.77768 18.1351C5.77768 19.1074 6.5732 19.8984 7.55612 19.8984H16.4447C17.4265 19.8984 18.2231 19.1086 18.2231 18.1351L19.1123 8.43894C19.1123 7.46547 18.3157 6.6767 17.3351 6.6767Z"
+                    fill="#4A4A4A"
+                />
+                <path
+                    d="M12.0006 17.065C11.6851 17.065 11.4291 16.8111 11.4291 16.4984V10.372C11.4291 10.0592 11.6851 9.80533 12.0006 9.80533C12.316 9.80533 12.572 10.0592 12.572 10.372V16.4984C12.572 16.8111 12.316 17.065 12.0006 17.065Z"
+                    fill="#4A4A4A"
+                />
+                <path
+                    d="M9.51043 17.0645C9.22013 17.0645 8.97096 16.8457 8.94238 16.5533L8.33548 10.4269C8.30576 10.1153 8.53553 9.83766 8.8487 9.80819C9.16186 9.78439 9.44416 10.0054 9.47388 10.317L10.0808 16.4434C10.1105 16.7551 9.88073 17.0327 9.56757 17.0633C9.54814 17.0633 9.52986 17.0645 9.51043 17.0645Z"
+                    fill="#4A4A4A"
+                />
+                <path
+                    d="M14.491 17.0645C14.7813 17.0645 15.0304 16.8457 15.059 16.5533L15.6659 10.4269C15.6956 10.1153 15.4659 9.83766 15.1528 9.80819C14.8396 9.78439 14.5573 10.0054 14.5276 10.317L13.9207 16.4434C13.891 16.7551 14.1207 17.0327 14.4338 17.0633C14.4533 17.0633 14.4727 17.0645 14.491 17.0645Z"
+                    fill="#4A4A4A"
+                />
+            </svg>
+        </button>
+        <button type="button" class="btn primary small" onclick="location.href='{{ route('HNA_Admag_Modi_001', $admin->id) }}'">
+            <span>수정</span>
+        </button>
     </div>
 </div>
 

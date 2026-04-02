@@ -20,11 +20,10 @@ class InquiryController extends Controller
         $query = Inquiry::with('reply.admin');
 
         if ($searchType && $searchKeyword) {
-            if ($searchType === 'title_content') {
-                $query->where(function($q) use ($searchKeyword) {
-                    $q->where('title', 'like', "%{$searchKeyword}%")
-                      ->orWhere('content', 'like', "%{$searchKeyword}%");
-                });
+            if ($searchType === 'title') {
+                $query->where('title', 'like', "%{$searchKeyword}%");
+            } elseif ($searchType === 'content') {
+                $query->where('content', 'like', "%{$searchKeyword}%");
             } elseif ($searchType === 'author') {
                 $query->where('username', 'like', "%{$searchKeyword}%");
             }

@@ -11,13 +11,18 @@ class PopupController extends Controller
 {
     public function index(Request $request)
     {
-        $searchType = $request->input('search_type', 'title');
+        $searchType = $request->input('search_type', 'all');
         $searchKeyword = $request->input('search_keyword');
 
         $query = Popup::query();
 
         if ($searchKeyword) {
-            if ($searchType == 'title') {
+            if ($searchType == 'all') {
+                $query->where(function($q) use ($searchKeyword) {
+                    $q->where('title', 'like', '%' . $searchKeyword . '%')
+                      ->orWhere('content', 'like', '%' . $searchKeyword . '%');
+                });
+            } elseif ($searchType == 'title') {
                 $query->where('title', 'like', '%' . $searchKeyword . '%');
             } elseif ($searchType == 'content') {
                 $query->where('content', 'like', '%' . $searchKeyword . '%');

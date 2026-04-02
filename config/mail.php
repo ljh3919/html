@@ -97,6 +97,10 @@ return [
             'retry_after' => 60,
         ],
 
+        'php_mail' => [
+            'transport' => 'php_mail',
+        ],
+
     ],
 
     /*

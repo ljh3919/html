@@ -20,6 +20,8 @@ class LetterController extends Controller
                 $query->where('username', 'like', "%{$searchKeyword}%");
             } elseif ($searchType === 'content') {
                 $query->where('content', 'like', "%{$searchKeyword}%");
+            } elseif ($searchType === 'author') {
+                $query->where('author_description', 'like', "%{$searchKeyword}%");
             }
         }
 

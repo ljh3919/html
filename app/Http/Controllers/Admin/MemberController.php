@@ -51,21 +51,18 @@ class MemberController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'required|string|unique:members,username|regex:/^[a-zA-Z0-9]+$/',
-            'password' => 'required|string|min:10|max:16|regex:/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/|confirmed',
             'phone' => 'required|string',
             'email' => 'required|email',
         ], [
             'required' => '입력항목을 확인 후 등록버튼을 선택해주세요.',
             'username.regex' => '아이디는 영문 또는 영문+숫자만 가능합니다.',
-            'password.regex' => '10~16자의 숫자와 영문 대 소문자 조합으로 사용하세요.',
-            'password.confirmed' => '비밀번호가 일치하지 않습니다.',
             'username.unique' => '이미 사용 중인 아이디입니다.',
         ]);
 
         Member::create([
             'name' => $request->name,
             'username' => $request->username,
-            'password' => $request->password, // Member 모델에서 hashed 캐스트 사용 중
+            'password' => '1234', // 기본 비밀번호 1234 설정
             'phone' => $request->phone,
             'email' => $request->email,
         ]);
@@ -87,19 +84,13 @@ class MemberController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'password' => 'nullable|string|min:10|max:16|regex:/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/|confirmed',
             'phone' => 'required|string',
             'email' => 'required|email',
         ], [
             'required' => '입력항목을 확인 후 등록버튼을 선택해주세요.',
-            'password.regex' => '10~16자의 숫자와 영문 대 소문자 조합으로 사용하세요.',
-            'password.confirmed' => '비밀번호가 일치하지 않습니다.',
         ]);
 
         $member->name = $request->name;
-        if ($request->filled('password')) {
-            $member->password = $request->password;
-        }
         $member->phone = $request->phone;
         $member->email = $request->email;
         $member->save();

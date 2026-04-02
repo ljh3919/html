@@ -1,166 +1,352 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? '하늘누리 관리자' }}</title>
-    <!-- Bootstrap CSS (가정: CDN 사용 중이거나 이미 포함됨) -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f4f7f6;
-        }
-        #wrapper {
-            display: flex;
-            width: 100%;
-            align-items: stretch;
-        }
-        #sidebar {
-            min-width: 250px;
-            max-width: 250px;
-            background: #343a40;
-            color: #fff;
-            transition: all 0.3s;
-            min-height: 100vh;
-        }
-        #sidebar .sidebar-header {
-            padding: 20px;
-            background: #212529;
-        }
-        #sidebar ul.components {
-            padding: 20px 0;
-        }
-        #sidebar ul p {
-            color: #fff;
-            padding: 10px;
-        }
-        #sidebar ul li a {
-            padding: 10px 20px;
-            font-size: 1.1em;
-            display: block;
-            color: #adb5bd;
-            text-decoration: none;
-        }
-        #sidebar ul li a:hover {
-            color: #fff;
-            background: #495057;
-        }
-        #sidebar ul li.active > a {
-            color: #fff;
-            background: #007bff;
-        }
-        #content {
-            width: 100%;
-            padding: 20px;
-            transition: all 0.3s;
-        }
-        .menu-title {
-            font-size: 0.9em;
-            font-weight: bold;
-            text-transform: uppercase;
-            padding: 10px 20px;
-            color: #6c757d;
-        }
-        .sub-menu {
-            padding-left: 20px;
-            font-size: 0.9em;
-        }
-    </style>
-    @yield('styles')
-</head>
-<body>
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>하늘누리 Admin</h3>
-            </div>
-            <ul class="list-unstyled components">
-                <!-- <div class="menu-title">관리자 관리</div> -->
-                <li class="{{ Request::is('admin/HNA_Admag*') ? 'active' : '' }}">
-                    <a href="{{ route('HNA_Admag_list_001') }}">관리자 관리</a>
-                </li>
-                
-                <!-- <div class="menu-title">회원 관리</div> -->
-                <li class="{{ Request::is('admin/HNA_Memmag*') ? 'active' : '' }}">
-                    <a href="{{ route('HNA_Memmag_List_001') }}">회원 관리</a>
-                </li>
-                
-                <li>
-                    <a href="#cyberSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">사이버 추모관</a>
-                    <ul class="collapse list-unstyled sub-menu {{ Request::is('admin/HNA_Deadmag*', 'admin/HNA_Lettermag*') ? 'show' : '' }}" id="cyberSubmenu">
-                        <li class="{{ Request::is('admin/HNA_Deadmag*') ? 'active' : '' }}">
-                            <a href="{{ route('HNA_Deadmag_List_001') }}">고인 관리</a>
-                        </li>
-                        <li class="{{ Request::is('admin/HNA_Lettermag*') ? 'active' : '' }}">
-                            <a href="{{ route('HNA_Lettermag_List_001') }}">하늘 편지 관리</a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <a href="#customerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">고객센터</a>
-                    <ul class="collapse list-unstyled sub-menu {{ Request::is('admin/HNA_Customer_Notice*', 'admin/HNA_Customer_Councel*', 'admin/HNA_Customer_Referen*') ? 'show' : '' }}" id="customerSubmenu">
-                        <li class="{{ Request::is('admin/HNA_Customer_Notice*') ? 'active' : '' }}">
-                            <a href="{{ route('HNA_Customer_Noticelist_001') }}">공지사항</a>
-                        </li>
-                        <li class="{{ Request::is('admin/HNA_Customer_Councel*') ? 'active' : '' }}">
-                            <a href="{{ route('HNA_Customer_Councellist_001') }}">1:1 상담</a>
-                        </li>
-                        <li class="{{ Request::is('admin/HNA_Customer_Referen*') ? 'active' : '' }}">
-                            <a href="{{ route('HNA_Customer_Referenlist_001') }}">자료실</a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li class="{{ Request::is('admin/HNA_Popup*') ? 'active' : '' }}">
-                    <a href="{{ route('HNA_Popup_List_001') }}">팝업관리</a>
-                </li>
-                
-                <li class="{{ Request::is('admin/HNA_Brochure*') ? 'active' : '' }}">
-                    <a href="{{ route('HNA_Brochure_Applicationlist_001') }}">브로슈어 신청관리</a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Page Content -->
-        <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm">
-                <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" class="btn btn-dark">
-                        <i class="fas fa-align-left"></i>
-                        <span>메뉴 토글</span>
-                    </button>
-                    <div class="ml-auto">
-                        <span class="mr-3">{{ auth('admin')->user()->name ?? '관리자' }}님 환영합니다</span>
-                        <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-outline-danger btn-sm">로그아웃</a>
-                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ $title ?? '하늘누리 관리자' }}</title>
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/admin-common.css') }}" />
+        @yield('styles')
+    </head>
+    <body>
+        <div class="container admin">
+            <header class="header">
+                <a
+                    class="home"
+                    href="/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >하늘누리 추모공원</a>
+                <div class="wrap-login">
+                    <div class="wrap-status">
+                        <span class="user">{{ auth('admin')->user()->username ?? 'Admin' }}</span>
+                        <span class="text">님이 로그인 하였습니다.</span>
                     </div>
+                    <button type="button" class="btn line h32" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <span>LOGOUT</span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+                            <path
+                                d="M20.7372 12.3052C20.8182 12.1102 20.8182 11.8892 20.7372 11.6932C20.6992 11.6032 20.6432 11.5232 20.5772 11.4532C20.5712 11.4472 20.5702 11.4392 20.5642 11.4332L17.5642 8.43322C17.2512 8.12122 16.7462 8.12122 16.4332 8.43322C16.1202 8.74622 16.1202 9.25221 16.4332 9.56521L18.0672 11.1992H11.9992C11.5582 11.1992 11.1992 11.5572 11.1992 11.9992C11.1992 12.4402 11.5572 12.7992 11.9992 12.7992H18.0672L16.4332 14.4332C16.1202 14.7462 16.1202 15.2532 16.4332 15.5662C16.5892 15.7212 16.7932 15.7992 16.9982 15.7992C17.2032 15.7992 17.4072 15.7212 17.5632 15.5662L20.5632 12.5662C20.5692 12.5602 20.5702 12.5522 20.5762 12.5462C20.6432 12.4762 20.6992 12.3962 20.7372 12.3052Z"
+                                fill="#4A4A4A"
+                            />
+                            <path
+                                d="M16.6632 17.4682C15.3592 18.5842 13.7032 19.1992 11.9992 19.1992C8.02921 19.1992 4.79919 15.9702 4.79919 11.9992C4.79919 8.02924 8.02921 4.79922 11.9992 4.79922C13.5592 4.79922 15.0492 5.30022 16.3092 6.24722C16.6622 6.51422 17.1642 6.44223 17.4292 6.08923C17.6952 5.73623 17.6232 5.23524 17.2702 4.96924C15.7312 3.81124 13.9092 3.19922 11.9992 3.19922C7.14621 3.19922 3.19922 7.14624 3.19922 11.9992C3.19922 16.8522 7.14621 20.7992 11.9992 20.7992C14.0842 20.7992 16.1102 20.0482 17.7042 18.6832C18.0392 18.3962 18.0792 17.8912 17.7912 17.5552C17.5042 17.2202 16.9992 17.1812 16.6632 17.4682Z"
+                                fill="#4A4A4A"
+                            />
+                        </svg>
+                    </button>
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
-            </nav>
-
-            @yield('content')
+            </header>
+            <main class="main">
+                <div class="lnb">
+                    <ul class="lnb-lv01">
+                        <li class="item">
+                            <div class="item-wrap">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M12 10C13.6569 10 15 8.65685 15 7C15 5.34315 13.6569 4 12 4C10.3431 4 9 5.34315 9 7C9 8.65685 10.3431 10 12 10Z"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-miterlimit="10"
+                                    />
+                                    <path
+                                        d="M3 22C3 17 7 13 12 13C17 13 21 17 21 22"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-miterlimit="10"
+                                    />
+                                    <path
+                                        d="M12 14V14.6"
+                                        stroke="white"
+                                        stroke-width="2"
+                                        stroke-miterlimit="10"
+                                        stroke-linecap="round"
+                                    />
+                                    <path
+                                        d="M12 18V21"
+                                        stroke="white"
+                                        stroke-width="2"
+                                        stroke-miterlimit="10"
+                                        stroke-linecap="round"
+                                    />
+                                </svg>
+                                <div class="item-text">관리자 관리</div>
+                            </div>
+                            <ul class="lnb-lv02">
+                                <li class="item {{ Request::is('admin/HNA_Admag*') ? 'active' : '' }}">
+                                    <a
+                                        class="item-wrap"
+                                        href="{{ route('HNA_Admag_list_001') }}"
+                                    >
+                                        <div class="item-text">관리자 관리</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="item">
+                            <div class="item-wrap">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M12 9C13.3807 9 14.5 7.88071 14.5 6.5C14.5 5.11929 13.3807 4 12 4C10.6193 4 9.5 5.11929 9.5 6.5C9.5 7.88071 10.6193 9 12 9Z"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-miterlimit="10"
+                                    />
+                                    <path
+                                        d="M19 11C20.1046 11 21 10.1046 21 9C21 7.89543 20.1046 7 19 7C17.8954 7 17 7.89543 17 9C17 10.1046 17.8954 11 19 11Z"
+                                        fill="white"
+                                    />
+                                    <path
+                                        d="M5 11C6.10457 11 7 10.1046 7 9C7 7.89543 6.10457 7 5 7C3.89543 7 3 7.89543 3 9C3 10.1046 3.89543 11 5 11Z"
+                                        fill="white"
+                                    />
+                                    <path
+                                        d="M3 21C3 16 7 12 12 12C17 12 21 16 21 21"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-miterlimit="10"
+                                    />
+                                </svg>
+                                <div class="item-text">회원관리</div>
+                            </div>
+                            <ul class="lnb-lv02">
+                                <li class="item {{ Request::is('admin/HNA_Memmag*') ? 'active' : '' }}">
+                                    <a
+                                        class="item-wrap"
+                                        href="{{ route('HNA_Memmag_List_001') }}"
+                                    >
+                                        <div class="item-text">회원 관리</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="item">
+                            <div class="item-wrap">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M20.1207 5.19724C18.1115 3.53793 15.1128 3.83781 13.2635 5.67704L12.7038 6.23681C12.3139 6.62664 11.6842 6.62664 11.2944 6.23681L10.7346 5.67704C8.88536 3.82781 5.88661 3.52793 3.87745 5.19724C1.56841 7.10644 1.44846 10.525 3.5176 12.5942L9.97491 19.0515C11.0944 20.171 12.9037 20.171 14.0232 19.0515L20.4805 12.5942C22.5497 10.525 22.4297 7.10644 20.1207 5.19724Z"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M12.3541 15.6492V14.8795C12.3541 13.4963 13.4726 12.3658 14.8677 12.3658H15.6375C15.8419 12.3658 15.9983 12.2095 15.9983 12.005C15.9983 11.8005 15.8419 11.6442 15.6375 11.6442H14.8677C13.4846 11.6442 12.3541 10.5136 12.3541 9.13054V8.36081C12.3541 8.15635 12.1977 8 11.9933 8C11.7888 8 11.6325 8.15635 11.6325 8.36081V9.13054C11.6325 10.5136 10.514 11.6442 9.11882 11.6442H8.34909C8.14463 11.6442 7.98828 11.8005 7.98828 12.005C7.98828 12.2095 8.14463 12.3658 8.34909 12.3658H9.11882C10.5019 12.3658 11.6325 13.4843 11.6325 14.8795V15.6492C11.6325 15.8536 11.7888 16.01 11.9933 16.01C12.1977 16.01 12.3541 15.8536 12.3541 15.6492Z"
+                                        fill="white"
+                                    />
+                                </svg>
+                                <div class="item-text">사이버추모관</div>
+                            </div>
+                            <ul class="lnb-lv02">
+                                <li class="item {{ Request::is('admin/HNA_Deadmag*') ? 'active' : '' }}">
+                                    <a
+                                        class="item-wrap"
+                                        href="{{ route('HNA_Deadmag_List_001') }}"
+                                    >
+                                        <div class="item-text">고인 관리</div>
+                                    </a>
+                                </li>
+                                <li class="item {{ Request::is('admin/HNA_Lettermag*') ? 'active' : '' }}">
+                                    <a
+                                        class="item-wrap"
+                                        href="{{ route('HNA_Lettermag_List_001') }}"
+                                    >
+                                        <div class="item-text">
+                                            하늘편지 관리
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="item">
+                            <div class="item-wrap">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M11.8 4.40031L8.70001 7.50031H4.10001C3.20001 7.50031 2.5 8.20032 2.5 9.10032V14.8003C2.5 15.7003 3.20001 16.4003 4.10001 16.4003H8.70001L11.8 19.5003C12.3 20.0003 13.2 19.6003 13.2 18.9003V11.9003V4.90031C13.2 4.30031 12.3 3.90031 11.8 4.40031Z"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-miterlimit="10"
+                                    />
+                                    <path
+                                        d="M16.6992 7.30078C19.2992 9.90078 19.2992 14.1008 16.6992 16.8008"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-miterlimit="10"
+                                    />
+                                    <path
+                                        d="M19.1016 4.90039C23.0016 8.80039 23.0016 15.2004 19.1016 19.1004"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-miterlimit="10"
+                                    />
+                                </svg>
+                                <div class="item-text">고객센터</div>
+                            </div>
+                            <ul class="lnb-lv02">
+                                <li class="item {{ Request::is('admin/HNA_Customer_Notice*') ? 'active' : '' }}">
+                                    <a
+                                        class="item-wrap"
+                                        href="{{ route('HNA_Customer_Noticelist_001') }}"
+                                    >
+                                        <div class="item-text">공지사항</div>
+                                    </a>
+                                </li>
+                                <li class="item {{ Request::is('admin/HNA_Customer_Councel*') ? 'active' : '' }}">
+                                    <a
+                                        class="item-wrap"
+                                        href="{{ route('HNA_Customer_Councellist_001') }}"
+                                    >
+                                        <div class="item-text">1:1 상담</div>
+                                    </a>
+                                </li>
+                                <li class="item {{ Request::is('admin/HNA_Customer_Referen*') ? 'active' : '' }}">
+                                    <a
+                                        class="item-wrap"
+                                        href="{{ route('HNA_Customer_Referenlist_001') }}"
+                                    >
+                                        <div class="item-text">자료실</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="item">
+                            <div class="item-wrap">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M19 4H5C4.44772 4 4 4.44772 4 5V19C4 19.5523 4.44772 20 5 20H19C19.5523 20 20 19.5523 20 19V5C20 4.44772 19.5523 4 19 4Z"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-miterlimit="10"
+                                    />
+                                    <path
+                                        d="M16.1992 6.5H17.7992"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-miterlimit="10"
+                                    />
+                                    <path
+                                        d="M4 9C10.2484 9 13.7516 9 20 9"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-miterlimit="10"
+                                    />
+                                </svg>
+                                <div class="item-text">팝업 관리</div>
+                            </div>
+                            <ul class="lnb-lv02">
+                                <li class="item {{ Request::is('admin/HNA_Popup*') ? 'active' : '' }}">
+                                    <a
+                                        class="item-wrap"
+                                        href="{{ route('HNA_Popup_List_001') }}"
+                                    >
+                                        <div class="item-text">팝업 관리</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="item">
+                            <div class="item-wrap">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M15 6H4C3.44772 6 3 6.44772 3 7V20C3 20.5523 3.44772 21 4 21H15C15.5523 21 16 20.5523 16 20V7C16 6.44772 15.5523 6 15 6Z"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M9 6V4C9 3.44772 9.44772 3 10 3H20C20.5523 3 21 3.44772 21 4V17C21 17.5523 20.5523 18 20 18H16.5"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M6 11H13"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-linejoin="round"
+                                    />
+                                    <path
+                                        d="M6 14H13"
+                                        stroke="white"
+                                        stroke-width="1.6"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                                <div class="item-text">브로슈어 신청</div>
+                            </div>
+                            <ul class="lnb-lv02">
+                                <li class="item {{ Request::is('admin/HNA_Brochure*') ? 'active' : '' }}">
+                                    <a
+                                        class="item-wrap"
+                                        href="{{ route('HNA_Brochure_Applicationlist_001') }}"
+                                    >
+                                        <div class="item-text">
+                                            브로슈어 신청
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="contents">
+                    @yield('content')
+                </div>
+            </main>
         </div>
-    </div>
-
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-    <!-- jQuery, Popper.js, Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // 알림창 닫기 버튼 기능
+                $(document).on('click', '[data-dismiss="alert"]', function() {
+                    $(this).closest('.alert').fadeOut();
+                });
             });
-        });
-    </script>
-    @yield('scripts')
-</body>
+        </script>
+        @yield('scripts')
+    </body>
 </html>

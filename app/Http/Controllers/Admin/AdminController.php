@@ -132,7 +132,7 @@ class AdminController extends Controller
             'password.required' => '비밀번호를 정확하게 입력해주세요',
         ]);
 
-        if (Auth::guard('admin')->attempt($credentials, $request->remember)) {
+        if (Auth::guard('admin')->attempt($credentials, false)) {
             if ($request->remember) {
                 Cookie::queue('remember_admin_id', $request->username, 60*24*30); // 30일
             } else {
@@ -195,10 +195,10 @@ class AdminController extends Controller
             // 이메일 발송
             try {
                 Mail::to($admin->email)->send(new AdminTempPasswordMail($tempPassword));
-                return response()->json(['success' => true, 'email' => $admin->email]);
+                return response()->json(['success' => true, 'email' => $admin->email, 'username' => $admin->username]);
             } catch (\Exception $e) {
                 \Log::error('Mail sending failed: ' . $e->getMessage());
-                return response()->json(['success' => false, 'message' => '이메일 발송 중 오류가 발생했습니다.']);
+                return response()->json(['success' => false, 'message' => '이메일 발송 중 오류가 발생했습니다: ' . $e->getMessage()]);
             }
         }
 
